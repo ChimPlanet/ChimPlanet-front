@@ -1,0 +1,15 @@
+name: UI-Test
+on: push
+    
+jobs:
+  interaction-and-accessibility:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+            node-version: 16
+      - name: Install dependencies
+        run: yarn
+      - name: Test Application using Jest
+        run: yarn test
