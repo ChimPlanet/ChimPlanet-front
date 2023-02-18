@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import queryClient from "@query";
+import queryClient from "@query/index";
 import "./index.css";
 import { QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";

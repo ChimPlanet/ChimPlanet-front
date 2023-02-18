@@ -1,35 +1,42 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "es6",
+    // "jsx": "react-jsx",
     "paths": {
       "@component/*": [
-        "./src/components/*"
+        "src/components/*"
       ],
       "@api/*": [
-        "./src/api/*"
+        "src/api/*"
       ],
       "@atoms/*": [
-        "./src/atoms/*"
+        "src/atoms/*"
       ],
       "@constants/*": [
-        "./src/constants/*"
+        "src/constants/*"
       ],
       "@hooks/*": [
-        "./src/hooks/*"
+        "src/hooks/*"
       ],
       "@layout/*": [
-        "./src/layout/*"
+        "src/layout/*"
       ],
       "@pages/*": [
-        "./src/pages/*"
+        "src/pages/*"
       ],
       "@query/*": [
-        "./src/query/*"
+        "src/query/*"
       ],
       "@utils/*": [
-        "./src/utils/*"
+        "src/utils/*"
       ],
     }
-  }
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
