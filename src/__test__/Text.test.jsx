@@ -9,6 +9,6 @@ describe("Text Component", () => {
   });
 
   test("문자열이 아닌 것을 넣었을 때, 오류가 발생된다.", () => {
-    expect(() => render(<Text />)).toThrow();
+    expect(() => render(<Text />)).toThrow(Error);
   });
 });
