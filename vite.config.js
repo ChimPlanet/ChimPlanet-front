@@ -17,4 +17,9 @@ export default defineConfig({
       },
     ],
   },
+  build: {
+    commonjsOptions: {
+      exclude: ["./src/__mocks__", "./src/__test__"],
+    },
+  },
 });
