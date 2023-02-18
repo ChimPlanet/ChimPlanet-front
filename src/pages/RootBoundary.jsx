@@ -1,6 +1,6 @@
-import ErrorBoundary from "@components/ErrorBoundary";
-import Fallback from "@components/Fallback";
-import Loading from "@components/Loading";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import Fallback from "@/components/Fallback";
+import Loading from "@/components/Loading";
 import { Suspense } from "react";
 /**
  * Suspend, ErrorBoundary 복합체

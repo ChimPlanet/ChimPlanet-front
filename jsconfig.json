@@ -3,33 +3,9 @@
     "baseUrl": ".",
     // "jsx": "react-jsx",
     "paths": {
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@api/*": [
-        "src/api/*"
-      ],
-      "@atoms/*": [
-        "src/atoms/*"
-      ],
-      "@constants/*": [
-        "src/constants/*"
-      ],
-      "@hooks/*": [
-        "src/hooks/*"
-      ],
-      "@layout/*": [
-        "src/layout/*"
-      ],
-      "@pages/*": [
-        "src/pages/*"
-      ],
-      "@query/*": [
-        "src/query/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ],
+      "@/*": [
+        "src/*"
+      ]
     }
   },
   "include": [

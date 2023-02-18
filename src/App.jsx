@@ -1,10 +1,10 @@
-import Text from "@components/Text";
+import Text from "@/components/Text";
 import "./App.css";
 
 function App() {
   return (
     <>
-      <Text />
+      <Text>hello</Text>
     </>
   );
 }
