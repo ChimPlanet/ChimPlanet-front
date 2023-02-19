@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "noLib": true,
     // "jsx": "react-jsx",
     "paths": {
       "@/*": [

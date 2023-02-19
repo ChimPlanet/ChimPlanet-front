@@ -1,15 +1,14 @@
-import Text from "@/components/Text";
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import About from "./pages/About";
-import Home from "./pages/Home";
+import AppRoutes from "@/components/AppRoutes";
+import Theme from "@/components/Theme";
+import "@/styles/App.scss";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-    </Routes>
+    <div id="App">
+      <Theme>
+        <AppRoutes />
+      </Theme>
+    </div>
   );
 }
 
