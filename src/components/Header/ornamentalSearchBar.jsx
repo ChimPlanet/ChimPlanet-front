@@ -30,7 +30,7 @@ OrnamentalSearchBar.propTypes = {
 export default function OrnamentalSearchBar({ onClick }) {
   return (
     <Container onClick={onClick}>
-      <SearchInput placeholder="# 태그 검색"></SearchInput>
+      <SearchInput placeholder="#태그 검색"></SearchInput>
       <SearchIcon />
     </Container>
   );
