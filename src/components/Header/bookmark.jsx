@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import BookmarkIcon from '../icons/BookmarkIcon';
+import BookmarkIcon from '@/components/icons/BookmarkIcon';
+import { BOOKMARK_PATH } from '@/constants/route';
 
-const BookmarkStyled = styled.div`
+const BookmarkLink = styled(Link)`
   font-weight: 500;
   font-size: 12px;
   color: #101c33;
@@ -18,9 +20,9 @@ const BookmarkStyled = styled.div`
 
 export default function Bookmark() {
   return (
-    <BookmarkStyled>
+    <BookmarkLink to={BOOKMARK_PATH}>
       북마크 &nbsp;
       <BookmarkIcon />
-    </BookmarkStyled>
+    </BookmarkLink>
   );
 }
