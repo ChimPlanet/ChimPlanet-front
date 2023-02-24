@@ -1,5 +1,9 @@
 @import './reset.scss';
 
+body {
+  overscroll-behavior-y: none;
+}
+
 #App {
   height: 200vh;
 }

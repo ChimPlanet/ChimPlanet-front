@@ -1,14 +1,16 @@
-import AppRoutes from "@/components/AppRoutes";
-import Theme from "@/components/Theme";
-import "@/styles/App.scss";
+import AppRoutes from '@/components/AppRoutes';
+import Theme from '@/components/Theme';
+import '@/styles/App.scss';
+import Header from './components/Header';
 
 function App() {
   return (
-    <div id="App">
+    <main id="App">
       <Theme>
+        <Header />
         <AppRoutes />
       </Theme>
-    </div>
+    </main>
   );
 }
 

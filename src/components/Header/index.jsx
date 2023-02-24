@@ -5,7 +5,7 @@ import HeaderTab from './headerTab';
 import SearchTab from './searchTab';
 
 const Container = styled.header`
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   z-index: 100;

@@ -1,6 +1,6 @@
-import BaseLayout from '@/layout/BaseLayout';
+import { ABOUT_PATH } from '@/constants/route';
 import { Link } from 'react-router-dom';
 
 export default function Home() {
-  return <BaseLayout></BaseLayout>;
+  return <Link to={ABOUT_PATH}>about</Link>;
 }
