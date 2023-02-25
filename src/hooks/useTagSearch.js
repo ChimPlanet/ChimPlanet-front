@@ -1,4 +1,9 @@
+import TagTrie from '@/utils/tagTrie';
 import { useCallback, useState } from 'react';
+
+function validateTag(tag) {
+  return TagTrie.ready() && TagTrie.getInstance().hasTag(tag);
+}
 
 export default function useTagSearch() {
   const [input, setInput] = useState('');
@@ -6,11 +11,12 @@ export default function useTagSearch() {
 
   const addTag = useCallback(
     (tag) => {
+      if (!validateTag(tag)) return;
       setTags([...tags, tag]);
       // 만약 입력한 태그가 input과 같다면 input을 초기화
       if (tag === input) setInput('');
     },
-    [setTags],
+    [setTags, input],
   );
   const removeTag = useCallback(
     (tag) => {

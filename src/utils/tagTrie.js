@@ -40,7 +40,9 @@ class TagTrie {
    * @param {string} word
    * @returns {boolean}
    */
-  hasTag(word) {}
+  hasTag(word) {
+    return this.tagMap.has(TagTrie.disassembleWord(word));
+  }
 
   //#endregion
 
