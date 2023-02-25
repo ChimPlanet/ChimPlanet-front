@@ -34,6 +34,14 @@ class TagTrie {
       .getPrefix(TagTrie.disassembleWord(word))
       .map((el) => this.tagMap.get(el));
   }
+
+  /**
+   * 단어에 해당하는 tag가 있는지 확인합니다.
+   * @param {string} word
+   * @returns {boolean}
+   */
+  hasTag(word) {}
+
   //#endregion
 
   //#region static methods
@@ -43,7 +51,7 @@ class TagTrie {
    * @returns {string}
    */
   static disassembleWord(word) {
-    return hangul.disassembleToString(word);
+    return hangul.disassembleToString(word).toLowerCase();
   }
 
   /**
@@ -54,10 +62,7 @@ class TagTrie {
    */
   static makeTagAndDisassembleMap(tags, disassembled) {
     return new Map(
-      disassembled.map((disassembledWord, i) => [
-        disassembledWord.toLowerCase(),
-        tags[i],
-      ]),
+      disassembled.map((disassembledWord, i) => [disassembledWord, tags[i]]),
     );
   }
 
