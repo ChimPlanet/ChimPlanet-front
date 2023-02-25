@@ -13,6 +13,13 @@ const Title = styled.p`
   font-size: 14px;
 `;
 
+const TagsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
 RecommendTagSection.propTypes = {
   word: PropTypes.string,
   addTag: PropTypes.func,
@@ -23,20 +30,19 @@ export default function RecommendTagSection({ word, addTag }) {
 
   const recommends = useMemo(() => {
     if (TagTrie.ready() && word.length > 0) {
-      console.log(TagTrie.getInstance());
       return TagTrie.getInstance().getSimilarTags(word);
     }
     return [];
   }, [word]);
 
-  console.log(recommends);
-
   return (
     <Container>
       <Title>추천 태그</Title>
-      {recommends.map((tag) => (
-        <Tag key={tag} name={tag} />
-      ))}
+      <TagsContainer>
+        {recommends.map((tag) => (
+          <Tag key={tag} name={tag} onClick={() => addTag(tag, true)} />
+        ))}
+      </TagsContainer>
     </Container>
   );
 }

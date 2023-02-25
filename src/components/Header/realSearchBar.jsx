@@ -49,9 +49,19 @@ RealSearchBar.propTypes = {
 };
 
 /**
+ *
+ * @typedef {object} RealSearchBarProps
+ * @property {string[]} tags
+ * @property {string} input
+ * @property {(id: number) => void} removeTag
+ * @property {(id: number) => void} addTag
+ * @property {(input: string) => void} setInput
+ * @property {() => void} search
+ *
+ *
  * 실제 동작하는 검색바 컴포넌트
  * (ornamental click -> display real component)
- * @param {{tags: string[], removeTag(id: number): void, addTag(tag: string): void, input: string, setInput(input: string): void}} props
+ * @param {RealSearchBarProps} props
  * @returns
  */
 export default function RealSearchBar({
@@ -60,8 +70,10 @@ export default function RealSearchBar({
   addTag,
   input,
   setInput,
+  search,
 }) {
   const inputRef = useRef(null);
+  const isTabRef = useRef(false);
 
   useLayoutEffect(() => {
     // 검색창이 rendering 되면 input에 focus를 가져옴.
@@ -76,12 +88,23 @@ export default function RealSearchBar({
     },
     [setInput],
   );
-
   const handleEnter = useCallback(
-    ({ key }) => {
-      if (key === 'Enter' && input.length > 0) addTag(input);
+    (e) => {
+      const key = e.key;
+      if (key === 'Tab') {
+        e.preventDefault();
+        if (input.trim().length > 0 && isTabRef.current === false) {
+          isTabRef.current = true;
+        } else if (isTabRef.current === true) {
+          isTabRef.current = false;
+          addTag(input);
+        }
+      }
+      if (key === 'Enter' && tags.length > 0) search();
+      if (key === 'Backspace' && input.length === 0 && tags.length > 0)
+        removeTag(tags[tags.length - 1]);
     },
-    [input, addTag],
+    [input, addTag, removeTag, tags, search],
   );
 
   return (
@@ -89,13 +112,19 @@ export default function RealSearchBar({
       <SearchIcon />
       <SearchContent>
         <TagContainer>
-          <Tag name="디자이너" color="blue" removeSelf={() => removeTag(0)} />
-          {/* 그냥 레아이웃만 보는 임시 컴포넌트 */}
+          {tags.map((tag) => (
+            <Tag
+              key={tag}
+              name={tag}
+              color="blue"
+              removeSelf={() => removeTag(tag)}
+            />
+          ))}
         </TagContainer>
         <SearchInput
           ref={inputRef}
           value={input}
-          placeholder="#태그 검색"
+          placeholder="#태그 검색 (Tab을 눌러 태그 완성)"
           onChange={handleInput}
           onKeyDown={handleEnter}
         />

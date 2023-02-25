@@ -2,12 +2,15 @@ import styled from 'styled-components';
 import { func, string } from 'prop-types';
 import CloseIcon from './icons/CloseIcon';
 
+function emptyFunction() {}
+
 const TagContainer = styled.div`
   border-radius: 100px;
   border: 1px solid ${({ customColor }) => customColor};
   color: ${({ customColor }) => customColor};
   fill: ${({ customColor }) => customColor};
   padding: ${({ padding }) => padding};
+  cursor: pointer;
 `;
 
 const TagText = styled.span`
@@ -15,7 +18,6 @@ const TagText = styled.span`
   padding-top: 2px;
   padding-left: 6px;
   vertical-align: middle;
-  cursor: hand;
 `;
 
 const TagCloseIconWrapper = styled.span`
@@ -30,20 +32,23 @@ const TagCloseIconWrapper = styled.span`
 Tag.propTypes = {
   name: string.isRequired,
   color: string,
+  padding: string,
+  onClick: func,
   removeSelf: func,
 };
 
 /**
- * @param {{name: string, color?: string, padding?:string, removeSelf?():void}}
+ * @param {{name: string, color?: string, padding?:string, removeSelf?():void, onClick?(): void}}
  */
 export default function Tag({
+  color = 'black',
   name,
   removeSelf,
-  color = '#DBDEE2',
+  onClick = emptyFunction,
   padding = '2.5px 5px',
 }) {
   return (
-    <TagContainer padding={padding} customColor={color}>
+    <TagContainer padding={padding} customColor={color} onClick={onClick}>
       <TagText>#{name}&nbsp;</TagText>
       {removeSelf && (
         <TagCloseIconWrapper onClick={removeSelf}>
