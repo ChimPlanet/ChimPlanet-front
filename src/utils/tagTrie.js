@@ -54,7 +54,10 @@ class TagTrie {
    */
   static makeTagAndDisassembleMap(tags, disassembled) {
     return new Map(
-      disassembled.map((disassembledWord, i) => [disassembledWord, tags[i]]),
+      disassembled.map((disassembledWord, i) => [
+        disassembledWord.toLowerCase(),
+        tags[i],
+      ]),
     );
   }
 
@@ -68,6 +71,11 @@ class TagTrie {
     }
     return TagTrie.#instance;
   }
+
+  static ready() {
+    return TagTrie.#instance !== undefined;
+  }
+
   //#endregion
 }
 
