@@ -1,6 +1,6 @@
-import { API_BASE_URL } from "@/constants";
+import { API_BASE_URL } from '@/constants';
 
-const { default: axios } = require("axios");
+import axios from 'axios';
 
 const client = axios.create({
   timeout: 3000,

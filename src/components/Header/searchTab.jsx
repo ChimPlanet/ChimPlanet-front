@@ -1,8 +1,8 @@
 import { func } from 'prop-types';
-import { useCallback } from 'react';
 import styled from 'styled-components';
 import RealSearchBar from './realSearchBar';
 import RecommendTagSection from './recommendTagSection';
+import useTagSearch from '../../hooks/useTagSearch';
 
 const Container = styled.div`
   padding-top: 20px;
@@ -14,13 +14,12 @@ SearchTab.propTypes = {
 };
 
 export default function SearchTab({ activeHeaderTab }) {
-  const addTag = useCallback(() => {}, []);
-  const removeTag = useCallback(() => {}, []);
+  const handle = useTagSearch();
 
   return (
     <Container>
-      <RealSearchBar tags={[]} addTag={addTag} removeTag={removeTag} />
-      <RecommendTagSection word={''} addTag={addTag} />
+      <RealSearchBar {...handle} />
+      <RecommendTagSection word={handle.input} addTag={handle.addTag} />
     </Container>
   );
 }

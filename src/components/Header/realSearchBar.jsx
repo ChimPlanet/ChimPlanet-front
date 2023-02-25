@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import SearchIcon from '@/components/icons/SearchIcon';
-import { useLayoutEffect, useRef } from 'react';
+import { useLayoutEffect, useRef, useCallback } from 'react';
 import Tag from '@/components/Tag';
 
 const Container = styled.div`
@@ -44,15 +44,23 @@ RealSearchBar.propTypes = {
   tags: PropTypes.array.isRequired,
   removeTag: PropTypes.func.isRequired,
   addTag: PropTypes.func.isRequired,
+  input: PropTypes.string.isRequired,
+  setInput: PropTypes.func.isRequired,
 };
 
 /**
  * 실제 동작하는 검색바 컴포넌트
  * (ornamental click -> display real component)
- * @param {{tags: string[], removeTag(id: number): void, addTag(tag: string): void}}
+ * @param {{tags: string[], removeTag(id: number): void, addTag(tag: string): void, input: string, setInput(input: string): void}} props
  * @returns
  */
-export default function RealSearchBar({ tags, removeTag, addTag }) {
+export default function RealSearchBar({
+  tags,
+  removeTag,
+  addTag,
+  input,
+  setInput,
+}) {
   const inputRef = useRef(null);
 
   useLayoutEffect(() => {
@@ -62,6 +70,20 @@ export default function RealSearchBar({ tags, removeTag, addTag }) {
     }
   }, []);
 
+  const handleInput = useCallback(
+    ({ target }) => {
+      setInput(target.value);
+    },
+    [setInput],
+  );
+
+  const handleEnter = useCallback(
+    ({ key }) => {
+      if (key === 'Enter' && input.length > 0) addTag(input);
+    },
+    [input, addTag],
+  );
+
   return (
     <Container>
       <SearchIcon />
@@ -70,7 +92,13 @@ export default function RealSearchBar({ tags, removeTag, addTag }) {
           <Tag name="디자이너" color="blue" removeSelf={() => removeTag(0)} />
           {/* 그냥 레아이웃만 보는 임시 컴포넌트 */}
         </TagContainer>
-        <SearchInput ref={inputRef} placeholder="#태그 검색" />
+        <SearchInput
+          ref={inputRef}
+          value={input}
+          placeholder="#태그 검색"
+          onChange={handleInput}
+          onKeyDown={handleEnter}
+        />
       </SearchContent>
     </Container>
   );
