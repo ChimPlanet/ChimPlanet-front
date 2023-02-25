@@ -12,7 +12,9 @@ export default function useTagSearch() {
   const addTag = useCallback(
     (tag) => {
       if (!validateTag(tag)) return;
-      setTags([...tags, tag]);
+
+      // 만약 동일한 태그가 없는 경우 추가
+      if (!tags.includes(tag)) setTags([...tags, tag]);
       // 만약 입력한 태그가 input과 같다면 input을 초기화
       if (tag === input) setInput('');
     },
