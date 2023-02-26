@@ -14,19 +14,9 @@ Carousel.propTypes = {
   delay: number.isRequired,
 };
 
-export default function Carousel({
-  children,
-  itemWidth,
-  translateDuration,
-  delay,
-}) {
-  const length = Children.count(children);
+export default function Carousel({ children, ...props }) {
   const enableAnimationRef = useRef(true);
   const [index, setIndex] = useState(0);
-  // 마우스 드래그 반영
-  const [delta, setDelta] = useState(0);
-  // 자동 Slider 동작 조절
-  const [isStop, setIsStop] = useState(false);
 
   const setCursor = useCallback(
     (valueOrCallback, enable = true) => {
@@ -36,44 +26,16 @@ export default function Carousel({
     [setIndex, enableAnimationRef],
   );
 
-  const handleDeltaConfirm = useCallback(() => {
-    enableAnimationRef.current = true;
-    if (Math.abs(delta) >= itemWidth / 3)
-      setCursor((prev) => prev - Math.sign(delta));
-    setDelta(0);
-  }, [delta, setDelta, enableAnimationRef]);
-
-  //#region Hooks
-
-  const normalize = useNormalize(length);
-
-  useCarouselCounter(setCursor, delay, isStop);
-
-  const events = useCarouselEvents(
-    index,
-    setCursor,
-    normalize,
-    setIsStop,
-    setDelta,
-    handleDeltaConfirm,
-  );
-
-  //#endregion
-
-  // 최적화를 위해서 css object 사용함.
-  const carouselStyle = {
-    transform: `translate3d(${
-      -(index + length) * itemWidth + delta
-    }px,0px,0px)`,
-    width: `${length * itemWidth * 3}px`,
-    transition: enableAnimationRef.current
-      ? `all ${translateDuration}ms ease-in-out`
-      : 'none',
-  };
-
   return (
-    <div className="carousel__container" style={carouselStyle} {...events}>
-      <CarouselContent children={children} itemWidth={itemWidth} />
+    <div className="carousel__container">
+      <CarouselContent
+        children={children}
+        index={index}
+        setCursor={setCursor}
+        // setIsStop={setIsStop}
+        enableAnimationRef={enableAnimationRef}
+        {...props}
+      />
       <CarouselIndicator />
     </div>
   );

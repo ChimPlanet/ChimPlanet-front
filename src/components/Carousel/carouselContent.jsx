@@ -1,9 +1,55 @@
-import { Children } from 'react';
+import useNormalize from '@/hooks/useNormalize';
+import { Children, useCallback, useState } from 'react';
+import { useCarouselCounter, useCarouselEvents } from './carouselHooks';
 import CarouselItem from './carouselItem';
 
-export default function CarouselContent({ children, itemWidth }) {
+export default function CarouselContent({
+  children,
+  itemWidth,
+  index,
+  setCursor,
+  enableAnimationRef,
+  translateDuration,
+  delay,
+}) {
+  const length = Children.count(children);
+  // 마우스 드래그 반영
+  const [delta, setDelta] = useState(0);
+  // 자동 Slider 동작 조절
+  const [isStop, setIsStop] = useState(false);
+
+  const normalize = useNormalize(length);
+
+  const handleDeltaConfirm = useCallback(() => {
+    enableAnimationRef.current = true;
+    if (Math.abs(delta) >= itemWidth / 3)
+      setCursor((prev) => prev - Math.sign(delta));
+    setDelta(0);
+  }, [delta, setDelta, enableAnimationRef]);
+
+  useCarouselCounter(setCursor, delay, isStop);
+
+  const events = useCarouselEvents(
+    index,
+    setCursor,
+    normalize,
+    setIsStop,
+    setDelta,
+    handleDeltaConfirm,
+  );
+
+  // 최적화를 위해서 css object 사용함.
+  const styles = {
+    transform: `translate3d(${
+      -(index + length) * itemWidth + delta
+    }px,0px,0px)`,
+    width: `${length * itemWidth * 3}px`,
+    transition: enableAnimationRef.current
+      ? `all ${translateDuration}ms ease-in-out`
+      : 'none',
+  };
   return (
-    <>
+    <div className="carousel-content__container" style={styles} {...events}>
       {Children.map(children, (child, i) => {
         return (
           <CarouselItem key={-i - 1} width={`${itemWidth}px`} child={child} />
@@ -21,6 +67,6 @@ export default function CarouselContent({ children, itemWidth }) {
           />
         );
       })}
-    </>
+    </div>
   );
 }
