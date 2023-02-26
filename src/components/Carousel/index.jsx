@@ -1,6 +1,6 @@
 import useNormalize from '@/hooks/useNormalize';
 import { element, arrayOf, number } from 'prop-types';
-import { Children, useCallback, useRef, useState } from 'react';
+import { Children, useCallback, useMemo, useRef, useState } from 'react';
 import CarouselContent from './carouselContent';
 import { useCarouselCounter, useCarouselEvents } from './carouselHooks';
 import CarouselIndicator from './carouselIndicator';
@@ -17,6 +17,9 @@ Carousel.propTypes = {
 export default function Carousel({ children, ...props }) {
   const enableAnimationRef = useRef(true);
   const [index, setIndex] = useState(0);
+  // 자동 Slider 동작 조절
+  const [isStop, setIsStop] = useState(false);
+  const length = useMemo(() => Children.count(children), [children]);
 
   const setCursor = useCallback(
     (valueOrCallback, enable = true) => {
@@ -31,12 +34,19 @@ export default function Carousel({ children, ...props }) {
       <CarouselContent
         children={children}
         index={index}
+        length={length}
         setCursor={setCursor}
-        // setIsStop={setIsStop}
         enableAnimationRef={enableAnimationRef}
+        isStop={isStop}
+        setIsStop={setIsStop}
         {...props}
       />
-      <CarouselIndicator />
+      <CarouselIndicator
+        maxLength={length}
+        cursor={index}
+        setCursor={setCursor}
+        setIsStop={setIsStop}
+      />
     </div>
   );
 }

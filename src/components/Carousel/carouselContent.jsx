@@ -10,13 +10,13 @@ export default function CarouselContent({
   setCursor,
   enableAnimationRef,
   translateDuration,
+  length,
   delay,
+  isStop,
+  setIsStop,
 }) {
-  const length = Children.count(children);
   // 마우스 드래그 반영
   const [delta, setDelta] = useState(0);
-  // 자동 Slider 동작 조절
-  const [isStop, setIsStop] = useState(false);
 
   const normalize = useNormalize(length);
 
