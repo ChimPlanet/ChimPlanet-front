@@ -21,13 +21,16 @@ export default function CarouselContent({
 
   const normalize = useNormalize(length);
 
-  const handleDeltaConfirm = useCallback(() => {
-    enableAnimationRef.current = true;
-    if (Math.abs(delta) >= itemWidth / 3)
-      setCursor((prev) => prev - Math.sign(delta));
-    else onClick(normalize(index));
-    setDelta(0);
-  }, [delta, setDelta, enableAnimationRef, onClick, index, normalize]);
+  const handleDeltaConfirm = useCallback(
+    (isUp = true) => {
+      enableAnimationRef.current = true;
+      if (Math.abs(delta) >= itemWidth / 3)
+        setCursor((prev) => prev - Math.sign(delta));
+      else if (isUp) onClick(normalize(index));
+      setDelta(0);
+    },
+    [delta, setDelta, enableAnimationRef, onClick, index, normalize],
+  );
 
   useCarouselCounter(setCursor, delay, isStop);
 

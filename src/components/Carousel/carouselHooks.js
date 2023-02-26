@@ -73,7 +73,7 @@ export function useCarouselEvents(
   // 마우스가 올라가 있는 경우 자동 Slider 를 멈춤
   const onMouseLeave = useCallback(
     (e) => {
-      handleDeltaConfirm();
+      handleDeltaConfirm(false);
       setStop(false);
     },
     [setStop, handleDeltaConfirm],
