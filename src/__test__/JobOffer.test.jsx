@@ -1,8 +1,9 @@
+import { render, screen } from '@testing-library/react';
 import JobOffer from '@/components/JobOffer';
 
-export default function About() {
-  return (
-    <>
+describe('JobOffer Component', () => {
+  test('문자열이 출력된다.', () => {
+    render(
       <JobOffer
         id={0}
         title="UX/UI 디자이너 구인"
@@ -15,7 +16,9 @@ export default function About() {
         style={{
           width: 250,
         }}
-      />
-    </>
-  );
-}
+      />,
+    );
+    let el = screen.getByText(/UX\/UI 디자이너 구인/);
+    expect(el).toBeInTheDocument();
+  });
+});
