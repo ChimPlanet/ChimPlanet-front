@@ -56,10 +56,9 @@ export default function CarouselIndicator({
       <Button onClick={() => setCursor(cursor + 1)}>
         <ArrowRightIcon />
       </Button>
-      <Indicator>{`${Math.min(
-        cursor + 1,
-        maxLength,
-      )} / ${maxLength}`}</Indicator>
+      <Indicator>{`${
+        [maxLength, cursor + 1, 1].sort()[1]
+      } / ${maxLength}`}</Indicator>
     </Container>
   );
 }

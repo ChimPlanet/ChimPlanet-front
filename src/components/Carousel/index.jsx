@@ -34,7 +34,7 @@ export default function Carousel({ children, ...props }) {
   const setCursor = useCallback(
     (valueOrCallback, enable = true) => {
       enableAnimationRef.current = enable;
-      if (valueOrCallback) setIndex(valueOrCallback);
+      if (valueOrCallback != undefined) setIndex(valueOrCallback);
     },
     [setIndex, enableAnimationRef],
   );
