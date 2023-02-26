@@ -14,6 +14,7 @@ export default function CarouselContent({
   delay,
   isStop,
   setIsStop,
+  onClick,
 }) {
   // 마우스 드래그 반영
   const [delta, setDelta] = useState(0);
@@ -24,8 +25,9 @@ export default function CarouselContent({
     enableAnimationRef.current = true;
     if (Math.abs(delta) >= itemWidth / 3)
       setCursor((prev) => prev - Math.sign(delta));
+    else onClick(normalize(index));
     setDelta(0);
-  }, [delta, setDelta, enableAnimationRef]);
+  }, [delta, setDelta, enableAnimationRef, onClick, index, normalize]);
 
   useCarouselCounter(setCursor, delay, isStop);
 

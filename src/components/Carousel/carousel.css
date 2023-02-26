@@ -24,6 +24,6 @@
 .carousel-item__container img {
   width: 100%;
   height: inherit;
-  object-fit: cover;
+  object-fit: fill;
   -webkit-user-drag: none;
 }

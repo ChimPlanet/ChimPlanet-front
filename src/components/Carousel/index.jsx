@@ -14,6 +14,16 @@ Carousel.propTypes = {
   delay: number.isRequired,
 };
 
+/**
+ * @typedef {Object} CarouselProps
+ * @property {number} itemWidth
+ * @property {React.Node} children
+ * @property {number} translateDuration
+ * @property {number} delay
+ * @property {(cursor: number)=>void} onClick
+ * @param {CarouselProps}
+ * @returns
+ */
 export default function Carousel({ children, ...props }) {
   const enableAnimationRef = useRef(true);
   const [index, setIndex] = useState(0);
