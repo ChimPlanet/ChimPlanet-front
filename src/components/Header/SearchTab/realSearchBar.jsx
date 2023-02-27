@@ -92,16 +92,24 @@ export default function RealSearchBar({
   const handleEnter = useCallback(
     (e) => {
       switch (e.key) {
-        case 'Tab':
-          e.preventDefault();
-          if (lastHangulRef.current) {
-            lastHangulRef.current = false;
-            return;
-          }
-          addTag(ignorePrefix(input));
-          break;
+        // case 'Tab':
+        //   e.preventDefault();
+        //   if (lastHangulRef.current) {
+        //     lastHangulRef.current = false;
+        //     return;
+        //   }
+        //   addTag(ignorePrefix(input));
+        //   break;
         case 'Enter':
-          if (tags.length > 0) search();
+          // 입력된 Tag 값이 있고 비어있는 경우 검색
+          if (tags.length !== 0 && input.length === 0) search();
+          else {
+            if (lastHangulRef.current) {
+              lastHangulRef.current = false;
+              return;
+            }
+            addTag(ignorePrefix(input));
+          }
           break;
         case 'Backspace':
           if (input.length === 0 && tags.length > 0) removeTag(tags.at(-1));
