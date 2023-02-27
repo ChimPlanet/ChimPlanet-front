@@ -8,12 +8,16 @@ export class HistoryContext extends BaseContext {
     super('history', []);
   }
 
-  remove(sentence) {
-    this.set(this.get().filter((s) => s !== sentence));
+  /**
+   * @param {number} id
+   */
+  removeByIndex(index) {
+    this.get().splice(index, 1);
+    this.save();
   }
 
-  add(sentence) {
-    this.set([...this.get(), sentence]);
+  addFront(sentence) {
+    this.set([sentence, ...this.get()]);
   }
 
   /**

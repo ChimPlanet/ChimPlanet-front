@@ -32,10 +32,14 @@ export default class BaseContext {
     this.set(this.initialValue);
   }
 
+  save() {
+    setLocalStorageValue(this.contextKey, this.value);
+  }
+
   /** @param {T} value */
   set(value) {
     this.value = value;
-    setLocalStorageValue(this.contextKey, value);
+    this.save();
   }
   /** @returns {T} */
   get() {

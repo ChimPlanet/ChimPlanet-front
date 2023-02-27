@@ -4,16 +4,20 @@ import BaseContext from './baseContext';
 export class BookmarkContext extends BaseContext {
   static #instance;
 
+  // ! 자료구조 Set 으로 바꾸기
+
   constructor() {
     super('bookmark', []);
   }
 
   toggle(id) {
-    this.set(
-      this.get().indexOf(id) === -1 // id가 없는 경우
-        ? this.get().concat(id) // id를 추가
-        : this.get().splice(idx, 1), // id를 제거
-    );
+    const idx = this.get().indexOf(id);
+    if (idx === -1) {
+      this.get().push(id);
+    } else {
+      this.get().splice(idx, 1);
+    }
+    this.save();
   }
 
   /**

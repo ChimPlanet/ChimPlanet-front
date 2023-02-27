@@ -36,7 +36,7 @@ export function setLocalStorageValue(key, value) {
   validate('key', key);
   validate('value', value);
 
-  localStorage.setItem(key, value);
+  localStorage.setItem(key, JSON.stringify(value));
 }
 /**
  * LocalStorage에 Key가 있는지 확인합니다.

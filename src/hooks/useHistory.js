@@ -10,12 +10,12 @@ export default function useHistory() {
       HistoryContext.getInstance().reset();
       update();
     },
-    removeHistory(history) {
-      HistoryContext.getInstance().remove(history);
+    removeHistory(index) {
+      HistoryContext.getInstance().removeByIndex(index);
       update();
     },
     addHistory(history) {
-      HistoryContext.getInstance().add(history);
+      HistoryContext.getInstance().addFront(history);
       update();
     },
   };

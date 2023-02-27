@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import MenuIcon from '../icons/MenuIcon';
+import MenuIcon from '@/components/icons/MenuIcon';
 
 const Container = styled.div`
   margin-top: 25px;

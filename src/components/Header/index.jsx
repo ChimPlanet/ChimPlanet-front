@@ -1,8 +1,8 @@
 import { SIZE_WIDTH } from '@/constants/size';
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
-import HeaderTab from './headerTab';
-import SearchTab from './searchTab';
+import HeaderTab from './HeaderTab';
+import SearchTab from './SearchTab';
 
 const Container = styled.header`
   position: sticky;
@@ -47,9 +47,7 @@ export default function Header() {
       <Container>
         <Content>
           <HeaderTab activeSearchTab={activeSearchTab} />
-          {activeTab === 'search' && (
-            <SearchTab activeHeaderTab={activeHeaderTab} />
-          )}
+          {activeTab === 'search' && <SearchTab />}
         </Content>
       </Container>
     </>
