@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 import queryClient, { QueryClientProvider } from '@/query';
 import { Suspense } from 'react';
 
-const HeaderMock = ({ children }) => (
+const HeaderMock = () => (
   <QueryClientProvider client={queryClient}>
     <Suspense fallback={'Loading'}>
       <Header />
@@ -19,12 +19,12 @@ describe('Header Component', () => {
     expect(el).toBeInTheDocument();
   });
 
-  test('태그 검색을 클릭하면, 태그 검색창이 뜬다.', async () => {
+  test('태그 검색을 클릭하면, 태그 검색창 및 최근 검색 기록이 뜬다.', async () => {
     render(<HeaderMock />, { wrapper: MemoryRouter });
     const el = screen.getByPlaceholderText(/#태그 검색/);
     fireEvent.click(el);
     await new Promise((r) => setTimeout(r, 1000));
-    const searchEl = screen.getByText(/추천 태그/);
+    const searchEl = screen.getByText(/최근 검색 기록/);
     expect(searchEl).toBeInTheDocument();
   });
 });
