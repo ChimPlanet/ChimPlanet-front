@@ -6,11 +6,9 @@ const Container = styled.div`
 `;
 
 const MenuItem = styled.span`
-  padding-top: 5px;
   display: inline-block;
   font-weight: 700;
-  font-size: 17px;
-  line-height: 17px;
+  font-size: 14px;
   vertical-align: middle;
   width: 100px;
   margin-left: 10px;
