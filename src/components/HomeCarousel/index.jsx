@@ -57,7 +57,7 @@ export default function HomeCarousel() {
       <Carousel onClick={handleClick} {...carouselConfig}>
         {data.map(({ imageUrl, href }) => (
           <AnchorBannerItem key={imageUrl}>
-            <img src={imageUrl} alt={href} />
+            <img referrerPolicy="no-referrer" src={imageUrl} alt={href} />
           </AnchorBannerItem>
         ))}
       </Carousel>
