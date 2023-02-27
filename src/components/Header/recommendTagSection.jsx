@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import useTagRecommendEngine from '@/hooks/useTagRecommendEngine';
 import { useMemo } from 'react';
 import Tag from '@/components/Tag';
+import { ignorePrefix } from '@/utils/str';
 
 const Container = styled.div``;
 
@@ -30,7 +31,7 @@ export default function RecommendTagSection({ word, addTag }) {
 
   const recommends = useMemo(() => {
     if (TagTrie.ready() && word.length > 0) {
-      return TagTrie.getInstance().getSimilarTags(word);
+      return TagTrie.getInstance().getSimilarTags(ignorePrefix(word));
     }
     return [];
   }, [word]);

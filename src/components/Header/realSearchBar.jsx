@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SearchIcon from '@/components/icons/SearchIcon';
 import { useLayoutEffect, useRef, useCallback } from 'react';
 import Tag from '@/components/Tag';
-import { isHangulChar } from '@/utils/str';
+import { ignorePrefix, isHangulChar } from '@/utils/str';
 
 const Container = styled.div`
   display: grid;
@@ -98,14 +98,13 @@ export default function RealSearchBar({
             lastHangulRef.current = false;
             return;
           }
-          addTag(input);
+          addTag(ignorePrefix(input));
           break;
         case 'Enter':
           if (tags.length > 0) search();
           break;
         case 'Backspace':
-          if (input.length === 0 && tags.length > 0)
-            removeTag(tags[tags.length - 1]);
+          if (input.length === 0 && tags.length > 0) removeTag(tags.at(-1));
           break;
         default:
           lastHangulRef.current = isHangulChar(e.key);
