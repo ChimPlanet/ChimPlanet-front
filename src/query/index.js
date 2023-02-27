@@ -6,6 +6,7 @@ const queryClient = new QueryClient({
       retry: 2, // Query 실패시, 2회 재시도 합니다.
       staleTime: 180000, // Stale time, 3 minutes
       suspense: true,
+      keepPreviousData: true,
     },
   },
 });
