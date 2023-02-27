@@ -4,5 +4,5 @@
  */
 export function toFormatNumber(number) {
   if (number < 10000) return number.toLocaleString();
-  return `${(number * 100) / 10000 / 100}만`;
+  return `${Math.trunc((number * 100) / 10000) / 100}만`;
 }

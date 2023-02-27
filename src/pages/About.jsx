@@ -9,7 +9,7 @@ export default function About() {
         writer="침플래닛"
         writeAt="2023-02-27"
         thumbnailUrl="https://cafeptthumb-phinf.pstatic.net/MjAyMzAyMDhfMTI1/MDAxNjc1ODY1OTk1MjUx.APGGjNqh9LS6w7tSLOcMAxn6_gAlP6INceA8x2q50Pog.xW5jRHAnSA2q_i7KN7to7wWTZKQPW3s3nk823D8u614g.JPEG/0001.jpg?type=w1600"
-        viewCount={12000}
+        viewCount={122222}
         isBookmarked={false}
         isClosed={false}
         style={{
