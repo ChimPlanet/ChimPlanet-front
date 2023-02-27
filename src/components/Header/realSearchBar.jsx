@@ -4,11 +4,12 @@ import SearchIcon from '@/components/icons/SearchIcon';
 import { useLayoutEffect, useRef, useCallback } from 'react';
 import Tag from '@/components/Tag';
 import { ignorePrefix, isHangulChar } from '@/utils/str';
+import { SIZE_WIDTH } from '@/constants/size';
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 16px auto;
-  width: 1060px;
+  width: ${SIZE_WIDTH}px;
   padding: 0px 14px;
   border: 1px solid #00bd2f;
   border-radius: 100px;

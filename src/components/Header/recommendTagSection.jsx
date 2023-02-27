@@ -5,8 +5,10 @@ import useTagRecommendEngine from '@/hooks/useTagRecommendEngine';
 import { useMemo } from 'react';
 import Tag from '@/components/Tag';
 import { ignorePrefix } from '@/utils/str';
+import { SIZE_WIDTH } from '@/constants/size';
 
 const Container = styled.div`
+  max-width: ${SIZE_WIDTH}px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

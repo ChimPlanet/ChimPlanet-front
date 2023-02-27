@@ -7,8 +7,16 @@ import { Suspense } from 'react';
 import Loading from '@/components/Loading';
 
 const Container = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   padding-top: 20px;
   background-color: white;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
 `;
 
 const Title = styled.p`

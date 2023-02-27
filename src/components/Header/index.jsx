@@ -46,9 +46,8 @@ export default function Header() {
       {activeTab === 'search' && <BackgroundSheet onClick={activeHeaderTab} />}
       <Container>
         <Content>
-          {activeTab === 'header' ? (
-            <HeaderTab activeSearchTab={activeSearchTab} />
-          ) : (
+          <HeaderTab activeSearchTab={activeSearchTab} />
+          {activeTab === 'search' && (
             <SearchTab activeHeaderTab={activeHeaderTab} />
           )}
         </Content>
