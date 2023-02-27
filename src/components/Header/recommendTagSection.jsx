@@ -6,15 +6,7 @@ import { useMemo } from 'react';
 import Tag from '@/components/Tag';
 import { ignorePrefix } from '@/utils/str';
 
-const Container = styled.div``;
-
-const Title = styled.p`
-  margin: 2.2em 0em;
-  text-align: center;
-  font-size: 14px;
-`;
-
-const TagsContainer = styled.div`
+const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -38,12 +30,9 @@ export default function RecommendTagSection({ word, addTag }) {
 
   return (
     <Container>
-      <Title>추천 태그</Title>
-      <TagsContainer>
-        {recommends.map((tag) => (
-          <Tag key={tag} name={tag} onClick={() => addTag(tag, true)} />
-        ))}
-      </TagsContainer>
+      {recommends.map((tag) => (
+        <Tag key={tag} name={tag} onClick={() => addTag(tag, true)} />
+      ))}
     </Container>
   );
 }

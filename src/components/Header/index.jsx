@@ -43,7 +43,7 @@ export default function Header() {
 
   return (
     <>
-      {/* {activeTab === 'search' && <BackgroundSheet onClick={activeHeaderTab} />} */}
+      {activeTab === 'search' && <BackgroundSheet onClick={activeHeaderTab} />}
       <Container>
         <Content>
           {activeTab === 'header' ? (
