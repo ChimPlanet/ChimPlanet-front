@@ -45,6 +45,7 @@ export default function useTagSearch() {
     removeTag,
     search,
     setInput,
+    setTags,
     input,
     tags,
   };

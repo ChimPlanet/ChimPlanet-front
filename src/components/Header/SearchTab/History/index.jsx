@@ -1,6 +1,7 @@
 import useHistory from '@/hooks/useHistory';
 import styled from 'styled-components';
 import HistoryList from './historyList';
+import PropTypes from 'prop-types';
 
 const Container = styled.div`
   color: #101c33;
@@ -22,7 +23,7 @@ const RemoveButton = styled.button`
   color: #868e96;
 `;
 
-export default function History() {
+export default function History({ setTags }) {
   const { history, removeAll, removeHistory } = useHistory();
 
   return (
@@ -31,7 +32,15 @@ export default function History() {
         <Title>최근 검색 기록</Title>
         <RemoveButton onClick={removeAll}>전체삭제</RemoveButton>
       </Header>
-      <HistoryList history={history} removeHistory={removeHistory} />
+      <HistoryList
+        setTags={setTags}
+        history={history}
+        removeHistory={removeHistory}
+      />
     </Container>
   );
 }
+
+History.propTypes = {
+  setTags: PropTypes.func.isRequired,
+};

@@ -1,5 +1,6 @@
 import XIcon from '@/components/icons/XIcon';
 import PropTypes from 'prop-types';
+import { useCallback } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.ul`
@@ -19,17 +20,26 @@ const DeleteButton = styled.button``;
 HistoryList.propTypes = {
   history: PropTypes.array.isRequired,
   removeHistory: PropTypes.func.isRequired,
+  setTags: PropTypes.func.isRequired,
 };
 
 /**
- * @param {{history: string[], removeHistory(index: number):void}} props
+ * @param {{history: string[], removeHistory(index: number):void, setTags(tags): void}} props
  */
-export default function HistoryList({ history, removeHistory }) {
+export default function HistoryList({ history, removeHistory, setTags }) {
+  /**
+   * @type {(history: string)}
+   */
+  const handleClickHistory = useCallback(
+    (history) => () => setTags(history.split(', ')),
+    [setTags],
+  );
+
   return (
     <Container>
       {history.map((item, index) => (
         <Item key={index}>
-          <span>{item}</span>
+          <span onClick={handleClickHistory(item)}>{item}</span>
           <DeleteButton onClick={() => removeHistory(index)}>
             <XIcon />
           </DeleteButton>

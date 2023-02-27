@@ -27,7 +27,7 @@ export default function SearchTab() {
       <Content>
         <RealSearchBar {...context} />
         {context.input.length === 0 ? (
-          <History />
+          <History setTags={context.setTags} />
         ) : (
           <Recommend word={context.input} addTag={context.addTag} />
         )}
