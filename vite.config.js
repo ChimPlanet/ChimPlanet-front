@@ -12,6 +12,7 @@ export default defineConfig({
     }),
   ],
   server: {
+    host: true, // open server
     port: 3001,
   },
   resolve: {
