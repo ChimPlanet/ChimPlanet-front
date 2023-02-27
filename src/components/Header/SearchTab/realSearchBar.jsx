@@ -34,7 +34,6 @@ const SearchInput = styled.input`
   flex-grow: 1;
   font-size: 16px;
   padding: 0px;
-  padding-top: 2px;
   margin: 0px;
   outline: none;
   &:focus {
@@ -125,7 +124,7 @@ export default function RealSearchBar({
               color="black"
               borderColor="transparent"
               fontSize="16px"
-              padding="6px 10px"
+              padding="7px 10px"
               weight={400}
               backgroundColor={SearchTagSequenceColor[i]}
               removeSelf={() => removeTag(tag)}
