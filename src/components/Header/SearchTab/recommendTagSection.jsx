@@ -36,7 +36,7 @@ export default function RecommendTagSection({ word, addTag }) {
           borderColor="#DBDEE2"
           name={' ' + tag}
           onClick={() => addTag(tag, true)}
-          padding="7px 18px 7px 16px"
+          padding="7px 18px 9px 16px"
         />
       ))}
     </Container>

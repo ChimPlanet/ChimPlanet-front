@@ -15,9 +15,8 @@ const TagContainer = styled.div`
 `;
 
 const TagText = styled.span`
-  font-weight: 500;
+  font-weight: ${({ weight }) => weight};
   display: inline-block;
-  padding-top: 2px;
   padding-left: 6px;
   vertical-align: middle;
   font-size: ${({ fontSize }) => fontSize};
@@ -47,6 +46,7 @@ Tag.propTypes = {
  * @property {string?} backgroundColor
  * @property {string} padding
  * @property {string} fontSize
+ * @property {number?} weight
  * @property {string?} borderColor
  * @property {()=>void} onClick
  * @property {()=>void} removeSelf
@@ -57,6 +57,7 @@ export default function Tag({
   color = 'black',
   borderColor = 'black',
   backgroundColor = 'transparent',
+  weight = 500,
   name,
   removeSelf,
   onClick = emptyFunction,
@@ -71,7 +72,9 @@ export default function Tag({
       backgroundColor={backgroundColor}
       onClick={onClick}
     >
-      <TagText fontSize={fontSize}>#{name}&nbsp;</TagText>
+      <TagText fontSize={fontSize} weight={weight}>
+        #{name}&nbsp;
+      </TagText>
       {removeSelf && (
         <TagCloseIconWrapper onClick={removeSelf}>
           <CloseIcon />
