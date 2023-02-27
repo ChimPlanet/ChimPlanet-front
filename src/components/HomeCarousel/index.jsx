@@ -8,8 +8,7 @@ const Padding = 10;
 
 const Container = styled.section`
   display: flex;
-  /* height: 375px; */
-  height: 450px;
+  height: 375px;
   margin: 30px auto;
   overflow: hidden;
   justify-content: center;
