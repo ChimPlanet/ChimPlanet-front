@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import styled from "styled-components";
 import Modal from '@mui/material/Modal';
 import DetailPostHeader from './DetailPostHeader';
@@ -58,39 +59,42 @@ const PostTags = styled.div`
     flex-wrap: wrap;
 `;
 
-
 export default function DetailModal() {
 
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
-    const ref = useRef()
+    const location = useLocation();
+    const navigate = useNavigate();
+    const ref = useRef();
 
-    const a = ['마감', '구인 중', '상시모집'];
-
-    const tags = ['#백엔드', '#프론트', '#UI/UX', '#개발자']
-
+    const {
+        id,
+        originalURL,
+        title,
+        status,
+        date,
+        time,
+        views,
+        imgLink,
+        text,
+        tags
+    } = location.state;
 
     const handleClickOutSide = (e) => {
-        if (open && !ref.current.contains(e.target)) {
-          setOpen(false);
+        if (!ref.current.contains(e.target)) {
+          navigate('/about');
         };
     };
-    
+
     useEffect(() => {
-        if (open) document.addEventListener('mousedown', handleClickOutSide);
+        document.addEventListener('mousedown', handleClickOutSide);
         return () => {
           document.removeEventListener('mousedown', handleClickOutSide);
         };
     });
 
-
     return(
-        <>
-            <button onClick={handleOpen}>Open modal</button>
+        <>  
             <Modal
-                open={open}
-                onClose={handleClose}
+                open={true}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
@@ -98,19 +102,27 @@ export default function DetailModal() {
                     <Container ref={ref}>
                         <PostContainer>
                             <Post>
-                                <DetailPostHeader status={a}/>
-                                <PostImg>여기에 이미지가 들어갈 예정</PostImg>
+                                <DetailPostHeader 
+                                title={title} 
+                                status={status} 
+                                date={date} 
+                                time={time}
+                                views={views}/>
+                                <PostImg>
+                                    <img src={imgLink} />
+                                    여기에 이미지가 들어갈 예정
+                                </PostImg>
                                 <PostText>
-                                    여기에 게시글 내용이 들어갈 예정
+                                    {text}
                                 </PostText>
                                 <SubTitle>
                                     태그
                                 </SubTitle>
                                 <PostTags>
-                                    {tags.map(items=> <PostTag key={items} tag={items}/>)}
+                                    {tags.map(items=> <PostTag key={items} tag={items}>{items}</PostTag >)}
                                 </PostTags>
                             </Post>
-                            <DetailMenuBar/>
+                            <DetailMenuBar id={id} originalURL={originalURL}/>
                         </PostContainer>
                     </Container>
                 </ContainerScroll>

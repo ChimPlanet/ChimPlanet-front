@@ -37,21 +37,19 @@ const PostTime = styled.div`
     margin-right: 8px;
 `;
 
-const PostViews = styled.div`
+const PostViews = styled.div``;
 
-`;
-
-export default function DetailPostHeader({status}) {
+export default function DetailPostHeader({title ,status, date, time, views}) {
     return(
         <HeaderContainer>
             <PostTitle>
-                [팀 창설][침플래닛] 인력사무소 모아보기 사이트 개발 인력 모집합니다
+                {title}
             </PostTitle>
             <PostInfo>
-                {status.map(items=> <PostStatus key={items}>{items}</PostStatus>)}
-                <PostDate>2023.02.16</PostDate>
-                <PostTime>17:01</PostTime>
-                <PostViews>조회 433</PostViews>
+                <PostStatus>{status}</PostStatus>
+                <PostDate>{date}</PostDate>
+                <PostTime>{time}</PostTime>
+                <PostViews>조회 {views}</PostViews>
             </PostInfo>
         </HeaderContainer>
     )
