@@ -23,10 +23,14 @@ export default function CarouselContent({
 
   const handleDeltaConfirm = useCallback(
     (isUp = true) => {
+      // 애니메이션 활성화
       enableAnimationRef.current = true;
+      // 스왑 (영역의 1/3 이상을 넘길때 다음 cursor로 넘어감)
       if (Math.abs(delta) >= itemWidth / 3)
         setCursor((prev) => prev - Math.sign(delta));
+      // 클릭 판정 (스왑이 아니고, 마우스를 땐 경우)
       else if (isUp) onClick(normalize(index));
+      // delta 값 초기화
       setDelta(0);
     },
     [delta, setDelta, enableAnimationRef, onClick, index, normalize],

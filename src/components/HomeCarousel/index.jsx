@@ -1,5 +1,5 @@
 import { SIZE_WIDTH } from '@/constants/size';
-import Carousel from '@/components/Carousel';
+import Carousel from './Carousel';
 import { useBanner } from '@/query/banner';
 import styled from 'styled-components';
 import { useCallback } from 'react';
