@@ -1,8 +1,6 @@
-import useNormalize from '@/hooks/useNormalize';
 import { element, arrayOf, number } from 'prop-types';
 import { Children, useCallback, useMemo, useRef, useState } from 'react';
 import CarouselContent from './carouselContent';
-import { useCarouselCounter, useCarouselEvents } from './carouselHooks';
 import CarouselIndicator from './carouselIndicator';
 // 최적화를 위해서 css sheet를 사용함.
 import './carousel.css';
