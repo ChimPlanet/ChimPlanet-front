@@ -1,11 +1,11 @@
 import TagTrie from '@/utils/tagTrie';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import useTagRecommendEngine from '@/hooks/useTagRecommendEngine';
 import { useMemo } from 'react';
 import Tag from '@/components/Tag';
 import { ignorePrefix } from '@/utils/str';
 import { SIZE_WIDTH } from '@/constants/size';
+import { useTagList } from '@/query/tag';
 
 const Container = styled.div`
   max-width: ${SIZE_WIDTH}px;
@@ -21,19 +21,23 @@ RecommendTagSection.propTypes = {
 };
 
 export default function RecommendTagSection({ word, addTag }) {
-  useTagRecommendEngine();
+  const { data: tags } = useTagList();
 
   const recommends = useMemo(() => {
-    if (TagTrie.ready() && word.length > 0) {
-      return TagTrie.getInstance().getSimilarTags(ignorePrefix(word));
-    }
-    return [];
-  }, [word]);
+    return TagTrie.getInstance(tags).getSimilarTags(ignorePrefix(word));
+  }, [word, tags]);
 
   return (
     <Container>
       {recommends.map((tag) => (
-        <Tag key={tag} name={tag} onClick={() => addTag(tag, true)} />
+        <Tag
+          key={tag}
+          color="#8E94A0"
+          borderColor="#DBDEE2"
+          name={' ' + tag}
+          onClick={() => addTag(tag, true)}
+          padding="7px 18px 9px 16px"
+        />
       ))}
     </Container>
   );

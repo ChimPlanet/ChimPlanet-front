@@ -4,17 +4,17 @@ import SearchIcon from '@/components/icons/SearchIcon';
 import { useLayoutEffect, useRef, useCallback } from 'react';
 import Tag from '@/components/Tag';
 import { ignorePrefix, isHangulChar } from '@/utils/str';
-import { SIZE_WIDTH } from '@/constants/size';
+import { SearchTagSequenceColor } from '@/constants/color';
 
 const Container = styled.div`
   display: grid;
   grid-template-columns: 16px auto;
-  width: ${SIZE_WIDTH}px;
   padding: 0px 14px;
   border: 1px solid #00bd2f;
   border-radius: 100px;
   align-items: center;
   height: 50px;
+  margin-bottom: 35px;
 `;
 
 const SearchContent = styled.div`
@@ -34,7 +34,6 @@ const SearchInput = styled.input`
   flex-grow: 1;
   font-size: 16px;
   padding: 0px;
-  padding-top: 2px;
   margin: 0px;
   outline: none;
   &:focus {
@@ -85,24 +84,23 @@ export default function RealSearchBar({
   }, []);
 
   const handleInput = useCallback(
-    ({ target }) => {
-      setInput(target.value);
-    },
+    ({ target }) => setInput(target.value),
     [setInput],
   );
   const handleEnter = useCallback(
     (e) => {
       switch (e.key) {
-        case 'Tab':
-          e.preventDefault();
-          if (lastHangulRef.current) {
-            lastHangulRef.current = false;
-            return;
-          }
-          addTag(ignorePrefix(input));
-          break;
         case 'Enter':
-          if (tags.length > 0) search();
+          // 입력된 Tag 값이 있고 비어있는 경우 검색
+          if (tags.length !== 0 && input.length === 0) search();
+          else {
+            // 한글 관련 이벤트 오류 해소
+            if (lastHangulRef.current) {
+              lastHangulRef.current = false;
+              return;
+            }
+            addTag(ignorePrefix(input));
+          }
           break;
         case 'Backspace':
           if (input.length === 0 && tags.length > 0) removeTag(tags.at(-1));
@@ -119,11 +117,16 @@ export default function RealSearchBar({
       <SearchIcon />
       <SearchContent>
         <TagContainer>
-          {tags.map((tag) => (
+          {tags.map((tag, i) => (
             <Tag
               key={tag}
               name={tag}
-              color="blue"
+              color="black"
+              borderColor="transparent"
+              fontSize="16px"
+              padding="7px 10px"
+              weight={400}
+              backgroundColor={SearchTagSequenceColor[i]}
               removeSelf={() => removeTag(tag)}
             />
           ))}
@@ -131,7 +134,7 @@ export default function RealSearchBar({
         <SearchInput
           ref={inputRef}
           value={input}
-          placeholder="#태그 검색 (Tab을 눌러 태그 완성)"
+          placeholder="#태그, 팀, 포지션 검색"
           onChange={handleInput}
           onKeyDown={handleEnter}
         />

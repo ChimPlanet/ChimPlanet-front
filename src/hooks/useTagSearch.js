@@ -1,6 +1,7 @@
 import TagTrie from '@/utils/tagTrie';
 import { useCallback, useState } from 'react';
 import { ignorePrefix } from '@/utils/str';
+import { HistoryContext } from '@/utils/Context/historyContext';
 
 function validateTag(tag) {
   return TagTrie.ready() && TagTrie.getInstance().hasTag(tag);
@@ -12,6 +13,7 @@ function getOriginalTag(tag) {
 
 export default function useTagSearch() {
   const [input, setInput] = useState('');
+  /** @type {[string[], Function]} */
   const [tags, setTags] = useState([]);
 
   const addTag = useCallback(
@@ -33,13 +35,17 @@ export default function useTagSearch() {
     [setTags],
   );
 
-  const search = useCallback(() => {}, []);
+  const search = useCallback(() => {
+    HistoryContext.getInstance().addFront(tags.join(', '));
+    setTags([]);
+  }, [tags, setTags]);
 
   return {
     addTag,
     removeTag,
     search,
     setInput,
+    setTags,
     input,
     tags,
   };
