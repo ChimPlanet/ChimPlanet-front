@@ -58,7 +58,7 @@ const PostTags = styled.div`
     display: flex;
     flex-wrap: wrap;
 `;
-
+ 
 export default function DetailModal() {
 
     const location = useLocation();
@@ -80,7 +80,7 @@ export default function DetailModal() {
 
     const handleClickOutSide = (e) => {
         if (!ref.current.contains(e.target)) {
-          navigate('/about');
+          navigate(-1);
         };
     };
 
@@ -109,7 +109,7 @@ export default function DetailModal() {
                                 time={time}
                                 views={views}/>
                                 <PostImg>
-                                    <img src={imgLink} />
+                                    <img referrerPolicy="no-referrer"  src={imgLink} />
                                     여기에 이미지가 들어갈 예정
                                 </PostImg>
                                 <PostText>
