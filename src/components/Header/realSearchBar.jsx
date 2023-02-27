@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SearchIcon from '@/components/icons/SearchIcon';
 import { useLayoutEffect, useRef, useCallback } from 'react';
 import Tag from '@/components/Tag';
+import { isHangulChar } from '@/utils/str';
 
 const Container = styled.div`
   display: grid;
@@ -73,7 +74,7 @@ export default function RealSearchBar({
   search,
 }) {
   const inputRef = useRef(null);
-  const isTabRef = useRef(false);
+  const lastHangulRef = useRef(false);
 
   useLayoutEffect(() => {
     // 검색창이 rendering 되면 input에 focus를 가져옴.
@@ -90,19 +91,25 @@ export default function RealSearchBar({
   );
   const handleEnter = useCallback(
     (e) => {
-      const key = e.key;
-      if (key === 'Tab') {
-        e.preventDefault();
-        if (input.trim().length > 0 && isTabRef.current === false) {
-          isTabRef.current = true;
-        } else if (isTabRef.current === true) {
-          isTabRef.current = false;
+      switch (e.key) {
+        case 'Tab':
+          e.preventDefault();
+          if (lastHangulRef.current) {
+            lastHangulRef.current = false;
+            return;
+          }
           addTag(input);
-        }
+          break;
+        case 'Enter':
+          if (tags.length > 0) search();
+          break;
+        case 'Backspace':
+          if (input.length === 0 && tags.length > 0)
+            removeTag(tags[tags.length - 1]);
+          break;
+        default:
+          lastHangulRef.current = isHangulChar(e.key);
       }
-      if (key === 'Enter' && tags.length > 0) search();
-      if (key === 'Backspace' && input.length === 0 && tags.length > 0)
-        removeTag(tags[tags.length - 1]);
     },
     [input, addTag, removeTag, tags, search],
   );
