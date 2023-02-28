@@ -1,3 +1,4 @@
+import theme from '@/theme';
 import { useState, useLayoutEffect } from 'react';
 
 const getWidth = () =>
@@ -5,15 +6,27 @@ const getWidth = () =>
   document.documentElement.clientWidth || //content만의 너비
   document.body.clientWidth;
 
+// 너비 내림차순으로 정렬
+const sizeKeys = Object.keys(theme.sizes).sort(
+  (a, b) => theme.sizes[b] - theme.sizes[a],
+);
+
+function getSizeType(width) {
+  for (const key of sizeKeys) {
+    if (width >= theme.sizes[key]) return key;
+  }
+  return sizeKeys.at(-1);
+}
+
 export default function useResize() {
-  let [WIDTH, setWIDTH] = useState(getWidth());
+  let [type, setType] = useState(getSizeType(getWidth()));
 
   useLayoutEffect(() => {
     let timeoutId = null;
 
     const resizeListener = () => {
       clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => setWIDTH(getWidth()), 10);
+      timeoutId = setTimeout(() => setType(getSizeType(getWidth())), 10);
     };
     window.addEventListener('resize', resizeListener);
     return () => {
@@ -21,5 +34,5 @@ export default function useResize() {
     };
   }, []);
 
-  return WIDTH;
+  return type;
 }

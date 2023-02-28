@@ -5,7 +5,7 @@ import axios from 'axios';
 const client = axios.create({
   timeout: 3000,
   baseURL: API_BASE_URL,
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 // client.interceptors.request.use()

@@ -14,26 +14,25 @@ const Container = styled.section`
 
   ${({ theme }) => theme.media.desktop`
     ${`.carousel__container {
-      width: ${theme.widths.desktop}px;
+      width: ${theme.widths.desktop + 2 * Padding}px;
     }`}
   `}
   ${({ theme }) => theme.media.tablet`
     ${`.carousel__container {
-      width: ${theme.widths.tablet}px;
+      width: ${theme.widths.tablet + 2 * Padding}px;
     }`}
   `}
 `;
 
 const AnchorBannerItem = styled.div`
   height: 100%;
-  width: ${({ theme }) => theme.widths.desktop}px;
   -webkit-user-drag: none;
 
   ${({ theme }) => theme.media.desktop`
-    ${`width: ${theme.widths.desktop}px`};
+    ${`width: ${theme.widths.desktop + 2 * Padding}px`};
   `}
   ${({ theme }) => theme.media.tablet`
-    ${`width: ${theme.widths.tablet}px`};
+    ${`width: ${theme.widths.tablet + 2 * Padding}px`};
   `}
 
   & img {
@@ -54,27 +53,31 @@ const carouselConfig = {
  * @returns
  */
 export default function HomeCarousel() {
-  const { data } = useBanner();
-  const w = useResize();
+  const { data: banners } = useBanner();
+  const sizeType = useResize();
 
   const handleClick = useCallback(
-    (index) => Array.isArray(data) && window.open(data[index].href),
-    [data],
+    (index) => Array.isArray(banners) && window.open(banners[index].href),
+    [banners],
   );
 
   const itemWidth = useMemo(() => {
-    switch (true) {
-      case w >= theme.sizes.desktop:
+    switch (sizeType) {
+      case 'desktop':
         return theme.widths.desktop;
       default:
         return theme.widths.tablet;
     }
-  }, [w]);
+  }, [sizeType]);
 
   return (
     <Container>
-      <Carousel onClick={handleClick} itemWidth={itemWidth} {...carouselConfig}>
-        {data.map(({ imageUrl, href }) => (
+      <Carousel
+        onClick={handleClick}
+        itemWidth={itemWidth + 2 * Padding}
+        {...carouselConfig}
+      >
+        {banners.map(({ imageUrl, href }) => (
           <AnchorBannerItem key={imageUrl}>
             <img referrerPolicy="no-referrer" src={imageUrl} alt={href} />
           </AnchorBannerItem>
