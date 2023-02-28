@@ -4,9 +4,7 @@ import JobTypography from './jobTypography';
 import JobStatusIndicator from './jobStatusIndicator';
 import JobOfferThumbnail from './jobOfferThumbnail';
 
-const Container = styled.div`
-  color: #101c33;
-`;
+const Container = styled.div``;
 
 /**
  * @typedef {object} JobOfferProps
