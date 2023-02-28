@@ -48,7 +48,7 @@ export default function JobOfferThumbnail({
 }) {
   return (
     <Container>
-      <ThumbnailImage src={src} alt={alt} />
+      <ThumbnailImage referrerPolicy="no-referrer" src={src} alt={alt} />
       <BookmarkButton
         color={isBookmarked ? '#00BD2F' : '#fff'}
         onClick={onBookmarkClick}
