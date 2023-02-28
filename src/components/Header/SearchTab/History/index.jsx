@@ -4,7 +4,6 @@ import HistoryList from './historyList';
 import PropTypes from 'prop-types';
 
 const Container = styled.div`
-  color: #101c33;
   width: 100%;
 `;
 
@@ -20,7 +19,7 @@ const Title = styled.h1`
 `;
 
 const RemoveButton = styled.button`
-  color: #868e96;
+  color: ${({ theme }) => theme.colors.sub};
 `;
 
 export default function History({ setTags }) {

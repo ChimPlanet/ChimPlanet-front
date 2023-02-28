@@ -52,7 +52,7 @@ export default function CarouselContent({
     transform: `translate3d(${
       -(index + length) * itemWidth + delta
     }px,0px,0px)`,
-    width: `${length * itemWidth * 3}px`,
+    // width: `${length * itemWidth * 3}px`,
     transition: enableAnimationRef.current
       ? `all ${translateDuration}ms ease-in-out`
       : 'none',
@@ -60,21 +60,13 @@ export default function CarouselContent({
   return (
     <div className="carousel-content__container" style={styles} {...events}>
       {Children.map(children, (child, i) => {
-        return (
-          <CarouselItem key={-i - 1} width={`${itemWidth}px`} child={child} />
-        );
+        return <CarouselItem key={-i - 1} child={child} />;
       })}
       {Children.map(children, (child, i) => {
-        return <CarouselItem key={i} width={`${itemWidth}px`} child={child} />;
+        return <CarouselItem key={i} child={child} />;
       })}
       {Children.map(children, (child, i) => {
-        return (
-          <CarouselItem
-            key={i + length}
-            width={`${itemWidth}px`}
-            child={child}
-          />
-        );
+        return <CarouselItem key={i + length} child={child} />;
       })}
     </div>
   );

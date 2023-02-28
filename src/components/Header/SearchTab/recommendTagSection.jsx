@@ -4,11 +4,9 @@ import styled from 'styled-components';
 import { useMemo } from 'react';
 import Tag from '@/components/Tag';
 import { ignorePrefix } from '@/utils/str';
-import { SIZE_WIDTH } from '@/constants/size';
 import { useTagList } from '@/query/tag';
 
 const Container = styled.div`
-  max-width: ${SIZE_WIDTH}px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

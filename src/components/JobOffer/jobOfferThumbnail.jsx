@@ -46,7 +46,6 @@ export default function JobOfferThumbnail({
   isBookmarked,
   onBookmarkClick,
 }) {
-  console.log(isBookmarked);
   return (
     <Container>
       <ThumbnailImage src={src} alt={alt} />
