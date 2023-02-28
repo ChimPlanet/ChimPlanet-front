@@ -16,7 +16,14 @@ const Container = styled.header`
 const Content = styled.div`
   margin: 0 auto;
   padding: 12px 0px;
-  max-width: ${({ theme }) => theme.widths.desktop}px;
+  /* max-width: ${({ theme }) => theme.widths.desktop}px; */
+
+  ${({ theme }) => theme.media.desktop`
+    ${`width: ${theme.widths.desktop}px`};
+  `}
+  ${({ theme }) => theme.media.tablet`
+    ${`width: ${theme.widths.tablet}px`};
+  `}
 `;
 
 const BackgroundSheet = styled.div`

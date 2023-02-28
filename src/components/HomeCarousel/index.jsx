@@ -8,22 +8,18 @@ import useResize from '@/hooks/useResize';
 const Padding = 10;
 
 const Container = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 375px;
   margin: 30px 0px;
   overflow: hidden;
-  width: 100%;
 
   ${({ theme }) => theme.media.desktop`
     ${`.carousel__container {
-      width: ${theme.widths.desktop + 2 * Padding}px;
+      width: ${theme.widths.desktop}px;
     }`}
   `}
   ${({ theme }) => theme.media.tablet`
     ${`.carousel__container {
-      width: ${theme.widths.tablet + 2 * Padding}px;
+      width: ${theme.widths.tablet}px;
     }`}
   `}
 `;
