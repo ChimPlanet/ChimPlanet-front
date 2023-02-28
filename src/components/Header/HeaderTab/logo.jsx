@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const LogoLink = styled(Link)`
   font-size: 28px;
   font-weight: 700;
-  color: #00bd2f;
+  color: ${({ theme }) => theme.colors.logo};
 `;
 
 export default function Logo() {

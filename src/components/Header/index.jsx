@@ -9,14 +9,13 @@ const Container = styled.header`
   left: 0;
   z-index: 100;
   width: 100%;
-  border-bottom: 1px solid #dbdee2;
-  background-color: #fff;
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.border}`};
+  background-color: ${({ theme }) => theme.backgroundColor.main};
 `;
 
 const Content = styled.div`
   margin: 0 auto;
   padding: 12px 0px;
-  /* max-width: ${({ theme }) => theme.widths.desktop}px; */
 
   ${({ theme }) => theme.media.desktop`
     ${`width: ${theme.widths.desktop}px`};

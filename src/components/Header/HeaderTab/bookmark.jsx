@@ -6,8 +6,6 @@ import { BOOKMARK_PATH } from '@/constants/route';
 const BookmarkLink = styled(Link)`
   font-weight: 500;
   font-size: 12px;
-  color: #101c33;
-  border: 1px solid #dbdee2;
   padding: 6px 10px;
   border-radius: 15px;
   width: 80px;
@@ -15,6 +13,8 @@ const BookmarkLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: ${({ theme }) => theme.colors.main};
+  border: ${({ theme }) => `1px solid ${theme.colors.border}`};
   cursor: pointer;
 `;
 

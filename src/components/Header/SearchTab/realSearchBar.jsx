@@ -10,7 +10,8 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 16px auto;
   padding: 0px 14px;
-  border: 1px solid #00bd2f;
+  border: ${({ theme }) => `1px solid ${theme.colors.logo}`};
+
   border-radius: 100px;
   align-items: center;
   height: 50px;

@@ -13,8 +13,16 @@ const widths = {
 };
 
 const colors = {
-  main: '#000',
-  sub: '#000',
+  main: '#101C33',
+  sub: '#868E96',
+  logo: '#00BD2F',
+  border: '#DBDEE2',
+  black: '#000000',
+};
+
+const backgroundColor = {
+  main: '#fff',
+  input: '#f5f6f7',
 };
 
 const media = {
@@ -51,6 +59,7 @@ const theme = {
   media,
   widths,
   sizes,
+  backgroundColor,
 };
 
 export default theme;

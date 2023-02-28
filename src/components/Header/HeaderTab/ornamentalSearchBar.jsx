@@ -4,19 +4,18 @@ import PropTypes from 'prop-types';
 
 const Container = styled.div`
   display: grid;
-  background-color: #f5f6f7;
   padding: 10px 20px;
   border-radius: 100px;
   width: 350px;
   grid-template-columns: auto 16px;
+  background-color: ${({ theme }) => theme.backgroundColor.input};
 `;
 
 const SearchInput = styled.input`
   padding: 0px;
   margin: 0px;
-  background: 'red';
   outline: none;
-  color: #b5bcc5;
+  color: ${({ theme }) => theme.colors.sub};
 
   &:focus {
     outline: none;
@@ -30,7 +29,7 @@ OrnamentalSearchBar.propTypes = {
 export default function OrnamentalSearchBar({ onClick }) {
   return (
     <Container onClick={onClick}>
-      <SearchInput placeholder="#태그 검색"></SearchInput>
+      <SearchInput placeholder="#태그 검색" />
       <SearchIcon />
     </Container>
   );

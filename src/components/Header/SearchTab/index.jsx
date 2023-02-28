@@ -8,8 +8,8 @@ const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  background-color: white;
   width: 100vw;
+  background-color: ${({ theme }) => theme.backgroundColor.main};
 `;
 
 const Content = styled.div`
