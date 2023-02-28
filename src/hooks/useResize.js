@@ -19,7 +19,7 @@ function getSizeType(width) {
 }
 
 export default function useResize() {
-  let [type, setType] = useState(sizeKeys[0]);
+  let [type, setType] = useState(getSizeType(getWidth()));
 
   useLayoutEffect(() => {
     let timeoutId = null;
