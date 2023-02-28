@@ -62,7 +62,6 @@ export default function HomeCarousel() {
   );
 
   const itemWidth = useMemo(() => {
-    console.log(sizeType);
     switch (sizeType) {
       case 'desktop':
         return theme.widths.desktop;

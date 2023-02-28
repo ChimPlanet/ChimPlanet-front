@@ -5,22 +5,24 @@ import { toFormatNumber } from '@/utils/number';
 const Container = styled.div``;
 
 const Title = styled.h3`
-  font-size: 1.25em;
-  padding-bottom: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  padding-bottom: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
 const Writer = styled.p`
-  font-size: 1em;
+  font-size: 16px;
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 `;
 
-const Detail = styled.span`
+const Detail = styled.p`
+  margin-top: 5px;
   font-size: 14px;
   color: #8e94a0;
 `;
