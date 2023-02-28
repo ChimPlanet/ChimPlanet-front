@@ -14,26 +14,25 @@ const Container = styled.section`
 
   ${({ theme }) => theme.media.desktop`
     ${`.carousel__container {
-      width: ${theme.widths.desktop}px;
+      width: ${theme.widths.desktop + 2 * Padding}px;
     }`}
   `}
   ${({ theme }) => theme.media.tablet`
     ${`.carousel__container {
-      width: ${theme.widths.tablet}px;
+      width: ${theme.widths.tablet + 2 * Padding}px;
     }`}
   `}
 `;
 
 const AnchorBannerItem = styled.div`
   height: 100%;
-  width: ${({ theme }) => theme.widths.desktop}px;
   -webkit-user-drag: none;
 
   ${({ theme }) => theme.media.desktop`
-    ${`width: ${theme.widths.desktop}px`};
+    ${`width: ${theme.widths.desktop + 2 * Padding}px`};
   `}
   ${({ theme }) => theme.media.tablet`
-    ${`width: ${theme.widths.tablet}px`};
+    ${`width: ${theme.widths.tablet + 2 * Padding}px`};
   `}
 
   & img {
@@ -73,7 +72,11 @@ export default function HomeCarousel() {
 
   return (
     <Container>
-      <Carousel onClick={handleClick} itemWidth={itemWidth} {...carouselConfig}>
+      <Carousel
+        onClick={handleClick}
+        itemWidth={itemWidth + 2 * Padding}
+        {...carouselConfig}
+      >
         {data.map(({ imageUrl, href }) => (
           <AnchorBannerItem key={imageUrl}>
             <img referrerPolicy="no-referrer" src={imageUrl} alt={href} />
