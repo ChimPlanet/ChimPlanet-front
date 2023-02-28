@@ -1,36 +1,52 @@
-import { SIZE_WIDTH } from '@/constants/size';
 import Carousel from './Carousel';
 import { useBanner } from '@/query/banner';
 import styled from 'styled-components';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import theme from '@/theme';
+import useResize from '@/hooks/useResize';
 
 const Padding = 10;
 
 const Container = styled.section`
   display: flex;
-  height: 375px;
-  margin: 30px auto;
-  overflow: hidden;
   justify-content: center;
-  .carousel__container {
-    width: ${SIZE_WIDTH + 2 * Padding}px;
-  }
+  align-items: center;
+  height: 375px;
+  margin: 30px 0px;
+  overflow: hidden;
+  width: 100%;
+
+  ${({ theme }) => theme.media.desktop`
+    ${`.carousel__container {
+      width: ${theme.widths.desktop + 2 * Padding}px;
+    }`}
+  `}
+  ${({ theme }) => theme.media.tablet`
+    ${`.carousel__container {
+      width: ${theme.widths.tablet + 2 * Padding}px;
+    }`}
+  `}
 `;
 
 const AnchorBannerItem = styled.div`
-  width: ${SIZE_WIDTH}px;
   height: 100%;
+  width: ${({ theme }) => theme.widths.desktop}px;
   -webkit-user-drag: none;
+
+  ${({ theme }) => theme.media.desktop`
+    ${`width: ${theme.widths.desktop}px`};
+  `}
+  ${({ theme }) => theme.media.tablet`
+    ${`width: ${theme.widths.tablet}px`};
+  `}
 
   & img {
     padding: 0px ${Padding}px;
     border-radius: 25px;
-    /* padding: 0px 20px; */
   }
 `;
 
 const carouselConfig = {
-  itemWidth: SIZE_WIDTH,
   delay: 2000,
   translateDuration: 500,
 };
@@ -43,17 +59,25 @@ const carouselConfig = {
  */
 export default function HomeCarousel() {
   const { data } = useBanner();
+  const w = useResize();
 
   const handleClick = useCallback(
-    (index) => {
-      if (Array.isArray(data)) window.open(data[index].href);
-    },
+    (index) => Array.isArray(data) && window.open(data[index].href),
     [data],
   );
 
+  const itemWidth = useMemo(() => {
+    switch (true) {
+      case w >= theme.sizes.desktop:
+        return theme.widths.desktop;
+      default:
+        return theme.widths.tablet;
+    }
+  }, [w]);
+
   return (
     <Container>
-      <Carousel onClick={handleClick} {...carouselConfig}>
+      <Carousel onClick={handleClick} itemWidth={itemWidth} {...carouselConfig}>
         {data.map(({ imageUrl, href }) => (
           <AnchorBannerItem key={imageUrl}>
             <img referrerPolicy="no-referrer" src={imageUrl} alt={href} />

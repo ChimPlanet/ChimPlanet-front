@@ -3,7 +3,6 @@ import RealSearchBar from './realSearchBar';
 import useTagSearch from '@/hooks/useTagSearch';
 import Recommend from './recommend';
 import History from './History';
-import { SIZE_WIDTH } from '@/constants/size';
 
 const Container = styled.div`
   position: fixed;
@@ -14,9 +13,16 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  width: ${SIZE_WIDTH}px;
   margin: 0 auto;
   padding: 30px 0px;
+
+  ${({ theme }) => theme.media.desktop`
+    ${'width: ' + theme.widths.desktop + 'px'};
+  `};
+
+  ${({ theme }) => theme.media.tablet`
+    ${'width: ' + theme.widths.tablet + 'px'};
+  `};
 `;
 
 export default function SearchTab() {

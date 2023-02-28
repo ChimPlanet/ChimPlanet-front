@@ -35,7 +35,7 @@ Object.keys(sizes).reduce((acc, label) => {
     case 'tablet':
       acc.tablet = (...args) =>
         css`
-          @media only screen and (max-width: ${sizes.desktop}px) and (min-width: ${sizes.tablet}px) {
+          @media only screen and (max-width: ${sizes.desktop}px) {
             ${args}
           }
         `;
@@ -50,6 +50,7 @@ const theme = {
   colors,
   media,
   widths,
+  sizes,
 };
 
 export default theme;

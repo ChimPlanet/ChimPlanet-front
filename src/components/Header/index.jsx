@@ -1,4 +1,3 @@
-import { SIZE_WIDTH } from '@/constants/size';
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import HeaderTab from './HeaderTab';
@@ -17,7 +16,7 @@ const Container = styled.header`
 const Content = styled.div`
   margin: 0 auto;
   padding: 12px 0px;
-  max-width: ${SIZE_WIDTH}px;
+  max-width: ${({ theme }) => theme.widths.desktop}px;
 `;
 
 const BackgroundSheet = styled.div`
