@@ -1,10 +1,28 @@
-import HomeCarousel from '@/components/HomeCarousel';
-import { Link } from 'react-router-dom';
+import HomeCarousel from '@/components/Home/HomeCarousel';
+import JobOfferSection from '@/components/Home/JobOfferSection';
+import styled from 'styled-components';
+import { Suspense } from 'react';
+
+const Content = styled.div`
+  margin: 0 auto;
+
+  ${({ theme }) => theme.media.desktop`
+    ${`width: ${theme.widths.desktop}px`};
+  `}
+  ${({ theme }) => theme.media.tablet`
+    ${`width: ${theme.widths.tablet}px`};
+  `}
+`;
 
 export default function Home() {
   return (
     <>
-      <HomeCarousel />
+      <Suspense>
+        <HomeCarousel />
+      </Suspense>
+      <Content>
+        <JobOfferSection />
+      </Content>
     </>
   );
 }

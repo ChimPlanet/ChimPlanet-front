@@ -53,22 +53,23 @@ const carouselConfig = {
  * @returns
  */
 export default function HomeCarousel() {
-  const { data } = useBanner();
-  const w = useResize();
+  const { data: banners } = useBanner();
+  const sizeType = useResize();
 
   const handleClick = useCallback(
-    (index) => Array.isArray(data) && window.open(data[index].href),
-    [data],
+    (index) => Array.isArray(banners) && window.open(banners[index].href),
+    [banners],
   );
 
   const itemWidth = useMemo(() => {
-    switch (true) {
-      case w >= theme.sizes.desktop:
+    console.log(sizeType);
+    switch (sizeType) {
+      case 'desktop':
         return theme.widths.desktop;
       default:
         return theme.widths.tablet;
     }
-  }, [w]);
+  }, [sizeType]);
 
   return (
     <Container>
@@ -77,7 +78,7 @@ export default function HomeCarousel() {
         itemWidth={itemWidth + 2 * Padding}
         {...carouselConfig}
       >
-        {data.map(({ imageUrl, href }) => (
+        {banners.map(({ imageUrl, href }) => (
           <AnchorBannerItem key={imageUrl}>
             <img referrerPolicy="no-referrer" src={imageUrl} alt={href} />
           </AnchorBannerItem>
