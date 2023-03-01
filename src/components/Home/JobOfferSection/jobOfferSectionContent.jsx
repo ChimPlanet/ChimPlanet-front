@@ -2,8 +2,6 @@ import { usePopularJobOffer } from '@/query/job';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useLayoutEffect, useMemo } from 'react';
-import JobOffer from '@/components/JobOffer';
-import JobUtils from '@/utils/job';
 import JobOfferMapContent from '@/components/JobOffer/jobOfferMapContent';
 
 const Container = styled.div`

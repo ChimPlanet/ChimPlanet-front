@@ -1,5 +1,6 @@
 import useResize from './useResize';
 import { useLayoutEffect, useReducer } from 'react';
+import { useSizeType } from '@/context/sizeTypeContext';
 
 // 훅 기본값
 const INITIAL = Object.freeze({
@@ -47,7 +48,7 @@ const reducer = (state, action) => {
 export default function useJobSection() {
   const [context, dispatch] = useReducer(reducer, INITIAL);
   // ! 화면 크기에 따라 per Page 변경
-  const sizeType = useResize();
+  const sizeType = useSizeType();
 
   useLayoutEffect(() => {
     dispatch({
