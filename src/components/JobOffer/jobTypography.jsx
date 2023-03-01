@@ -40,7 +40,7 @@ const Detail = styled.p`
 export default function JobTypography({ title, writer, viewCount, writeAt }) {
   return (
     <Container>
-      <Title>{title}</Title>
+      <Title title={title}>{title}</Title>
       <Writer>{writer}</Writer>
       <Detail>
         {writeAt} &#183; 조회 {toFormatNumber(viewCount)}
