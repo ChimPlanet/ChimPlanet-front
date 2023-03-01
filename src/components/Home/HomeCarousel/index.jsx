@@ -3,7 +3,7 @@ import { useBanner } from '@/query/banner';
 import styled from 'styled-components';
 import { useCallback, useMemo } from 'react';
 import theme from '@/theme';
-import useResize from '@/hooks/useResize';
+import { useSizeType } from '@/context/sizeTypeContext';
 
 const Padding = 10;
 
@@ -54,7 +54,7 @@ const carouselConfig = {
  */
 export default function HomeCarousel() {
   const { data: banners } = useBanner();
-  const sizeType = useResize();
+  const sizeType = useSizeType();
 
   const handleClick = useCallback(
     (index) => Array.isArray(banners) && window.open(banners[index].href),

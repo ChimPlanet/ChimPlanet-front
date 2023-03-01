@@ -2,8 +2,7 @@ import { usePopularJobOffer } from '@/query/job';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useLayoutEffect, useMemo } from 'react';
-import JobOffer from '@/components/JobOffer';
-import JobUtils from '@/utils/job';
+import JobOfferMapContent from '@/components/JobOffer/jobOfferMapContent';
 
 const Container = styled.div`
   margin-top: 20px;
@@ -24,32 +23,18 @@ export default function JobOfferSectionContent({ page, perPage, setLength }) {
     [offers],
   );
 
-  const jobs = useMemo(() => {
-    return offers
-      .slice((page - 1) * perPage, Math.min(page * perPage, offers.length))
-      .map(JobUtils.__transform);
-  }, [offers, page, perPage]);
+  const jobs = useMemo(
+    () =>
+      offers.slice(
+        (page - 1) * perPage,
+        Math.min(page * perPage, offers.length),
+      ),
+    [offers, page, perPage],
+  );
 
   return (
     <Container column={perPage}>
-      {jobs.map((offer, index) => (
-        <JobOffer
-          key={offer.boardId}
-          id={offer.boardId}
-          title={offer.title}
-          writer={offer.writer}
-          writeAt={offer.regDate}
-          thumbnailUrl="https://cafeptthumb-phinf.pstatic.net/MjAyMzAyMDhfMTI1/MDAxNjc1ODY1OTk1MjUx.APGGjNqh9LS6w7tSLOcMAxn6_gAlP6INceA8x2q50Pog.xW5jRHAnSA2q_i7KN7to7wWTZKQPW3s3nk823D8u614g.JPEG/0001.jpg?type=w1600"
-          viewCount={offer.viewCount}
-          isBookmarked={false}
-          isClosed={offer.isClosed}
-          isCreate={offer.isCreate}
-          isRegular={offer.isRegular}
-          style={{
-            width: 250,
-          }}
-        />
-      ))}
+      <JobOfferMapContent jobs={jobs} />
     </Container>
   );
 }

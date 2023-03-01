@@ -22,12 +22,8 @@ const BookmarkButton = styled.button`
   position: absolute;
   top: 0;
   right: 0;
-  margin-top: 1em;
-  margin-right: 1em;
-
-  & svg {
-    fill: ${({ color }) => color};
-  }
+  margin-top: 16px;
+  margin-right: 10px;
 `;
 
 /**
@@ -49,10 +45,7 @@ export default function JobOfferThumbnail({
   return (
     <Container>
       <ThumbnailImage referrerPolicy="no-referrer" src={src} alt={alt} />
-      <BookmarkButton
-        color={isBookmarked ? '#00BD2F' : '#fff'}
-        onClick={onBookmarkClick}
-      >
+      <BookmarkButton onClick={onBookmarkClick}>
         <JobBookmarkIcon filled={isBookmarked} />
       </BookmarkButton>
     </Container>

@@ -3,6 +3,7 @@ import Theme from '@/components/Theme';
 import '@/styles/App.scss';
 import styled from 'styled-components';
 import Header from './components/Header';
+import { SizeTypeContextProvider } from './context/sizeTypeContext';
 
 const Main = styled.main`
   color: ${({ theme }) => theme.colors.main};

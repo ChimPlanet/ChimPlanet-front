@@ -20,6 +20,10 @@ export class BookmarkContext extends BaseContext {
     this.save();
   }
 
+  getBookmarkSet() {
+    return new Set(this.get());
+  }
+
   /**
    * @returns {BookmarkContext}
    */

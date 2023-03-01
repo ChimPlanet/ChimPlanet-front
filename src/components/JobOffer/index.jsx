@@ -70,4 +70,5 @@ JobOffer.propTypes = {
   isBookmarked: PropTypes.bool,
   isCreate: PropTypes.bool,
   isRegular: PropTypes.bool,
+  onBookmarkClick: PropTypes.func.isRequired,
 };
