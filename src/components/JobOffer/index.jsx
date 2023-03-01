@@ -15,6 +15,8 @@ const Container = styled.div``;
  * @property {string} writeAt
  * @property {string} writer
  * @property {boolean} isClosed
+ * @property {boolean} isCreate
+ * @property {boolean} isRegular
  * @property {boolean} isBookmarked
  * @property {()=>void} onBookmarkClick
  *
@@ -27,6 +29,8 @@ export default function JobOffer({
   viewCount,
   writeAt,
   isClosed,
+  isCreate,
+  isRegular,
   writer = '침플래닛',
   isBookmarked = false,
   onBookmarkClick,
@@ -40,7 +44,11 @@ export default function JobOffer({
         isBookmarked={isBookmarked}
         onBookmarkClick={onBookmarkClick}
       />
-      <JobStatusIndicator isClosed={isClosed} />
+      <JobStatusIndicator
+        isCreate={isCreate}
+        isRegular={isRegular}
+        isClosed={isClosed}
+      />
       <JobTypography
         writer={writer}
         writeAt={writeAt}
@@ -60,4 +68,6 @@ JobOffer.propTypes = {
   isClosed: PropTypes.bool.isRequired,
   writer: PropTypes.string,
   isBookmarked: PropTypes.bool,
+  isCreate: PropTypes.bool,
+  isRegular: PropTypes.bool,
 };
