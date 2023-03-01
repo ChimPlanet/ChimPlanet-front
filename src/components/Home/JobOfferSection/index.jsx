@@ -8,19 +8,21 @@ import useJobSection from '@/hooks/useJobSection';
 const Container = styled.section``;
 
 export default function JobOfferSection() {
-  const { setLength, context, nextPage, prevPage } = useJobSection();
+  const { context, dispatch, ActionType } = useJobSection();
   return (
     <Container>
       <JobOfferSectionHeader
         title="실시간 인기 구인글"
         isNext={context.isNext}
         isPrev={context.isPrev}
-        nextPage={nextPage}
-        prevPage={prevPage}
+        nextPage={() => dispatch({ type: ActionType.NEXT })}
+        prevPage={() => dispatch({ type: ActionType.PREV })}
       />
       <Suspense fallback={<Loading />}>
         <JobOfferSectionContent
-          setLength={setLength}
+          setLength={(length) =>
+            dispatch({ type: ActionType.SET_LENGTH, payload: length })
+          }
           perPage={context.perPage}
           page={context.page}
         />
