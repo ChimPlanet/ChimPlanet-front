@@ -1,6 +1,7 @@
 import useResize from './useResize';
-import { useLayoutEffect, useCallback, useState } from 'react';
+import { useLayoutEffect, useReducer } from 'react';
 
+// 훅 기본값
 const INITIAL = Object.freeze({
   page: 1,
   perPage: 4,
@@ -9,52 +10,56 @@ const INITIAL = Object.freeze({
   isPrev: false,
 });
 
-function processContext(context) {
+const ActionType = Object.freeze({
+  NEXT: Symbol('NEXT'),
+  PREV: Symbol('PREV'),
+  SET_PER_PAGE: Symbol('SET_PER_PAGE'),
+  SET_LENGTH: Symbol('SET_LENGTH'),
+});
+
+// 리듀서
+const _reducer = (state, { type, payload }) => {
+  switch (type) {
+    case ActionType.SET_PER_PAGE:
+      return { ...state, perPage: payload };
+    case ActionType.SET_LENGTH:
+      return { ...state, length: payload };
+    case ActionType.NEXT:
+      return state.isNext ? { ...state, page: state.page + 1 } : state;
+    case ActionType.PREV:
+      return state.isPrev ? { ...state, page: state.page - 1 } : state;
+    default:
+      return state;
+  }
+};
+
+// Middleware
+function middleware(context) {
   context.isNext = context.page * context.perPage < context.length;
   context.isPrev = context.page > 1;
   return context;
 }
 
+const reducer = (state, action) => {
+  return middleware(_reducer(state, action));
+};
+
 export default function useJobSection() {
-  const [context, setContext] = useState(INITIAL);
+  const [context, dispatch] = useReducer(reducer, INITIAL);
   // ! 화면 크기에 따라 per Page 변경
   const sizeType = useResize();
 
   useLayoutEffect(() => {
-    setContext((prev) => ({
-      ...prev,
-      perPage: sizeType === 'desktop' ? 4 : 3, // 큰 화면 일 때 4개, 작은 화면 일 때 3개로 출력
-    }));
+    dispatch({
+      type: ActionType.SET_PER_PAGE,
+      payload: sizeType === 'desktop' ? 4 : 3,
+    });
+    // 큰 화면 일 때 4개, 작은 화면 일 때 3개로 출력
   }, [sizeType]);
-
-  const nextPage = useCallback(() => {
-    if (context.isNext) {
-      setContext((prev) =>
-        processContext({
-          ...prev,
-          page: prev.page + 1,
-        }),
-      );
-    }
-  }, [context, setContext]);
-
-  const prevPage = useCallback(() => {
-    if (context.isPrev) {
-      setContext((prev) =>
-        processContext({
-          ...prev,
-          page: prev.page - 1,
-        }),
-      );
-    }
-  }, [context, setContext]);
 
   return {
     context,
-    setLength(length) {
-      setContext((prev) => processContext({ ...prev, length }));
-    },
-    nextPage,
-    prevPage,
+    dispatch,
+    ActionType,
   };
 }

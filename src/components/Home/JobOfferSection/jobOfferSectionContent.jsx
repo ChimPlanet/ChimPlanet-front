@@ -19,9 +19,10 @@ const Container = styled.div`
 export default function JobOfferSectionContent({ page, perPage, setLength }) {
   const { data: offers } = usePopularJobOffer();
 
-  useLayoutEffect(() => {
-    if (Array.isArray(offers)) setLength(offers.length);
-  }, [offers]);
+  useLayoutEffect(
+    () => Array.isArray(offers) && setLength(offers.length),
+    [offers],
+  );
 
   const jobs = useMemo(() => {
     return offers
