@@ -128,6 +128,5 @@ const Useless_Words = [
 ];
 // 정규식
 const UselessWordsRegex = convertStringsToRegExp(Useless_Words);
-console.log(UselessWordsRegex);
 
 export default JobUtils;
