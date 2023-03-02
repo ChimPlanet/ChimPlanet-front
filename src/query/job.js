@@ -12,6 +12,15 @@ export const usePopularJobOffer = () => {
   });
 };
 
+/**
+ * ! 반드시 FetchFunction은 JobOffer Array를 반환해야 한다.
+ */
+export function useJobOfferFromDynamic(fetchFunction) {
+  return useQuery([JobOfferQueryKey], fetchFunction, {
+    select: transformResponse,
+  });
+}
+
 export const useJobOfferByArrayId = (ids) => {
   return useQuery([JobOfferQueryKey], fetchJobOffer, {
     select: useCallback(

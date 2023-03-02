@@ -4,10 +4,15 @@ import JobOfferSectionHeader from './jobOfferSectionHeader';
 import { Suspense, useCallback } from 'react';
 import Loading from '@/components/Loading';
 import useJobSection from '@/hooks/useJobSection';
+import PropTypes from 'prop-types';
 
 const Container = styled.section``;
 
-export default function JobOfferSection() {
+/**
+ * @param {{fetchFunction: Function, title: string}}
+ * @returns
+ */
+export default function JobOfferSection({ fetchFunction, title }) {
   const { context, dispatch, ActionType } = useJobSection();
 
   const setLength = useCallback(
@@ -26,7 +31,7 @@ export default function JobOfferSection() {
   return (
     <Container>
       <JobOfferSectionHeader
-        title="실시간 인기 구인글"
+        title={title}
         isNext={context.isNext}
         isPrev={context.isPrev}
         nextPage={nextPage}
@@ -34,6 +39,7 @@ export default function JobOfferSection() {
       />
       <Suspense fallback={<Loading />}>
         <JobOfferSectionContent
+          fetchFunction={fetchFunction}
           setLength={setLength}
           perPage={context.perPage}
           page={context.page}
@@ -42,3 +48,8 @@ export default function JobOfferSection() {
     </Container>
   );
 }
+
+JobOfferSection.propTypes = {
+  fetchFunction: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+};

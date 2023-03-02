@@ -1,4 +1,4 @@
-import { usePopularJobOffer } from '@/query/job';
+import { useJobOfferFromDynamic } from '@/query/job';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useEffect, useLayoutEffect, useMemo } from 'react';
@@ -15,8 +15,13 @@ const Container = styled.div`
  * @param {{page: number, perPage: number, setLength(length: number): void}}
  * @returns
  */
-export default function JobOfferSectionContent({ page, perPage, setLength }) {
-  const { data: offers } = usePopularJobOffer();
+export default function JobOfferSectionContent({
+  page,
+  perPage,
+  setLength,
+  fetchFunction,
+}) {
+  const { data: offers } = useJobOfferFromDynamic(fetchFunction);
 
   useLayoutEffect(
     () => Array.isArray(offers) && setLength(offers.length),

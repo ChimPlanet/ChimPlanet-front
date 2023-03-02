@@ -10,7 +10,10 @@ const Container = styled.div`
   grid-template-columns: auto 60px;
 `;
 
-const Title = styled.h1``;
+const Title = styled.h1`
+  font-size: 22px;
+  font-weight: 700;
+`;
 
 const ControlBox = styled.div`
   display: flex;

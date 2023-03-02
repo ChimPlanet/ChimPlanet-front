@@ -1,7 +1,11 @@
 import HomeCarousel from '@/components/Home/HomeCarousel';
-import JobOfferSection from '@/components/Home/JobOfferSection';
 import styled from 'styled-components';
 import { Suspense } from 'react';
+import OfficialSection from '@/components/Home/Sections/OfficialSection';
+import RecentSection from '@/components/Home/Sections/RecentSection';
+import PopularSection from '@/components/Home/Sections/PopularSection';
+import SubBanner from '@/components/Home/SubBanner';
+import MoreOfferButton from '@/components/Home/MoreOfferButton';
 
 const Content = styled.div`
   margin: 0 auto;
@@ -22,7 +26,11 @@ export default function Home() {
         <HomeCarousel />
       </Suspense>
       <Content>
-        <JobOfferSection />
+        <OfficialSection />
+        <SubBanner />
+        <PopularSection />
+        <RecentSection />
+        <MoreOfferButton />
       </Content>
     </>
   );
