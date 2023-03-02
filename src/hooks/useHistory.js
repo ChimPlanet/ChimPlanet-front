@@ -14,6 +14,9 @@ export default function useHistory() {
       HistoryContext.getInstance().removeByIndex(index);
       update();
     },
+    /**
+     * @param {string[]} history
+     */
     addHistory(history) {
       HistoryContext.getInstance().addFront(history);
       update();

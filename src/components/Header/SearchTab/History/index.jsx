@@ -22,7 +22,7 @@ const RemoveButton = styled.button`
   color: ${({ theme }) => theme.colors.sub};
 `;
 
-export default function History({ setTags }) {
+export default function History({ addTag }) {
   const { history, removeAll, removeHistory } = useHistory();
 
   return (
@@ -32,7 +32,7 @@ export default function History({ setTags }) {
         <RemoveButton onClick={removeAll}>전체삭제</RemoveButton>
       </Header>
       <HistoryList
-        setTags={setTags}
+        addTag={addTag}
         history={history}
         removeHistory={removeHistory}
       />
@@ -41,5 +41,5 @@ export default function History({ setTags }) {
 }
 
 History.propTypes = {
-  setTags: PropTypes.func.isRequired,
+  addTag: PropTypes.func.isRequired,
 };

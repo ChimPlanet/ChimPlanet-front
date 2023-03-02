@@ -17,9 +17,7 @@ export default function Recommend({ word, addTag }) {
   return (
     <>
       <Title>추천 태그</Title>
-      <Suspense fallback={<Loading />}>
-        <RecommendTagSection word={word} addTag={addTag} />
-      </Suspense>
+      <RecommendTagSection word={word} addTag={addTag} />
     </>
   );
 }

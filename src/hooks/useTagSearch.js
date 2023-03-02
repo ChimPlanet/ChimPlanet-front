@@ -26,7 +26,7 @@ export default function useTagSearch() {
       // 만약 입력한 태그가 input과 같다면 input을 초기화
       if (tag === ignorePrefix(input) || clear) setInput('');
     },
-    [setTags, input],
+    [setTags, input, tags],
   );
   const removeTag = useCallback(
     (tag) => {
@@ -36,7 +36,7 @@ export default function useTagSearch() {
   );
 
   const search = useCallback(() => {
-    HistoryContext.getInstance().addFront(tags.join(', '));
+    HistoryContext.getInstance().addFront(tags.map((t) => `#${t}`));
     setTags([]);
   }, [tags, setTags]);
 
