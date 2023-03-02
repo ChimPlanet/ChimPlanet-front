@@ -25,7 +25,6 @@ import { convertStringsToRegExp } from './str';
  * @property {boolean} isRegular
  *
  * @typedef {object} Flags
- * @property {boolean} isCreate
  * @property {boolean} isRegular
  *
  */
@@ -53,7 +52,6 @@ const JobUtils = class {
       imgUrl: rawElement.imgUrl,
       // ! Indicate 표시용
       isClosed: rawElement.endStr === END_FLAG,
-      isCreate: flags.isCreate,
       isRegular: flags.isRegular,
     };
   }
@@ -72,17 +70,9 @@ const JobUtils = class {
     return [
       JobUtils.__removeUselessWord(rawTitle).trim(),
       {
-        isCreate: JobUtils.__checkIsCreate(rawTitle),
         isRegular: JobUtils.__checkIsRegular(rawTitle),
       },
     ];
-  }
-
-  /**
-   * @param {string} value
-   */
-  static __checkIsCreate(value) {
-    return value.startsWith(TITLE_PREFIX.CREATE);
   }
   /**
    * @param {string} value
