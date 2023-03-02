@@ -6,11 +6,18 @@ import styled from 'styled-components';
 const Container = styled.div`
   user-select: none;
   display: grid;
-  justify-content: space-between;
-  grid-template-columns: auto 60px;
+  grid-template-columns: auto auto 60px;
 `;
 
-const Title = styled.h1``;
+const Title = styled.h1`
+  font-size: 22px;
+  font-weight: 700;
+`;
+
+const Detail = styled.div`
+  align-content: flex-end;
+  width: fit-content;
+`;
 
 const ControlBox = styled.div`
   display: flex;
@@ -27,7 +34,17 @@ const Arrow = styled.span`
 `;
 
 /**
- * @param {{title: string, isNext: boolean, isPrev: boolean, nextPage():void, prevPage():void}}
+ * @typedef {Object} JobOfferSectionHeaderProps
+ * @property {string} title
+ * @property {boolean} isNext
+ * @property {boolean} isPrev
+ * @property {()=>void} nextPage
+ * @property {()=>void} prevPage
+ * @property {boolean} hideArrow
+ *
+ *
+ *
+ * @param {JobOfferSectionHeaderProps}
  * @returns
  */
 export default function JobOfferSectionHeader({
@@ -36,17 +53,24 @@ export default function JobOfferSectionHeader({
   isPrev,
   nextPage,
   prevPage,
+  hideArrow,
+  detail,
 }) {
   return (
     <Container>
       <Title>{title}</Title>
+      {detail}
       <ControlBox>
-        <Arrow enable={isPrev} onClick={prevPage}>
-          <SectionLeftIcon />
-        </Arrow>
-        <Arrow enable={isNext} onClick={nextPage}>
-          <SectionRightIcon />
-        </Arrow>
+        {!hideArrow && (
+          <>
+            <Arrow enable={isPrev} onClick={prevPage}>
+              <SectionLeftIcon />
+            </Arrow>
+            <Arrow enable={isNext} onClick={nextPage}>
+              <SectionRightIcon />
+            </Arrow>
+          </>
+        )}
       </ControlBox>
     </Container>
   );

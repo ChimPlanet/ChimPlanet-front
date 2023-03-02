@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import JobOfferMapContent from './JobOffer/jobOfferMapContent';
 import { useSizeType } from '@/context/sizeTypeContext';
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
-import useBookmark from '@/hooks/useBookmark';
 
 const Container = styled.section`
   display: grid;

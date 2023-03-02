@@ -1,6 +1,5 @@
 import JobOffer from '@/components/JobOffer';
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
-import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import useBookmark from '@/hooks/useBookmark';
 
@@ -15,17 +14,19 @@ export default function JobOfferMapContent({ jobs }) {
     <>
       {jobs.map((offer) => (
         <JobOffer
-          key={offer.boardId}
-          id={offer.boardId}
+          key={offer.id}
+          id={offer.id}
+          thumbnailURL={offer.thumbnailURL}
+          isThumbnail={offer.isThumbnail}
           title={offer.title}
           writer={offer.writer}
           writeAt={offer.regDate}
-          thumbnailUrl="https://cafeptthumb-phinf.pstatic.net/MjAyMzAyMDhfMTI1/MDAxNjc1ODY1OTk1MjUx.APGGjNqh9LS6w7tSLOcMAxn6_gAlP6INceA8x2q50Pog.xW5jRHAnSA2q_i7KN7to7wWTZKQPW3s3nk823D8u614g.JPEG/0001.jpg?type=w1600"
+          redirectURL={offer.redirectURL}
           viewCount={offer.viewCount}
-          isBookmarked={bookmarkSet.has(offer.boardId)}
+          isBookmarked={bookmarkSet.has(offer.id)}
           isClosed={offer.isClosed}
           isRegular={offer.isRegular}
-          onBookmarkClick={() => toggle(offer.boardId)}
+          onBookmarkClick={() => toggle(offer.id)}
           style={{
             width: 250,
           }}

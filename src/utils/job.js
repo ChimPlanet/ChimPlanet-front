@@ -1,28 +1,28 @@
 import { convertStringsToRegExp } from './str';
 /**
  * @typedef {object} ResponseJobOfferVO
- * @property {string} boardId
  * @property {string} writer
- * @property {string} title
+ * @property {string} boardTitle
  * @property {string} articleId
  * @property {string} likeCount
- * @property {string} viewCount
+ * @property {string} readCount
  * @property {string} regDate
- * @property {string} imgUrl
- * @property {string} endStr
+ * @property {string} isEnd
+ * @property {string} redirectURL
+ * @property {string} thumbnailURL
  *
  * @typedef {object} JobOfferVO
- * @property {number} boardId
  * @property {string} writer
  * @property {string} title
- * @property {string} articleId
+ * @property {string} id
  * @property {number} likeCount
  * @property {number} viewCount
  * @property {string} regDate
- * @property {string} imgUrl
  * @property {boolean} isClosed
- * @property {boolean} isCreate
+ * @property {string} redirectURL
  * @property {boolean} isRegular
+ * @property {string} thumbnailURL
+ * @property {string} isThumbnail
  *
  * @typedef {object} Flags
  * @property {boolean} isRegular
@@ -40,16 +40,18 @@ const JobUtils = class {
    * @returns {JobOfferVO}
    */
   static __transform(rawElement) {
-    const [title, flags] = JobUtils.__parseTitle(rawElement.title);
+    const [title, flags] = JobUtils.__parseTitle(rawElement.boardTitle);
     return {
       title,
-      boardId: JobUtils.toFieldNumber(rawElement.boardId),
+      id: JobUtils.toFieldNumber(rawElement.articleId),
       writer: rawElement.writer,
-      articleId: rawElement.articleId,
       likeCount: JobUtils.toFieldNumber(rawElement.likeCount),
-      viewCount: JobUtils.toFieldNumber(rawElement.viewCount),
-      regDate: rawElement.regDate,
-      imgUrl: rawElement.imgUrl,
+      viewCount: JobUtils.toFieldNumber(rawElement.readCount),
+      regDate: JobUtils.__parseDate(rawElement.regDate),
+      thumbnailURL: JobUtils.__preprocessThumbnailQuery(
+        rawElement.thumbnailURL,
+      ),
+      isThumbnail: rawElement.thumbnailURL.length > 0,
       // ! Indicate 표시용
       isClosed: rawElement.endStr === END_FLAG,
       isRegular: flags.isRegular,
@@ -62,6 +64,17 @@ const JobUtils = class {
   static toFieldNumber(value) {
     return parseInt(value);
   }
+
+  /** @param {string} value */
+  static __parseDate(value) {
+    return value.slice(0, 11);
+  }
+
+  /** @param {string} value */
+  static __preprocessThumbnailQuery(value) {
+    return value.replace('f100_100', 'f200_200');
+  }
+
   /**
    * @param {string} rawTitle
    * @return {[string, Flags]}

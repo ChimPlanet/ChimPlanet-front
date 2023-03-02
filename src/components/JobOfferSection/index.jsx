@@ -4,16 +4,38 @@ import JobOfferSectionHeader from './jobOfferSectionHeader';
 import { Suspense, useCallback } from 'react';
 import Loading from '@/components/Loading';
 import useJobSection from '@/hooks/useJobSection';
+import PropTypes from 'prop-types';
 
-const Container = styled.section``;
+const Container = styled.section`
+  min-height: 350px;
+`;
 
-export default function JobOfferSection() {
-  const { context, dispatch, ActionType } = useJobSection();
+/**
+ * @typedef {Object} JobOfferSectionProps
+ * @property {string} title
+ * @property {boolean?} hideArrow
+ * @property {JSX.Element} detail
+ * @property {Function} fetchFunction
+ * @property {number?} numOfLines
+ *
+ *
+ * @param {JobOfferSectionProps} props
+ * @returns
+ */
+export default function JobOfferSection({
+  fetchFunction,
+  title,
+  hideArrow = false,
+  detail = <div></div>,
+  numOfLines = 1,
+}) {
+  const { context, dispatch, ActionType } = useJobSection(numOfLines);
 
   const setLength = useCallback(
     (length) => dispatch({ type: ActionType.SET_LENGTH, payload: length }),
     [dispatch],
   );
+
   const nextPage = useCallback(
     () => dispatch({ type: ActionType.NEXT }),
     [dispatch],
@@ -26,7 +48,9 @@ export default function JobOfferSection() {
   return (
     <Container>
       <JobOfferSectionHeader
-        title="실시간 인기 구인글"
+        title={title}
+        detail={detail}
+        hideArrow={hideArrow}
         isNext={context.isNext}
         isPrev={context.isPrev}
         nextPage={nextPage}
@@ -34,11 +58,18 @@ export default function JobOfferSection() {
       />
       <Suspense fallback={<Loading />}>
         <JobOfferSectionContent
+          fetchFunction={fetchFunction}
           setLength={setLength}
           perPage={context.perPage}
           page={context.page}
+          numOfLines={numOfLines}
         />
       </Suspense>
     </Container>
   );
 }
+
+JobOfferSection.propTypes = {
+  fetchFunction: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+};
