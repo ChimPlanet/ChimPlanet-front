@@ -45,7 +45,7 @@ const reducer = (state, action) => {
   return middleware(_reducer(state, action));
 };
 
-export default function useJobSection() {
+export default function useJobSection(numOfLines) {
   const [context, dispatch] = useReducer(reducer, INITIAL);
   // ! 화면 크기에 따라 per Page 변경
   const sizeType = useSizeType();
@@ -53,7 +53,7 @@ export default function useJobSection() {
   useLayoutEffect(() => {
     dispatch({
       type: ActionType.SET_PER_PAGE,
-      payload: sizeType === 'desktop' ? 4 : 3,
+      payload: (sizeType === 'desktop' ? 4 : 3) * numOfLines,
     });
     // 큰 화면 일 때 4개, 작은 화면 일 때 3개로 출력
   }, [sizeType]);

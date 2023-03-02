@@ -10,6 +10,7 @@ import MoreOfferButton from '@/components/Home/MoreOfferButton';
 const Content = styled.div`
   margin: 0 auto;
   margin-top: 70px;
+  margin-bottom: 100px;
 
   ${({ theme }) => theme.media.desktop`
     ${`width: ${theme.widths.desktop}px`};

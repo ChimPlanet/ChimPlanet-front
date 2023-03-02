@@ -9,10 +9,19 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: ${({ column }) => `repeat(${column}, 1fr)`};
   gap: 20px;
+  row-gap: 70px;
 `;
 
 /**
- * @param {{page: number, perPage: number, setLength(length: number): void}}
+ * @typedef {Object} JobOfferSectionContentProps
+ * @property {number} page
+ * @property {number} perPage
+ * @property {(length: number) => void} setLength
+ * @property {number} numOfLines
+ * @property {Function} fetchFunction
+ *
+ *
+ * @param {JobOfferSectionContentProps}
  * @returns
  */
 export default function JobOfferSectionContent({
@@ -20,6 +29,7 @@ export default function JobOfferSectionContent({
   perPage,
   setLength,
   fetchFunction,
+  numOfLines,
 }) {
   const { data: offers } = useJobOfferFromDynamic(fetchFunction);
 
@@ -47,7 +57,7 @@ export default function JobOfferSectionContent({
   );
 
   return (
-    <Container column={perPage}>
+    <Container column={perPage / numOfLines}>
       <JobOfferMapContent jobs={jobs} />
     </Container>
   );

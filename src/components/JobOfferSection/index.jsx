@@ -9,16 +9,31 @@ import PropTypes from 'prop-types';
 const Container = styled.section``;
 
 /**
- * @param {{fetchFunction: Function, title: string}}
+ * @typedef {Object} JobOfferSectionProps
+ * @property {string} title
+ * @property {boolean?} hideArrow
+ * @property {JSX.Element} detail
+ * @property {Function} fetchFunction
+ * @property {number?} numOfLines
+ *
+ *
+ * @param {JobOfferSectionProps} props
  * @returns
  */
-export default function JobOfferSection({ fetchFunction, title }) {
-  const { context, dispatch, ActionType } = useJobSection();
+export default function JobOfferSection({
+  fetchFunction,
+  title,
+  hideArrow = false,
+  detail = <div></div>,
+  numOfLines = 1,
+}) {
+  const { context, dispatch, ActionType } = useJobSection(numOfLines);
 
   const setLength = useCallback(
     (length) => dispatch({ type: ActionType.SET_LENGTH, payload: length }),
     [dispatch],
   );
+
   const nextPage = useCallback(
     () => dispatch({ type: ActionType.NEXT }),
     [dispatch],
@@ -32,6 +47,8 @@ export default function JobOfferSection({ fetchFunction, title }) {
     <Container>
       <JobOfferSectionHeader
         title={title}
+        detail={detail}
+        hideArrow={hideArrow}
         isNext={context.isNext}
         isPrev={context.isPrev}
         nextPage={nextPage}
@@ -43,6 +60,7 @@ export default function JobOfferSection({ fetchFunction, title }) {
           setLength={setLength}
           perPage={context.perPage}
           page={context.page}
+          numOfLines={numOfLines}
         />
       </Suspense>
     </Container>

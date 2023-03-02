@@ -1,11 +1,20 @@
 import fetchRecentOffer from '@/api/job/fetchRecentOffer';
 import JobOfferSection from '@/components/JobOfferSection';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  margin-top: 65px;
+`;
 
 export default function RecentSection() {
   return (
-    <JobOfferSection
-      title="최근에 올라온 구인글"
-      fetchFunction={fetchRecentOffer}
-    />
+    <Container>
+      <JobOfferSection
+        title="최근에 올라온 구인글"
+        fetchFunction={fetchRecentOffer}
+        hideArrow={true}
+        numOfLines={2}
+      />
+    </Container>
   );
 }
