@@ -9,13 +9,13 @@ const Container = styled.div``;
 /**
  * @typedef {object} JobOfferProps
  * @property {number} id
- * @property {string} thumbnailUrl
+ * @property {string} thumbnailURL
+ * @property {boolean} isThumbnail
  * @property {string} title
  * @property {number} viewCount
  * @property {string} writeAt
  * @property {string} writer
  * @property {boolean} isClosed
- * @property {boolean} isCreate
  * @property {boolean} isRegular
  * @property {boolean} isBookmarked
  * @property {()=>void} onBookmarkClick
@@ -25,11 +25,11 @@ const Container = styled.div``;
 export default function JobOffer({
   id,
   title,
-  thumbnailUrl,
+  thumbnailURL,
+  isThumbnail,
   viewCount,
   writeAt,
   isClosed,
-  isCreate,
   isRegular,
   writer = '침플래닛',
   isBookmarked = false,
@@ -39,8 +39,9 @@ export default function JobOffer({
   return (
     <Container {...props}>
       <JobOfferThumbnail
-        src={thumbnailUrl}
+        src={thumbnailURL}
         alt={title}
+        isThumbnail={isThumbnail}
         isBookmarked={isBookmarked}
         onBookmarkClick={onBookmarkClick}
       />
@@ -58,10 +59,11 @@ export default function JobOffer({
 JobOffer.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  thumbnailUrl: PropTypes.string.isRequired,
+  thumbnailURL: PropTypes.string.isRequired,
   viewCount: PropTypes.number.isRequired,
   writeAt: PropTypes.string.isRequired,
   isClosed: PropTypes.bool.isRequired,
+  isThumbnail: PropTypes.bool.isRequired,
   writer: PropTypes.string,
   isBookmarked: PropTypes.bool,
   isRegular: PropTypes.bool,

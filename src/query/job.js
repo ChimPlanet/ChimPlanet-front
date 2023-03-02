@@ -16,7 +16,7 @@ export const useJobOfferByArrayId = (ids) => {
   return useQuery([JobOfferQueryKey], fetchJobOffer, {
     select: useCallback(
       (data) => {
-        return transformResponse(data).filter((el) => ids.includes(el.boardId));
+        return transformResponse(data).filter((el) => ids.includes(el.id));
       },
       [ids],
     ),
