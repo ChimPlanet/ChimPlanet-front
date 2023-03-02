@@ -44,11 +44,7 @@ export default function JobOffer({
         isBookmarked={isBookmarked}
         onBookmarkClick={onBookmarkClick}
       />
-      <JobStatusIndicator
-        isCreate={isCreate}
-        isRegular={isRegular}
-        isClosed={isClosed}
-      />
+      <JobStatusIndicator isRegular={isRegular} isClosed={isClosed} />
       <JobTypography
         writer={writer}
         writeAt={writeAt}
@@ -68,7 +64,6 @@ JobOffer.propTypes = {
   isClosed: PropTypes.bool.isRequired,
   writer: PropTypes.string,
   isBookmarked: PropTypes.bool,
-  isCreate: PropTypes.bool,
   isRegular: PropTypes.bool,
   onBookmarkClick: PropTypes.func.isRequired,
 };

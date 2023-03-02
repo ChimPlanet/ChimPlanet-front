@@ -21,18 +21,16 @@ const Indicator = styled.span`
  * @typedef {object} JobStatusIndicatorProps
  * @property {boolean} isClosed
  * @property {boolean} isRegular
- * @property {boolean} isCreate
  *
  * @param {JobStatusIndicatorProps}
  * @returns
  */
-export default function JobStatusIndicator({ isClosed, isRegular, isCreate }) {
+export default function JobStatusIndicator({ isClosed, isRegular }) {
   return (
     <Container>
       <Indicator color={isClosed ? '#ED2040' : '#00BD2F'}>
         {isClosed ? '마감' : '구인 중'}
       </Indicator>
-      {isCreate && <Indicator color="#969696">팀 창설</Indicator>}
       {isRegular && <Indicator color="#969696">상시모집</Indicator>}
     </Container>
   );
@@ -41,5 +39,4 @@ export default function JobStatusIndicator({ isClosed, isRegular, isCreate }) {
 JobStatusIndicator.propTypes = {
   isClosed: PropTypes.bool.isRequired,
   isRegular: PropTypes.bool.isRequired,
-  isCreate: PropTypes.bool.isRequired,
 };

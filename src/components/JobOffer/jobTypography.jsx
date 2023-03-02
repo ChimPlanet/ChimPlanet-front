@@ -8,9 +8,9 @@ const Title = styled.h3`
   font-size: 18px;
   font-weight: 700;
   padding-bottom: 15px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* overflow: hidden; */
+  /* text-overflow: ellipsis; */
+  /* white-space: nowrap; */
 `;
 
 const Writer = styled.p`

@@ -24,7 +24,6 @@ export default function JobOfferMapContent({ jobs }) {
           viewCount={offer.viewCount}
           isBookmarked={bookmarkSet.has(offer.boardId)}
           isClosed={offer.isClosed}
-          isCreate={offer.isCreate}
           isRegular={offer.isRegular}
           onBookmarkClick={() => toggle(offer.boardId)}
           style={{
