@@ -1,7 +1,7 @@
 import { usePopularJobOffer } from '@/query/job';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useLayoutEffect, useMemo } from 'react';
+import { useEffect, useLayoutEffect, useMemo } from 'react';
 import JobOfferMapContent from '@/components/JobOffer/jobOfferMapContent';
 
 const Container = styled.div`
@@ -22,6 +22,15 @@ export default function JobOfferSectionContent({ page, perPage, setLength }) {
     () => Array.isArray(offers) && setLength(offers.length),
     [offers],
   );
+
+  // ! 미리 이미지 가져오기
+  useEffect(() => {
+    if (Array.isArray(offers)) {
+      offers.forEach((offer) => {
+        if (offer.isThumbnail) new Image().src = offer.thumbnailURL;
+      });
+    }
+  }, [offers]);
 
   const jobs = useMemo(
     () =>
