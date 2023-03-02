@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useMemo } from 'react';
 import Tag from '@/components/Tag';
 import { ignorePrefix } from '@/utils/str';
-import { useTagList } from '@/query/tag';
 
 const Container = styled.div`
   display: flex;
@@ -19,11 +18,9 @@ RecommendTagSection.propTypes = {
 };
 
 export default function RecommendTagSection({ word, addTag }) {
-  const { data: tags } = useTagList();
-
   const recommends = useMemo(() => {
-    return TagTrie.getInstance(tags).getSimilarTags(ignorePrefix(word));
-  }, [word, tags]);
+    return TagTrie.getInstance().getSimilarTags(ignorePrefix(word));
+  }, [word]);
 
   return (
     <Container>

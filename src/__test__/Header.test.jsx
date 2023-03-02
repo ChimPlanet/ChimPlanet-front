@@ -5,6 +5,8 @@ import queryClient, { QueryClientProvider } from '@/query';
 import { Suspense } from 'react';
 import Theme from '@/components/Theme';
 
+jest.mock('@/constants', () => ({ getApiBase: () => 'localhost:3000' }));
+
 const HeaderMock = () => (
   <Theme>
     <QueryClientProvider client={queryClient}>

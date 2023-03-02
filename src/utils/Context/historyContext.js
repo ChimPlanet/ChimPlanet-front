@@ -15,9 +15,11 @@ export class HistoryContext extends BaseContext {
     this.get().splice(index, 1);
     this.save();
   }
-
-  addFront(sentence) {
-    this.set([sentence, ...this.get()]);
+  /**
+   * @param {string[]} sentences
+   */
+  addFront(sentences) {
+    this.set([...sentences, ...this.get()]);
   }
 
   /**
