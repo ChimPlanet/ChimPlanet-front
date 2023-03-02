@@ -1,9 +1,10 @@
 import Carousel from './Carousel';
 import { useBanner } from '@/query/banner';
 import styled from 'styled-components';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, Suspense } from 'react';
 import theme from '@/theme';
 import { useSizeType } from '@/context/sizeTypeContext';
+import Loading from '@/components/Loading';
 
 const Padding = 10;
 
@@ -46,13 +47,7 @@ const carouselConfig = {
   translateDuration: 500,
 };
 
-/**
- * @typedef {object} HomeCarouselProps
- *
- * @param {HomeCarouselProps}
- * @returns
- */
-export default function HomeCarousel() {
+function HomeCarouselContent() {
   const { data: banners } = useBanner();
   const sizeType = useSizeType();
 
@@ -71,18 +66,31 @@ export default function HomeCarousel() {
   }, [sizeType]);
 
   return (
+    <Carousel
+      onClick={handleClick}
+      itemWidth={itemWidth + 2 * Padding}
+      {...carouselConfig}
+    >
+      {banners.map(({ imageUrl, href }) => (
+        <AnchorBannerItem key={imageUrl}>
+          <img referrerPolicy="no-referrer" src={imageUrl} alt={href} />
+        </AnchorBannerItem>
+      ))}
+    </Carousel>
+  );
+}
+/**
+ * @typedef {object} HomeCarouselProps
+ *
+ * @param {HomeCarouselProps}
+ * @returns
+ */
+export default function HomeCarousel() {
+  return (
     <Container>
-      <Carousel
-        onClick={handleClick}
-        itemWidth={itemWidth + 2 * Padding}
-        {...carouselConfig}
-      >
-        {banners.map(({ imageUrl, href }) => (
-          <AnchorBannerItem key={imageUrl}>
-            <img referrerPolicy="no-referrer" src={imageUrl} alt={href} />
-          </AnchorBannerItem>
-        ))}
-      </Carousel>
+      <Suspense fallback={<Loading />}>
+        <HomeCarouselContent />
+      </Suspense>
     </Container>
   );
 }

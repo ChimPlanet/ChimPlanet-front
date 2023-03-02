@@ -6,7 +6,9 @@ import Loading from '@/components/Loading';
 import useJobSection from '@/hooks/useJobSection';
 import PropTypes from 'prop-types';
 
-const Container = styled.section``;
+const Container = styled.section`
+  min-height: 350px;
+`;
 
 /**
  * @typedef {Object} JobOfferSectionProps
