@@ -7,6 +7,8 @@ const Container = styled.div`
   position: relative;
   top: 0;
   left: 0;
+  width: 100%;
+  /* height: 190px; */
   aspect-ratio: 5/3.8;
 `;
 
@@ -14,9 +16,12 @@ const ThumbnailImage = styled.img`
   position: absolute;
   top: 0;
   left: 0;
+  display: block;
   width: 100%;
   height: 100%;
+  /* object-fit: contain; */
   border-radius: 10px;
+  margin: 0px auto;
 `;
 
 const BookmarkButton = styled.button`
