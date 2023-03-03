@@ -4,7 +4,14 @@ import JobTypography from './jobTypography';
 import JobStatusIndicator from './jobStatusIndicator';
 import JobOfferThumbnail from './jobOfferThumbnail';
 
-const Container = styled.div``;
+const Container = styled.div`
+  transform: translateY(0px);
+  transition: transform 0.1s ease-in-out;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+`;
 
 /**
  * @typedef {object} JobOfferProps
