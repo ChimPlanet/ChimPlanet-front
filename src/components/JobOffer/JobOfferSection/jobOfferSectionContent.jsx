@@ -1,15 +1,16 @@
 import { useJobOfferFromDynamic } from '@/query/job';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useEffect, useLayoutEffect, useMemo } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import JobOfferMapContent from '@/components/JobOffer/jobOfferMapContent';
 
 const Container = styled.div`
   margin-top: 20px;
-  display: grid;
-  grid-template-columns: ${({ column }) => `repeat(${column}, 1fr)`};
+  display: flex;
   gap: 20px;
-  row-gap: 70px;
+  width: fit-content;
+  transform: ${(p) => `translate3d(${p.moveX}px, 0px, 0px)`};
+  transition: transform 0.2s ease-in-out;
 `;
 
 /**
@@ -17,7 +18,6 @@ const Container = styled.div`
  * @property {number} page
  * @property {number} perPage
  * @property {(length: number) => void} setLength
- * @property {number} numOfLines
  * @property {Function} fetchFunction
  *
  *
@@ -25,11 +25,10 @@ const Container = styled.div`
  * @returns
  */
 export default function JobOfferSectionContent({
-  page,
+  cursor,
   perPage,
   setLength,
   fetchFunction,
-  numOfLines,
 }) {
   const { data: offers } = useJobOfferFromDynamic(fetchFunction);
 
@@ -47,24 +46,15 @@ export default function JobOfferSectionContent({
     }
   }, [offers]);
 
-  const jobs = useMemo(
-    () =>
-      offers.slice(
-        (page - 1) * perPage,
-        Math.min(page * perPage, offers.length),
-      ),
-    [offers, page, perPage],
-  );
-
   return (
-    <Container column={perPage / numOfLines}>
-      <JobOfferMapContent jobs={jobs} />
+    <Container moveX={-cursor * 270} column={perPage}>
+      <JobOfferMapContent jobs={offers} />
     </Container>
   );
 }
 
 JobOfferSectionContent.propTypes = {
-  page: PropTypes.number.isRequired,
+  cursor: PropTypes.number.isRequired,
   perPage: PropTypes.number.isRequired,
   setLength: PropTypes.func.isRequired,
 };
