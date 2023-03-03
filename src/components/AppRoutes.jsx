@@ -4,11 +4,13 @@ import {
   EVENT_PATH,
   HOME_PATH,
   OFFICIAL_PATH,
+  JOB_PATH
 } from '@/constants/route';
 import Article from '@/pages/Article';
 import Bookmark from '@/pages/Bookmark';
 import Event from '@/pages/Event';
 import Home from '@/pages/Home';
+import DetailModal from './PostDetail';
 import NotFound from '@/pages/NotFound';
 import Official from '@/pages/Official';
 import Job from '@/pages/Job';
