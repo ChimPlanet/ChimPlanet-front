@@ -1,8 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { useRecoilValue, useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { ListSort, PostSort } from "@/atoms/PostList"
 import JobOffer from '@/components/JobOffer';
 import JobNavBar from '@/components/JobNavBar';
@@ -22,46 +22,48 @@ const JobOfferContainer = styled.div`
 
 export default function Job() {
 
-    const [postList, setPostList] = useState([])
-    const [newList, setNewList] = useState([])
+    const [postList, setPostList] = useState([]);
+    const [newList, setNewList] = useState([]);
 
     async function getUser() {
         try {
             const response = await axios.get('http://43.207.33.71:8080/api/boards');
-            return response.data
+            return response.data;
         } catch (error) {
             console.error(error);
         };
     };
 
-    const { error, data } = useQuery('repoData', getUser)
-    const postSort = useRecoilValue(PostSort)
-    const listSort = useRecoilValue(ListSort)
+    const { error, data } = useQuery('repoData', getUser);
+    const postSort = useRecoilValue(PostSort);
+    const listSort = useRecoilValue(ListSort);
 
-    const postValue = postSort.find(item=>item.isClicked === 1)
-   
-    console.log(error)
+    const postValue = postSort.find(item=>item.isClicked === 1);
+
+    console.log(error);
+    console.log(data);
     
     useEffect(()=>{
         if(postValue.text === '구인중'){
-            setPostList(data.filter(item=>item.endStr === 'ING'))
+            setPostList(data.filter(item=>item.isEnd === 'ING'));
         }else if(postValue.text === '모집마감'){
-            setPostList(data.filter(item=>item.endStr === 'END'))
+            setPostList(data.filter(item=>item.isEnd === 'END'));
         }else if(postValue.text === '전체'){
-            setPostList(data)
+            setPostList(data);
         }
-    },[data, postValue]) 
+    },[data, postValue]);
 
     useEffect(()=>{
-        const newPostList = [...postList]
+        const newPostList = [...postList];
         if(listSort === '조회순'){
-            setNewList(newPostList.sort((a, b)=> b.viewCount.replace( ',','') - a.viewCount.replace(',','')))
+            setNewList(newPostList.sort((a, b)=> b.readCount.replace( ',','') - a.readCount.replace(',','')));
         }else if(listSort === '좋아요순'){
-            setNewList(newPostList.sort((a, b)=> b.likeCount.replace( ',','') - a.likeCount.replace(',','')))
+            setNewList(newPostList.sort((a, b)=> b.likeCount - a.likeCount));
         }else{
-            setNewList(postList)
+            setNewList(postList);
         }
-    },[listSort, postList])
+    },[listSort, postList]);
+
 
     return (
         <Container>
@@ -71,13 +73,13 @@ export default function Job() {
                 <JobOffer
                 key={item.boardId}
                 id={+item.boardId}
-                title={item.title}
+                title={item.boardTitle}
                 writer={item.writer}
                 writeAt={item.regDate}
-                thumbnailUrl={item.imgUrl}
-                viewCount={+item.viewCount}
+                thumbnailUrl={item.redirectURL}
+                viewCount={+item.readCount.replace( ',','')}
                 isBookmarked={false}
-                isClosed={item.endStr === 'ING' ? false : true}
+                isClosed={item.isEnd === 'ING' ? false : true}
                 style={{
                 width: 250,
                 }} /> 
