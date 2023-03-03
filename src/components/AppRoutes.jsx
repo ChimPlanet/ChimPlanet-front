@@ -11,6 +11,7 @@ import Event from '@/pages/Event';
 import Home from '@/pages/Home';
 import NotFound from '@/pages/NotFound';
 import Official from '@/pages/Official';
+import Job from '@/pages/Job';
 import { Route, Routes } from 'react-router-dom';
 
 export default function AppRoutes() {
@@ -19,9 +20,8 @@ export default function AppRoutes() {
       <Route path={HOME_PATH} element={<Home />} />
       <Route path={BOOKMARK_PATH} element={<Bookmark />} />
       <Route path={ARTICLE_PATH} element={<Article />} />
-      <Route path={OFFICIAL_PATH} element={<Official />} />
-      <Route path={EVENT_PATH} element={<Event />} />
-      <Route path={'*'} element={<NotFound />} />
+      <Route path={JOB_PATH} element={<Job />} />
+      <Route path={'/about'} element={<About />} />
     </Routes>
   );
 }
