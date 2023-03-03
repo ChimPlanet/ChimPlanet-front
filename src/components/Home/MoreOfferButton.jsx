@@ -1,0 +1,28 @@
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import ArrowBelowIcon from '@/components/icons/ArrowBelowIcon';
+import { ARTICLE_PATH } from '@/constants/route';
+
+const Container = styled(Link)`
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 50px;
+  margin: 0 auto;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 100px;
+  border: ${({ theme }) => `1px solid ${theme.colors.border}`};
+  margin-top: 70px;
+`;
+
+export default function MoreOfferButton() {
+  return (
+    <Container to={ARTICLE_PATH}>
+      더 많은 공고글 보기&nbsp;&nbsp;
+      <ArrowBelowIcon />
+    </Container>
+  );
+}
