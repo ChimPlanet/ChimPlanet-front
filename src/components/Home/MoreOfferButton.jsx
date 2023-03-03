@@ -21,7 +21,7 @@ const Container = styled(Link)`
 export default function MoreOfferButton() {
   return (
     <Container to={ARTICLE_PATH}>
-      더 많은 공고글 보기
+      더 많은 공고글 보기&nbsp;&nbsp;
       <ArrowBelowIcon />
     </Container>
   );
