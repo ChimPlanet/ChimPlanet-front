@@ -12,6 +12,7 @@ const Container = styled.section`
   height: 375px;
   margin: 30px 0px;
   overflow: hidden;
+  cursor: pointer;
 
   ${({ theme }) => theme.media.desktop`
     ${`.carousel__container {

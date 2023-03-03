@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   background-color: #d9d9d9;
 
-  margin-top: 70px;
+  margin-top: 65px;
   margin-bottom: 65px;
   height: 108px;
   border-radius: 8px;

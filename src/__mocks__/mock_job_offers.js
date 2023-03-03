@@ -1,5 +1,30 @@
 export default [
   {
+    articleId: '10100289',
+    writer: '우주이루다',
+    boardTitle: '이세계 아이돌 홈페이지 만들어가실 인력을 모집하고 있습니다!',
+    likeCount: null,
+    readCount: '310',
+    regDate: '2023.03.03 12:44',
+    thumbnailURL:
+      'https://cafethumb.pstatic.net/MjAyMzAzMDNfMTE0/MDAxNjc3ODE0NTU2NDY0.pxN2tbcAFGht6LJPvbLmIgwF4bZwHv0XXr0ru6e0Dpog.qoUJDDewoR3NSps1IGDxtyr2vlXZEA4p7EFb7q2N7ZUg.PNG/제목_없음-3.png?type=f100_100',
+    redirectURL: 'https://cafe.naver.com/steamindiegame10100289',
+    isEnd: 'ING',
+  },
+  {
+    articleId: '10092174',
+    writer: '설가람',
+    boardTitle:
+      '이세돌 비주얼 노벨 RE:BIND(가제)에서 실력이 높은 일러스트레이터 분들을 모집합니다!!',
+    likeCount: null,
+    readCount: '322',
+    regDate: '2023.03.02 21:02',
+    thumbnailURL:
+      'https://cafethumb.pstatic.net/MjAyMzAzMDJfNTEg/MDAxNjc3NzU4NTM5MDc4.2sNtN66Oy-VBIFAjQGZl9WVQ0e5T7q5Xyl2yAal8L9cg.zKKPfM_dDnm3GXmM0VjJRipOlT9xkFNSUSPgiLFU2Sgg.JPEG/20230228＿180530.jpg?type=f100_100',
+    redirectURL: 'https://cafe.naver.com/steamindiegame10092174',
+    isEnd: 'ING',
+  },
+  {
     articleId: '10089814',
     writer: '우주이루다',
     boardTitle: '리듬게임을 같이 만들어갈 인원들을 모집하고 있습니다!',

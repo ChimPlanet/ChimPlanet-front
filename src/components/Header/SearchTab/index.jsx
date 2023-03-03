@@ -5,8 +5,7 @@ import Recommend from './recommend';
 import History from './History';
 import useTagTrie from '@/hooks/useTagTrie';
 import PropTypes from 'prop-types';
-import { Suspense, useMemo } from 'react';
-import Loading from '@/components/Loading';
+import { useMemo } from 'react';
 
 const Container = styled.div`
   position: fixed;
@@ -40,34 +39,12 @@ export default function SearchTab() {
     <Container>
       <Content>
         <RealSearchBar {...context} />
-        <Suspense fallback={<Loading />}>
-          <SearchContent
-            type={contentType}
-            addTag={context.addTag}
-            input={context.input}
-          />
-        </Suspense>
+        {contentType === 'history' ? (
+          <History addTag={context.addTag} />
+        ) : (
+          <Recommend word={context.input} addTag={context.addTag} />
+        )}
       </Content>
     </Container>
   );
 }
-
-/**
- *
- * @param {{type: 'history' | 'recommend', addTag(tag): void, input: string}}
- * @returns
- */
-function SearchContent({ type, addTag, input }) {
-  useTagTrie();
-  return type === 'history' ? (
-    <History addTag={addTag} />
-  ) : (
-    <Recommend word={input} addTag={addTag} />
-  );
-}
-
-SearchContent.propTypes = {
-  type: PropTypes.string.isRequired,
-  addTag: PropTypes.func.isRequired,
-  input: PropTypes.string.isRequired,
-};

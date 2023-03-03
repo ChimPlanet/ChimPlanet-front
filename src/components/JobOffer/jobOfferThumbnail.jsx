@@ -8,8 +8,7 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  /* height: 190px; */
-  aspect-ratio: 5/3.8;
+  height: 250px;
 `;
 
 const ThumbnailImage = styled.img`
@@ -17,19 +16,20 @@ const ThumbnailImage = styled.img`
   top: 0;
   left: 0;
   display: block;
-  width: 100%;
-  height: 100%;
-  /* object-fit: contain; */
-  border-radius: 10px;
+  width: 250px;
+  height: 250px;
+  border-radius: 8px;
   margin: 0px auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 `;
 
 const BookmarkButton = styled.button`
   position: absolute;
   top: 0;
   right: 0;
-  margin-top: 16px;
-  margin-right: 10px;
+  margin-top: 18px;
+  margin-right: 18px;
 `;
 
 /**

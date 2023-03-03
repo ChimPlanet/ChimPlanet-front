@@ -15,7 +15,7 @@ const Container = styled.header`
 
 const Content = styled.div`
   margin: 0 auto;
-  padding: 12px 0px;
+  padding-top: 12px;
 
   ${({ theme }) => theme.media.desktop`
     ${`width: ${theme.widths.desktop}px`};
