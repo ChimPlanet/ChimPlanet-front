@@ -1,10 +1,9 @@
-import useResize from './useResize';
 import { useLayoutEffect, useReducer } from 'react';
 import { useSizeType } from '@/context/sizeTypeContext';
 
 // 훅 기본값
 const INITIAL = Object.freeze({
-  page: 1,
+  cursor: 0,
   perPage: 4,
   length: 0,
   isNext: false,
@@ -26,9 +25,9 @@ const _reducer = (state, { type, payload }) => {
     case ActionType.SET_LENGTH:
       return { ...state, length: payload };
     case ActionType.NEXT:
-      return state.isNext ? { ...state, page: state.page + 1 } : state;
+      return state.isNext ? { ...state, cursor: state.cursor + 1 } : state;
     case ActionType.PREV:
-      return state.isPrev ? { ...state, page: state.page - 1 } : state;
+      return state.isPrev ? { ...state, cursor: state.cursor - 1 } : state;
     default:
       return state;
   }
@@ -36,8 +35,8 @@ const _reducer = (state, { type, payload }) => {
 
 // Middleware
 function middleware(context) {
-  context.isNext = context.page * context.perPage < context.length;
-  context.isPrev = context.page > 1;
+  context.isNext = context.cursor + context.perPage < context.length;
+  context.isPrev = context.cursor > 0;
   return context;
 }
 
@@ -45,7 +44,7 @@ const reducer = (state, action) => {
   return middleware(_reducer(state, action));
 };
 
-export default function useJobSection(numOfLines) {
+export default function useJobSection() {
   const [context, dispatch] = useReducer(reducer, INITIAL);
   // ! 화면 크기에 따라 per Page 변경
   const sizeType = useSizeType();
@@ -53,7 +52,7 @@ export default function useJobSection(numOfLines) {
   useLayoutEffect(() => {
     dispatch({
       type: ActionType.SET_PER_PAGE,
-      payload: (sizeType === 'desktop' ? 4 : 3) * numOfLines,
+      payload: sizeType === 'desktop' ? 4 : 3,
     });
     // 큰 화면 일 때 4개, 작은 화면 일 때 3개로 출력
   }, [sizeType]);

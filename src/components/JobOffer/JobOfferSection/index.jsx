@@ -8,6 +8,8 @@ import PropTypes from 'prop-types';
 
 const Container = styled.section`
   min-height: 460px;
+  overflow-x: hidden;
+  width: ${(props) => props.width};
 `;
 
 /**
@@ -16,7 +18,6 @@ const Container = styled.section`
  * @property {boolean?} hideArrow
  * @property {JSX.Element} detail
  * @property {Function} fetchFunction
- * @property {number?} numOfLines
  *
  *
  * @param {JobOfferSectionProps} props
@@ -27,9 +28,8 @@ export default function JobOfferSection({
   title,
   hideArrow = false,
   detail = <div></div>,
-  numOfLines = 1,
 }) {
-  const { context, dispatch, ActionType } = useJobSection(numOfLines);
+  const { context, dispatch, ActionType } = useJobSection();
 
   const setLength = useCallback(
     (length) => dispatch({ type: ActionType.SET_LENGTH, payload: length }),
@@ -46,7 +46,7 @@ export default function JobOfferSection({
   );
 
   return (
-    <Container>
+    <Container width={`${context.perPage * 270 - 20}px`}>
       <JobOfferSectionHeader
         title={title}
         detail={detail}
@@ -61,8 +61,7 @@ export default function JobOfferSection({
           fetchFunction={fetchFunction}
           setLength={setLength}
           perPage={context.perPage}
-          page={context.page}
-          numOfLines={numOfLines}
+          cursor={context.cursor}
         />
       </Suspense>
     </Container>

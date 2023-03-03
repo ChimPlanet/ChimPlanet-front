@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Container = styled.div`
-  padding: 13px 0px;
+  margin-top: 20px;
+  margin-bottom: 15px;
   font-size: 12px;
   font-weight: 500;
 `;

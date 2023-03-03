@@ -7,13 +7,17 @@ const Container = styled.div``;
 const Title = styled.h3`
   font-size: 18px;
   font-weight: 700;
-  padding-bottom: 15px;
-  /* overflow: hidden; */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-height: 42px;
 `;
 
 const Writer = styled.p`
+  margin-top: 15px;
   font-size: 16px;
   font-weight: 500;
   overflow: hidden;
