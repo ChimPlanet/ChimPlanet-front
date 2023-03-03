@@ -1,8 +1,16 @@
-import { ARTICLE_PATH, BOOKMARK_PATH, HOME_PATH, JOB_PATH } from '@/constants/route';
-import About from '@/pages/About';
+import {
+  ARTICLE_PATH,
+  BOOKMARK_PATH,
+  EVENT_PATH,
+  HOME_PATH,
+  OFFICIAL_PATH,
+} from '@/constants/route';
 import Article from '@/pages/Article';
 import Bookmark from '@/pages/Bookmark';
+import Event from '@/pages/Event';
 import Home from '@/pages/Home';
+import NotFound from '@/pages/NotFound';
+import Official from '@/pages/Official';
 import Job from '@/pages/Job';
 import { Route, Routes } from 'react-router-dom';
 

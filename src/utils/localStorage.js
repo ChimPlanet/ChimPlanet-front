@@ -12,10 +12,10 @@ const MIN_KEY_LENGTH = 3;
 function validate(type, value) {
   switch (true) {
     case value === null || value === undefined:
-      throw new LocalStorageInvalidError(type, value, "null/undefined");
-    case type === "key" &&
-      (typeof value !== "string" || value.length < MIN_KEY_LENGTH):
-      throw new LocalStorageInvalidError(type, value, "check key condition");
+      throw new LocalStorageInvalidError(type, value, 'null/undefined');
+    case type === 'key' &&
+      (typeof value !== 'string' || value.length < MIN_KEY_LENGTH):
+      throw new LocalStorageInvalidError(type, value, 'check key condition');
   }
 }
 /**
@@ -23,7 +23,7 @@ function validate(type, value) {
  * @param {string} key
  */
 export function getLocalStorageValue(key) {
-  validate("key", key);
+  validate('key', key);
   const rawValue = localStorage.getItem(key);
   return JSON.parse(rawValue);
 }
@@ -33,10 +33,19 @@ export function getLocalStorageValue(key) {
  * @param {*} value
  */
 export function setLocalStorageValue(key, value) {
-  validate("key", key);
-  validate("value", value);
+  validate('key', key);
+  validate('value', value);
 
-  localStorage.setItem(key, value);
+  localStorage.setItem(key, JSON.stringify(value));
+}
+/**
+ * LocalStorage에 Key가 있는지 확인합니다.
+ * @param {string} key
+ * @returns
+ */
+export function isKeyOnLocalStorage(key) {
+  validate('key', key);
+  return localStorage.getItem(key) !== null;
 }
 
 /**

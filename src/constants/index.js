@@ -1,3 +1,3 @@
-export const API_BASE_URL = "http://localhost:8080/api";
+export const getApiBase = () => import.meta.env.VITE_API_BASE;
 
-export const BASE_NAME = "/ChimPlanet-front/";
+export const BASE_NAME = '/ChimPlanet-front/';

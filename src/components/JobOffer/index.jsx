@@ -5,18 +5,25 @@ import JobStatusIndicator from './jobStatusIndicator';
 import JobOfferThumbnail from './jobOfferThumbnail';
 
 const Container = styled.div`
-  color: #101c33;
+  transform: translateY(0px);
+  transition: transform 0.1s ease-in-out;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
 `;
 
 /**
  * @typedef {object} JobOfferProps
  * @property {number} id
- * @property {string} thumbnailUrl
+ * @property {string} thumbnailURL
+ * @property {boolean} isThumbnail
  * @property {string} title
  * @property {number} viewCount
  * @property {string} writeAt
  * @property {string} writer
  * @property {boolean} isClosed
+ * @property {boolean} isRegular
  * @property {boolean} isBookmarked
  * @property {()=>void} onBookmarkClick
  *
@@ -25,10 +32,12 @@ const Container = styled.div`
 export default function JobOffer({
   id,
   title,
-  thumbnailUrl,
+  thumbnailURL,
+  isThumbnail,
   viewCount,
   writeAt,
   isClosed,
+  isRegular,
   writer = '침플래닛',
   isBookmarked = false,
   onBookmarkClick,
@@ -37,12 +46,13 @@ export default function JobOffer({
   return (
     <Container {...props}>
       <JobOfferThumbnail
-        src={thumbnailUrl}
+        src={thumbnailURL}
         alt={title}
+        isThumbnail={isThumbnail}
         isBookmarked={isBookmarked}
         onBookmarkClick={onBookmarkClick}
       />
-      <JobStatusIndicator isClosed={isClosed} />
+      <JobStatusIndicator isRegular={isRegular} isClosed={isClosed} />
       <JobTypography
         writer={writer}
         writeAt={writeAt}
@@ -56,10 +66,13 @@ export default function JobOffer({
 JobOffer.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  thumbnailUrl: PropTypes.string.isRequired,
+  thumbnailURL: PropTypes.string.isRequired,
   viewCount: PropTypes.number.isRequired,
   writeAt: PropTypes.string.isRequired,
   isClosed: PropTypes.bool.isRequired,
+  isThumbnail: PropTypes.bool.isRequired,
   writer: PropTypes.string,
   isBookmarked: PropTypes.bool,
+  isRegular: PropTypes.bool,
+  onBookmarkClick: PropTypes.func.isRequired,
 };

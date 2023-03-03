@@ -1,33 +1,35 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import JobBookmarkIcon from '@/components/icons/JobBookmarkIcon';
+import DefaultThumbnail from '@/assets/default_thumbnail.png';
 
 const Container = styled.div`
   position: relative;
   top: 0;
   left: 0;
-  aspect-ratio: 5/3.8;
+  width: 100%;
+  height: 250px;
 `;
 
 const ThumbnailImage = styled.img`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
+  display: block;
+  width: 250px;
+  height: 250px;
+  border-radius: 8px;
+  margin: 0px auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 `;
 
 const BookmarkButton = styled.button`
   position: absolute;
   top: 0;
   right: 0;
-  margin-top: 1em;
-  margin-right: 1em;
-
-  & svg {
-    fill: ${({ color }) => color};
-  }
+  margin-top: 18px;
+  margin-right: 18px;
 `;
 
 /**
@@ -35,6 +37,7 @@ const BookmarkButton = styled.button`
  * @property {string} src
  * @property {string} alt
  * @property {boolean} isBookmarked
+ * @property {boolean} isThumbnail
  * @property {()=>void} onBookmarkClick
  *
  * @param {JobOfferThumbnailProps}
@@ -43,17 +46,18 @@ const BookmarkButton = styled.button`
 export default function JobOfferThumbnail({
   src,
   alt,
+  isThumbnail,
   isBookmarked,
   onBookmarkClick,
 }) {
-  console.log(isBookmarked);
   return (
     <Container>
-      <ThumbnailImage src={src} alt={alt} />
-      <BookmarkButton
-        color={isBookmarked ? '#00BD2F' : '#fff'}
-        onClick={onBookmarkClick}
-      >
+      <ThumbnailImage
+        referrerPolicy="no-referrer"
+        src={isThumbnail ? src : DefaultThumbnail}
+        alt={alt}
+      />
+      <BookmarkButton onClick={onBookmarkClick}>
         <JobBookmarkIcon filled={isBookmarked} />
       </BookmarkButton>
     </Container>
@@ -64,4 +68,5 @@ JobOfferThumbnail.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   isBookmarked: PropTypes.bool.isRequired,
+  isThumbnail: PropTypes.bool.isRequired,
 };
