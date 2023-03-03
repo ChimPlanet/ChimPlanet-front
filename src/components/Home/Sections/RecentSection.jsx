@@ -1,5 +1,5 @@
 import fetchRecentOffer from '@/api/job/fetchRecentOffer';
-import JobOfferSection from '@/components/JobOfferSection';
+import JobOfferSection from '@/components/JobOffer/JobOfferSection';
 import styled from 'styled-components';
 
 const Container = styled.div`

@@ -1,5 +1,5 @@
 import fetchOfficialOffer from '@/api/job/fetchOfficialOffer';
-import JobOfferSection from '@/components/JobOfferSection';
+import JobOfferSection from '@/components/JobOffer/JobOfferSection';
 import { Link } from 'react-router-dom';
 import { OFFICIAL_PATH } from '@/constants/route';
 import styled from 'styled-components';

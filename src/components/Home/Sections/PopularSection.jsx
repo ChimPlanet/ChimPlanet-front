@@ -1,5 +1,5 @@
 import fetchPopularOffer from '@/api/job/fetchPopularOffer';
-import JobOfferSection from '@/components/JobOfferSection';
+import JobOfferSection from '@/components/JobOffer/JobOfferSection';
 
 export default function PopularSection() {
   return (

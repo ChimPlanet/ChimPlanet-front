@@ -7,7 +7,7 @@ import useJobSection from '@/hooks/useJobSection';
 import PropTypes from 'prop-types';
 
 const Container = styled.section`
-  min-height: 350px;
+  min-height: 460px;
 `;
 
 /**
