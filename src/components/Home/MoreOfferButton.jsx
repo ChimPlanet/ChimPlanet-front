@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import ArrowBelowIcon from '@/components/icons/ArrowBelowIcon';
-import { ARTICLE_PATH } from '@/constants/route';
+import { JOB_PATH } from '@/constants/route';
 
 const Container = styled(Link)`
   cursor: pointer;
@@ -20,7 +20,7 @@ const Container = styled(Link)`
 
 export default function MoreOfferButton() {
   return (
-    <Container to={ARTICLE_PATH}>
+    <Container to={JOB_PATH}>
       더 많은 공고글 보기&nbsp;&nbsp;
       <ArrowBelowIcon />
     </Container>

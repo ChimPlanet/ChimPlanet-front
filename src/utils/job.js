@@ -120,6 +120,8 @@ const RegularWordRegex = convertStringsToRegExp(REGULAR_WORDS);
 
 // 의미 없는 단어 삭제
 const Useless_Words = [
+  '(완료)',
+  '[완료]',
   '(마감)',
   '[마감]',
   '[모집중]',

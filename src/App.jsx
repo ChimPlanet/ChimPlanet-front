@@ -1,4 +1,4 @@
-import AppRoutes from '@/components/AppRoutes';
+import AppRoutes from '@/pages/AppRoutes';
 import Theme from '@/components/Theme';
 import '@/styles/App.scss';
 import styled from 'styled-components';
