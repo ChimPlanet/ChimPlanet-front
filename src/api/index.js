@@ -1,11 +1,10 @@
-import { API_BASE_URL } from "@/constants";
-
-const { default: axios } = require("axios");
+import { getApiBase } from '@/constants';
+import axios from 'axios';
 
 const client = axios.create({
   timeout: 3000,
-  baseURL: API_BASE_URL,
-  withCredentials: true,
+  baseURL: getApiBase(),
+  // withCredentials: true,
 });
 
 // client.interceptors.request.use()

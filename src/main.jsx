@@ -1,22 +1,25 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import { RecoilRoot } from "recoil";
-import RootBoundary from "@/pages/RootBoundary";
-import queryClient, { QueryClientProvider } from "@/query";
-import { HashRouter as RootRouter } from "react-router-dom";
-import { BASE_NAME } from "./constants";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { RecoilRoot } from 'recoil';
+import RootBoundary from '@/pages/RootBoundary';
+import queryClient, { QueryClientProvider } from '@/query';
+import { HashRouter as RootRouter } from 'react-router-dom';
+import { SizeTypeContextProvider } from '@/context/sizeTypeContext';
+import { BASE_NAME } from './constants';
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RootRouter /* basename={BASE_NAME} */>
+    <SizeTypeContextProvider>
       <QueryClientProvider client={queryClient}>
         <RecoilRoot>
-          <RootBoundary>
-            <App />
-          </RootBoundary>
+          <RootRouter /* basename={BASE_NAME} */>
+            <RootBoundary>
+              <App />
+            </RootBoundary>
+          </RootRouter>
         </RecoilRoot>
       </QueryClientProvider>
-    </RootRouter>
-  </React.StrictMode>
+    </SizeTypeContextProvider>
+  </React.StrictMode>,
 );
