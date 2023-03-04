@@ -4,7 +4,7 @@ import App from './App';
 import { RecoilRoot } from 'recoil';
 import RootBoundary from '@/pages/RootBoundary';
 import queryClient, { QueryClientProvider } from '@/query';
-import { HashRouter as RootRouter } from 'react-router-dom';
+import { BrowserRouter as RootRouter } from 'react-router-dom';
 import { SizeTypeContextProvider } from '@/context/sizeTypeContext';
 import { BASE_NAME } from './constants';
 
