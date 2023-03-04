@@ -44,7 +44,7 @@ const AnchorBannerItem = styled.div`
 `;
 
 const carouselConfig = {
-  delay: 2000,
+  delay: 5000,
   translateDuration: 500,
 };
 
