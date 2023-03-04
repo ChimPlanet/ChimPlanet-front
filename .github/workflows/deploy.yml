@@ -29,24 +29,6 @@ jobs:
       - name: Build project
         run: yarn build
 
-      - name: Upload production-ready build files
-        uses: actions/upload-artifact@v2
-        with:
-          name: production-files
-          path: ./dist
-
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: production-files
-          path: ./dist
-
       - name: Make zip file
         run: zip ./$GITHUB_SHA.zip ./dist
         shell: bash
