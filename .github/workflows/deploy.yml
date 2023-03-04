@@ -28,6 +28,9 @@ jobs:
 
       - name: Build project
         run: yarn build
+      
+      - name: Include Appspec.yml
+        run: mv appspec.yml ./dist
 
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip dist/
