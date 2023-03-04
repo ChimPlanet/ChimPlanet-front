@@ -74,7 +74,13 @@ function HomeCarouselContent() {
     >
       {banners.map(({ imageUrl, href }) => (
         <AnchorBannerItem key={imageUrl}>
-          <img referrerPolicy="no-referrer" src={imageUrl} alt={href} />
+          <img
+            referrerPolicy="no-referrer"
+            width={itemWidth}
+            height={375}
+            src={imageUrl}
+            alt={href}
+          />
         </AnchorBannerItem>
       ))}
     </Carousel>
