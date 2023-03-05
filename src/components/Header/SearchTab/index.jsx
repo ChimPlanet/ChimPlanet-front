@@ -28,8 +28,12 @@ const Content = styled.div`
   `};
 `;
 
-export default function SearchTab() {
-  const context = useTagSearch();
+/**
+ * @param {{afterSearch():void}} param0
+ * @returns
+ */
+export default function SearchTab({ afterSearch }) {
+  const context = useTagSearch(afterSearch);
 
   const contentType = useMemo(() => {
     return context.input.length === 0 ? 'history' : 'recommend';

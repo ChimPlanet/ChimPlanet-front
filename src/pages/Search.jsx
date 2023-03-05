@@ -9,19 +9,21 @@ const Container = styled.div``;
 export default function Search() {
   const location = useLocation();
 
-  const words = useMemo(() => {
-    return (
-      new URLSearchParams(decodeURIComponent(location.search))
-        .get('q')
-        ?.split(',') || []
-    );
+  const metadata = useMemo(() => {
+    const params = new URLSearchParams(decodeURIComponent(location.search));
+    return {
+      type: params.get('type') || 'normal',
+      words: params.get('q')?.split(',') || [],
+    };
   }, [location.search]);
-
-  console.log(words);
 
   return (
     <Container>
-      {words.length === 0 ? <NoResultFound /> : <SearchResult words={words} />}
+      {metadata.words.length === 0 ? (
+        <NoResultFound />
+      ) : (
+        <SearchResult words={metadata.words} />
+      )}
     </Container>
   );
 }

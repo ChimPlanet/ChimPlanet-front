@@ -4,11 +4,11 @@ export default function useSearch() {
   const navigate = useNavigate();
 
   return useCallback(
-    (words) => {
+    (words, type) => {
       let query = Array.isArray(words)
         ? words.map((el) => el.trim()).join(',')
         : words;
-      navigate(`/search?q=${encodeURIComponent(query)}`);
+      navigate(`/search?type=${type}&q=${encodeURIComponent(query)}`);
     },
     [navigate],
   );

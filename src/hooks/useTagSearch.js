@@ -12,7 +12,7 @@ function getOriginalTag(tag) {
   return TagTrie.getInstance().tagMap.get(TagTrie.disassembleWord(tag));
 }
 
-export default function useTagSearch() {
+export default function useTagSearch(afterSearch) {
   const [input, setInput] = useState('');
   /** @type {[string[], Function]} */
   const [tags, setTags] = useState([]);
@@ -41,8 +41,9 @@ export default function useTagSearch() {
   const search = useCallback(() => {
     HistoryContext.getInstance().addFront(tags.map((t) => `#${t}`));
     setTags([]);
-    __search(tags);
-  }, [tags, setTags, __search]);
+    __search(tags, 'tag');
+    afterSearch();
+  }, [tags, setTags, __search, afterSearch]);
 
   return {
     addTag,
