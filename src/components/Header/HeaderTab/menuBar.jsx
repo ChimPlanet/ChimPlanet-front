@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { EVENT_PATH, OFFICIAL_PATH } from '@/constants/route';
 import CategoryOverlay from '../CategoryOverlay/index';
 import { useState, useCallback, useRef } from 'react';
+import FloatingMenu from '@/components/FloatingMenu';
 
 const Container = styled.div`
   position: relative;
@@ -68,11 +69,13 @@ export default function MenuBar() {
         </MenuItem>
       </Container>
       {isCategoryVisible && (
-        <CategoryOverlay
-          top={categoryAnchor.current?.getBoundingClientRect().bottom}
-          left={categoryAnchor.current?.getBoundingClientRect().left}
+        <FloatingMenu
+          position="fixed"
+          anchorRef={categoryAnchor}
           close={closeCategory}
-        />
+        >
+          <CategoryOverlay />
+        </FloatingMenu>
       )}
     </>
   );
