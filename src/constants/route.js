@@ -10,3 +10,4 @@ export const OFFICIAL_PATH = '/official';
 
 export const EVENT_PATH = '/event';
 
+export const SEARCH_PATH = '/search';

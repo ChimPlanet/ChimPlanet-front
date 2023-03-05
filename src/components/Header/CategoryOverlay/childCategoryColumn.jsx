@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import useSearch from '../../../hooks/useSearch';
 
 const Container = styled.div`
   width: 220px;
@@ -92,16 +93,28 @@ const childMap = {
 };
 
 /**
- * @param {{parent: string}} param0
+ * @param {{parent: string, afterChoose():void}} param0
  * @returns
  */
-export default function ChildCategoryColumn({ parent }) {
+export default function ChildCategoryColumn({ parent, afterChoose }) {
+  const search = useSearch();
+
   return (
     <Container>
       <Content>
         {parent &&
           Array.isArray(childMap[parent]) &&
-          childMap[parent].map((el) => <Item key={el}>{el}</Item>)}
+          childMap[parent].map((el) => (
+            <Item
+              key={el}
+              onClick={() => {
+                search(el);
+                afterChoose();
+              }}
+            >
+              {el}
+            </Item>
+          ))}
       </Content>
       <Background />
     </Container>

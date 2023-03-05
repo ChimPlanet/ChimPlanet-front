@@ -7,7 +7,7 @@ import { useCallback } from 'react';
 const transformResponse = (data) => data.map(JobUtils.__transform);
 
 export const usePopularJobOffer = () => {
-  return useQuery([JobOfferQueryKey], fetchJobOffer, {
+  return useQuery([JobOfferQueryKey, 'popular'], fetchJobOffer, {
     select: transformResponse,
   });
 };
@@ -15,8 +15,8 @@ export const usePopularJobOffer = () => {
 /**
  * ! 반드시 FetchFunction은 JobOffer Array를 반환해야 한다.
  */
-export function useJobOfferFromDynamic(fetchFunction) {
-  return useQuery([JobOfferQueryKey], fetchFunction, {
+export function useJobOfferFromDynamic(key, fetchFunction) {
+  return useQuery([JobOfferQueryKey, key], fetchFunction, {
     select: transformResponse,
   });
 }

@@ -16,6 +16,7 @@ const Detail = styled.div`
 export default function OfficialSection() {
   return (
     <JobOfferSection
+      queryKey="official"
       title="공식 콘텐츠 구인글"
       fetchFunction={fetchOfficialOffer}
       detail={

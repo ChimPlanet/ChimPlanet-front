@@ -10,13 +10,20 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
-export default function CategoryOverlay() {
+/**
+ * @param {{close():void}}
+ * @returns
+ */
+export default function CategoryOverlay({ close }) {
   const [parent, setParent] = useState(null);
-
   return (
     <Container>
-      <ParentCategoryColumn current={parent} setCurrent={setParent} />
-      <ChildCategoryColumn parent={parent} />
+      <ParentCategoryColumn
+        afterChoose={close}
+        current={parent}
+        setCurrent={setParent}
+      />
+      <ChildCategoryColumn afterChoose={close} parent={parent} />
     </Container>
   );
 }

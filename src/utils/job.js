@@ -51,7 +51,9 @@ const JobUtils = class {
       thumbnailURL: JobUtils.__preprocessThumbnailQuery(
         rawElement.thumbnailURL,
       ),
-      isThumbnail: rawElement.thumbnailURL.length > 0,
+      isThumbnail:
+        typeof rawElement.thumbnailURL === 'string' &&
+        rawElement.thumbnailURL.length > 0,
       // ! Indicate 표시용
       isClosed: rawElement.endStr === END_FLAG,
       isRegular: flags.isRegular,
@@ -72,7 +74,9 @@ const JobUtils = class {
 
   /** @param {string} value */
   static __preprocessThumbnailQuery(value) {
-    return value.replace('f100_100', 'f200_200');
+    return typeof value === 'string'
+      ? value.replace('f100_100', 'f200_200')
+      : value;
   }
 
   /**

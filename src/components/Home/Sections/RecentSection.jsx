@@ -37,7 +37,7 @@ export default function RecentSection() {
 }
 
 function RecentSectionContent() {
-  const { data: offers } = useJobOfferFromDynamic(fetchRecentOffer);
+  const { data: offers } = useJobOfferFromDynamic('recent', fetchRecentOffer);
   const sizeType = useSizeType();
 
   const pageCount = useMemo(() => (sizeType === 'desktop' ? 4 : 3), [sizeType]);

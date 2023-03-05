@@ -5,6 +5,7 @@ import {
   HOME_PATH,
   OFFICIAL_PATH,
   JOB_PATH,
+  SEARCH_PATH,
 } from '@/constants/route';
 import Article from '@/pages/Article';
 import Bookmark from '@/pages/Bookmark';
@@ -15,6 +16,7 @@ import NotFound from '@/pages/NotFound';
 import Official from '@/pages/Official';
 import Job from '@/pages/Job';
 import { Route, Routes } from 'react-router-dom';
+import Search from './Search';
 
 export default function AppRoutes() {
   return (
@@ -27,6 +29,7 @@ export default function AppRoutes() {
       <Route path={JOB_PATH} element={<Job />} />
       <Route path={EVENT_PATH} element={<Event />} />
       <Route path={OFFICIAL_PATH} element={<Official />} />
+      <Route path={SEARCH_PATH} element={<Search />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

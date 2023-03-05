@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { cloneElement } from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -30,7 +31,7 @@ export default function FloatingMenu({
       left={anchorRef.current?.getBoundingClientRect().left}
       {...props}
     >
-      {children}
+      {cloneElement(children, { close })}
     </Container>
   );
 }

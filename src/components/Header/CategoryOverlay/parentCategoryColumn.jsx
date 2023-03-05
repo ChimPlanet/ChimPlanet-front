@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import useSearch from '../../../hooks/useSearch';
 
 const Container = styled.div`
   width: 220px;
@@ -35,10 +36,16 @@ const PARENTS = [
 ];
 
 /**
- * @param {{current: string, setCurrent(value: string):void }}
+ * @param {{current: string, setCurrent(value: string):void, afterChoose():void }}
  * @returns
  */
-export default function ParentCategoryColumn({ current, setCurrent }) {
+export default function ParentCategoryColumn({
+  current,
+  setCurrent,
+  afterChoose,
+}) {
+  const search = useSearch();
+
   return (
     <Container>
       <Content>
@@ -47,6 +54,10 @@ export default function ParentCategoryColumn({ current, setCurrent }) {
             key={parent}
             data-selected={parent === current}
             onMouseEnter={() => setCurrent(parent)}
+            onClick={() => {
+              search(parent);
+              afterChoose();
+            }}
           >
             {parent}
           </Item>

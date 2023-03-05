@@ -25,12 +25,13 @@ const Container = styled.div`
  * @returns
  */
 export default function JobOfferSectionContent({
+  queryKey,
   cursor,
   perPage,
   setLength,
   fetchFunction,
 }) {
-  const { data: offers } = useJobOfferFromDynamic(fetchFunction);
+  const { data: offers } = useJobOfferFromDynamic(queryKey, fetchFunction);
 
   useLayoutEffect(
     () => Array.isArray(offers) && setLength(offers.length),
