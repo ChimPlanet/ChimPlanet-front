@@ -11,7 +11,7 @@ import Article from '@/pages/Article';
 import Bookmark from '@/pages/Bookmark';
 import Event from '@/pages/Event';
 import Home from '@/pages/Home';
-import DetailModal from '../components/PostDetail';
+
 import NotFound from '@/pages/NotFound';
 import Official from '@/pages/Official';
 import Job from '@/pages/Job';
@@ -21,8 +21,6 @@ import Search from './Search';
 export default function AppRoutes() {
   return (
     <Routes>
-      <Route path="/:id" element={<DetailModal />} />
-
       <Route path={HOME_PATH} element={<Home />} />
       <Route path={BOOKMARK_PATH} element={<Bookmark />} />
       <Route path={ARTICLE_PATH} element={<Article />} />
