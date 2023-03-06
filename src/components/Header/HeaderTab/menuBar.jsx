@@ -5,6 +5,7 @@ import { EVENT_PATH, OFFICIAL_PATH } from '@/constants/route';
 import CategoryOverlay from '../CategoryOverlay/index';
 import { useState, useCallback, useRef } from 'react';
 import FloatingMenu from '@/components/FloatingMenu';
+import useTimer from '../../../hooks/useTimer';
 
 const Container = styled.div`
   position: relative;
@@ -51,12 +52,16 @@ export default function MenuBar() {
     [setIsCategoryVisible],
   );
 
+  // ! 1 초 안에 카테고리 안으로 들어가지 않는 경우, 카테고리가 닫힘
+  const { clear, fire } = useTimer(closeCategory, 500);
+
   return (
     <>
       <Container>
         <CategoryItem
           ref={categoryAnchor}
           onMouseOver={() => setIsCategoryVisible(true)}
+          onMouseOut={fire}
         >
           <MenuIcon />
           &nbsp;&nbsp; 카테고리
@@ -73,6 +78,7 @@ export default function MenuBar() {
           position="fixed"
           anchorRef={categoryAnchor}
           close={closeCategory}
+          onMouseEnter={clear}
         >
           <CategoryOverlay />
         </FloatingMenu>
