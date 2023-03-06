@@ -8,9 +8,14 @@ const Wrapper = styled.div`
   padding: 30px 2px 30px 45px;
 `;
 
-const Content = styled.div`
-  max-height: 70vh;
-  overflow: auto;
+const Content = styled.div``;
+
+const PostText = styled.div`
+  padding-right: 25px;
+  font-weight: 500;
+  font-size: 16px;
+
+  height: fit-content;
 
   &::-webkit-scrollbar {
     margin-right: 10px;
@@ -24,12 +29,6 @@ const Content = styled.div`
     background-clip: padding-box;
     border: 3px solid transparent;
   }
-`;
-
-const PostText = styled.div`
-  padding-right: 25px;
-  font-weight: 500;
-  font-size: 16px;
 `;
 
 const SubTitle = styled.div`
