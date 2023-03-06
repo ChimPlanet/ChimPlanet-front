@@ -2,6 +2,7 @@ import TagTrie from '@/utils/tagTrie';
 import { useCallback, useState } from 'react';
 import { ignorePrefix } from '@/utils/str';
 import { HistoryContext } from '@/utils/Context/historyContext';
+import useSearch from './useSearch';
 
 function validateTag(tag) {
   return TagTrie.ready() && TagTrie.getInstance().hasTag(tag);
@@ -11,10 +12,12 @@ function getOriginalTag(tag) {
   return TagTrie.getInstance().tagMap.get(TagTrie.disassembleWord(tag));
 }
 
-export default function useTagSearch() {
+export default function useTagSearch(afterSearch) {
   const [input, setInput] = useState('');
   /** @type {[string[], Function]} */
   const [tags, setTags] = useState([]);
+
+  const __search = useSearch();
 
   const addTag = useCallback(
     (tag, clear = false) => {
@@ -38,7 +41,9 @@ export default function useTagSearch() {
   const search = useCallback(() => {
     HistoryContext.getInstance().addFront(tags.map((t) => `#${t}`));
     setTags([]);
-  }, [tags, setTags]);
+    __search(tags, 'tag');
+    afterSearch();
+  }, [tags, setTags, __search, afterSearch]);
 
   return {
     addTag,

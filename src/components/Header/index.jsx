@@ -52,7 +52,9 @@ export default function Header() {
       <Container>
         <Content>
           <HeaderTab activeSearchTab={activeSearchTab} />
-          {activeTab === 'search' && <SearchTab />}
+          {activeTab === 'search' && (
+            <SearchTab afterSearch={activeHeaderTab} />
+          )}
         </Content>
       </Container>
     </>

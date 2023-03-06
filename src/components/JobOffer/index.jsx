@@ -66,7 +66,7 @@ export default function JobOffer({
 JobOffer.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  thumbnailURL: PropTypes.string.isRequired,
+  thumbnailURL: PropTypes.string,
   viewCount: PropTypes.number.isRequired,
   writeAt: PropTypes.string.isRequired,
   isClosed: PropTypes.bool.isRequired,

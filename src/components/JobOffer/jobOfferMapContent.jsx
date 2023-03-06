@@ -2,18 +2,21 @@ import JobOffer from '@/components/JobOffer';
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import PropTypes from 'prop-types';
 import useBookmark from '@/hooks/useBookmark';
+import { useArticleContext } from '@/context/articleContext';
 
 /**
  * @param {{jobs: import("@/utils/job").JobOfferVO[], toggleBookmark(id: number):void}}
  */
 
 export default function JobOfferMapContent({ jobs }) {
+  const [, { open }] = useArticleContext();
   const { toggle } = useBookmark();
   const bookmarkSet = BookmarkContext.getInstance().getBookmarkSet();
   return (
     <>
       {jobs.map((offer) => (
         <JobOffer
+          onClick={() => open(offer.id)}
           key={offer.id}
           id={offer.id}
           thumbnailURL={offer.thumbnailURL}

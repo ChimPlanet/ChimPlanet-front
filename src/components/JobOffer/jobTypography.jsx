@@ -13,7 +13,6 @@ const Title = styled.h3`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  max-height: 42px;
 `;
 
 const Writer = styled.p`

@@ -5,6 +5,7 @@ import { useLayoutEffect, useRef, useCallback } from 'react';
 import Tag from '@/components/Tag';
 import { ignorePrefix, isHangulChar } from '@/utils/str';
 import { SearchTagSequenceColor } from '@/constants/color';
+import TagTrie from '@/utils/tagTrie';
 
 const Container = styled.div`
   display: grid;
@@ -92,16 +93,15 @@ export default function RealSearchBar({
     (e) => {
       switch (e.key) {
         case 'Enter':
-          // 입력된 Tag 값이 있고 비어있는 경우 검색
+          // 태그 검색 검색 경우
           if (tags.length !== 0 && input.length === 0) search();
-          else {
-            // 한글 관련 이벤트 오류 해소
-            if (lastHangulRef.current) {
-              lastHangulRef.current = false;
-              return;
-            }
-            addTag(ignorePrefix(input));
+
+          // 한글 관련 이벤트 오류 해소
+          if (lastHangulRef.current) {
+            lastHangulRef.current = false;
+            return;
           }
+          addTag(ignorePrefix(input));
           break;
         case 'Backspace':
           if (input.length === 0 && tags.length > 0) removeTag(tags.at(-1));

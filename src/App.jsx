@@ -1,11 +1,12 @@
 import AppRoutes from '@/pages/AppRoutes';
-import Theme from '@/components/Theme';
 import '@/styles/App.scss';
 import styled from 'styled-components';
 import Header from './components/Header';
 import { useEffect } from 'react';
 import fetchTagList from '@/api/tag/fetchTagList';
 import TagTrie from '@/utils/tagTrie';
+import AppContextProvider from './context';
+import JobDetailSubscriber from '@/components/JobOffer/JobDetailSubscriber';
 
 const Main = styled.main`
   color: ${({ theme }) => theme.colors.main};
@@ -19,12 +20,13 @@ function App() {
   }, []);
 
   return (
-    <Theme>
+    <AppContextProvider>
       <Main id="App">
         <Header />
         <AppRoutes />
+        <JobDetailSubscriber />
       </Main>
-    </Theme>
+    </AppContextProvider>
   );
 }
 

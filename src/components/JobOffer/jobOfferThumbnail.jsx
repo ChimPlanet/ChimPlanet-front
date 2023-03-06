@@ -65,7 +65,7 @@ export default function JobOfferThumbnail({
 }
 
 JobOfferThumbnail.propTypes = {
-  src: PropTypes.string.isRequired,
+  src: PropTypes.string,
   alt: PropTypes.string.isRequired,
   isBookmarked: PropTypes.bool.isRequired,
   isThumbnail: PropTypes.bool.isRequired,

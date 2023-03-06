@@ -18,12 +18,14 @@ const Container = styled.section`
  * @property {boolean?} hideArrow
  * @property {JSX.Element} detail
  * @property {Function} fetchFunction
+ * @property {string} queryKey
  *
  *
  * @param {JobOfferSectionProps} props
  * @returns
  */
 export default function JobOfferSection({
+  queryKey,
   fetchFunction,
   title,
   hideArrow = false,
@@ -58,6 +60,7 @@ export default function JobOfferSection({
       />
       <Suspense fallback={<Loading />}>
         <JobOfferSectionContent
+          queryKey={queryKey}
           fetchFunction={fetchFunction}
           setLength={setLength}
           perPage={context.perPage}
