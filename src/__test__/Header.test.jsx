@@ -3,18 +3,18 @@ import Header from '@/components/Header';
 import { MemoryRouter } from 'react-router-dom';
 import queryClient, { QueryClientProvider } from '@/query';
 import { Suspense } from 'react';
-import Theme from '@/components/Theme';
+import { ThemeProvider } from '@/context/themeContext';
 
 jest.mock('@/constants', () => ({ getApiBase: () => 'localhost:3000' }));
 
 const HeaderMock = () => (
-  <Theme>
+  <ThemeProvider>
     <QueryClientProvider client={queryClient}>
       <Suspense fallback={'Loading'}>
         <Header />
       </Suspense>
     </QueryClientProvider>
-  </Theme>
+  </ThemeProvider>
 );
 
 describe('Header Component', () => {
