@@ -1,90 +1,100 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil'
 import { ListSort, PostSort } from "@/atoms/PostList"
-import JobOffer from '@/components/JobOffer';
+import useJobSection from '@/hooks/useJobSection';
 import JobNavBar from '@/components/JobNavBar';
-import { SIZE_WIDTH } from '@/constants/size';
+import JobInfiniteScroll from '@/components/JobInfiniteScroll';
+import mock_job_offers from '@/__mocks__/mock_job_offers';
 
 const Container = styled.section`
-    width: ${SIZE_WIDTH}px;
+    width: ${(props) => props.width};
     margin: 0 auto;
-`;
-
-const JobOfferContainer = styled.div`
-    display: grid;
-    justify-content: space-between;
-    grid-template-columns: 250px 250px 250px 250px; 
-    row-gap: 56px;
 `;
 
 export default function Job() {
 
+    const [isLoading, setIsLoading] = useState(false);
+    const [num, setNum] = useState(5);
     const [postList, setPostList] = useState([]);
     const [newList, setNewList] = useState([]);
+    const postSort = useRecoilValue(PostSort);
+    const listSort = useRecoilValue(ListSort);
+    const target = useRef(); 
 
+    const { context } = useJobSection();
+    
     async function getUser() {
-        try {
+        /* try {
             const response = await axios.get('http://43.207.33.71:8080/api/boards');
             return response.data;
         } catch (error) {
             console.error(error);
-        };
+        }; */
+        return mock_job_offers
     };
 
-    const { error, data } = useQuery('repoData', getUser);
-    const postSort = useRecoilValue(PostSort);
-    const listSort = useRecoilValue(ListSort);
+    const { data } = useQuery('repoData', getUser);
 
     const postValue = postSort.find(item=>item.isClicked === 1);
 
-    console.log(error);
-    console.log(data);
-    
     useEffect(()=>{
         if(postValue.text === '구인중'){
-            setPostList(data.filter(item=>item.isEnd === 'ING'));
+            setPostList(data.slice(0,num).filter(item=>item.isEnd === 'ING'));
         }else if(postValue.text === '모집마감'){
-            setPostList(data.filter(item=>item.isEnd === 'END'));
+            setPostList(data.slice(0,num).filter(item=>item.isEnd === 'END'));
         }else if(postValue.text === '전체'){
-            setPostList(data);
-        }
-    },[data, postValue]);
+            setPostList(data.slice(0,num));
+        };
+        setIsLoading(true);
+    },[data, postValue, num]);
 
     useEffect(()=>{
         const newPostList = [...postList];
         if(listSort === '조회순'){
             setNewList(newPostList.sort((a, b)=> b.readCount.replace( ',','') - a.readCount.replace(',','')));
-        }else if(listSort === '좋아요순'){
+        }else if(listSort === '추천순'){
             setNewList(newPostList.sort((a, b)=> b.likeCount - a.likeCount));
         }else{
             setNewList(postList);
-        }
+        };
     },[listSort, postList]);
 
-
+    const getMoreItem = () => {
+        if(data.length > num){
+        setNum((num) => num + 5 )
+        setIsLoading(false);
+        }
+    }
+    console.log(data.length )
+    const onIntersect = async ([entry], observer) => {
+        if (entry.isIntersecting) {
+          //observer.unobserve(entry.target);
+          await getMoreItem();
+          observer.observe(entry.target);
+        }
+    };
+    
+    useEffect(() => {
+    let observer;
+    if (target.current) {
+        observer = new IntersectionObserver(onIntersect, {
+        threshold: 0.4,
+        });
+        observer.observe(target.current);
+    }
+    return () => observer && observer.disconnect();
+    }, [target.current]);
+    
     return (
-        <Container>
-            <JobNavBar/>
-            <JobOfferContainer>
-                { newList.map(item => 
-                <JobOffer
-                key={item.boardId}
-                id={+item.boardId}
-                title={item.boardTitle}
-                writer={item.writer}
-                writeAt={item.regDate}
-                thumbnailUrl={item.redirectURL}
-                viewCount={+item.readCount.replace( ',','')}
-                isBookmarked={false}
-                isClosed={item.isEnd === 'ING' ? false : true}
-                style={{
-                width: 250,
-                }} /> 
-                )}
-            </JobOfferContainer>
+        <Container width={`${context.perPage * 270 - 20}px`}>
+            <JobNavBar total={data.length}/>
+            <JobInfiniteScroll List={newList}/>
+            { !isLoading && <div>로딩 중</div> } 
+            { (isLoading && !(data.length <= num))  && <div ref={target}>s</div> } 
+            { data.length <= num && <div >게시물 끝</div> } 
         </Container>
     )
 }
