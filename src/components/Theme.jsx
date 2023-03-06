@@ -1,7 +1,5 @@
 import theme from '@/theme';
 import PropTypes from 'prop-types';
-import { ThemeProvider } from 'styled-components';
-
 Theme.propTypes = {
   children: PropTypes.element.isRequired,
 };

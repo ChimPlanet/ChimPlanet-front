@@ -3,6 +3,7 @@ import { JobOfferQueryKey } from '@/constants/query';
 import fetchJobOffer from '@/api/job/fetchJobOffer';
 import JobUtils from '@/utils/job';
 import { useCallback } from 'react';
+import fetchJobOfferDetail from '@/api/job/fetchJobOfferDetail';
 
 const transformResponse = (data) => data.map(JobUtils.__transform);
 
@@ -30,4 +31,8 @@ export const useJobOfferByArrayId = (ids) => {
       [ids],
     ),
   });
+};
+
+export const useJobOfferDetail = (id) => {
+  return useQuery([JobOfferQueryKey, 'detail', id], fetchJobOfferDetail);
 };
