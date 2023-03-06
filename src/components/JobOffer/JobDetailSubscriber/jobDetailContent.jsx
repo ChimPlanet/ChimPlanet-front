@@ -4,23 +4,36 @@ import styled from 'styled-components';
 import JobDetailHeader from './jobDetailHeader';
 import PostTag from './PostTag';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  padding: 30px 2px 30px 45px;
+`;
 
 const Content = styled.div`
   max-height: 70vh;
   overflow: auto;
+
+  &::-webkit-scrollbar {
+    margin-right: 10px;
+    width: 13px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: lightgray;
+    border-radius: 100px;
+    background-clip: padding-box;
+    border: 3px solid transparent;
+  }
 `;
 
 const PostText = styled.div`
-  width: 580px;
-  height: 912px;
+  padding-right: 25px;
   font-weight: 500;
   font-size: 16px;
-  line-height: 19px;
-  margin-bottom: 110px;
 `;
 
 const SubTitle = styled.div`
+  padding-top: 10px;
   font-size: 22px;
   font-weight: 700;
   line-height: 26px;

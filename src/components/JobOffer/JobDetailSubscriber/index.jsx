@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import styled from 'styled-components';
 import JobDetailMenuBar from './jobDetailMenuBar';
 import JobDetailContent from './jobDetailContent';
+import Loading from '@/components/Loading';
 
 const Container = styled.div`
   position: absolute;
@@ -20,7 +21,8 @@ const Container = styled.div`
 
 const ContentWrapper = styled.div`
   width: 700px;
-  min-height: 500px;
+  min-height: 875px;
+  max-height: 875px;
 
   background-color: white;
   border-radius: 8px;
@@ -33,7 +35,7 @@ export default function JobDetailSubscriber() {
     <Modal open={typeof id === 'number'} onClose={close}>
       <Container>
         <ContentWrapper>
-          <Suspense>
+          <Suspense fallback={<Loading />}>
             {typeof id === 'number' && <JobDetailContent id={id} />}
           </Suspense>
         </ContentWrapper>
