@@ -4,6 +4,10 @@ import DetailBookMark from '@/components/icons/DetailBookMark';
 import ShareIcon from '@/components/icons/ShareIcon';
 
 const Container = styled.div`
+  margin-top: 20px;
+  position: sticky;
+  top: 20px;
+  left: 0px;
   display: flex;
   flex-direction: column;
   align-items: center;

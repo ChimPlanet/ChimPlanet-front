@@ -14,21 +14,6 @@ const PostText = styled.div`
   padding-right: 25px;
   font-weight: 500;
   font-size: 16px;
-
-  height: fit-content;
-
-  &::-webkit-scrollbar {
-    margin-right: 10px;
-    width: 13px;
-    background-color: transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: lightgray;
-    border-radius: 100px;
-    background-clip: padding-box;
-    border: 3px solid transparent;
-  }
 `;
 
 const SubTitle = styled.div`
