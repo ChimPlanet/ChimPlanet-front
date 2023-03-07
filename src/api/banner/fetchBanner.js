@@ -8,7 +8,7 @@ import bannerEntries from '@/__mocks__/mock_banner_entries';
 export default async () => {
   // return await client.get()
 
-  await new Promise((r) => setTimeout(r, 50000));
+  await new Promise((r) => setTimeout(r, 1000));
 
   return bannerEntries;
 };
