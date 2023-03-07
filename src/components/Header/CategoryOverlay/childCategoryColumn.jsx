@@ -108,7 +108,7 @@ export default function ChildCategoryColumn({ parent, afterChoose }) {
             <Item
               key={el}
               onClick={() => {
-                search(el);
+                search(el, 'tag');
                 afterChoose();
               }}
             >

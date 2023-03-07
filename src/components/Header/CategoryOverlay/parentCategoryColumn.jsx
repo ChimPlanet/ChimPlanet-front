@@ -55,7 +55,7 @@ export default function ParentCategoryColumn({
             data-selected={parent === current}
             onMouseEnter={() => setCurrent(parent)}
             onClick={() => {
-              search(parent);
+              search(parent, 'tag');
               afterChoose();
             }}
           >
