@@ -1,10 +1,13 @@
 import PropTypes from 'prop-types';
 
 /**
+ * @typedef {Object} SearchMetadata
+ * @property {string[]} words
+ * @property {"normal" | "tag"} type
  *
- * @param {{words: string[]}}
+ * @param {{metadata: SearchMetadata}}
  */
-export default function SearchResult({ words }) {
+export default function SearchResult({ metadata }) {
   return <></>;
 }
 
