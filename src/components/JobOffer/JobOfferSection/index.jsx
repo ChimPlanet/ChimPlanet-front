@@ -5,6 +5,7 @@ import { Suspense, useCallback } from 'react';
 import Loading from '@/components/Loading';
 import useJobSection from '@/hooks/useJobSection';
 import PropTypes from 'prop-types';
+import JobSelectionSkeleton from '@/components/Skeletons/JobSectionSkeleton';
 
 const Container = styled.section`
   min-height: 460px;
@@ -58,7 +59,7 @@ export default function JobOfferSection({
         nextPage={nextPage}
         prevPage={prevPage}
       />
-      <Suspense fallback={<Loading />}>
+      <Suspense fallback={<JobSelectionSkeleton />}>
         <JobOfferSectionContent
           queryKey={queryKey}
           fetchFunction={fetchFunction}

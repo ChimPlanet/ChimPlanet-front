@@ -48,7 +48,7 @@ export default function JobOfferSectionContent({
   }, [offers]);
 
   return (
-    <Container moveX={-cursor * 270} column={perPage}>
+    <Container moveX={-cursor * 270}>
       <JobOfferMapContent jobs={offers} />
     </Container>
   );
