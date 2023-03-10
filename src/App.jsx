@@ -7,10 +7,23 @@ import fetchTagList from '@/api/tag/fetchTagList';
 import TagTrie from '@/utils/tagTrie';
 import AppContextProvider from './context';
 import JobDetailSubscriber from '@/components/JobDetailSubscriber';
+import Banner from './components/Banner/index';
 
 const Main = styled.main`
   color: ${({ theme }) => theme.colors.main};
   background-color: ${({ theme }) => theme.backgroundColor.main};
+`;
+
+const Content = styled.div`
+  margin: 0 auto;
+  margin-top: 55px;
+
+  ${({ theme }) => theme.media.desktop`
+    ${`width: ${theme.widths.desktop}px`};
+  `}
+  ${({ theme }) => theme.media.tablet`
+    ${`width: ${theme.widths.tablet}px`};
+  `}
 `;
 
 function App() {
@@ -23,7 +36,10 @@ function App() {
     <AppContextProvider>
       <Main id="App">
         <Header />
-        <AppRoutes />
+        <Banner />
+        <Content>
+          <AppRoutes />
+        </Content>
         <JobDetailSubscriber />
       </Main>
     </AppContextProvider>

@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import { useCallback, useMemo, Suspense } from 'react';
 import theme from '@/theme';
 import { useSizeType } from '@/context/sizeTypeContext';
-import Loading from '@/common/components/Loading';
 import BannerSkeleton from '@/components/Skeletons/BannerSkeleton';
+import { useLocation } from 'react-router-dom';
+import { HOME_PATH } from '@/constants/route';
 
 const Padding = 10;
 
@@ -93,12 +94,14 @@ function HomeCarouselContent() {
  * @param {HomeCarouselProps}
  * @returns
  */
-export default function HomeCarousel() {
-  return (
+export default function Banner() {
+  const { pathname } = useLocation();
+
+  return pathname === HOME_PATH ? (
     <Container>
       <Suspense fallback={<BannerSkeleton />}>
         <HomeCarouselContent />
       </Suspense>
     </Container>
-  );
+  ) : null;
 }
