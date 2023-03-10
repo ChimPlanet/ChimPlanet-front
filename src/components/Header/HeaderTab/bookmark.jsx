@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import BookmarkIcon from '@/components/icons/BookmarkIcon';
+
+import { BookmarkIcon } from '@/common/icons';
 import { BOOKMARK_PATH } from '@/constants/route';
 
 const BookmarkLink = styled(Link)`

@@ -1,7 +1,7 @@
-import SectionLeftIcon from '@/components/icons/SectionLeftIcon';
-import SectionRightIcon from '@/components/icons/SectionRightIcon';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+import { SectionLeftIcon, SectionRightIcon } from '@/common/icons';
 
 const Container = styled.div`
   user-select: none;

@@ -1,4 +1,4 @@
-import useResize from '@/hooks/useResize';
+import useResize from '@/common/hooks/useResize';
 import { createContext, useContext } from 'react';
 
 const sizeTypeContext = createContext(null);

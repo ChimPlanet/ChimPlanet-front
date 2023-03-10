@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import CafaIcon from '@/components/icons/CafaIcon';
-import DetailBookMark from '@/components/icons/DetailBookMark';
-import ShareIcon from '@/components/icons/ShareIcon';
+import CafeIcon from '@/common/icons/CafeIcon';
+import DetailBookMark from '@/common/icons/DetailBookMark';
+import ShareIcon from '@/common/icons/ShareIcon';
 
 const Container = styled.div`
   margin-top: 20px;
@@ -47,7 +47,7 @@ export default function JobDetailMenuBar({ id }) {
     <Container>
       <a href={`https://cafe.naver.com/steamindiegame/${id}`} target="_blank">
         <IconContainer>
-          <CafaIcon />
+          <CafeIcon />
         </IconContainer>
         <IconText>원문</IconText>
       </a>

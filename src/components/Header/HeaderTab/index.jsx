@@ -1,10 +1,10 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import Bookmark from './bookmark';
 import Logo from './logo';
 import MenuBar from './menuBar';
 import OrnamentalSearchBar from './ornamentalSearchBar';
-import PropTypes from 'prop-types';
 
 const Container = styled.div``;
 

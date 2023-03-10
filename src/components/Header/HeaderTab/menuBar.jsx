@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import MenuIcon from '@/components/icons/MenuIcon';
+import { useState, useCallback, useRef } from 'react';
+
+import { MenuIcon } from '@/common/icons';
 import { Link, useLocation } from 'react-router-dom';
 import { EVENT_PATH, OFFICIAL_PATH } from '@/constants/route';
 import CategoryOverlay from '../CategoryOverlay/index';
-import { useState, useCallback, useRef } from 'react';
-import FloatingMenu from '@/components/FloatingMenu';
-import useTimer from '../../../hooks/useTimer';
+import { FloatingMenu } from '@/common/components';
+import useTimer from '@/common/hooks/useTimer';
 
 const Container = styled.div`
   position: relative;

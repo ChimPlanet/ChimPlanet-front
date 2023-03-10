@@ -1,5 +1,5 @@
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
-import useUpdate from './useUpdate';
+import useUpdate from '../common/hooks/useUpdate';
 
 export default function useBookmark() {
   const update = useUpdate();

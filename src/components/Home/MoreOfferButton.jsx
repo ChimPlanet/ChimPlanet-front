@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import ArrowBelowIcon from '@/components/icons/ArrowBelowIcon';
+import ArrowBelowIcon from '@/common/icons/ArrowBelowIcon';
 import { JOB_PATH } from '@/constants/route';
 
 const Container = styled(Link)`

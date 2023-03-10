@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import SearchIcon from '@/components/icons/SearchIcon';
 import { useLayoutEffect, useRef, useCallback } from 'react';
+
+import { SearchIcon } from '@/common/icons';
 import Tag from '@/components/Tag';
 import { ignorePrefix, isHangulChar } from '@/utils/str';
 import { SearchTagSequenceColor } from '@/constants/color';
-import TagTrie from '@/utils/tagTrie';
 
 const Container = styled.div`
   display: grid;

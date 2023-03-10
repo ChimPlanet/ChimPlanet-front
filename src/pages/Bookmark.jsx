@@ -1,5 +1,5 @@
 import BookmarkSection from '@/components/BookmarkSection';
-import Loading from '@/components/Loading';
+import Loading from '@/common/components/Loading';
 import { Suspense } from 'react';
 import styled from 'styled-components';
 

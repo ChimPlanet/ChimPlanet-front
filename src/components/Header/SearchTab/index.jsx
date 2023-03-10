@@ -1,11 +1,10 @@
 import styled from 'styled-components';
+import { useMemo } from 'react';
+
 import RealSearchBar from './realSearchBar';
-import useTagSearch from '@/hooks/useTagSearch';
+import useTagSearch from '@/components/Header/hooks/useTagSearch';
 import Recommend from './recommend';
 import History from './History';
-import useTagTrie from '@/hooks/useTagTrie';
-import PropTypes from 'prop-types';
-import { useMemo } from 'react';
 
 const Container = styled.div`
   position: fixed;

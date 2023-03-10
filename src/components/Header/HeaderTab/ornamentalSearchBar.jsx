@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SearchIcon from '@/components/icons/SearchIcon';
+import { SearchIcon } from '@/common/icons';
 import PropTypes from 'prop-types';
 
 const Container = styled.div`

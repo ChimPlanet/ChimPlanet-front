@@ -1,4 +1,4 @@
-import JobOffer from '@/components/JobOffer';
+import JobOffer from './JobOffer';
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import PropTypes from 'prop-types';
 import useBookmark from '@/hooks/useBookmark';

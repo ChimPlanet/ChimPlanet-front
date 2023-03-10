@@ -1,11 +1,11 @@
-import fetchRecentOffer from '@/api/job/fetchRecentOffer';
-import JobOfferMapContent from '@/components/JobOffer/jobOfferMapContent';
-import JobOfferSection from '@/components/JobOffer/JobOfferSection';
-import Loading from '@/components/Loading';
-import { useSizeType } from '@/context/sizeTypeContext';
-import { useJobOfferFromDynamic } from '@/query/job';
 import { Suspense, useMemo } from 'react';
 import styled from 'styled-components';
+
+import fetchRecentOffer from '@/api/job/fetchRecentOffer';
+import { JobOfferMapContent } from '@/common/components/JobOffer';
+import Loading from '@/common/components/Loading';
+import { useSizeType } from '@/context/sizeTypeContext';
+import { useJobOfferFromDynamic } from '@/query/job';
 
 const Container = styled.div`
   margin-top: 65px;

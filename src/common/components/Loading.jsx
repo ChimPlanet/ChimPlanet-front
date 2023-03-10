@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Spinner from '../assets/loading-middle.gif';
+import Spinner from '@/assets/loading-middle.gif';
 
 const Container = styled.div`
   display: flex;

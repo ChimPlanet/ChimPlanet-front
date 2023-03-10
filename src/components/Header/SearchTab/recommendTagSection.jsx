@@ -1,7 +1,8 @@
-import TagTrie from '@/utils/tagTrie';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useMemo } from 'react';
+
+import TagTrie from '@/utils/tagTrie';
 import Tag from '@/components/Tag';
 import { ignorePrefix } from '@/utils/str';
 

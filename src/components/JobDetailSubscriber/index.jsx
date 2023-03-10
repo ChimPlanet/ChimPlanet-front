@@ -4,7 +4,7 @@ import { Suspense } from 'react';
 import styled from 'styled-components';
 import JobDetailMenuBar from './jobDetailMenuBar';
 import JobDetailContent from './jobDetailContent';
-import Loading from '@/components/Loading';
+import Loading from '@/common/components/Loading';
 import { styled as muiStyled } from '@mui/material/styles';
 
 const ScrollModal = muiStyled(Modal)({

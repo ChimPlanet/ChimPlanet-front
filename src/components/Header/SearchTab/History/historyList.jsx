@@ -1,7 +1,8 @@
-import XIcon from '@/components/icons/XIcon';
 import PropTypes from 'prop-types';
 import { useCallback } from 'react';
 import styled from 'styled-components';
+
+import { XIcon } from '@/common/icons';
 import { ignorePrefix } from '@/utils/str';
 
 const Container = styled.ul`

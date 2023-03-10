@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useCallback, useMemo, Suspense } from 'react';
 import theme from '@/theme';
 import { useSizeType } from '@/context/sizeTypeContext';
-import Loading from '@/components/Loading';
+import Loading from '@/common/components/Loading';
 import BannerSkeleton from '@/components/Skeletons/BannerSkeleton';
 
 const Padding = 10;

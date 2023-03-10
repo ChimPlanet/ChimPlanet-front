@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import JobBookmarkIcon from '@/components/icons/JobBookmarkIcon';
+
+import { JobBookmarkIcon } from '@/common/icons';
 import DefaultThumbnail from '@/assets/default_thumbnail.png';
 
 const Container = styled.div`

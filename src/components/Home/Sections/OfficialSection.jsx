@@ -1,8 +1,9 @@
-import fetchOfficialOffer from '@/api/job/fetchOfficialOffer';
-import JobOfferSection from '@/components/JobOffer/JobOfferSection';
-import { Link } from 'react-router-dom';
-import { OFFICIAL_PATH } from '@/constants/route';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+import { JobOfferSection } from '@/common/components/JobOffer';
+import fetchOfficialOffer from '@/api/job/fetchOfficialOffer';
+import { OFFICIAL_PATH } from '@/constants/route';
 
 const Detail = styled.div`
   text-align: right;

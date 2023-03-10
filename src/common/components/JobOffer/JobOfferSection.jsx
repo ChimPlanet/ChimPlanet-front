@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import JobOfferSectionContent from './jobOfferSectionContent';
-import JobOfferSectionHeader from './jobOfferSectionHeader';
-import { Suspense, useCallback } from 'react';
-import Loading from '@/components/Loading';
-import useJobSection from '@/hooks/useJobSection';
 import PropTypes from 'prop-types';
+import { Suspense, useCallback } from 'react';
+
+import JobOfferSectionContent from './components/jobOfferSectionContent';
+import JobOfferSectionHeader from './components/jobOfferSectionHeader';
+import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobSelectionSkeleton from '@/components/Skeletons/JobSectionSkeleton';
 
 const Container = styled.section`

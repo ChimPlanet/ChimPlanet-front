@@ -1,6 +1,4 @@
-import { Suspense } from 'react';
 import styled from 'styled-components';
-import Loading from '@/components/Loading';
 import RecommendTagSection from './recommendTagSection';
 
 const Title = styled.p`

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import useSearch from '../../../hooks/useSearch';
+import useSearch from '../hooks/useSearch';
 
 const Container = styled.div`
   width: 220px;

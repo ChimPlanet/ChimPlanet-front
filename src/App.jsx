@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import fetchTagList from '@/api/tag/fetchTagList';
 import TagTrie from '@/utils/tagTrie';
 import AppContextProvider from './context';
-import JobDetailSubscriber from '@/components/JobOffer/JobDetailSubscriber';
+import JobDetailSubscriber from '@/components/JobDetailSubscriber';
 
 const Main = styled.main`
   color: ${({ theme }) => theme.colors.main};

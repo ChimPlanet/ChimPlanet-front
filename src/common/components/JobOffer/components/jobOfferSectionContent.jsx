@@ -2,7 +2,7 @@ import { useJobOfferFromDynamic } from '@/query/job';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useEffect, useLayoutEffect } from 'react';
-import JobOfferMapContent from '@/components/JobOffer/jobOfferMapContent';
+import { JobOfferMapContent } from '@/common/components/JobOffer';
 
 const Container = styled.div`
   margin-top: 20px;

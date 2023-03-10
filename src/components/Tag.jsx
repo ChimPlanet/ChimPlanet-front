@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { func, string } from 'prop-types';
-import CloseIcon from './icons/CloseIcon';
+import CloseIcon from '@/common/icons/CloseIcon';
 
 function emptyFunction() {}
 

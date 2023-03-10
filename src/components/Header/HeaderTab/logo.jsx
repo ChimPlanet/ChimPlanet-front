@@ -1,6 +1,7 @@
-import { HOME_PATH } from '@/constants/route';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { HOME_PATH } from '@/constants/route';
 
 const LogoLink = styled(Link)`
   font-size: 28px;

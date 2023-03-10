@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import JobTypography from './jobTypography';
-import JobStatusIndicator from './jobStatusIndicator';
-import JobOfferThumbnail from './jobOfferThumbnail';
+import JobTypography from './components/jobTypography';
+import JobStatusIndicator from './components/jobStatusIndicator';
+import JobOfferThumbnail from './components/jobOfferThumbnail';
 
 const Container = styled.div`
   transform: translateY(0px);

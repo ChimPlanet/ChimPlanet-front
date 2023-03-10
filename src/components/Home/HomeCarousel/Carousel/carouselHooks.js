@@ -1,5 +1,4 @@
-import useInterval from '@/hooks/useInterval';
-import { d } from 'hangul-js';
+import useInterval from '@/common/hooks/useInterval';
 import { useCallback, useRef } from 'react';
 
 /**
