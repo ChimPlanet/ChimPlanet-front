@@ -10,6 +10,7 @@ import SectionLeftIcon from './SectionLeftIcon';
 import SectionRightIcon from './SectionRightIcon';
 import ShareIcon from './ShareIcon';
 import XIcon from './XIcon';
+import ArrowBelowSmallIcon from './ArrowBelowSmallIcon';
 
 export {
   ArrowBelowIcon,
@@ -24,4 +25,5 @@ export {
   SectionRightIcon,
   ShareIcon,
   XIcon,
+  ArrowBelowSmallIcon,
 };

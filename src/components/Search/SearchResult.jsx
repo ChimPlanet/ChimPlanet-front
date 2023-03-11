@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import JobView from '@/components/JobView';
 
 /**
  * @typedef {Object} SearchMetadata
@@ -8,9 +8,9 @@ import PropTypes from 'prop-types';
  * @param {{metadata: SearchMetadata}}
  */
 export default function SearchResult({ metadata }) {
-  return <></>;
+  return (
+    <JobView metadata={metadata}>
+      <JobView.Header />
+    </JobView>
+  );
 }
-
-SearchResult.propTypes = {
-  words: PropTypes.arrayOf(PropTypes.string).isRequired,
-};

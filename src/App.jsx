@@ -16,7 +16,6 @@ const Main = styled.main`
 
 const Content = styled.div`
   margin: 0 auto;
-  margin-top: 55px;
 
   ${({ theme }) => theme.media.desktop`
     ${`width: ${theme.widths.desktop}px`};
