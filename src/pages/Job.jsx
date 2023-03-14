@@ -7,6 +7,7 @@ import { ListSort, PostSort } from '@/atoms/PostList';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobNavBar from '@/components/JobNavBar';
 import JobInfiniteScroll from '@/components/JobInfiniteScroll';
+import { useArticleContext } from '@/context/articleContext';
 import mock_job_offers from '@/__mocks__/mock_job_offers';
 
 const Container = styled.section`
@@ -14,7 +15,7 @@ const Container = styled.section`
   margin: 0 auto;
 `;
 
-export default function Job() {
+export default function Job({parId}) {
   const [isLoading, setIsLoading] = useState(false);
   const [num, setNum] = useState(5);
   const [postList, setPostList] = useState([]);
@@ -22,8 +23,14 @@ export default function Job() {
   const postSort = useRecoilValue(PostSort);
   const listSort = useRecoilValue(ListSort);
   const target = useRef();
-
+  const [, { open }] = useArticleContext();
   const { context } = useJobSection();
+
+  useEffect(()=>{
+    if( typeof parId === 'number' && parId !== 0){
+      open(parId);
+    };
+  },[]);
 
   async function getUser() {
     /* try {
@@ -69,9 +76,9 @@ export default function Job() {
     if (data.length > num) {
       setNum((num) => num + 5);
       setIsLoading(false);
-    }
+    };
   };
-  console.log(data.length);
+
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
       //observer.unobserve(entry.target);
@@ -94,7 +101,7 @@ export default function Job() {
   return (
     <Container width={`${context.perPage * 270 - 20}px`}>
       <JobNavBar total={data.length} />
-      <JobInfiniteScroll List={newList} />
+      <JobInfiniteScroll List={newList} parId={parId} />
       {!isLoading && <div>로딩 중</div>}
       {isLoading && !(data.length <= num) && <div ref={target}>s</div>}
       {data.length <= num && <div>게시물 끝</div>}

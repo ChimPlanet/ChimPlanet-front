@@ -26,7 +26,7 @@ export default function JobInfiniteScroll({ List }) {
       <JobOfferContainer column={pageCount}>
         {List.map((item) => (
           <JobOffer
-            onClick={() => open(10092174)}
+            onClick={() => open(+item.articleId)}
             key={item.articleId}
             id={+item.articleId}
             title={item.boardTitle}

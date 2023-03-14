@@ -15,16 +15,21 @@ import Home from '@/pages/Home';
 import NotFound from '@/pages/NotFound';
 import Official from '@/pages/Official';
 import Job from '@/pages/Job';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useSearchParams } from 'react-router-dom';
+
 import Search from './Search';
 
+
 export default function AppRoutes() {
+
+  const [id] = useSearchParams()
+
   return (
     <Routes>
       <Route path={HOME_PATH} element={<Home />} />
       <Route path={BOOKMARK_PATH} element={<Bookmark />} />
       <Route path={ARTICLE_PATH} element={<Article />} />
-      <Route path={JOB_PATH} element={<Job />} />
+      <Route path={JOB_PATH} element={<Job parId={+id.get('id')} />} />
       <Route path={EVENT_PATH} element={<Event />} />
       <Route path={OFFICIAL_PATH} element={<Official />} />
       <Route path={SEARCH_PATH} element={<Search />} />
