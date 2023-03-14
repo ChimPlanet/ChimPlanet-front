@@ -1,4 +1,7 @@
-import PropTypes from 'prop-types';
+import JobView from '@/components/JobView';
+import styled from 'styled-components';
+import { Suspense } from 'react';
+import { Loading } from '@/common/components';
 
 /**
  * @typedef {Object} SearchMetadata
@@ -8,9 +11,17 @@ import PropTypes from 'prop-types';
  * @param {{metadata: SearchMetadata}}
  */
 export default function SearchResult({ metadata }) {
-  return <></>;
+  return (
+    <JobView metadata={metadata}>
+      <JobView.Header />
+      <Padding />
+      <Suspense fallback={<Loading />}>
+        <JobView.Content />
+      </Suspense>
+    </JobView>
+  );
 }
 
-SearchResult.propTypes = {
-  words: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
+const Padding = styled.div`
+  height: 16px;
+`;

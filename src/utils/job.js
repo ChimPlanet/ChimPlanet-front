@@ -18,6 +18,7 @@ import { convertStringsToRegExp } from './str';
  * @property {number} likeCount
  * @property {number} viewCount
  * @property {string} regDate
+ * @property {Date} regDateTime
  * @property {boolean} isClosed
  * @property {string} redirectURL
  * @property {boolean} isRegular
@@ -48,6 +49,7 @@ const JobUtils = class {
       likeCount: JobUtils.toFieldNumber(rawElement.likeCount),
       viewCount: JobUtils.toFieldNumber(rawElement.readCount),
       regDate: JobUtils.__parseDate(rawElement.regDate),
+      regDateTime: JobUtils.__parseDateTime(rawElement.regDate),
       thumbnailURL: JobUtils.__preprocessThumbnailQuery(
         rawElement.thumbnailURL,
       ),
@@ -70,6 +72,10 @@ const JobUtils = class {
   /** @param {string} value */
   static __parseDate(value) {
     return value.slice(0, 11);
+  }
+
+  static __parseDateTime(value) {
+    return new Date(value);
   }
 
   /** @param {string} value */

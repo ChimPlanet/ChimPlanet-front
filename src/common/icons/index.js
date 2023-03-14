@@ -10,8 +10,16 @@ import SectionLeftIcon from './SectionLeftIcon';
 import SectionRightIcon from './SectionRightIcon';
 import ShareIcon from './ShareIcon';
 import XIcon from './XIcon';
+import ArrowBelowSmallIcon from './ArrowBelowSmallIcon';
+import NotificationIcon from './NotificationIcon';
+import DashboardIcon from './DashboardIcon';
+import UlIcon from './UlIcon';
+import UserIcon from './UserIcon';
+import PopupIcon from './PopupIcon';
 
 export {
+  UserIcon,
+  PopupIcon,
   ArrowBelowIcon,
   CloseIcon,
   CafeIcon,
@@ -24,4 +32,8 @@ export {
   SectionRightIcon,
   ShareIcon,
   XIcon,
+  ArrowBelowSmallIcon,
+  NotificationIcon,
+  DashboardIcon,
+  UlIcon,
 };
