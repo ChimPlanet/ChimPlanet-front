@@ -1,6 +1,4 @@
-import HomeCarousel from '@/components/Banner';
 import styled from 'styled-components';
-import { Suspense } from 'react';
 import OfficialSection from '@/components/Home/Sections/OfficialSection';
 import RecentSection from '@/components/Home/Sections/RecentSection';
 import PopularSection from '@/components/Home/Sections/PopularSection';
