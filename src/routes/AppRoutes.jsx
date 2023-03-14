@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useSearchParams } from 'react-router-dom';
 
 import {
   ARTICLE_PATH,
@@ -29,13 +29,16 @@ import AdminMarketing from '@/pages/AdminMarketing';
 import AdminContents from '@/pages/AdminContents';
 
 export default function AppRoutes() {
+
+  const [id] = useSearchParams()
+
   return (
     <Routes>
       <Route path={HOME_PATH} element={<ClientOutlet />}>
         <Route path={HOME_PATH} element={<Home />} />
         <Route path={BOOKMARK_PATH} element={<Bookmark />} />
         <Route path={ARTICLE_PATH} element={<Article />} />
-        <Route path={JOB_PATH} element={<Job />} />
+        <Route path={JOB_PATH} element={<Job parId={+id.get('id')} />} />
         <Route path={EVENT_PATH} element={<Event />} />
         <Route path={OFFICIAL_PATH} element={<Official />} />
         <Route path={SEARCH_PATH} element={<Search />} />
