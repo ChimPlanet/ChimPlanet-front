@@ -59,7 +59,7 @@ export default function JobDetailMenuBar({ id }) {
       </div>
       <div
         onClick={() => {
-          handleCopyClipBoard(document.location.href + `?id=${id}`);
+          handleCopyClipBoard(window.location.origin + `/job/?id=${id}`);
         }}
       >
         <IconContainer>
