@@ -5,15 +5,7 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  margin: 0 auto;
   margin-top: 30px;
-
-  ${({ theme }) => theme.media.desktop`
-    ${`width: ${theme.widths.desktop}px`};
-  `}
-  ${({ theme }) => theme.media.tablet`
-    ${`width: ${theme.widths.tablet}px`};
-  `}
 `;
 
 export default function Search() {
@@ -32,7 +24,7 @@ export default function Search() {
       {metadata.words.length === 0 ? (
         <InvalidSearch />
       ) : (
-        <SearchResult words={metadata.words} />
+        <SearchResult metadata={metadata} />
       )}
     </Container>
   );

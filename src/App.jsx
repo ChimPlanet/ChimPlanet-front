@@ -1,29 +1,16 @@
-import AppRoutes from '@/pages/AppRoutes';
-import '@/styles/App.scss';
+import AppRoutes from '@/routes/AppRoutes';
 import styled from 'styled-components';
-import Header from './components/Header';
 import { useEffect } from 'react';
 import fetchTagList from '@/api/tag/fetchTagList';
 import TagTrie from '@/utils/tagTrie';
 import AppContextProvider from './context';
 import JobDetailSubscriber from '@/components/JobDetailSubscriber';
-import Banner from './components/Banner/index';
+
+import '@/styles/App.scss';
 
 const Main = styled.main`
   color: ${({ theme }) => theme.colors.main};
   background-color: ${({ theme }) => theme.backgroundColor.main};
-`;
-
-const Content = styled.div`
-  margin: 0 auto;
-  margin-top: 55px;
-
-  ${({ theme }) => theme.media.desktop`
-    ${`width: ${theme.widths.desktop}px`};
-  `}
-  ${({ theme }) => theme.media.tablet`
-    ${`width: ${theme.widths.tablet}px`};
-  `}
 `;
 
 function App() {
@@ -35,11 +22,7 @@ function App() {
   return (
     <AppContextProvider>
       <Main id="App">
-        <Header />
-        <Banner />
-        <Content>
-          <AppRoutes />
-        </Content>
+        <AppRoutes />
         <JobDetailSubscriber />
       </Main>
     </AppContextProvider>
