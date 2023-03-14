@@ -1,4 +1,4 @@
-import { node, string } from 'prop-types';
+import { node } from 'prop-types';
 import styled from 'styled-components';
 
 export default function SidebarGroup({ children, title }) {

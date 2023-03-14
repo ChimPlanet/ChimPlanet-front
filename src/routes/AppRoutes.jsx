@@ -23,10 +23,12 @@ import Official from '@/pages/Official';
 import Job from '@/pages/Job';
 import Search from '@/pages/Search';
 import ClientOutlet from '@/pages/ClientOutlet';
-import AdminOutlet from '@/pages/AdminOutlet';
-import AdminDashboard from '@/pages/AdminDashboard';
-import AdminMarketing from '@/pages/AdminMarketing';
-import AdminContents from '@/pages/AdminContents';
+import { lazy } from 'react';
+
+const AdminOutlet = lazy(() => import('@/pages/AdminOutlet'));
+const AdminDashboard = lazy(() => import('@/pages/AdminDashboard'));
+const AdminMarketing = lazy(() => import('@/pages/AdminMarketing'));
+const AdminContents = lazy(() => import('@/pages/AdminContents'));
 
 export default function AppRoutes() {
   return (
