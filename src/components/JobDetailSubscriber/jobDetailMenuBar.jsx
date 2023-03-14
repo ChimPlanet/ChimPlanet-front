@@ -35,12 +35,22 @@ const IconText = styled.div`
 
 export default function JobDetailMenuBar({ id }) {
   const handleCopyClipBoard = async (text) => {
+    const input = document.createElement('input');
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+    alert("링크가 복사되었습니다.")
+    /*     
     try {
       await navigator.clipboard.writeText(text);
       alert('클립보드에 링크가 복사되었습니다.');
     } catch (e) {
+      console.log(e)
       alert('복사에 실패하였습니다');
-    }
+    } 
+    */
   };
 
   return (
