@@ -32,5 +32,6 @@ const Wrapper = styled(Link)`
   &[data-selected='true'] {
     background-color: #00bd2f;
     color: #fff;
+    fill: #fff;
   }
 `;
