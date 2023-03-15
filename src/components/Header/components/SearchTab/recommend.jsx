@@ -1,15 +1,17 @@
 import styled from 'styled-components';
+import { useSearchContext } from '../../context/searchContext';
 
 import RecommendTagSection from './recommendTagSection';
 
-/**
- * @param {{word: string, addTag(tag: string):void}}
- */
-export default function Recommend({ word, addTag }) {
+export default function Recommend() {
+  const [{ searchType, input }, { addTag }] = useSearchContext();
+
   return (
     <>
       <Title>추천 태그</Title>
-      <RecommendTagSection word={word} addTag={addTag} />
+      {searchType === 'tag' && (
+        <RecommendTagSection word={input} addTag={addTag} />
+      )}
     </>
   );
 }

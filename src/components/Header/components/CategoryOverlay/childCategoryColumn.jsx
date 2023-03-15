@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import useSearch from '../../hooks/useSearch';
+import useSearch from '../../hooks/useSearchNavigate';
 
 /**
  * @param {{parent: string, afterChoose():void}} param0

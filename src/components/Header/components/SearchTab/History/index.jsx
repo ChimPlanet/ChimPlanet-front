@@ -1,11 +1,17 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 import useHistory from '@/hooks/useHistory';
 import HistoryList from './historyList';
+import { useSearchContext } from '../../../context/searchContext';
 
-export default function History({ addTag }) {
+export default function History() {
+  const [, { addTag, setInput }] = useSearchContext();
   const { history, removeAll, removeHistory } = useHistory();
+
+  const handleClick = (historyItem) => {
+    if (historyItem.at(0) === '#') addTag(historyItem);
+    else setInput(historyItem);
+  };
 
   return (
     <Container>
@@ -14,17 +20,13 @@ export default function History({ addTag }) {
         <RemoveButton onClick={removeAll}>전체삭제</RemoveButton>
       </Header>
       <HistoryList
-        addTag={addTag}
+        onClick={handleClick}
         history={history}
         removeHistory={removeHistory}
       />
     </Container>
   );
 }
-
-History.propTypes = {
-  addTag: PropTypes.func.isRequired,
-};
 
 const Container = styled.div`
   width: 100%;

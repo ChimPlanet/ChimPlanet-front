@@ -1,27 +1,17 @@
 import PropTypes from 'prop-types';
-import { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { XIcon } from '@/common/icons';
-import { ignorePrefix } from '@/utils/str';
 
 /**
  * @param {{history: string[], removeHistory(index: number):void, addTag(tag): void}} props
  */
-export default function HistoryList({ history, removeHistory, addTag }) {
-  /**
-   * @type {(history: string)}
-   */
-  const handleClickHistory = useCallback(
-    (history) => () => addTag(ignorePrefix(history)),
-    [addTag],
-  );
-
+export default function HistoryList({ history, removeHistory, onClick }) {
   return (
     <Container>
       {history.slice(0, 8).map((item, index) => (
         <Item key={index}>
-          <ItemTitle onClick={handleClickHistory(item)}>{item}</ItemTitle>
+          <ItemTitle onClick={onClick.bind(null, item)}>{item}</ItemTitle>
           <DeleteButton onClick={() => removeHistory(index)}>
             <XIcon />
           </DeleteButton>
@@ -34,7 +24,6 @@ export default function HistoryList({ history, removeHistory, addTag }) {
 HistoryList.propTypes = {
   history: PropTypes.array.isRequired,
   removeHistory: PropTypes.func.isRequired,
-  addTag: PropTypes.func.isRequired,
 };
 
 const Container = styled.ul`

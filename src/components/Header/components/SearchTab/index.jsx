@@ -1,34 +1,33 @@
 import styled from 'styled-components';
-import { useMemo } from 'react';
 
 import RealSearchBar from './realSearchBar';
-import useTagSearch from '@/components/Header/hooks/useTagSearch';
 import Recommend from './recommend';
 import History from './History';
+import {
+  SearchContextProvider,
+  useSearchContext,
+} from '../../context/searchContext';
 
 /**
  * @param {{afterSearch():void}} param0
  * @returns
  */
 export default function SearchTab({ afterSearch }) {
-  const context = useTagSearch(afterSearch);
-
-  const contentType = useMemo(() => {
-    return context.input.length === 0 ? 'history' : 'recommend';
-  }, [context.input]);
-
   return (
     <Container>
       <Content>
-        <RealSearchBar {...context} />
-        {contentType === 'history' ? (
-          <History addTag={context.addTag} />
-        ) : (
-          <Recommend word={context.input} addTag={context.addTag} />
-        )}
+        <SearchContextProvider onAfterSearch={afterSearch}>
+          <RealSearchBar />
+          <SearchOptionalSection />
+        </SearchContextProvider>
       </Content>
     </Container>
   );
+}
+
+export function SearchOptionalSection() {
+  const [{ searchType }] = useSearchContext();
+  return searchType === 'normal' ? <History /> : <Recommend />;
 }
 
 const Container = styled.div`

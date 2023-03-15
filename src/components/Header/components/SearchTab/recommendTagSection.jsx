@@ -19,7 +19,7 @@ export default function RecommendTagSection({ word, addTag }) {
           color="#8E94A0"
           borderColor="#DBDEE2"
           name={' ' + tag}
-          onClick={() => addTag(tag, true)}
+          onClick={addTag.bind(null, '#' + tag, true)}
           padding="7px 18px 9px 16px"
         />
       ))}

@@ -1,19 +1,10 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useLayoutEffect, useRef, useCallback } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 
 import { SearchIcon } from '@/common/icons';
-import Tag from '@/components/Tag';
-import { ignorePrefix, isHangulChar } from '@/utils/str';
-import { SearchTagSequenceColor } from '@/constants/color';
-
-RealSearchBar.propTypes = {
-  tags: PropTypes.array.isRequired,
-  removeTag: PropTypes.func.isRequired,
-  addTag: PropTypes.func.isRequired,
-  input: PropTypes.string.isRequired,
-  setInput: PropTypes.func.isRequired,
-};
+import useSearchInput from '../../hooks/useSearchInput';
+import { useSearchContext } from '../../context/searchContext';
+import RealSearchTagList from './realSearchTagList';
 
 /**
  *
@@ -31,71 +22,26 @@ RealSearchBar.propTypes = {
  * @param {RealSearchBarProps} props
  * @returns
  */
-export default function RealSearchBar({
-  tags,
-  removeTag,
-  addTag,
-  input,
-  setInput,
-  search,
-}) {
-  const inputRef = useRef(null);
-  const lastHangulRef = useRef(false);
+export default function RealSearchBar() {
+  const [{ input, tags }, { setInput, removeTag }] = useSearchContext();
 
+  const inputRef = useRef(null);
+  const handleEnter = useSearchInput();
+
+  // 검색창이 rendering 되면 input에 focus를 가져옴.
   useLayoutEffect(() => {
-    // 검색창이 rendering 되면 input에 focus를 가져옴.
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
-
-  const handleInput = useCallback(
-    ({ target }) => setInput(target.value),
-    [setInput],
-  );
-  const handleEnter = useCallback(
-    (e) => {
-      switch (e.key) {
-        case 'Enter':
-          // 태그 검색 검색 경우
-          if (tags.length !== 0 && input.length === 0) search();
-
-          // 한글 관련 이벤트 오류 해소
-          if (lastHangulRef.current) {
-            lastHangulRef.current = false;
-            return;
-          }
-          addTag(ignorePrefix(input));
-          break;
-        case 'Backspace':
-          if (input.length === 0 && tags.length > 0) removeTag(tags.at(-1));
-          break;
-        default:
-          lastHangulRef.current = isHangulChar(e.key);
-      }
-    },
-    [input, addTag, removeTag, tags, search],
-  );
+  // Input Event
+  const handleInput = ({ target }) => setInput(target.value);
 
   return (
     <Container>
       <SearchIcon />
       <SearchContent>
-        <TagContainer>
-          {tags.map((tag, i) => (
-            <Tag
-              key={tag}
-              name={tag}
-              color="black"
-              borderColor="transparent"
-              fontSize="16px"
-              padding="7px 10px"
-              weight={400}
-              backgroundColor={SearchTagSequenceColor[i]}
-              removeSelf={() => removeTag(tag)}
-            />
-          ))}
-        </TagContainer>
+        <RealSearchTagList tags={tags} removeTag={removeTag} />
         <SearchInput
           ref={inputRef}
           value={input}
@@ -124,13 +70,6 @@ const SearchContent = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 12px;
-`;
-
-const TagContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 7px;
-  padding-right: 10px;
 `;
 
 const SearchInput = styled.input`
