@@ -6,18 +6,6 @@ import TagTrie from '@/utils/tagTrie';
 import Tag from '@/components/Tag';
 import { ignorePrefix } from '@/utils/str';
 
-const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-`;
-
-RecommendTagSection.propTypes = {
-  word: PropTypes.string,
-  addTag: PropTypes.func,
-};
-
 export default function RecommendTagSection({ word, addTag }) {
   const recommends = useMemo(() => {
     return TagTrie.getInstance().getSimilarTags(ignorePrefix(word));
@@ -38,3 +26,15 @@ export default function RecommendTagSection({ word, addTag }) {
     </Container>
   );
 }
+
+RecommendTagSection.propTypes = {
+  word: PropTypes.string,
+  addTag: PropTypes.func,
+};
+
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+`;

@@ -1,12 +1,6 @@
 import styled from 'styled-components';
-import RecommendTagSection from './recommendTagSection';
 
-const Title = styled.p`
-  margin: 2.2em 0em;
-  text-align: center;
-  font-size: 14px;
-  color: ${({ theme }) => theme.colors.black};
-`;
+import RecommendTagSection from './recommendTagSection';
 
 /**
  * @param {{word: string, addTag(tag: string):void}}
@@ -19,3 +13,10 @@ export default function Recommend({ word, addTag }) {
     </>
   );
 }
+
+const Title = styled.p`
+  margin: 2.2em 0em;
+  text-align: center;
+  font-size: 14px;
+  color: ${({ theme }) => theme.colors.black};
+`;

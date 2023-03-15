@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import Header from '@/components/Header';
+import Header from '@/components/Header/components/Header';
 import { MemoryRouter } from 'react-router-dom';
 import queryClient, { QueryClientProvider } from '@/query';
 import { Suspense } from 'react';

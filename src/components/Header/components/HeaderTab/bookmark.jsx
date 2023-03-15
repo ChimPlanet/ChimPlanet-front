@@ -4,6 +4,15 @@ import styled from 'styled-components';
 import { BookmarkIcon } from '@/common/icons';
 import { BOOKMARK_PATH } from '@/constants/route';
 
+export default function Bookmark() {
+  return (
+    <BookmarkLink to={BOOKMARK_PATH}>
+      북마크 &nbsp;
+      <BookmarkIcon />
+    </BookmarkLink>
+  );
+}
+
 const BookmarkLink = styled(Link)`
   font-weight: 500;
   font-size: 12px;
@@ -18,12 +27,3 @@ const BookmarkLink = styled(Link)`
   border: ${({ theme }) => `1px solid ${theme.colors.border}`};
   cursor: pointer;
 `;
-
-export default function Bookmark() {
-  return (
-    <BookmarkLink to={BOOKMARK_PATH}>
-      북마크 &nbsp;
-      <BookmarkIcon />
-    </BookmarkLink>
-  );
-}

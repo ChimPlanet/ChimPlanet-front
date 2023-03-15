@@ -7,42 +7,6 @@ import Tag from '@/components/Tag';
 import { ignorePrefix, isHangulChar } from '@/utils/str';
 import { SearchTagSequenceColor } from '@/constants/color';
 
-const Container = styled.div`
-  display: grid;
-  grid-template-columns: 16px auto;
-  padding: 0px 14px;
-  border: ${({ theme }) => `1px solid ${theme.colors.logo}`};
-
-  border-radius: 100px;
-  align-items: center;
-  height: 50px;
-  margin-bottom: 35px;
-`;
-
-const SearchContent = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-left: 12px;
-`;
-
-const TagContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 7px;
-  padding-right: 10px;
-`;
-
-const SearchInput = styled.input`
-  flex-grow: 1;
-  font-size: 16px;
-  padding: 0px;
-  margin: 0px;
-  outline: none;
-  &:focus {
-    outline: none;
-  }
-`;
-
 RealSearchBar.propTypes = {
   tags: PropTypes.array.isRequired,
   removeTag: PropTypes.func.isRequired,
@@ -143,3 +107,39 @@ export default function RealSearchBar({
     </Container>
   );
 }
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 16px auto;
+  padding: 0px 14px;
+  border: ${({ theme }) => `1px solid ${theme.colors.logo}`};
+
+  border-radius: 100px;
+  align-items: center;
+  height: 50px;
+  margin-bottom: 35px;
+`;
+
+const SearchContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 12px;
+`;
+
+const TagContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  padding-right: 10px;
+`;
+
+const SearchInput = styled.input`
+  flex-grow: 1;
+  font-size: 16px;
+  padding: 0px;
+  margin: 0px;
+  outline: none;
+  &:focus {
+    outline: none;
+  }
+`;

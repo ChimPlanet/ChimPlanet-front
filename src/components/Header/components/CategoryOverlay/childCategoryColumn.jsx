@@ -1,6 +1,40 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import useSearch from '../hooks/useSearch';
+
+import useSearch from '../../hooks/useSearch';
+
+/**
+ * @param {{parent: string, afterChoose():void}} param0
+ * @returns
+ */
+export default function ChildCategoryColumn({ parent, afterChoose }) {
+  const search = useSearch();
+
+  return (
+    <Container>
+      <Content>
+        {parent &&
+          Array.isArray(childMap[parent]) &&
+          childMap[parent].map((el) => (
+            <Item
+              key={el}
+              onClick={() => {
+                search(el, 'tag');
+                afterChoose();
+              }}
+            >
+              {el}
+            </Item>
+          ))}
+      </Content>
+      <Background />
+    </Container>
+  );
+}
+
+ChildCategoryColumn.propTypes = {
+  parent: PropTypes.string,
+};
 
 const Container = styled.div`
   width: 220px;
@@ -90,37 +124,4 @@ const childMap = {
     '애니메이터',
   ],
   기타: ['기타 전체', '테스터'],
-};
-
-/**
- * @param {{parent: string, afterChoose():void}} param0
- * @returns
- */
-export default function ChildCategoryColumn({ parent, afterChoose }) {
-  const search = useSearch();
-
-  return (
-    <Container>
-      <Content>
-        {parent &&
-          Array.isArray(childMap[parent]) &&
-          childMap[parent].map((el) => (
-            <Item
-              key={el}
-              onClick={() => {
-                search(el, 'tag');
-                afterChoose();
-              }}
-            >
-              {el}
-            </Item>
-          ))}
-      </Content>
-      <Background />
-    </Container>
-  );
-}
-
-ChildCategoryColumn.propTypes = {
-  parent: PropTypes.string,
 };

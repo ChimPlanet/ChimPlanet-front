@@ -1,6 +1,20 @@
 import styled from 'styled-components';
-import { SearchIcon } from '@/common/icons';
 import PropTypes from 'prop-types';
+
+import { SearchIcon } from '@/common/icons';
+
+export default function OrnamentalSearchBar({ onClick }) {
+  return (
+    <Container onClick={onClick}>
+      <SearchInput placeholder="#태그 검색" />
+      <SearchIcon />
+    </Container>
+  );
+}
+
+OrnamentalSearchBar.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
 
 const Container = styled.div`
   display: grid;
@@ -21,16 +35,3 @@ const SearchInput = styled.input`
     outline: none;
   }
 `;
-
-OrnamentalSearchBar.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};
-
-export default function OrnamentalSearchBar({ onClick }) {
-  return (
-    <Container onClick={onClick}>
-      <SearchInput placeholder="#태그 검색" />
-      <SearchIcon />
-    </Container>
-  );
-}

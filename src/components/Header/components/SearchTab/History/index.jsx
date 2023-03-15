@@ -1,26 +1,8 @@
-import useHistory from '@/hooks/useHistory';
 import styled from 'styled-components';
-import HistoryList from './historyList';
 import PropTypes from 'prop-types';
 
-const Container = styled.div`
-  width: 100%;
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-`;
-
-const Title = styled.h1`
-  font-size: 14px;
-  font-weight: 500;
-`;
-
-const RemoveButton = styled.button`
-  color: ${({ theme }) => theme.colors.sub};
-`;
+import useHistory from '@/hooks/useHistory';
+import HistoryList from './historyList';
 
 export default function History({ addTag }) {
   const { history, removeAll, removeHistory } = useHistory();
@@ -43,3 +25,22 @@ export default function History({ addTag }) {
 History.propTypes = {
   addTag: PropTypes.func.isRequired,
 };
+
+const Container = styled.div`
+  width: 100%;
+`;
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+`;
+
+const Title = styled.h1`
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+const RemoveButton = styled.button`
+  color: ${({ theme }) => theme.colors.sub};
+`;
