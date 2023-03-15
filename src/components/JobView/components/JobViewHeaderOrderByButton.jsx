@@ -23,12 +23,15 @@ const SelectText = styled.span`
   font-size: 16px;
   font-weight: 500;
   color: ${({ theme }) => theme.colors.main};
+  user-select: none;
 `;
 
 const Menu = styled.div`
   background-color: white;
   width: ${MenuWidth}px;
   margin-top: 10px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
 `;
 
 const MenuOptions = styled.button`
@@ -38,8 +41,7 @@ const MenuOptions = styled.button`
   text-align: left;
   color: ${({ selected, theme }) => (selected ? theme.colors.logo : '#8e94a0')};
   cursor: pointer;
-
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
 
   &:first-child {
     border-top-left-radius: 4px;
@@ -62,7 +64,7 @@ export default function JobViewHeaderOrderByButton() {
   const anchorRef = useRef();
   const [context, dispatch] = useJobViewContext();
 
-  const handleSelectClick = () => setVisible(true);
+  const handleSelectClick = () => setVisible((prev) => !prev);
   const close = () => setVisible(false);
   const handleOptionClick = (orderBy) => {
     dispatch({ orderBy });
