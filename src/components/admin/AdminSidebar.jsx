@@ -21,7 +21,7 @@ export default function AdminSidebar() {
   return (
     <Style>
       <Sidebar>
-        <LogoLink to={ADMIN_WRAPPER_PATH}>침플래닛</LogoLink>
+        <LogoLink to={`/${ADMIN_WRAPPER_PATH}`}>침플래닛</LogoLink>
         <Content>
           <Sidebar.Group>
             <Sidebar.GroupItem icon={<PopupIcon />}>
