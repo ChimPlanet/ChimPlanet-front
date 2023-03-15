@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
 import { ADMIN_WRAPPER_PATH } from '@/constants/route';
 
-export default function SidebarGroupItem({ icon, children, to }) {
+export default function SidebarGroupItem({ icon, children, to, openTab }) {
   const { pathname } = useLocation();
 
   const currentPath = useMemo(
@@ -12,7 +12,12 @@ export default function SidebarGroupItem({ icon, children, to }) {
   );
 
   return (
-    <Wrapper className="group-item" to={to} data-selected={currentPath === to}>
+    <Wrapper
+      className="group-item"
+      to={to}
+      target={!openTab ? '_self' : '_blank'}
+      data-selected={currentPath === to}
+    >
       <WrapperIcon>{icon}</WrapperIcon>
       {children}
     </Wrapper>
