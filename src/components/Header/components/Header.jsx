@@ -4,6 +4,32 @@ import styled from 'styled-components';
 import HeaderTab from './HeaderTab';
 import SearchTab from './SearchTab';
 
+export default function Header() {
+  const [activeTab, setActiveTab] = useState('header');
+
+  const activeSearchTab = useCallback(() => {
+    setActiveTab('search');
+  }, [setActiveTab]);
+
+  const activeHeaderTab = useCallback(() => {
+    setActiveTab('header');
+  }, [setActiveTab]);
+
+  return (
+    <>
+      {activeTab === 'search' && <BackgroundSheet onClick={activeHeaderTab} />}
+      <Container>
+        <Content>
+          <HeaderTab activeSearchTab={activeSearchTab} />
+          {activeTab === 'search' && (
+            <SearchTab afterSearch={activeHeaderTab} />
+          )}
+        </Content>
+      </Container>
+    </>
+  );
+}
+
 const Container = styled.header`
   position: sticky;
   top: 0;
@@ -35,29 +61,3 @@ const BackgroundSheet = styled.div`
   left: 0;
   background-color: rgba(0, 0, 0, 0.107);
 `;
-
-export default function Header() {
-  const [activeTab, setActiveTab] = useState('header');
-
-  const activeSearchTab = useCallback(() => {
-    setActiveTab('search');
-  }, [setActiveTab]);
-
-  const activeHeaderTab = useCallback(() => {
-    setActiveTab('header');
-  }, [setActiveTab]);
-
-  return (
-    <>
-      {activeTab === 'search' && <BackgroundSheet onClick={activeHeaderTab} />}
-      <Container>
-        <Content>
-          <HeaderTab activeSearchTab={activeSearchTab} />
-          {activeTab === 'search' && (
-            <SearchTab afterSearch={activeHeaderTab} />
-          )}
-        </Content>
-      </Container>
-    </>
-  );
-}

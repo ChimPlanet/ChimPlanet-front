@@ -1,7 +1,8 @@
 import styled from 'styled-components';
+import { useState } from 'react';
+
 import ParentCategoryColumn from './parentCategoryColumn';
 import ChildCategoryColumn from './childCategoryColumn';
-import { useState } from 'react';
 
 const Container = styled.div`
   margin-top: 1px;
