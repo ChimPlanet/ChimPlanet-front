@@ -21,10 +21,10 @@ export default function AdminSidebar() {
   return (
     <Style>
       <Sidebar>
-        <LogoLink to={ADMIN_WRAPPER_PATH}>침플래닛</LogoLink>
+        <LogoLink to={`/${ADMIN_WRAPPER_PATH}`}>침플래닛</LogoLink>
         <Content>
           <Sidebar.Group>
-            <Sidebar.GroupItem icon={<PopupIcon />}>
+            <Sidebar.GroupItem to="/" openTab icon={<PopupIcon />}>
               사이트 바로가기
             </Sidebar.GroupItem>
             <Sidebar.GroupItem icon={<UserIcon />}>
@@ -66,6 +66,7 @@ const LogoLink = styled(Link)`
   color: ${({ theme }) => theme.colors.logo};
   padding: 15px 24px;
   border: 1px solid #454545;
+  height: 64px;
 `;
 
 const Content = styled.div`
