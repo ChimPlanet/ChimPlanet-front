@@ -32,7 +32,9 @@ export default function AdminSidebar() {
             </Sidebar.GroupItem>
           </Sidebar.Group>
           <GroupDivider />
-          <Sidebar.Group title={<GroupTitle>사이트 관리</GroupTitle>}>
+          <Sidebar.Group
+            title={<GroupTitle className="group-item">사이트 관리</GroupTitle>}
+          >
             <Sidebar.GroupItem to={DASHBOARD_PATH} icon={<DashboardIcon />}>
               대시보드
             </Sidebar.GroupItem>
@@ -68,8 +70,9 @@ const LogoLink = styled(Link)`
 
 const Content = styled.div`
   margin-top: 24px;
-  & > .group-item {
-    padding: 24px;
+  & .group-item,
+  .group-title {
+    padding-left: 24px;
   }
 `;
 
@@ -81,7 +84,6 @@ const GroupTitle = styled.p`
 `;
 
 const GroupDivider = muiStyled(Divider)({
-  marginTop: 24,
-  marginBottom: 24,
+  margin: 24,
   borderColor: '#454545',
 });
