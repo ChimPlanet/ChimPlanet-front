@@ -11,8 +11,14 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   & img {
+    position: relative;
     max-width: 100%;
     margin: 10px 0px;
+  }
+  & img:hover {
+    z-index: 10000;
+    transform: scale(1.5) translateX(30px);
+    cursor: zoom-in;
   }
 `;
 
