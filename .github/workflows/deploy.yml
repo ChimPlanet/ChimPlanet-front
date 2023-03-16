@@ -25,7 +25,13 @@ jobs:
 
       - name: Install dependencies
         run: yarn
-
+        
+      - name: Create .Env
+        run: | 
+          echo "VITE_API_BASE=$VITE_API_BASE" >> .env
+        env: 
+          VITE_API_BASE: ${{ secrets.VITE_API_BASE }}
+          
       - name: Build project
         run: yarn build
       
