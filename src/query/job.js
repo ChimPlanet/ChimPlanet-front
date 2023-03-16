@@ -1,11 +1,12 @@
 import { useQuery } from 'react-query';
 import { JobOfferQueryKey } from '@/constants/query';
 import fetchJobOffer from '@/api/job/fetchJobOffer';
-import JobUtils from '@/utils/job';
+
 import { useCallback } from 'react';
 import fetchJobOfferDetail from '@/api/job/fetchJobOfferDetail';
+import Offer from '@/api/domain/Offer';
 
-const transformResponse = (data) => data.map(JobUtils.__transform);
+const transformResponse = (data) => data.map(Offer);
 
 export const usePopularJobOffer = () => {
   return useQuery([JobOfferQueryKey, 'popular'], fetchJobOffer, {

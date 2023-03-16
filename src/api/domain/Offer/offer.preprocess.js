@@ -1,61 +1,36 @@
-import { data, field } from '@/utils/decorator';
-import { convertStringsToRegExp } from '@/utils/str';
+import { convertStringsToRegExp } from '@/api/domain/domain.utils';
 
-@data
-class Offer {
-  @field('articleId', parseInt)
-  id;
-  @field('writer')
-  writer;
-  @field('boardTitle', parseTitle)
-  title;
-  @field('likeCount', parseInt)
-  likeCount;
-  @field('readCount', parseInt)
-  viewCount;
-  @field('regDate', parseDate)
-  regDate;
-  @field('regDate', parseDateTime)
-  regDateTime;
-  @field('redirectURL')
-  redirectURL;
-  @field('thumbnailURL', parseThumbnailURL)
-  thumbnailURL;
-  @field('isEnd', isClosed)
-  isClosed;
-  @field('boardTitle', isRegular)
-  isRegular;
-  @field('thumbnailURL', isThumbnail)
-  isThumbnail;
+export function number(value) {
+  return parseInt(value);
 }
 
-function parseTitle(title) {
+export function title(title) {
   return title.replace(UselessWordsRegex, '');
 }
 
-function parseDate(value) {
+export function date(value) {
   return value.slice(0, 11);
 }
 
-function parseDateTime(value) {
+export function dateTime(value) {
   return new Date(value);
 }
 
-function parseThumbnailURL(value) {
+export function thumbnailURL(value) {
   return typeof value === 'string'
     ? value.replace('f100_100', 'f200_200')
     : value;
 }
 
-function isThumbnail(value) {
+export function isThumbnail(value) {
   return typeof value === 'string' && value.length > 0;
 }
 
-function isClosed(value) {
+export function isClosed(value) {
   return value === END_FLAG;
 }
 
-function isRegular(value) {
+export function isRegular(value) {
   return RegularWordRegex.test(value);
 }
 
@@ -92,5 +67,3 @@ const Useless_Words = [
 const RegularWordRegex = convertStringsToRegExp(REGULAR_WORDS);
 
 const UselessWordsRegex = convertStringsToRegExp(Useless_Words);
-
-export { Offer };

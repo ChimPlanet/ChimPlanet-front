@@ -7,6 +7,6 @@ import client from '../index';
 export default async () => {
   // const response = await client.get('/boards');
   // return response.data;
-  await new Promise((r) => setTimeout(r, 500));
+
   return mock_job_offers;
 };
