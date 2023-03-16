@@ -5,6 +5,14 @@ import { Offer } from '@/service/offer';
 import JobDetailHeader from './jobDetailHeader';
 import PostTag from './PostTag';
 
+import { useMemo } from 'react';
+import {
+  stringToDom,
+  getAllImgElementsFromDom,
+  configureImageNoRefererPolicy,
+  adaptImagesNoRefererPolicy,
+} from './util';
+
 const Wrapper = styled.div`
   padding: 30px 2px 30px 45px;
 `;
@@ -46,6 +54,12 @@ const PostTags = styled.div`
 export default function JobDetailContent({ offer }) {
   const { data } = useJobOfferDetail(offer.id);
 
+  const content = useMemo(() => {
+    const dom = stringToDom(data.content);
+    adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
+    return dom.documentElement.outerHTML;
+  }, [data]);
+
   return (
     <Wrapper>
       <JobDetailHeader
@@ -58,7 +72,7 @@ export default function JobDetailContent({ offer }) {
       <Content>
         <PostText
           dangerouslySetInnerHTML={{
-            __html: data.content,
+            __html: content,
           }}
         />
       </Content>
