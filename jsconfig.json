@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
     "baseUrl": ".",
+    // "target": "ES6",
     // "noLib": true,
     // "jsx": "react-jsx",
     "paths": {
