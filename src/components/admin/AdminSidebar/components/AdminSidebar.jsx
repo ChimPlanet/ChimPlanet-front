@@ -1,3 +1,6 @@
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import Sidebar from '@/common/components/Sidebar';
 import {
   DashboardIcon,
@@ -6,8 +9,6 @@ import {
   UlIcon,
   UserIcon,
 } from '@/common/icons';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import {
   ADMIN_WRAPPER_PATH,
   CONTENTS_PATH,
@@ -16,38 +17,45 @@ import {
 } from '@/constants/route';
 import { Divider } from '@mui/material';
 import { styled as muiStyled } from '@mui/material/styles';
+import useAdminSidebarJSXElement from '../hooks/useAdminSidebarComponent';
 
 export default function AdminSidebar() {
+  const [AdditionalElement] = useAdminSidebarJSXElement();
+
   return (
     <Style>
       <Sidebar>
         <LogoLink to={`/${ADMIN_WRAPPER_PATH}`}>침플래닛</LogoLink>
-        <Content>
-          <Sidebar.Group>
-            <Sidebar.GroupItem to="/" openTab icon={<PopupIcon />}>
-              사이트 바로가기
-            </Sidebar.GroupItem>
-            <Sidebar.GroupItem icon={<UserIcon />}>
-              운영진 설정
-            </Sidebar.GroupItem>
-          </Sidebar.Group>
-          <GroupDivider />
-          <Sidebar.Group
-            title={<GroupTitle className="group-item">사이트 관리</GroupTitle>}
-          >
-            <Sidebar.GroupItem to={DASHBOARD_PATH} icon={<DashboardIcon />}>
-              대시보드
-            </Sidebar.GroupItem>
-            <Sidebar.GroupItem to={CONTENTS_PATH} icon={<UlIcon />}>
-              컨텐츠 관리
-            </Sidebar.GroupItem>
-            <Sidebar.GroupItem to={MARKETING_PATH} icon={<NotificationIcon />}>
-              마케팅 관리
-            </Sidebar.GroupItem>
-          </Sidebar.Group>
-        </Content>
+        {AdditionalElement || <AdminSidebarBaseContent />}
       </Sidebar>
     </Style>
+  );
+}
+
+function AdminSidebarBaseContent() {
+  return (
+    <Content>
+      <Sidebar.Group>
+        <Sidebar.GroupItem to="/" openTab icon={<PopupIcon />}>
+          사이트 바로가기
+        </Sidebar.GroupItem>
+        <Sidebar.GroupItem icon={<UserIcon />}>운영진 설정</Sidebar.GroupItem>
+      </Sidebar.Group>
+      <GroupDivider />
+      <Sidebar.Group
+        title={<GroupTitle className="group-item">사이트 관리</GroupTitle>}
+      >
+        <Sidebar.GroupItem to={DASHBOARD_PATH} icon={<DashboardIcon />}>
+          대시보드
+        </Sidebar.GroupItem>
+        <Sidebar.GroupItem to={CONTENTS_PATH} icon={<UlIcon />}>
+          컨텐츠 관리
+        </Sidebar.GroupItem>
+        <Sidebar.GroupItem to={MARKETING_PATH} icon={<NotificationIcon />}>
+          마케팅 관리
+        </Sidebar.GroupItem>
+      </Sidebar.Group>
+    </Content>
   );
 }
 
