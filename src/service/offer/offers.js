@@ -17,6 +17,8 @@ class Offer {
   regDate;
   @field('regDate', pp.dateTime)
   regDateTime;
+  @field('regDate')
+  rawDateTime;
   @field('redirectURL')
   redirectURL;
   @field('thumbnailURL', pp.thumbnailURL)
@@ -27,6 +29,8 @@ class Offer {
   isRegular;
   @field('thumbnailURL', pp.isThumbnail)
   isThumbnail;
+  @field('boardtags')
+  tags;
 }
 
 export default Offer;

@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   & img {
-    width: 100%;
+    max-width: 100%;
     margin: 10px 0px;
   }
 `;
@@ -45,8 +45,7 @@ export default function JobDetailContent({ offer }) {
       <JobDetailHeader
         title={offer.title}
         status={offer.isClosed}
-        date={offer.regDate}
-        time={''}
+        date={offer.rawDateTime}
         views={offer.viewCount}
       />
       {/* <PostImg referrerPolicy="no-referrer" src={imgLink} /> */}
