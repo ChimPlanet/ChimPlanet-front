@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { JobOfferSection } from '@/common/components/JobOffer';
-import fetchOfficialOffer from '@/api/job/fetchOfficialOffer';
+import { fetchOfficialOffer } from '@/service/offer/offer.api';
 import { OFFICIAL_PATH } from '@/constants/route';
 
 const Detail = styled.div`

@@ -1,7 +1,7 @@
 import AppRoutes from '@/routes/AppRoutes';
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import fetchTagList from '@/api/tag/fetchTagList';
+import fetchTagList from '@/service/tag/fetchTagList';
 import TagTrie from '@/utils/tagTrie';
 import AppContextProvider from './context';
 import JobDetailSubscriber from '@/components/JobDetailSubscriber';

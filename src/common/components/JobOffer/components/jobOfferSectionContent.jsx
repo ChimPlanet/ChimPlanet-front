@@ -1,4 +1,4 @@
-import { useJobOfferFromDynamic } from '@/query/job';
+import { useJobOfferFromDynamic } from '@/query/offer';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useEffect, useLayoutEffect } from 'react';

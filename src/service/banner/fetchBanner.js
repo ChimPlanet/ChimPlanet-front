@@ -1,4 +1,4 @@
-import client from '../index';
+import client from '../client';
 import bannerEntries from '@/__mocks__/mock_banner_entries';
 
 /**

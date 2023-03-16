@@ -1,4 +1,4 @@
-import { data, field } from '@/api/domain/domain.decorator';
+import { data, field } from '@/service/domain.decorator';
 import * as pp from './offer.preprocess';
 
 @data

@@ -1,4 +1,4 @@
-import fetchTagList from '@/api/tag/fetchTagList';
+import fetchTagList from '@/service/tag/fetchTagList';
 import { useQuery } from 'react-query';
 import { TagQueryKey } from '../constants/query';
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useJobOfferByArrayId } from '@/query/job';
+import { useJobOfferByArrayId } from '@/query/offer';
 import { JobOfferMapContent } from '@/common/components/JobOffer';
 import { useSizeType } from '@/context/sizeTypeContext';
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';

@@ -1,4 +1,4 @@
-import Offer from '@/api/domain/Offer';
+import { Offer } from '@/service/offer';
 import { useQuery } from 'react-query';
 import { fetchOffersByTags } from './model';
 

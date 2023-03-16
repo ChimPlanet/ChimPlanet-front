@@ -1,5 +1,5 @@
-import fetchBanner from '@/api/banner/fetchBanner';
-import fetchSubBanner from '@/api/banner/fetchSubBanner';
+import fetchBanner from '@/service/banner/fetchBanner';
+import fetchSubBanner from '@/service/banner/fetchSubBanner';
 import { BannerQueryKey } from '@/constants/query';
 import { useQuery } from 'react-query';
 import { SubBannerQueryKey } from '../constants/query';
