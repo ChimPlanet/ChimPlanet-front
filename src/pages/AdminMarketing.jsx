@@ -1,3 +1,5 @@
+import { MarketingBanner } from '@/components/admin/MarketingBanner';
+
 export default function AdminMarketing() {
-  return <div>marketing</div>;
+  return <MarketingBanner />;
 }

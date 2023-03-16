@@ -16,6 +16,7 @@ import DashboardIcon from './DashboardIcon';
 import UlIcon from './UlIcon';
 import UserIcon from './UserIcon';
 import PopupIcon from './PopupIcon';
+import LeftArrowIcon from './LeftArrowIcon';
 
 export {
   UserIcon,
@@ -36,4 +37,5 @@ export {
   NotificationIcon,
   DashboardIcon,
   UlIcon,
+  LeftArrowIcon,
 };

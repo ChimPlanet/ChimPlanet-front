@@ -17,16 +17,21 @@ import {
 } from '@/constants/route';
 import { Divider } from '@mui/material';
 import { styled as muiStyled } from '@mui/material/styles';
-import useAdminSidebarJSXElement from '../hooks/useAdminSidebarComponent';
+import useAdminSidebarMenu from '../hooks/useAdminSidebarMenu';
+import AdminSidebarMenu from './AdminSidebarMenu';
 
 export default function AdminSidebar() {
-  const [AdditionalElement] = useAdminSidebarJSXElement();
+  const [AdditionalElement] = useAdminSidebarMenu();
 
   return (
     <Style>
       <Sidebar>
         <LogoLink to={`/${ADMIN_WRAPPER_PATH}`}>침플래닛</LogoLink>
-        {AdditionalElement || <AdminSidebarBaseContent />}
+        {AdditionalElement ? (
+          <AdminSidebarMenu children={AdditionalElement} />
+        ) : (
+          <AdminSidebarBaseContent />
+        )}
       </Sidebar>
     </Style>
   );
@@ -73,7 +78,7 @@ const LogoLink = styled(Link)`
   font-weight: 700;
   color: ${({ theme }) => theme.colors.logo};
   padding: 15px 24px;
-  border: 1px solid #454545;
+  border-bottom: 1px solid #454545;
   height: 64px;
 `;
 

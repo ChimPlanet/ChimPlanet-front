@@ -7,7 +7,7 @@ const sidebarJSXElementAtom = atom({
 });
 
 /**
- * @returns {[JSX.Element, {clear():void, setElement(JSX.Element):void}]}
+ * @returns {[JSX.Element, {clear():void, setElement(element: JSX.Element):void}]}
  */
 export default function useAdminSidebarJSXElement() {
   const [Element, setElement] = useRecoilState(sidebarJSXElementAtom);
@@ -18,7 +18,7 @@ export default function useAdminSidebarJSXElement() {
       clear: () => setElement(null),
       setElement,
     }),
-    setElement,
+    [setElement],
   );
 
   return [Element, handle];

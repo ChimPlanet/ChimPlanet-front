@@ -1,4 +1,4 @@
 import AdminSidebar from './components/AdminSidebar';
-import useAdminSidebarJSXElement from './hooks/useAdminSidebarComponent';
+import useAdminSidebarMenu from './hooks/useAdminSidebarMenu';
 
-export { AdminSidebar, useAdminSidebarJSXElement };
+export { AdminSidebar, useAdminSidebarMenu };
