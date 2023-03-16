@@ -29,17 +29,17 @@ const ContentWrapper = styled.div`
 `;
 
 export default function JobDetailSubscriber() {
-  const [id, { close }] = useArticleContext();
+  const [article, { close }] = useArticleContext();
 
   return (
-    <ScrollModal open={typeof id === 'number'} onClose={close}>
+    <ScrollModal open={article !== null} onClose={close}>
       <>
         <ContentWrapper>
           <Suspense fallback={<Loading />}>
-            {typeof id === 'number' && <JobDetailContent id={id} />}
+            {article && <JobDetailContent offer={article} />}
           </Suspense>
         </ContentWrapper>
-        <JobDetailMenuBar id={id} />
+        <JobDetailMenuBar id={article?.id} />
       </>
     </ScrollModal>
   );

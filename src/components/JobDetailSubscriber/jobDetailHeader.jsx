@@ -39,14 +39,13 @@ const PostTime = styled.div`
 
 const PostViews = styled.div``;
 
-export default function JobDetailHeader({ title, status, date, time, views }) {
+export default function JobDetailHeader({ title, status, date, views }) {
   return (
     <HeaderContainer>
       <PostTitle>{title}</PostTitle>
       <PostInfo>
-        <PostStatus>{status}</PostStatus>
+        <PostStatus>{status ? '마감' : '모집중'}</PostStatus>
         <PostDate>{date}</PostDate>
-        <PostTime>{time}</PostTime>
         <PostViews>조회 {views}</PostViews>
       </PostInfo>
     </HeaderContainer>

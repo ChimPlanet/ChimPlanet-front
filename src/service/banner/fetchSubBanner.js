@@ -1,12 +1,10 @@
-import client from '../index';
+import client from '../client';
 
 /**
  *
  */
 export default async () => {
   // return await client.get()
-
-  await new Promise((r) => setTimeout(r, 500));
 
   return '';
 };

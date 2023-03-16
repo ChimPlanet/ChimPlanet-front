@@ -1,11 +1,11 @@
 import { Suspense, useMemo } from 'react';
 import styled from 'styled-components';
 
-import fetchRecentOffer from '@/api/job/fetchRecentOffer';
+import { fetchRecentOffer } from '@/service/offer/offer.api';
 import { JobOfferMapContent } from '@/common/components/JobOffer';
 import Loading from '@/common/components/Loading';
 import { useSizeType } from '@/context/sizeTypeContext';
-import { useJobOfferFromDynamic } from '@/query/job';
+import { useJobOfferFromDynamic } from '@/query/offer';
 
 const Container = styled.div`
   margin-top: 65px;
