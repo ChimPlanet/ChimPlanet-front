@@ -16,7 +16,7 @@ export default function JobOfferMapContent({ jobs }) {
     <>
       {jobs.map((offer) => (
         <JobOffer
-          onClick={() => open(offer.id)}
+          onClick={open.bind(null, offer)}
           key={offer.id}
           id={offer.id}
           thumbnailURL={offer.thumbnailURL}

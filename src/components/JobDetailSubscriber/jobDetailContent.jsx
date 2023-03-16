@@ -1,6 +1,7 @@
-import { useJobOfferDetail } from '@/query/offer';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+import { useJobOfferDetail } from '@/query/offer';
+import { Offer } from '@/service/offer';
 import JobDetailHeader from './jobDetailHeader';
 import PostTag from './PostTag';
 
@@ -30,17 +31,18 @@ const PostTags = styled.div`
   flex-wrap: wrap;
 `;
 
-export default function JobDetailContent({ id }) {
-  const { data } = useJobOfferDetail(id);
-
+/** @param {{offer: Offer}} */
+export default function JobDetailContent({ offer }) {
+  const { data } = useJobOfferDetail(offer.id);
+  console.log(data);
   return (
     <Wrapper>
       <JobDetailHeader
-        title={data.title}
-        status={data.status}
-        date={data.date}
-        time={data.time}
-        views={data.views}
+        title={offer.title}
+        status={offer.isClosed}
+        date={offer.regDate}
+        time={''}
+        views={offer.viewCount}
       />
       {/* <PostImg referrerPolicy="no-referrer" src={imgLink} /> */}
       <Content>
@@ -52,7 +54,7 @@ export default function JobDetailContent({ id }) {
       </Content>
       <SubTitle>태그</SubTitle>
       <PostTags>
-        {data.tags.map((items) => (
+        {data.tags?.map((items) => (
           <PostTag key={items} tag={items}>
             {items}
           </PostTag>
@@ -61,7 +63,3 @@ export default function JobDetailContent({ id }) {
     </Wrapper>
   );
 }
-
-JobDetailContent.propTypes = {
-  id: PropTypes.number.isRequired,
-};

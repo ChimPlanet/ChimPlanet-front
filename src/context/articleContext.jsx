@@ -1,19 +1,22 @@
-import { createContext, useCallback, useState, useContext } from 'react';
+import { Offer } from '@/service/offer';
+import { createContext, useState, useContext, useMemo } from 'react';
 
+/** @type {React.Context<[Offer, {close():void, open(offer: Offer):void}]>} */
 const articleContext = createContext();
 
 export function ArticleProvider({ children }) {
-  const [articleId, setArticleId] = useState(null);
+  const [article, setArticle] = useState(null);
 
-  const close = useCallback(() => setArticleId(null), [setArticleId]);
-
-  const open = useCallback((id) => setArticleId(id), [setArticleId]);
+  const handle = useMemo(
+    () => ({
+      close: () => setArticle(null),
+      open: (article) => setArticle(article),
+    }),
+    [setArticle],
+  );
 
   return (
-    <articleContext.Provider
-      children={children}
-      value={[articleId, { open, close }]}
-    />
+    <articleContext.Provider children={children} value={[article, handle]} />
   );
 }
 

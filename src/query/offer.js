@@ -39,7 +39,11 @@ export const useJobOfferByArrayId = (ids) => {
 
 /** @returns {import('react-query').UseQueryResult<OfferContent>} */
 export const useJobOfferDetail = (id) => {
-  return useQuery([JobOfferQueryKey, 'detail', id], fetchOfferContent, {
-    select: OfferContent,
-  });
+  return useQuery(
+    [JobOfferQueryKey, 'detail', id],
+    () => fetchOfferContent(id),
+    {
+      select: OfferContent,
+    },
+  );
 };
