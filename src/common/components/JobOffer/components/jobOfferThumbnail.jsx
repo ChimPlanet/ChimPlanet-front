@@ -51,6 +51,11 @@ export default function JobOfferThumbnail({
   isBookmarked,
   onBookmarkClick,
 }) {
+  const handleClick = (e) => {
+    e.stopPropagation();
+    onBookmarkClick();
+  };
+
   return (
     <Container>
       <ThumbnailImage
@@ -58,7 +63,7 @@ export default function JobOfferThumbnail({
         src={isThumbnail ? src : DefaultThumbnail}
         alt={alt}
       />
-      <BookmarkButton onClick={onBookmarkClick}>
+      <BookmarkButton onClick={handleClick}>
         <JobBookmarkIcon filled={isBookmarked} />
       </BookmarkButton>
     </Container>
