@@ -14,7 +14,8 @@ export async function fetchPopularOffer() {
 }
 
 export async function fetchRecentOffer() {
-  return mock_job_offers;
+  const response = await client.get('/boards/new');
+  return response.data;
 }
 
 export async function fetchOfferContent(id) {

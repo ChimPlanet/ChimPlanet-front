@@ -9,7 +9,12 @@ const Wrapper = styled.div`
   padding: 30px 2px 30px 45px;
 `;
 
-const Content = styled.div``;
+const Content = styled.div`
+  & img {
+    width: 100%;
+    margin: 10px 0px;
+  }
+`;
 
 const PostText = styled.div`
   padding-right: 25px;
@@ -34,7 +39,7 @@ const PostTags = styled.div`
 /** @param {{offer: Offer}} */
 export default function JobDetailContent({ offer }) {
   const { data } = useJobOfferDetail(offer.id);
-  console.log(data);
+
   return (
     <Wrapper>
       <JobDetailHeader
