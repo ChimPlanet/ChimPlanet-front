@@ -62,7 +62,7 @@ const Content = styled.div`
   }
   & img:hover {
     z-index: 10000;
-    transform: scale(1.5) translateX(30px);
+    transform: scale(1.3) translateX(30px);
     cursor: zoom-in;
   }
 `;

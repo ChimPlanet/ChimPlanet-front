@@ -11,6 +11,14 @@ class OfferContent {
   redirectURL;
   @field('tagList')
   tags;
+  @field('isEnd')
+  isClosed;
+  @field('title')
+  title;
+  @field('regData', pp.dateTime)
+  dateTime;
+  @field('readCount', pp.number)
+  viewCount;
 }
 
 export default OfferContent;

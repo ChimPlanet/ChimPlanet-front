@@ -2,15 +2,15 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { JobOfferSection } from '@/common/components/JobOffer';
-import { fetchOfficialOffer } from '@/service/offer/offer.api';
 import { OFFICIAL_PATH } from '@/constants/route';
+import backend from '@/service/backend';
 
 export default function OfficialSection() {
   return (
     <JobOfferSection
       queryKey="official"
       title="공식 콘텐츠 구인글"
-      fetchFunction={fetchOfficialOffer}
+      fetchFunction={backend.offers.official}
       detail={
         <Detail>
           <Link to={OFFICIAL_PATH}>자세히 보기</Link>
