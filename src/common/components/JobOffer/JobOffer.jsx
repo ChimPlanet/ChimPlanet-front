@@ -4,15 +4,6 @@ import JobTypography from './components/jobTypography';
 import JobStatusIndicator from './components/jobStatusIndicator';
 import JobOfferThumbnail from './components/jobOfferThumbnail';
 
-const Container = styled.div`
-  transform: translateY(0px);
-  transition: transform 0.1s ease-in-out;
-
-  &:hover {
-    transform: translateY(-10px);
-  }
-`;
-
 /**
  * @typedef {object} JobOfferProps
  * @property {number} id
@@ -76,3 +67,12 @@ JobOffer.propTypes = {
   isRegular: PropTypes.bool,
   onBookmarkClick: PropTypes.func.isRequired,
 };
+
+const Container = styled.div`
+  transform: translateY(0px);
+  transition: transform 0.1s ease-in-out;
+
+  &:hover {
+    transform: translateY(-10px);
+  }
+`;

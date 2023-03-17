@@ -1,35 +1,7 @@
 import styled from 'styled-components';
 import { func, string } from 'prop-types';
+
 import CloseIcon from '@/common/icons/CloseIcon';
-
-function emptyFunction() {}
-
-const TagContainer = styled.div`
-  border-radius: 100px;
-  border: 1px solid ${({ borderColor }) => borderColor};
-  color: ${({ customColor }) => customColor};
-  fill: ${({ customColor }) => customColor};
-  background-color: ${({ backgroundColor }) => backgroundColor};
-  padding: ${({ padding }) => padding};
-  cursor: pointer;
-`;
-
-const TagText = styled.span`
-  font-weight: ${({ weight }) => weight};
-  display: inline-block;
-  padding-left: 6px;
-  vertical-align: middle;
-  font-size: ${({ fontSize }) => fontSize};
-`;
-
-const TagCloseIconWrapper = styled.span`
-  cursor: pointer;
-
-  svg {
-    width: 13px;
-    height: 13px;
-  }
-`;
 
 Tag.propTypes = {
   name: string.isRequired,
@@ -83,3 +55,32 @@ export default function Tag({
     </TagContainer>
   );
 }
+
+function emptyFunction() {}
+
+const TagContainer = styled.div`
+  border-radius: 100px;
+  border: 1px solid ${({ borderColor }) => borderColor};
+  color: ${({ customColor }) => customColor};
+  fill: ${({ customColor }) => customColor};
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  padding: ${({ padding }) => padding};
+  cursor: pointer;
+`;
+
+const TagText = styled.span`
+  font-weight: ${({ weight }) => weight};
+  display: inline-block;
+  padding-left: 6px;
+  vertical-align: middle;
+  font-size: ${({ fontSize }) => fontSize};
+`;
+
+const TagCloseIconWrapper = styled.span`
+  cursor: pointer;
+
+  svg {
+    width: 13px;
+    height: 13px;
+  }
+`;

@@ -2,6 +2,22 @@ import { useSubBanner } from '@/query/banner';
 import { Suspense } from 'react';
 import styled from 'styled-components';
 
+export default function SubBanner() {
+  return (
+    <Container>
+      <Suspense>
+        <SubBannerContent />
+      </Suspense>
+    </Container>
+  );
+}
+
+function SubBannerContent() {
+  const { data: subBanner } = useSubBanner();
+
+  return <SubBannerImage src={subBanner} />;
+}
+
 const Container = styled.div`
   background-color: #d9d9d9;
 
@@ -21,19 +37,3 @@ const Container = styled.div`
 const SubBannerImage = styled.img`
   object-fit: fill;
 `;
-
-export default function SubBanner() {
-  return (
-    <Container>
-      <Suspense>
-        <SubBannerContent />
-      </Suspense>
-    </Container>
-  );
-}
-
-function SubBannerContent() {
-  const { data: subBanner } = useSubBanner();
-
-  return <SubBannerImage src={subBanner} />;
-}

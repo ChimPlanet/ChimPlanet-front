@@ -7,24 +7,6 @@ import Loading from '@/common/components/Loading';
 import { useSizeType } from '@/context/sizeTypeContext';
 import { useJobOfferFromDynamic } from '@/query/offer';
 
-const Container = styled.div`
-  margin-top: 65px;
-  min-height: 700px;
-`;
-
-const Title = styled.h1`
-  font-size: 22px;
-  font-weight: 700;
-`;
-
-const JobContent = styled.div`
-  margin-top: 20px;
-  display: grid;
-  grid-template-columns: ${({ column }) => `repeat(${column}, 1fr)`};
-  gap: 20px;
-  row-gap: 70px;
-`;
-
 export default function RecentSection() {
   return (
     <Container>
@@ -48,3 +30,21 @@ function RecentSectionContent() {
     </JobContent>
   );
 }
+
+const Container = styled.div`
+  margin-top: 65px;
+  min-height: 700px;
+`;
+
+const Title = styled.h1`
+  font-size: 22px;
+  font-weight: 700;
+`;
+
+const JobContent = styled.div`
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: ${({ column }) => `repeat(${column}, 1fr)`};
+  gap: 20px;
+  row-gap: 70px;
+`;

@@ -1,7 +1,8 @@
-import { AdminSidebar } from '@/components/admin/AdminSidebar';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { AdminSidebar } from '@/components/admin/AdminSidebar';
 import Loading from '@/common/components/Loading';
 
 export default function AdminOutlet() {

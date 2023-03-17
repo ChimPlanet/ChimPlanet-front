@@ -1,12 +1,9 @@
-import InvalidSearch from '@/components/Search/InvalidSearch';
-import SearchResult from '@/components/Search/SearchResult';
 import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  margin-top: 30px;
-`;
+import InvalidSearch from '@/components/Search/InvalidSearch';
+import SearchResult from '@/components/Search/SearchResult';
 
 export default function Search() {
   const location = useLocation();
@@ -29,3 +26,7 @@ export default function Search() {
     </Container>
   );
 }
+
+const Container = styled.div`
+  margin-top: 30px;
+`;

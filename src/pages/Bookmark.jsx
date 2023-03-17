@@ -1,7 +1,19 @@
-import BookmarkSection from '@/components/BookmarkSection';
-import Loading from '@/common/components/Loading';
 import { Suspense } from 'react';
 import styled from 'styled-components';
+
+import BookmarkSection from '@/components/BookmarkSection';
+import Loading from '@/common/components/Loading';
+
+export default function Bookmark() {
+  return (
+    <Container>
+      <Header>북마크</Header>
+      <Suspense fallback={<Loading />}>
+        <BookmarkSection />
+      </Suspense>
+    </Container>
+  );
+}
 
 const Container = styled.div`
   margin: 0 auto;
@@ -20,14 +32,3 @@ const Header = styled.h2`
   font-size: 20px;
   margin-bottom: 20px;
 `;
-
-export default function Bookmark() {
-  return (
-    <Container>
-      <Header>북마크</Header>
-      <Suspense fallback={<Loading />}>
-        <BookmarkSection />
-      </Suspense>
-    </Container>
-  );
-}

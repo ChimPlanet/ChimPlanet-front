@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
+
 import { ListSort, PostSort } from '@/atoms/PostList';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobNavBar from '@/components/JobNavBar';
@@ -10,12 +10,7 @@ import JobInfiniteScroll from '@/components/JobInfiniteScroll';
 import { useArticleContext } from '@/context/articleContext';
 import mock_job_offers from '@/__mocks__/mock_job_offers';
 
-const Container = styled.section`
-  width: ${(props) => props.width};
-  margin: 0 auto;
-`;
-
-export default function Job({parId}) {
+export default function Job({ parId }) {
   const [isLoading, setIsLoading] = useState(false);
   const [num, setNum] = useState(5);
   const [postList, setPostList] = useState([]);
@@ -26,11 +21,11 @@ export default function Job({parId}) {
   const [, { open }] = useArticleContext();
   const { context } = useJobSection();
 
-  useEffect(()=>{
-    if( typeof parId === 'number' && parId !== 0){
+  useEffect(() => {
+    if (typeof parId === 'number' && parId !== 0) {
       open(parId);
-    };
-  },[]);
+    }
+  }, []);
 
   async function getUser() {
     /* try {
@@ -76,7 +71,7 @@ export default function Job({parId}) {
     if (data.length > num) {
       setNum((num) => num + 5);
       setIsLoading(false);
-    };
+    }
   };
 
   const onIntersect = async ([entry], observer) => {
@@ -108,3 +103,8 @@ export default function Job({parId}) {
     </Container>
   );
 }
+
+const Container = styled.section`
+  width: ${(props) => props.width};
+  margin: 0 auto;
+`;

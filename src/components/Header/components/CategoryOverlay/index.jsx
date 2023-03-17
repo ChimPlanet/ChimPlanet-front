@@ -4,13 +4,6 @@ import { useState } from 'react';
 import ParentCategoryColumn from './parentCategoryColumn';
 import ChildCategoryColumn from './childCategoryColumn';
 
-const Container = styled.div`
-  margin-top: 1px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  cursor: pointer;
-`;
-
 /**
  * @param {{close():void}}
  * @returns
@@ -28,3 +21,10 @@ export default function CategoryOverlay({ close }) {
     </Container>
   );
 }
+
+const Container = styled.div`
+  margin-top: 1px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  cursor: pointer;
+`;

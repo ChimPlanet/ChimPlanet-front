@@ -7,6 +7,23 @@ import JobDetailContent from './jobDetailContent';
 import Loading from '@/common/components/Loading';
 import { styled as muiStyled } from '@mui/material/styles';
 
+export default function JobDetailSubscriber() {
+  const [article, { close }] = useArticleContext();
+
+  return (
+    <ScrollModal open={article !== null} onClose={close}>
+      <>
+        <ContentWrapper>
+          <Suspense fallback={<Loading />}>
+            {article && <JobDetailContent offer={article} />}
+          </Suspense>
+        </ContentWrapper>
+        <JobDetailMenuBar id={article?.id} />
+      </>
+    </ScrollModal>
+  );
+}
+
 const ScrollModal = muiStyled(Modal)({
   display: 'flex',
   flexDirection: 'row',
@@ -27,20 +44,3 @@ const ContentWrapper = styled.div`
   background-color: white;
   border-radius: 8px;
 `;
-
-export default function JobDetailSubscriber() {
-  const [article, { close }] = useArticleContext();
-
-  return (
-    <ScrollModal open={article !== null} onClose={close}>
-      <>
-        <ContentWrapper>
-          <Suspense fallback={<Loading />}>
-            {article && <JobDetailContent offer={article} />}
-          </Suspense>
-        </ContentWrapper>
-        <JobDetailMenuBar id={article?.id} />
-      </>
-    </ScrollModal>
-  );
-}

@@ -1,7 +1,8 @@
+import { Suspense } from 'react';
+
 import ErrorBoundary from '@/common/components/ErrorBoundary';
 import Fallback from '@/common/components/Fallback';
 import Loading from '@/common/components/Loading';
-import { Suspense } from 'react';
 /**
  * Suspend, ErrorBoundary 복합체
  * @param {{ children: React.ReactNode }}
