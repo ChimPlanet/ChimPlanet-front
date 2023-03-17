@@ -1,5 +1,5 @@
 import { useSizeType } from '@/context/sizeTypeContext';
-import { useMemo } from 'react';
+import { cloneElement, useMemo } from 'react';
 import styled from 'styled-components';
 /**
  * @typedef {object} ResizableGridProps
@@ -16,7 +16,7 @@ export default function ResizableGrid({ children, ...props }) {
 
   return (
     <Container columns={columns} {...props}>
-      {children}
+      {cloneElement(children, { columns })}
     </Container>
   );
 }

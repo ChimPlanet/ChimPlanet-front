@@ -1,7 +1,12 @@
-import { SectionLeftIcon, SectionRightIcon } from '@/common/icons';
 import styled from 'styled-components';
 
-export default function PseudoOfferSection({ title }) {
+import { JobOfferMapContent } from '@/common/components/JobOffer';
+import { SectionLeftIcon, SectionRightIcon } from '@/common/icons';
+import pseudoOffers from '../__mocks__/pseudoOffers';
+import ResizableGrid from '@/common/components/ResizableGrid';
+import { memo } from 'react';
+
+export default function PseudoOfferSection({ title, numOfLines = 1 }) {
   return (
     <Container>
       <SectionHeader>
@@ -14,11 +19,22 @@ export default function PseudoOfferSection({ title }) {
           </NavButtons>
         </SectionHeaderSide>
       </SectionHeader>
+      <ResizableGrid style={{ rowGap: 50, columnGap: 20 }}>
+        <PseudoJobOfferMapContent numOfLines={numOfLines} />
+      </ResizableGrid>
     </Container>
   );
 }
 
-const Container = styled.div``;
+const PseudoJobOfferMapContent = memo(({ columns, numOfLines }) => {
+  return (
+    <JobOfferMapContent jobs={pseudoOffers.slice(0, columns * numOfLines)} />
+  );
+});
+
+const Container = styled.div`
+  pointer-events: none;
+`;
 
 const SectionHeader = styled.div`
   display: flex;

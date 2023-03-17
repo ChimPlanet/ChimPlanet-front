@@ -11,7 +11,7 @@ export default function JobViewContent() {
   useEffect(() => dispatch({ originalData: offers }), [offers]);
 
   return (
-    <ResizableGrid>
+    <ResizableGrid style={{ rowGap: 50, columnGap: 20 }}>
       <JobOfferMapContent jobs={context.displayedData} />
     </ResizableGrid>
   );
