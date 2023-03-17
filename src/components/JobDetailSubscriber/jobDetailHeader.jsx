@@ -1,5 +1,18 @@
 import styled from 'styled-components';
 
+export default function JobDetailHeader({ title, status, date, views }) {
+  return (
+    <HeaderContainer>
+      <PostTitle>{title}</PostTitle>
+      <PostInfo>
+        <PostStatus>{status ? '마감' : '모집중'}</PostStatus>
+        <PostDate>{date}</PostDate>
+        <PostViews>조회 {views}</PostViews>
+      </PostInfo>
+    </HeaderContainer>
+  );
+}
+
 const HeaderContainer = styled.header`
   margin-bottom: 21px;
   font-size: 14px;
@@ -38,16 +51,3 @@ const PostTime = styled.div`
 `;
 
 const PostViews = styled.div``;
-
-export default function JobDetailHeader({ title, status, date, views }) {
-  return (
-    <HeaderContainer>
-      <PostTitle>{title}</PostTitle>
-      <PostInfo>
-        <PostStatus>{status ? '마감' : '모집중'}</PostStatus>
-        <PostDate>{date}</PostDate>
-        <PostViews>조회 {views}</PostViews>
-      </PostInfo>
-    </HeaderContainer>
-  );
-}

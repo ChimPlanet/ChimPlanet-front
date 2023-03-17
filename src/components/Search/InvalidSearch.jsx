@@ -1,12 +1,5 @@
 import styled from 'styled-components';
 
-const Container = styled.div``;
-
-const Title = styled.h1`
-  font-weight: 700;
-  font-size: 24px;
-`;
-
 export default function InvalidSearch() {
   return (
     <Container>
@@ -14,3 +7,10 @@ export default function InvalidSearch() {
     </Container>
   );
 }
+
+const Container = styled.div``;
+
+const Title = styled.h1`
+  font-weight: 700;
+  font-size: 24px;
+`;

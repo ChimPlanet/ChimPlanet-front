@@ -4,14 +4,11 @@ import styled from 'styled-components';
 import { useEffect, useLayoutEffect } from 'react';
 import { JobOfferMapContent } from '@/common/components/JobOffer';
 
-const Container = styled.div`
-  margin-top: 20px;
-  display: flex;
-  gap: 20px;
-  width: fit-content;
-  transform: ${(p) => `translate3d(${p.moveX}px, 0px, 0px)`};
-  transition: transform 0.2s ease-in-out;
-`;
+JobOfferSectionContent.propTypes = {
+  cursor: PropTypes.number.isRequired,
+  perPage: PropTypes.number.isRequired,
+  setLength: PropTypes.func.isRequired,
+};
 
 /**
  * @typedef {Object} JobOfferSectionContentProps
@@ -54,8 +51,11 @@ export default function JobOfferSectionContent({
   );
 }
 
-JobOfferSectionContent.propTypes = {
-  cursor: PropTypes.number.isRequired,
-  perPage: PropTypes.number.isRequired,
-  setLength: PropTypes.func.isRequired,
-};
+const Container = styled.div`
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  width: fit-content;
+  transform: ${(p) => `translate3d(${p.moveX}px, 0px, 0px)`};
+  transition: transform 0.2s ease-in-out;
+`;

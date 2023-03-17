@@ -1,4 +1,4 @@
-import { string, element } from 'prop-types';
+import { element } from 'prop-types';
 
 CarouselItem.propTypes = {
   child: element.isRequired,

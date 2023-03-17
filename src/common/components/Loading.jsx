@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 import Spinner from '@/assets/loading-middle.gif';
 
+export default function Loading() {
+  return (
+    <Container>
+      <img src={Spinner} alt="로딩중" />
+    </Container>
+  );
+}
+
 const Container = styled.div`
   display: flex;
   justify-content: center;
@@ -14,11 +22,3 @@ const Container = styled.div`
     width: 5%;
   }
 `;
-
-export default function Loading() {
-  return (
-    <Container>
-      <img src={Spinner} alt="로딩중" />
-    </Container>
-  );
-}

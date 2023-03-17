@@ -6,6 +6,51 @@ import { ArrowBelowSmallIcon } from '@/common/icons';
 
 const MenuWidth = 100;
 
+const orderByTypes = Object.freeze([
+  { key: 'recent', name: '최신순' },
+  { key: 'popular', name: '조회수' },
+  { key: 'recommend', name: '추천순' },
+]);
+//"popular" | "recent" | "recommend"
+export default function JobViewHeaderOrderByButton() {
+  const [visible, setVisible] = useState(false);
+  const anchorRef = useRef();
+  const [context, dispatch] = useJobViewContext();
+
+  const handleSelectClick = () => setVisible((prev) => !prev);
+  const close = () => setVisible(false);
+  const handleOptionClick = (orderBy) => {
+    dispatch({ orderBy });
+    close();
+  };
+
+  return (
+    <Container>
+      <Select onClick={handleSelectClick} ref={anchorRef}>
+        <SelectText>
+          {orderByTypes.find((e) => e.key === context.orderBy).name} &nbsp;
+          <ArrowBelowSmallIcon />
+        </SelectText>
+      </Select>
+      {visible && (
+        <FloatingMenu anchorRef={anchorRef} close={close}>
+          <Menu>
+            {orderByTypes.map(({ key, name }) => (
+              <MenuOptions
+                key={key}
+                selected={key === context.orderBy}
+                onClick={handleOptionClick.bind(null, key)}
+              >
+                {name}
+              </MenuOptions>
+            ))}
+          </Menu>
+        </FloatingMenu>
+      )}
+    </Container>
+  );
+}
+
 const Container = styled.div``;
 
 const Select = styled.div`
@@ -52,48 +97,3 @@ const MenuOptions = styled.button`
     border-bottom-right-radius: 4px;
   }
 `;
-
-const orderByTypes = Object.freeze([
-  { key: 'recent', name: '최신순' },
-  { key: 'popular', name: '조회수' },
-  { key: 'recommend', name: '추천순' },
-]);
-//"popular" | "recent" | "recommend"
-export default function JobViewHeaderOrderByButton() {
-  const [visible, setVisible] = useState(false);
-  const anchorRef = useRef();
-  const [context, dispatch] = useJobViewContext();
-
-  const handleSelectClick = () => setVisible((prev) => !prev);
-  const close = () => setVisible(false);
-  const handleOptionClick = (orderBy) => {
-    dispatch({ orderBy });
-    close();
-  };
-
-  return (
-    <Container>
-      <Select onClick={handleSelectClick} ref={anchorRef}>
-        <SelectText>
-          {orderByTypes.find((e) => e.key === context.orderBy).name} &nbsp;
-          <ArrowBelowSmallIcon />
-        </SelectText>
-      </Select>
-      {visible && (
-        <FloatingMenu anchorRef={anchorRef} close={close}>
-          <Menu>
-            {orderByTypes.map(({ key, name }) => (
-              <MenuOptions
-                key={key}
-                selected={key === context.orderBy}
-                onClick={handleOptionClick.bind(null, key)}
-              >
-                {name}
-              </MenuOptions>
-            ))}
-          </Menu>
-        </FloatingMenu>
-      )}
-    </Container>
-  );
-}

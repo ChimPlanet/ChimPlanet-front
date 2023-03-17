@@ -7,12 +7,6 @@ import JobOfferSectionHeader from './components/jobOfferSectionHeader';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobSelectionSkeleton from '@/components/Skeletons/JobSectionSkeleton';
 
-const Container = styled.section`
-  min-height: 460px;
-  overflow-x: hidden;
-  width: ${(props) => props.width};
-`;
-
 /**
  * @typedef {Object} JobOfferSectionProps
  * @property {string} title
@@ -76,3 +70,9 @@ JobOfferSection.propTypes = {
   fetchFunction: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
 };
+
+const Container = styled.section`
+  min-height: 460px;
+  overflow-x: hidden;
+  width: ${(props) => props.width};
+`;

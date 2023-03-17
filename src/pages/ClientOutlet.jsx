@@ -1,7 +1,8 @@
-import Banner from '@/components/Banner';
-import { Header } from '@/components/Header';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
+
+import Banner from '@/components/Banner';
+import { Header } from '@/components/Header';
 
 export default function ClientOutlet() {
   return (

@@ -1,6 +1,35 @@
 import styled from 'styled-components';
 import { ArrowLeftIcon, ArrowRightIcon } from './arrowIcon';
 
+/**
+ *
+ * @param {{maxLength: number, cursor: number, setCursor: (cursor: number) => void}}
+ * @returns
+ */
+export default function CarouselIndicator({
+  maxLength,
+  cursor,
+  setCursor,
+  setIsStop,
+}) {
+  return (
+    <Container
+      onMouseEnter={() => setIsStop(true)}
+      onMouseLeave={() => setIsStop(false)}
+    >
+      <Button onClick={() => setCursor(cursor - 1)}>
+        <ArrowLeftIcon />
+      </Button>
+      <Button onClick={() => setCursor(cursor + 1)}>
+        <ArrowRightIcon />
+      </Button>
+      <Indicator>{`${
+        [maxLength, cursor + 1, 1].sort()[1]
+      } / ${maxLength}`}</Indicator>
+    </Container>
+  );
+}
+
 const Container = styled.div`
   position: absolute;
   bottom: 0;
@@ -33,32 +62,3 @@ const Indicator = styled.div`
   padding: 10px 20px;
   border-radius: 100px;
 `;
-
-/**
- *
- * @param {{maxLength: number, cursor: number, setCursor: (cursor: number) => void}}
- * @returns
- */
-export default function CarouselIndicator({
-  maxLength,
-  cursor,
-  setCursor,
-  setIsStop,
-}) {
-  return (
-    <Container
-      onMouseEnter={() => setIsStop(true)}
-      onMouseLeave={() => setIsStop(false)}
-    >
-      <Button onClick={() => setCursor(cursor - 1)}>
-        <ArrowLeftIcon />
-      </Button>
-      <Button onClick={() => setCursor(cursor + 1)}>
-        <ArrowRightIcon />
-      </Button>
-      <Indicator>{`${
-        [maxLength, cursor + 1, 1].sort()[1]
-      } / ${maxLength}`}</Indicator>
-    </Container>
-  );
-}

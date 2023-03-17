@@ -2,13 +2,6 @@ import PropTypes from 'prop-types';
 import { cloneElement } from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  position: ${(props) => props.position};
-  top: ${(props) => props.top}px;
-  left: ${(props) => props.left}px;
-  z-index: ${(props) => props.zIndex};
-`;
-
 /**
  * @typedef {object} FloatingAnchorContainerProps
  * @property {JSX.Element} children
@@ -42,3 +35,10 @@ export default function FloatingMenu({
 FloatingMenu.propTypes = {
   children: PropTypes.node.isRequired,
 };
+
+const Container = styled.div`
+  position: ${(props) => props.position};
+  top: ${(props) => props.top}px;
+  left: ${(props) => props.left}px;
+  z-index: ${(props) => props.zIndex};
+`;

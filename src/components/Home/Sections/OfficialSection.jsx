@@ -5,15 +5,6 @@ import { JobOfferSection } from '@/common/components/JobOffer';
 import { fetchOfficialOffer } from '@/service/offer/offer.api';
 import { OFFICIAL_PATH } from '@/constants/route';
 
-const Detail = styled.div`
-  text-align: right;
-  margin-top: 2px;
-  margin-right: 30px;
-  font-size: 16px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.black};
-`;
-
 export default function OfficialSection() {
   return (
     <JobOfferSection
@@ -28,3 +19,12 @@ export default function OfficialSection() {
     />
   );
 }
+
+const Detail = styled.div`
+  text-align: right;
+  margin-top: 2px;
+  margin-right: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.black};
+`;
