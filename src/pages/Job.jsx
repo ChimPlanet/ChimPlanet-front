@@ -1,67 +1,59 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import styled from 'styled-components';
-import { useQuery } from 'react-query';
 import { useRecoilValue } from 'recoil';
-
 import { ListSort, PostSort } from '@/atoms/PostList';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobNavBar from '@/components/JobNavBar';
 import JobInfiniteScroll from '@/components/JobInfiniteScroll';
 import { useArticleContext } from '@/context/articleContext';
-import mock_job_offers from '@/__mocks__/mock_job_offers';
+import { fetchRecentOffer, fetchOfferContent } from '@/service/offer/offer.api';
+import { useJobOfferFromDynamic, useJobOfferDetail } from '@/query/offer';
 
 export default function Job({ parId }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [a, setA] =  useState(null)
   const [num, setNum] = useState(5);
   const [postList, setPostList] = useState([]);
   const [newList, setNewList] = useState([]);
   const postSort = useRecoilValue(PostSort);
   const listSort = useRecoilValue(ListSort);
   const target = useRef();
-  const [, { open }] = useArticleContext();
+  const [,{ open }] = useArticleContext();
   const { context } = useJobSection();
-
-  useEffect(() => {
-    if (typeof parId === 'number' && parId !== 0) {
-      open(parId);
-    }
-  }, []);
-
-  async function getUser() {
-    /* try {
-            const response = await axios.get('http://43.207.33.71:8080/api/boards');
-            return response.data;
-        } catch (error) {
-            console.error(error);
-        }; */
-    return mock_job_offers;
+  
+  
+  if( parId !== null && parId !== 0){
+    const { data : offer } = useJobOfferDetail(parId)
+    useMemo(()=>setA(offer),[offer])
   }
 
-  const { data } = useQuery('repoData', getUser);
+  useEffect(()=> {open(a)},[])
+
+  const { data } = useJobOfferFromDynamic('repoData', fetchRecentOffer);
 
   const postValue = postSort.find((item) => item.isClicked === 1);
 
-  useEffect(() => {
+  useMemo(() => {
     if (postValue.text === '구인중') {
-      setPostList(data.slice(0, num).filter((item) => item.isEnd === 'ING'));
+      setPostList(data.slice(0, num).filter((item) => item.isClosed === false));
     } else if (postValue.text === '모집마감') {
-      setPostList(data.slice(0, num).filter((item) => item.isEnd === 'END'));
+      setPostList(data.slice(0, num).filter((item) => item.isClosed === true));
     } else if (postValue.text === '전체') {
       setPostList(data.slice(0, num));
     }
     setIsLoading(true);
   }, [data, postValue, num]);
 
-  useEffect(() => {
+  useMemo(() => {
     const newPostList = [...postList];
     if (listSort === '조회순') {
       setNewList(
-        newPostList.sort(
-          (a, b) => b.readCount.replace(',', '') - a.readCount.replace(',', ''),
-        ),
+        newPostList.sort((a, b) => b.data.readCount - a.data.readCount)
       );
     } else if (listSort === '추천순') {
-      setNewList(newPostList.sort((a, b) => b.likeCount - a.likeCount));
+      setNewList(
+        newPostList.sort((a, b) => b.data.likeCount - a.data.likeCount)
+      );
     } else {
       setNewList(postList);
     }
