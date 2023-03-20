@@ -1,12 +1,12 @@
-import { fetchPopularOffer } from '@/service/offer/offer.api';
 import { JobOfferSection } from '@/common/components/JobOffer';
+import backend from '@/service/backend';
 
 export default function PopularSection() {
   return (
     <JobOfferSection
       queryKey="popular"
       title="실시간 인기 구인글"
-      fetchFunction={fetchPopularOffer}
+      fetchFunction={backend.offers.popular}
     />
   );
 }
