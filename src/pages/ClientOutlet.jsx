@@ -1,18 +1,22 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Banner from '@/components/Banner';
 import { Header } from '@/components/Header';
 import { usePreloadContext } from '@/context/preloadContext';
+import { HOME_PATH } from '@/constants/route';
 
 export default function ClientOutlet() {
+
+  const {pathname} = useLocation();
 
   const preloaded = usePreloadContext();
 
   return (
     <>
       <Header />
-      <Banner banners={preloaded?.mainBanner} />
+
+    {pathname === HOME_PATH && <Banner banners={preloaded?.mainBanner} />}
       <Content>
         <Outlet />
       </Content>
