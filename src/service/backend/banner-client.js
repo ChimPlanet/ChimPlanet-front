@@ -1,9 +1,11 @@
 import bannerEntries from '@/__mocks__/mock_banner_entries';
 import HttpClient from './http-client';
+import { select } from '@/service/domain.decorator';
+import { Banner } from "@/service/banner";
 
 class BannerClient extends HttpClient {
   constructor() {
-    super('BannerClient', '/banners');
+    super('BannerClient', '/file');
   }
 
   /**
@@ -14,8 +16,9 @@ class BannerClient extends HttpClient {
     return bannerEntries;
   }
 
+  @select(collection => collection.map(Banner))
   async subBanner() {
-    return '';
+    return await this.get("/banner");
   }
 }
 
