@@ -21,14 +21,14 @@ import useAdminSidebarMenu from '../hooks/useAdminSidebarMenu';
 import AdminSidebarMenu from './AdminSidebarMenu';
 
 export default function AdminSidebar() {
-  const [AdditionalElement] = useAdminSidebarMenu();
+  const [MenuContentElement] = useAdminSidebarMenu();
 
   return (
     <Style>
       <Sidebar>
         <LogoLink to={`/${ADMIN_WRAPPER_PATH}`}>침플래닛</LogoLink>
-        {AdditionalElement ? (
-          <AdminSidebarMenu children={AdditionalElement} />
+        {MenuContentElement ? (
+          <AdminSidebarMenu children={MenuContentElement} />
         ) : (
           <AdminSidebarBaseContent />
         )}
