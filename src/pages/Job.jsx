@@ -6,8 +6,7 @@ import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobNavBar from '@/components/JobNavBar';
 import JobInfiniteScroll from '@/components/JobInfiniteScroll';
 import { useArticleContext } from '@/context/articleContext';
-import { fetchRecentOffer, fetchOfferContent } from '@/service/offer/offer.api';
-import { useJobOfferFromDynamic, useJobOfferDetail } from '@/query/offer';
+import {useRecentOffers} from '@/query/offer';
 
 export default function Job({ parId }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,7 +28,7 @@ export default function Job({ parId }) {
 
   useEffect(()=> {open(a)},[])
 
-  const { data } = useJobOfferFromDynamic('repoData', fetchRecentOffer);
+  const { data } = useRecentOffers(); 
 
   const postValue = postSort.find((item) => item.isClicked === 1);
 
