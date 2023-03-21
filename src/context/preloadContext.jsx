@@ -13,7 +13,6 @@ export function PreloadProvider({ children }) {
     Promise.all(
       NeedPreloadRequests.map(el => el.value())
     ).then(responses => {
-      console.log(responses)
       const _preload = {};
 
       responses.forEach((data, i) => {
@@ -24,9 +23,6 @@ export function PreloadProvider({ children }) {
       setPreload(_preload);
     })
   }, []);
-
-
-  console.log(preloads)
 
   return (
     <preloadContext.Provider children={children} value={preloads} />

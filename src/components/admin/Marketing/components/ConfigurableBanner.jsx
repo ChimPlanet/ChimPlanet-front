@@ -2,9 +2,13 @@ import Banner from '@/components/Banner';
 import styled from 'styled-components';
 
 export default function ConfigurableBanner() {
+
+  // ! use RecoilState for shareing Sidebar Menu Setting
+  const banners = [];
+
   return (
-    <Container>
-      <Banner />
+     <Container>
+      <Banner banners={banners} />
     </Container>
   ); 
 }
