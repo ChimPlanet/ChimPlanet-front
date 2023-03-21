@@ -3,12 +3,16 @@ import styled from 'styled-components';
 
 import Banner from '@/components/Banner';
 import { Header } from '@/components/Header';
+import { usePreloadContext } from '@/context/preloadContext';
 
 export default function ClientOutlet() {
+
+  const preloaded = usePreloadContext();
+
   return (
     <>
       <Header />
-      <Banner />
+      <Banner banners={preloaded?.mainBanner} />
       <Content>
         <Outlet />
       </Content>
