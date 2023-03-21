@@ -1,5 +1,6 @@
-import Banner from '@/components/Banner';
 import styled from 'styled-components';
+
+import Banner from '@/components/Banner';
 
 export default function ConfigurableBanner() {
 
@@ -14,7 +15,12 @@ export default function ConfigurableBanner() {
 }
 
 const Container = styled.div`
-  margin-top: 25px; 
-  height: 375px; 
-  background-color: #d9d9d9;
+  margin: 30px 0px;
+  box-style: border-box;
+  height: 375px;
+
+  &:hover {
+    border: 4px solid ${({theme}) => theme.colors.logo}
+  }
+
 `;

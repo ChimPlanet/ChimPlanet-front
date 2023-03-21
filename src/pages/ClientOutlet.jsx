@@ -16,7 +16,7 @@ export default function ClientOutlet() {
     <>
       <Header />
 
-    {pathname === HOME_PATH && <Banner banners={preloaded?.mainBanner} />}
+    {pathname === HOME_PATH && <BannerWrapper><Banner banners={preloaded?.mainBanner} /></BannerWrapper>}
       <Content>
         <Outlet />
       </Content>
@@ -33,4 +33,8 @@ const Content = styled.div`
   ${({ theme }) => theme.media.tablet`
     ${`width: ${theme.widths.tablet}px`};
   `}
+`;
+
+const BannerWrapper = styled.div`
+  margin: 30px 0px;
 `;
