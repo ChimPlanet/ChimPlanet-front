@@ -6,11 +6,12 @@ import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobNavBar from '@/components/JobNavBar';
 import JobInfiniteScroll from '@/components/JobInfiniteScroll';
 import { useArticleContext } from '@/context/articleContext';
-import {useRecentOffers} from '@/query/offer';
+import { fetchRecentOffer } from '@/service/offer/offer.api';
+import { useRecentOffers, useJobOfferDetail } from '@/query/offer';
 
 export default function Job({ parId }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [a, setA] =  useState(null)
+  const [offerData, setOfferData] =  useState(null);
   const [num, setNum] = useState(5);
   const [postList, setPostList] = useState([]);
   const [newList, setNewList] = useState([]);
@@ -22,13 +23,13 @@ export default function Job({ parId }) {
   
   
   if( parId !== null && parId !== 0){
-    const { data : offer } = useJobOfferDetail(parId)
-    useMemo(()=>setA(offer),[offer])
-  }
+    const { data : offer } = useJobOfferDetail(parId);
+    useMemo(()=>setOfferData(offer),[offer]);
+  };
 
-  useEffect(()=> {open(a)},[])
+  useEffect(()=> {open(offerData)},[]);
 
-  const { data } = useRecentOffers(); 
+  const { data } = useRecentOffers('repoData', fetchRecentOffer);;
 
   const postValue = postSort.find((item) => item.isClicked === 1);
 
