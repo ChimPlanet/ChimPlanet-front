@@ -31,7 +31,7 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-  padding: 36px;
+
 `;
 
 const Header = styled.div`
