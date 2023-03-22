@@ -1,11 +1,10 @@
 import { Suspense, useMemo } from 'react';
 import styled from 'styled-components';
 
-import { fetchRecentOffer } from '@/service/offer/offer.api';
 import { JobOfferMapContent } from '@/common/components/JobOffer';
 import Loading from '@/common/components/Loading';
 import { useSizeType } from '@/context/sizeTypeContext';
-import { useJobOfferFromDynamic } from '@/query/offer';
+import { useRecentOffers } from '@/query/offer';
 
 export default function RecentSection() {
   return (
@@ -19,7 +18,7 @@ export default function RecentSection() {
 }
 
 function RecentSectionContent() {
-  const { data: offers } = useJobOfferFromDynamic('recent', fetchRecentOffer);
+  const { data: offers } = useRecentOffers();
   const sizeType = useSizeType();
 
   const pageCount = useMemo(() => (sizeType === 'desktop' ? 4 : 3), [sizeType]);
