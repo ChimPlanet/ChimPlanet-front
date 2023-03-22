@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import Arrow from "../../../../assets/arrow.png";
+import Arrow from "../../../../assets/Arrow.png";
 import { useState } from 'react';
 import { useSetRecoilState } from "recoil";
 import { ListSort } from "@/atoms/PostList";
