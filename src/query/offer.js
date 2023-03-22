@@ -47,3 +47,10 @@ export const useJobOfferDetail = (id) => {
     },
   );
 };
+
+// 추후 api변경되면 수정 예정
+export function useRecentOffers(key, fetchFunction) {
+  return useQuery([JobOfferQueryKey, key], fetchFunction, {
+    select: transformResponse,
+  });
+};
