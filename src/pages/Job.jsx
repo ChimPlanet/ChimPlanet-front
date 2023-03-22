@@ -6,7 +6,6 @@ import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobNavBar from '@/components/JobNavBar';
 import JobInfiniteScroll from '@/components/JobInfiniteScroll';
 import { useArticleContext } from '@/context/articleContext';
-import { fetchRecentOffer } from '@/service/offer/offer.api';
 import { useRecentOffers, useJobOfferDetail } from '@/query/offer';
 
 export default function Job({ parId }) {
@@ -29,7 +28,7 @@ export default function Job({ parId }) {
 
   useEffect(()=> {open(offerData)},[]);
 
-  const { data } = useRecentOffers('repoData', fetchRecentOffer);;
+  const { data } = useRecentOffers();;
 
   const postValue = postSort.find((item) => item.isClicked === 1);
 
