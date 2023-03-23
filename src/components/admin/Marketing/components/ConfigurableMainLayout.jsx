@@ -45,6 +45,7 @@ const Layout = styled.div`
 
 const OptionsBox = styled.div`
   position: absolute;
+  z-index: 1000;
   ${({ posX, posY }) => `
     left: ${posX};
     top: ${posY};

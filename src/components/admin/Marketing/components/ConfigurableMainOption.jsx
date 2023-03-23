@@ -2,11 +2,23 @@ import { WriteIcon } from '@/common/icons';
 import styled from 'styled-components';
 import OptionBelowArrowIcon from '@/common/icons/OptionBelowArrowIcon';
 import { useState } from 'react';
+import { useAdminSidebarMenu } from '@/components/admin/AdminSidebar';
+import ConfigurableSidebarMenu from './ConfigurableSidebarMenu';
 
 export default function ConfigurableOption() {
   const [open, setOpen] = useState(false);
 
+  const [, { clear, push }] = useAdminSidebarMenu();
+
   const toggleMenu = () => setOpen((p) => !p);
+
+  const setupSidebarMenu = (type) => {
+    clear();
+    push(<ConfigurableSidebarMenu type={type} />);
+  };
+
+  const onBannerRegisterClick = () => setupSidebarMenu('register');
+  const onBannerSequenceClick = () => setupSidebarMenu('sequence');
 
   return (
     <Container>
@@ -17,8 +29,8 @@ export default function ConfigurableOption() {
       </PreviewButton>
       {open && (
         <Menu>
-          <MenuItem>배너 등록</MenuItem>
-          <MenuItem>순서 편집</MenuItem>
+          <MenuItem onClick={onBannerRegisterClick}>배너 등록</MenuItem>
+          <MenuItem onClick={onBannerSequenceClick}>순서 편집</MenuItem>
         </Menu>
       )}
     </Container>
