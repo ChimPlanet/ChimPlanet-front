@@ -2,12 +2,17 @@ import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { AdminSidebar } from '@/components/admin/AdminSidebar';
+import {
+  AdminSidebar,
+  useAdminSidebarMenu,
+} from '@/components/admin/AdminSidebar';
 import Loading from '@/common/components/Loading';
 
 export default function AdminOutlet() {
+  const [Element] = useAdminSidebarMenu();
+
   return (
-    <Layout>
+    <Layout extend={Element}>
       <AdminSidebar />
       <Wrapper>
         <Header />
@@ -23,7 +28,8 @@ export default function AdminOutlet() {
 
 const Layout = styled.div`
   display: grid;
-  grid-template-columns: 240px auto;
+  grid-template-columns: ${({ extend }) =>
+    extend ? '450px auto' : '240px auto'};
 `;
 
 const Wrapper = styled.div`

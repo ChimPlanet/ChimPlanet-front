@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import ConfigurationRegisterOptionMenu from './ConfigurationRegisterOptionMenu';
+import ConfigurationSequenceOptionMenu from './ConfigurationSequenceOptionMenu';
 
 /**
  *
@@ -6,7 +8,15 @@ import styled from 'styled-components';
  * @returns
  */
 export default function ConfigurableSidebarMenu({ type }) {
-  return <Container></Container>;
+  return (
+    <Container>
+      {type === 'register' ? (
+        <ConfigurationRegisterOptionMenu />
+      ) : (
+        <ConfigurationSequenceOptionMenu />
+      )}
+    </Container>
+  );
 }
 
 const Container = styled.div``;

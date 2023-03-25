@@ -19,8 +19,8 @@ class HttpClient {
     return response.data;
   }
 
-  async post(endpoint, body) {
-    const response = await client.post(this.nested + endpoint, body);
+  async post(endpoint, body, config) {
+    const response = await client.post(this.nested + endpoint, body, config);
     return response.data;
   }
 
