@@ -14,6 +14,7 @@ function preloadImages(data) {
   return data;
 }
 
+/** @returns {import('react-query').UseQueryResult<Banner[]>} */
 export const useBanner = () => {
   return useQuery(BannerQueryKey, backend.banners.mainBanner, {
     select: preloadImages,

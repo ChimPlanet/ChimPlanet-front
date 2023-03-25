@@ -9,7 +9,7 @@ class BannerClient extends HttpClient {
 
   /**
    * ! Banner API 완성시에 작성하시오
-   * @returns Banner
+   * @returns {Promise<Banner[]>}
    */
   @select(typeBannerCollection)
   async mainBanner() {

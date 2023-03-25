@@ -1,3 +1,6 @@
+import { Loading } from '@/common/components';
+import { useBanner } from '@/query/banner';
+import { Suspense } from 'react';
 import styled from 'styled-components';
 
 import BannerPreviewList from './BannerPreviewList';
@@ -9,13 +12,23 @@ export default function ConfigurationRegisterOptionMenu() {
     <Wrapper>
       <Typography>배너목록</Typography>
       <Content>
-        <BannerPreviewList />
-
-        <SubBannerPreviewList />
-
-        <SubmitBannerButton />
+        <Suspense fallback={<Loading />}>
+          <OptionMenuContent />
+        </Suspense>
       </Content>
     </Wrapper>
+  );
+}
+
+function OptionMenuContent() {
+  const { data: banner } = useBanner();
+
+  return (
+    <>
+      <BannerPreviewList items={banner} />
+      <SubBannerPreviewList />
+      <SubmitBannerButton />
+    </>
   );
 }
 
