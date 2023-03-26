@@ -17,9 +17,9 @@ export function field(responseFieldName, preprocess) {
         throw Error("You can't write Data Class's Property");
       },
       get: function () {
-        return (this['__' + fieldName] ??= preprocess
+        return preprocess
           ? preprocess(this.data[responseFieldName])
-          : this.data[responseFieldName]);
+          : this.data[responseFieldName];
       },
       enumerable: true,
       configurable: true,

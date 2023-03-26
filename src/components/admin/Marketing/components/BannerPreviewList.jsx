@@ -1,9 +1,19 @@
-import { Banner } from '@/service/banner';
 import React from 'react';
-import styled from 'styled-components';
 
-/** @param {{items: Banner[]}} */
-export default function BannerPreviewList({ items }) {
+import { Banner } from '@/service/banner';
+import {
+  Wrapper,
+  Container,
+  Content,
+  Title,
+  Information,
+  InformationDetail,
+  InformationType,
+  BannerPreviewImg,
+} from './BannerPreviewList.style';
+
+/** @param {{title: string, items: Banner[]}} */
+export default function BannerPreviewList({ title, items }) {
   return (
     <Container>
       {items.map((element, i) => (
@@ -12,19 +22,20 @@ export default function BannerPreviewList({ items }) {
           data={element}
           index={i + 1}
           maxLength={items.length}
+          title={title}
         />
       ))}
     </Container>
   );
 }
-/** @param {{data: Banner, index: number, maxLength: number}} */
-function BannerPreviewListItem({ data, maxLength, index }) {
+/** @param {{data: Banner, index: number, maxLength: number, title: string}} */
+function BannerPreviewListItem({ data, maxLength, index, title }) {
   return (
     <Wrapper>
       <BannerPreviewImg src={data.sourceUrl} alt={data.fileName} />
       <Content>
         <Title>
-          메인비주얼[{index}/{maxLength}]
+          {title}[{index}/{maxLength}]
         </Title>
         <Information>
           <div>
@@ -40,53 +51,3 @@ function BannerPreviewListItem({ data, maxLength, index }) {
     </Wrapper>
   );
 }
-
-const Container = styled.div`
-  border: 1px solid #454545;
-
-  border-radius: 4px;
-`;
-
-const Wrapper = styled.div`
-  padding: 15px;
-  display: flex;
-  column-gap: 20px;
-  border-bottom: 1px solid #454545;
-  &:last-child {
-    border-bottom: none;
-  }
-`;
-
-const BannerPreviewImg = styled.img`
-  width: 125px;
-  height: 44px;
-
-  &:hover {
-    transform-origin: top left;
-    transform: scale(2.85);
-    cursor: zoom-in;
-  }
-`;
-
-const Content = styled.div`
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const Title = styled.p``;
-
-const Information = styled.div`
-  display: flex;
-  column-gap: 10px;
-`;
-
-const InformationType = styled.span`
-  color: #fff;
-  font-weight: 700;
-`;
-
-const InformationDetail = styled.span`
-  margin-left: 4px;
-`;

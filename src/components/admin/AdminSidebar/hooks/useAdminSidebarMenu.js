@@ -16,7 +16,10 @@ export default function useAdminSidebarJSXElement() {
   const handle = useMemo(
     () => ({
       clear: () => setElements([]),
-      pop: () => setElements((prev) => (prev.length > 1 ? prev.slice(-1) : [])),
+      pop: () =>
+        setElements((prev) =>
+          prev.length > 1 ? prev.slice(0, prev.length - 1) : [],
+        ),
       push: (element) => setElements((prev) => [...prev, element]),
     }),
     [setElements],

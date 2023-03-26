@@ -1,8 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useAdminSidebarMenu } from '../../AdminSidebar';
+import { BannerForm } from './BannerForm';
 
-export default function SubmitBannerButton({ onClick }) {
-  return <Button onClick={onClick}>배너 등록</Button>;
+export default function SubmitBannerButton() {
+  const [, { push }] = useAdminSidebarMenu();
+
+  const handleClick = () => {
+    push(<BannerForm type="new" />);
+  };
+
+  return <Button onClick={handleClick}>배너 등록</Button>;
 }
 
 const Button = styled.button`
