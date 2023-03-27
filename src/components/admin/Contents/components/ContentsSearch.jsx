@@ -15,8 +15,8 @@ export default function ContentsSearch() {
             <SearchInput ref={inputRef} placeholder="ID 또는 검색어를 입력하세요"/>
             <SearchIcon />
         </Container>
-    )
-}
+    );
+};
 
 const Container = styled.div`
     display: flex;

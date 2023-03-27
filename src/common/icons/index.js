@@ -17,6 +17,9 @@ import UlIcon from './UlIcon';
 import UserIcon from './UserIcon';
 import PopupIcon from './PopupIcon';
 import LeftArrowIcon from './LeftArrowIcon';
+import DetailedSettingsIcon from './DetailedSettingsIcon';
+import PreviewIcon from './PreviewIcon';
+import MinXIcon from './MinXIcon';
 
 export {
   UserIcon,
@@ -38,4 +41,7 @@ export {
   DashboardIcon,
   UlIcon,
   LeftArrowIcon,
+  DetailedSettingsIcon,
+  PreviewIcon,
+  MinXIcon,
 };

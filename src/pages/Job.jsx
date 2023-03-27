@@ -20,7 +20,6 @@ export default function Job({ parId }) {
   const [,{ open }] = useArticleContext();
   const { context } = useJobSection();
   
-  
   if( parId !== null && parId !== 0){
     const { data : offer } = useJobOfferDetail(parId);
     useMemo(()=>setOfferData(offer),[offer]);
