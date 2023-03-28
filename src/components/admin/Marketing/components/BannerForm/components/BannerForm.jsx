@@ -1,10 +1,17 @@
 import { Banner } from '@/service/banner';
-import styled from 'styled-components';
 import BannerImageForm from './BannerImageForm';
 import BannerLinkForm from './BannerLinkForm';
 import { useReducer } from 'react';
 import { useAdminSidebarMenu } from '@/components/admin/AdminSidebar';
 import { Switch } from '@mui/material';
+
+import {
+  Container,
+  UseContainer,
+  UseTypography,
+  UseSwitch,
+  BannerSubmitFormButton,
+} from './BannerForm.style';
 
 /**
  * @param {{type: "update" | "new", payload?: Banner}} param0
@@ -58,33 +65,3 @@ export default function BannerForm({ type, payload }) {
     </Container>
   );
 }
-
-const Container = styled.div`
-  padding: 32px;
-  font-size: 14px;
-  font-weight: 500;
-`;
-
-const UseContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const UseTypography = styled.span``;
-
-const UseSwitch = styled.div``;
-
-const BannerSubmitFormButton = styled.button`
-  margin-top: 24px;
-  display: block;
-  background-color: #252525;
-  border: 1px solid ${({ theme }) => theme.colors.logo};
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 400;
-  text-align: center;
-  color: #fff;
-  width: 100%;
-  padding: 11px 0px;
-`;

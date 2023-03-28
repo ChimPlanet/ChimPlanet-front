@@ -1,7 +1,4 @@
-import styled from 'styled-components';
-
 import BannerPreviewList from './BannerPreviewList';
-import SubBannerPreviewList from './SubBannerPreviewList';
 import SubmitBannerButton from './SubmitBannerButton';
 import { useEffect } from 'react';
 import { useAdminBannerState } from '../atoms/adminBanner.atom';
@@ -10,6 +7,14 @@ import {
   filterMainBanner,
   filterSubBanner,
 } from '@/service/banner/banner-utils';
+
+import {
+  Wrapper,
+  ControlBox,
+  RefreshButton,
+  Typography,
+  Content,
+} from './ConfigurationRegisterOptionMenu.style';
 
 export default function ConfigurationRegisterOptionMenu() {
   const [banners, setBanners] = useAdminBannerState();
@@ -46,33 +51,3 @@ export default function ConfigurationRegisterOptionMenu() {
     </Wrapper>
   );
 }
-
-const Wrapper = styled.div`
-  color: #fff;
-  padding: 24px 32px;
-`;
-
-const ControlBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const RefreshButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.logo};
-  border-radius: 4px;
-  color: #fff;
-  font-weight: 500;
-  font-size: 14px;
-`;
-
-const Typography = styled.p`
-  font-weight: 500;
-  font-size: 14px;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 16px;
-  margin-top: 8px;
-`;

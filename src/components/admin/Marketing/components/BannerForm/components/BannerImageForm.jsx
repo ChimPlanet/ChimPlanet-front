@@ -1,4 +1,11 @@
-import styled from 'styled-components';
+import {
+  Container,
+  Content,
+  Title,
+  ItemImageWrap,
+  ItemDescription,
+  ItemWrap,
+} from './BannerImageForm.style';
 
 export default function BannerImageForm() {
   return (
@@ -20,30 +27,3 @@ function ImageItem({ title }) {
     </ItemWrap>
   );
 }
-
-const Container = styled.div``;
-
-const Title = styled.p``;
-
-const Content = styled.div`
-  margin-top: 8px;
-  display: flex;
-  flex-direction: column;
-  row-gap: 24px;
-  border: 1px solid #454545;
-  border-radius: 4px;
-  padding: 25px 15px;
-`;
-
-const ItemWrap = styled.div``;
-
-const ItemDescription = styled.p``;
-
-const ItemImageWrap = styled.div`
-  margin-top: 8px;
-  width: 357px;
-  height: 169px;
-  background-color: #e0e0e0;
-  border-radius: 4px;
-  overflow: hidden;
-`;
