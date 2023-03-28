@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import { styled as muiStyled } from '@mui/material/styles';
+import MUISwitch from '@mui/material/Switch';
+
 export const Container = styled.div`
   padding: 32px;
   font-size: 14px;
@@ -11,6 +14,24 @@ export const UseContainer = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
+
+export const Switch = muiStyled(MUISwitch)({
+  '& .MuiSwitch-switchBase': {
+    '&.Mui-checked': {
+      color: '#fff',
+      '& + .MuiSwitch-track': {
+        opacity: 1,
+        backgroundColor: '#2BB34B',
+      },
+    },
+  },
+  '& .MuiSwitch-thumb': {
+    boxShadow: 'none',
+    width: 16,
+    height: 16,
+    margin: 2,
+  },
+});
 
 export const UseTypography = styled.span``;
 

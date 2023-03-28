@@ -3,9 +3,9 @@ import BannerImageForm from './BannerImageForm';
 import BannerLinkForm from './BannerLinkForm';
 import { useReducer } from 'react';
 import { useAdminSidebarMenu } from '@/components/admin/AdminSidebar';
-import { Switch } from '@mui/material';
 
 import {
+  Switch,
   Container,
   UseContainer,
   UseTypography,
