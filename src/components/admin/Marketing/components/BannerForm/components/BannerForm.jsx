@@ -1,7 +1,6 @@
 import { Banner } from '@/service/banner';
 import BannerImageForm from './BannerImageForm';
 import BannerLinkForm from './BannerLinkForm';
-import { useReducer } from 'react';
 import { useAdminSidebarMenu } from '@/components/admin/AdminSidebar';
 
 import {
@@ -12,35 +11,13 @@ import {
   UseSwitch,
   BannerSubmitFormButton,
 } from './BannerForm.style';
+import useBannerForm from '../hooks/useBannerForm';
 
 /**
  * @param {{type: "update" | "new", payload?: Banner}} param0
  */
 export default function BannerForm({ type, payload }) {
-  /** @type {[import('@/service/banner/banner-request').UploadBannerRequestOptions, (newState: Partial<import('@/service/banner/banner-request').UploadBannerRequestOptions>)=>void]} */
-  const [state, dispatch] = useReducer(
-    (state, newState) => ({ ...state, ...newState }),
-    type === 'new'
-      ? {
-          deviceType: 'PC',
-          fileType: 'MAIN',
-          redirectionType: '',
-          redirectUrl: '',
-          useYn: 'Y',
-          sequence: 0,
-          formData: null,
-        }
-      : {
-          deviceType: payload.isMain ? 'MAIN' : 'PC',
-          fileType: payload.isMain ? 'MAIN' : 'MID',
-          redirectUrl: payload.redirectUrl,
-          redirectionType: payload.redirectType,
-          useYn: payload.yn ? 'Y' : 'N',
-          sequence: payload.sequence,
-          formData: null,
-        },
-  );
-
+  const [state, dispatch] = useBannerForm(type, payload);
   const [, { pop }] = useAdminSidebarMenu();
 
   const handleSubmit = () => {
@@ -61,7 +38,7 @@ export default function BannerForm({ type, payload }) {
       </UseContainer>
       <BannerImageForm />
       <BannerLinkForm />
-      <BannerSubmitFormButton>배너 등록</BannerSubmitFormButton>
+      <BannerSubmitFormButton onClick={handleSubmit} children="배너 등록" />
     </Container>
   );
 }
