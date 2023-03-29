@@ -21,6 +21,7 @@ export const LinkInput = styled.input`
   border-radius: 4px;
   padding: 8px;
   border: 1px solid #454545;
+  color: #fff;
 `;
 
 export const SwitchContainer = styled(RadioGroup)`

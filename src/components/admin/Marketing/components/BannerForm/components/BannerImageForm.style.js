@@ -26,3 +26,18 @@ export const ItemImageWrap = styled.div`
   border-radius: 4px;
   overflow: hidden;
 `;
+
+export const PlaceHolderContainer = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.main};
+`;
+
+export const PlaceHolderRow = styled.p`
+  line-height: 20px;
+`;

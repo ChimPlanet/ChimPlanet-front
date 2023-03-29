@@ -1,3 +1,4 @@
+import DragAndDropImage from '@/common/components/DragAndDropImage';
 import {
   Container,
   Content,
@@ -5,6 +6,8 @@ import {
   ItemImageWrap,
   ItemDescription,
   ItemWrap,
+  PlaceHolderContainer,
+  PlaceHolderRow,
 } from './BannerImageForm.style';
 
 export default function BannerImageForm() {
@@ -23,7 +26,18 @@ function ImageItem({ title }) {
   return (
     <ItemWrap>
       <ItemDescription>{title}</ItemDescription>
-      <ItemImageWrap />
+      <ItemImageWrap>
+        <DragAndDropImage id={title} elementWhenEmpty={<PlaceHolderImage />} />
+      </ItemImageWrap>
     </ItemWrap>
+  );
+}
+
+function PlaceHolderImage() {
+  return (
+    <PlaceHolderContainer>
+      <PlaceHolderRow>이곳에 파일을 드롭하여</PlaceHolderRow>
+      <PlaceHolderRow>업로드 해주세요.</PlaceHolderRow>
+    </PlaceHolderContainer>
   );
 }
