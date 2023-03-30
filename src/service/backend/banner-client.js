@@ -1,5 +1,5 @@
 import HttpClient from './http-client';
-import { select } from '@/service/domain.decorator';
+import { select } from 'useful-decorator';
 import { Banner } from '@/service/banner';
 
 class BannerClient extends HttpClient {
