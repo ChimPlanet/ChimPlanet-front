@@ -3,7 +3,7 @@
  * @property {"MOBILE"|"PC"} deviceType
  * @property {"MAIN"|"MID"} fileType
  * @property {string} redirectUrl
- * @property {string} redirectionType
+ * @property {"CurrentTab" | "NewTab"} redirectionType
  * @property {"Y"|"N"} useYn
  * @property {number} sequence
  * @property {File | FormData} formData

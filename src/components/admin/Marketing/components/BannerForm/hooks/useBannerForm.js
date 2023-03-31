@@ -21,7 +21,6 @@ const defaultBannerFormState = {
 /**
  * @param {"new" | "update"} type
  * @param {Banner?} payload
- * @returns
  */
 export default function useBannerForm(type, payload) {
   /** @type {[BannerFormState, (newState: Partial<BannerFormState>)=>void]} */
@@ -30,7 +29,5 @@ export default function useBannerForm(type, payload) {
     type === 'new' ? defaultBannerFormState : formVOFromBanner(banner),
   );
 
-  const submit = useCallback(() => {}, [stateAndDispatch[0]]);
-
-  return [stateAndDispatch, submit];
+  return stateAndDispatch;
 }

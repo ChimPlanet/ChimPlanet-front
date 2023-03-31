@@ -12,13 +12,13 @@ import {
   BannerPreviewImg,
 } from './BannerPreviewList.style';
 
-/** @param {{title: string, items: Banner[]}} */
+/** @param {{title: string, items: import('./utils').PairedBanner[]}} */
 export default function BannerPreviewList({ title, items }) {
   return (
     <Container>
       {items.map((element, i) => (
         <BannerPreviewListItem
-          key={element.id}
+          key={element.pc.id}
           data={element}
           index={i + 1}
           maxLength={items.length}
@@ -28,11 +28,14 @@ export default function BannerPreviewList({ title, items }) {
     </Container>
   );
 }
-/** @param {{data: Banner, index: number, maxLength: number, title: string}} */
+/** @param {{data: import('./utils').PairedBanner, index: number, maxLength: number, title: string}} */
 function BannerPreviewListItem({ data, maxLength, index, title }) {
   return (
     <Wrapper>
-      <BannerPreviewImg src={data.sourceUrl} alt={data.fileName} />
+      <BannerPreviewImg
+        src={data.mobile.sourceUrl}
+        alt={data.mobile.fileName}
+      />
       <Content>
         <Title>
           {title}[{index}/{maxLength}]

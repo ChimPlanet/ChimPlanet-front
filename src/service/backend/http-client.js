@@ -14,23 +14,35 @@ class HttpClient {
     this.nested = nested;
   }
 
+  /** @param {string} endpoint */
   async get(endpoint) {
     const response = await client.get(this.nested + endpoint);
     return response.data;
   }
 
+  /**
+   * @param {string} endpoint
+   * @param {object} body
+   * @param {import('axios').AxiosRequestConfig<any>} config
+   */
   async post(endpoint, body, config) {
     const response = await client.post(this.nested + endpoint, body, config);
     return response.data;
   }
 
+  /** @param {string} endpoint */
   async delete(endpoint) {
     const response = await client.delete(this.nested + endpoint);
     return response.data;
   }
 
-  async update(endpoint, body) {
-    const response = await client.update(this.nested + endpoint, body);
+  /**
+   * @param {string} endpoint
+   * @param {object} body
+   * @param {import('axios').AxiosRequestConfig<any>} config
+   */
+  async update(endpoint, body, config) {
+    const response = await client.update(this.nested + endpoint, body, config);
     return response.data;
   }
 }
