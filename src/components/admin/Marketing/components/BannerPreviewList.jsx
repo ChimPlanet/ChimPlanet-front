@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Banner } from '@/service/banner';
+import useAdminSidebarMenu from '@/components/admin/AdminSidebar/hooks/useAdminSidebarMenu';
+
 import {
   Wrapper,
   Container,
@@ -11,6 +12,7 @@ import {
   InformationType,
   BannerPreviewImg,
 } from './BannerPreviewList.style';
+import { BannerForm } from './BannerForm';
 
 /** @param {{title: string, items: import('./utils').PairedBanner[]}} */
 export default function BannerPreviewList({ title, items }) {
@@ -30,8 +32,14 @@ export default function BannerPreviewList({ title, items }) {
 }
 /** @param {{data: import('./utils').PairedBanner, index: number, maxLength: number, title: string}} */
 function BannerPreviewListItem({ data, maxLength, index, title }) {
+  const [, { push }] = useAdminSidebarMenu();
+
+  const handleClick = () => {
+    push(<BannerForm type="update" payload={data} />);
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onClick={handleClick}>
       <BannerPreviewImg
         src={data.mobile.sourceUrl}
         alt={data.mobile.fileName}

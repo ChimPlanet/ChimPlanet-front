@@ -1,33 +1,63 @@
-import { Banner } from '@/service/banner';
-import { useCallback } from 'react';
 import { useReducer } from 'react';
-import { formVOFromBanner } from '../utils';
+import { formBaseVOFromBanner, formDiffVOFromPairedBanner } from '../utils';
 
 /**
- * @typedef {import('@/service/banner/banner-request').UploadBannerRequestOptions} BannerFormState
+ * @typedef {Omit<import('@/service/banner/banner-request').UploadBannerRequestOptions, "formData" | "deviceType">} BannerFormBaseState
+ *
+ * @typedef {Pick<import('@/service/banner/banner-request').UploadBannerRequestOptions, "deviceType" | "formData"> & {imageSourceUrl: string}} BannerFormDiffState
  */
 
-/** @type {BannerFormState} */
-const defaultBannerFormState = {
-  deviceType: 'PC',
+/** @type {BannerFormBaseState} */
+const defaultBannerBaseFormState = {
   fileType: 'MAIN',
   redirectionType: '',
   redirectUrl: '',
   useYn: 'Y',
   sequence: 0,
-  formData: null,
 };
 
 /**
+ * @param {"MOBILE" | "PC"} type
+ * @returns {BannerFormDiffState}
+ */
+const defaultBannerDiffFormState = (type) => ({
+  formData: null,
+  deviceType: type,
+  imageSourceUrl: null,
+});
+
+/**
  * @param {"new" | "update"} type
- * @param {Banner?} payload
+ * @param {import('@/components/admin/Marketing/components/utils').PairedBanner} payload
  */
 export default function useBannerForm(type, payload) {
-  /** @type {[BannerFormState, (newState: Partial<BannerFormState>)=>void]} */
-  const stateAndDispatch = useReducer(
+  /** @type {[BannerFormBaseState, (newState: Partial<BannerFormBaseState>)=>void]} */
+  const baseStateAndDispatch = useReducer(
     (state, newState) => ({ ...state, ...newState }),
-    type === 'new' ? defaultBannerFormState : formVOFromBanner(banner),
+    type === 'new'
+      ? defaultBannerBaseFormState
+      : formBaseVOFromBanner(payload.pc),
   );
 
-  return stateAndDispatch;
+  /** @type {[BannerFormDiffState, (newState: Partial<BannerFormDiffState>)=>void]} */
+  const pcStateAndDispatch = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    type === 'new'
+      ? defaultBannerDiffFormState('PC')
+      : formDiffVOFromPairedBanner(payload.pc),
+  );
+
+  /** @type {[BannerFormDiffState, (newState: Partial<BannerFormDiffState>)=>void]} */
+  const mobileStateAndDispatch = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    type === 'new'
+      ? defaultBannerDiffFormState('MOBILE')
+      : formDiffVOFromPairedBanner(payload.mobile),
+  );
+
+  return {
+    base: baseStateAndDispatch,
+    pc: pcStateAndDispatch,
+    mobile: mobileStateAndDispatch,
+  };
 }

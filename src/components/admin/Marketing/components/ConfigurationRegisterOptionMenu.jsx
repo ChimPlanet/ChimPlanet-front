@@ -1,12 +1,15 @@
-import BannerPreviewList from './BannerPreviewList';
-import SubmitBannerButton from './SubmitBannerButton';
 import { useEffect } from 'react';
-import { useAdminBannerState } from '../atoms/adminBanner.atom';
+
 import backend from '@/service/backend';
 import {
   filterMainBanner,
   filterSubBanner,
 } from '@/service/banner/banner-utils';
+import { groupBy } from '@/utils';
+
+import BannerPreviewList from './BannerPreviewList';
+import SubmitBannerButton from './SubmitBannerButton';
+import { useAdminBannerState } from '../atoms/adminBanner.atom';
 
 import {
   Wrapper,
@@ -15,7 +18,6 @@ import {
   Typography,
   Content,
 } from './ConfigurationRegisterOptionMenu.style';
-import { groupBy } from '@/utils';
 import { groupBannerToPairItem } from './utils/index';
 
 export default function ConfigurationRegisterOptionMenu() {

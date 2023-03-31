@@ -28,7 +28,11 @@ export default function BannerLinkForm({
   setRedirectType,
   setRedirectURL,
 }) {
-  const handleRedirectTypeChange = setRedirectType;
+  function handleRedirectTypeChange(e) {
+    if (e && e.target) {
+      setRedirectType(e.target.value);
+    }
+  }
 
   /** @param {React.ChangeEvent<HTMLInputElement>} e */
   function handleRedirectURLChange(e) {

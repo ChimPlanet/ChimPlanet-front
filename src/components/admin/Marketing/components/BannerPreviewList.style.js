@@ -12,6 +12,9 @@ export const Wrapper = styled.div`
   display: flex;
   column-gap: 20px;
   border-bottom: 1px solid #454545;
+  &:hover {
+    background-color: #454545;
+  }
   &:last-child {
     border-bottom: none;
   }

@@ -1,7 +1,7 @@
 import { Container, Content, Title } from './BannerImageForm.style';
 import BannerImageFormItem from './BannerImageFormItem';
 
-export default function BannerImageForm({ setImageFile, imageUrl }) {
+export default function BannerImageForm({ imageFileSetter, imageSourceSet }) {
   return (
     <Container>
       <Title>이미지 등록</Title>
@@ -9,14 +9,14 @@ export default function BannerImageForm({ setImageFile, imageUrl }) {
         <BannerImageFormItem
           title="PC용 이미지"
           type="PC"
-          imageSourceUrl=""
-          setImageFile={() => {}}
+          imageSourceUrl={imageSourceSet.pc}
+          setImageFile={imageFileSetter.pc}
         />
         <BannerImageFormItem
           title="모바일용 이미지"
           type="MOBILE"
-          imageSourceUrl=""
-          setImageFile={() => {}}
+          imageSourceUrl={imageSourceSet.mobile}
+          setImageFile={imageFileSetter.mobile}
         />
       </Content>
     </Container>
