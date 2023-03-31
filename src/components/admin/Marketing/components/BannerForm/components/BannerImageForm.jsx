@@ -1,43 +1,24 @@
-import DragAndDropImage from '@/common/components/DragAndDropImage';
-import {
-  Container,
-  Content,
-  Title,
-  ItemImageWrap,
-  ItemDescription,
-  ItemWrap,
-  PlaceHolderContainer,
-  PlaceHolderRow,
-} from './BannerImageForm.style';
+import { Container, Content, Title } from './BannerImageForm.style';
+import BannerImageFormItem from './BannerImageFormItem';
 
-export default function BannerImageForm() {
+export default function BannerImageForm({ setImageFile, imageUrl }) {
   return (
     <Container>
       <Title>이미지 등록</Title>
       <Content>
-        <ImageItem title="PC용 이미지" />
-        <ImageItem title="모바일용 이미지" />
+        <BannerImageFormItem
+          title="PC용 이미지"
+          type="PC"
+          imageSourceUrl=""
+          setImageFile={() => {}}
+        />
+        <BannerImageFormItem
+          title="모바일용 이미지"
+          type="MOBILE"
+          imageSourceUrl=""
+          setImageFile={() => {}}
+        />
       </Content>
     </Container>
-  );
-}
-
-function ImageItem({ title }) {
-  return (
-    <ItemWrap>
-      <ItemDescription>{title}</ItemDescription>
-      <ItemImageWrap>
-        <DragAndDropImage id={title} elementWhenEmpty={<PlaceHolderImage />} />
-      </ItemImageWrap>
-    </ItemWrap>
-  );
-}
-
-function PlaceHolderImage() {
-  return (
-    <PlaceHolderContainer>
-      <PlaceHolderRow>이곳에 파일을 드롭하여</PlaceHolderRow>
-      <PlaceHolderRow>업로드 해주세요.</PlaceHolderRow>
-    </PlaceHolderContainer>
   );
 }

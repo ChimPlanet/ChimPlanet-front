@@ -12,9 +12,12 @@ export default function useDragDrop({ setDragging, onDropFile }) {
         defaultProcess(e);
         if (e.dataTransfer.files) setDragging(true);
       },
+      /** @param {DragEvent} e */
       onDrop(e) {
         defaultProcess(e);
-        onDropFile(e);
+        if (e.dataTransfer?.files.length === 1) {
+          onDropFile(e.dataTransfer?.files[0]);
+        }
         setDragging(false);
       },
     }),

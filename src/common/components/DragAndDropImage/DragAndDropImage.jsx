@@ -47,7 +47,7 @@ export default function DragAndDropImage({
 
   return (
     <OverlayContainer>
-      <OverlayPane zIndex={1} onClick={() => console.log('hello')}>
+      <OverlayPane zIndex={1}>
         <FileDragDropPane
           id={id}
           draggingElement={elementWhenDragging}

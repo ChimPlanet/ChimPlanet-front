@@ -1,4 +1,5 @@
 import { Banner } from '@/service/banner';
+import { useCallback } from 'react';
 import { useReducer } from 'react';
 import { formVOFromBanner } from '../utils';
 
@@ -29,5 +30,7 @@ export default function useBannerForm(type, payload) {
     type === 'new' ? defaultBannerFormState : formVOFromBanner(banner),
   );
 
-  return stateAndDispatch;
+  const submit = useCallback(() => {}, [stateAndDispatch[0]]);
+
+  return [stateAndDispatch, submit];
 }
