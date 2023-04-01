@@ -6,11 +6,11 @@ import BannerImageForm from './BannerImageForm';
 import BannerLinkForm from './BannerLinkForm';
 
 import {
-  Switch,
+  OptionSwitch,
   Container,
-  UseContainer,
-  UseTypography,
-  UseSwitch,
+  Option,
+  OptionTypography,
+  OptionSwitchWrap,
   BannerSubmitFormButton,
 } from './BannerForm.style';
 import useBannerForm from '../hooks/useBannerForm';
@@ -60,9 +60,12 @@ export default function BannerForm({ type, payload }) {
     pop();
   };
 
-  const handleUseClick = () =>
+  function handleUseClick() {
     baseDispatch({ useYn: baseState.useYn === 'Y' ? 'N' : 'Y' });
-
+  }
+  function handleBannerType() {
+    baseDispatch({ fileType: baseState.fileType === 'MAIN' ? 'MID' : 'MAIN' });
+  }
   // #region Image Form
   const imageSourceSet = useMemo(
     () => ({
@@ -92,13 +95,26 @@ export default function BannerForm({ type, payload }) {
 
   return (
     <Container>
-      <UseContainer>
-        <UseTypography>사용 여부</UseTypography>
-        <UseSwitch>
+      <Option>
+        <OptionTypography>사용 여부</OptionTypography>
+        <OptionSwitchWrap>
           {baseState.useYn === 'Y' ? '사용함' : '사용안함'}
-          <Switch onClick={handleUseClick} checked={baseState.useYn === 'Y'} />
-        </UseSwitch>
-      </UseContainer>
+          <OptionSwitch
+            onClick={handleUseClick}
+            checked={baseState.useYn === 'Y'}
+          />
+        </OptionSwitchWrap>
+      </Option>
+      <Option>
+        <OptionTypography>배너 종류</OptionTypography>
+        <OptionSwitchWrap>
+          {baseState.fileType === 'MAIN' ? '메인 배너' : '서브 배너'}
+          <OptionSwitch
+            onClick={handleBannerType}
+            checked={baseState.fileType === 'MAIN'}
+          />
+        </OptionSwitchWrap>
+      </Option>
       <BannerImageForm
         imageFileSetter={imageFileSetter}
         imageSourceSet={imageSourceSet}

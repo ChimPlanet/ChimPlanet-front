@@ -9,13 +9,13 @@ export const Container = styled.div`
   font-weight: 500;
 `;
 
-export const UseContainer = styled.div`
+export const Option = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-export const Switch = muiStyled(MUISwitch)({
+export const OptionSwitch = muiStyled(MUISwitch)({
   '& .MuiSwitch-switchBase': {
     '&.Mui-checked': {
       color: '#fff',
@@ -33,9 +33,9 @@ export const Switch = muiStyled(MUISwitch)({
   },
 });
 
-export const UseTypography = styled.span``;
+export const OptionTypography = styled.span``;
 
-export const UseSwitch = styled.div``;
+export const OptionSwitchWrap = styled.div``;
 
 export const BannerSubmitFormButton = styled.button`
   margin-top: 24px;
