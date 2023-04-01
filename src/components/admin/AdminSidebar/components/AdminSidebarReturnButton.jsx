@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import useAdminSidebarMenu from '../hooks/useAdminSidebarMenu';
 
 export default function AdminSidebarReturnButton() {
-  const [, { clear }] = useAdminSidebarMenu();
+  const [, { pop }] = useAdminSidebarMenu();
 
   return (
-    <ReturnButton onClick={clear}>
+    <ReturnButton onClick={pop}>
       <LeftArrowIcon />
       <Typography>돌아가기</Typography>
     </ReturnButton>

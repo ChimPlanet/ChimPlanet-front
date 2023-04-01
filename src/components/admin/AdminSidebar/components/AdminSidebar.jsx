@@ -19,19 +19,22 @@ import { Divider } from '@mui/material';
 import { styled as muiStyled } from '@mui/material/styles';
 import useAdminSidebarMenu from '../hooks/useAdminSidebarMenu';
 import AdminSidebarMenu from './AdminSidebarMenu';
+import { SidebarTemporaryProvider } from '../contexts/sidebarTemporaryContext';
 
 export default function AdminSidebar() {
-  const [AdditionalElement] = useAdminSidebarMenu();
+  const [MenuContentElement] = useAdminSidebarMenu();
 
   return (
     <Style>
       <Sidebar>
         <LogoLink to={`/${ADMIN_WRAPPER_PATH}`}>침플래닛</LogoLink>
-        {AdditionalElement ? (
-          <AdminSidebarMenu children={AdditionalElement} />
-        ) : (
-          <AdminSidebarBaseContent />
-        )}
+        <SidebarTemporaryProvider>
+          {MenuContentElement ? (
+            <AdminSidebarMenu children={MenuContentElement} />
+          ) : (
+            <AdminSidebarBaseContent />
+          )}
+        </SidebarTemporaryProvider>
       </Sidebar>
     </Style>
   );

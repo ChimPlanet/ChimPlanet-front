@@ -19,8 +19,8 @@ export default function SidebarGroupItem({ icon, children, to, openTab }) {
       target={!openTab ? '_self' : '_blank'}
       data-selected={currentPath === to}
     >
-      <WrapperIcon>{icon}</WrapperIcon>
-      {children}
+      <WrapperIcon>{icon}</WrapperIcon> 
+        {children}
     </Wrapper>
   );
 }
@@ -31,7 +31,8 @@ const WrapperIcon = styled.span`
 `;
 
 const Wrapper = styled(Link)`
-  display: block;
+  display: flex;
+  align-items: center;
   padding-top: 10px;
   padding-bottom: 10px;
   cursor: pointer;
@@ -41,3 +42,4 @@ const Wrapper = styled(Link)`
     fill: #fff;
   }
 `;
+

@@ -17,6 +17,8 @@ import UlIcon from './UlIcon';
 import UserIcon from './UserIcon';
 import PopupIcon from './PopupIcon';
 import LeftArrowIcon from './LeftArrowIcon';
+import WriteIcon from './WriteIcon';
+import OptionBelowArrowIcon from './OptionBelowArrowIcon';
 
 export {
   UserIcon,
@@ -38,4 +40,6 @@ export {
   DashboardIcon,
   UlIcon,
   LeftArrowIcon,
+  OptionBelowArrowIcon,
+  WriteIcon,
 };
