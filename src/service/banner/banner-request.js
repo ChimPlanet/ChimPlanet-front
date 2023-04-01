@@ -3,7 +3,7 @@
  * @property {"MOBILE"|"PC"} deviceType
  * @property {"MAIN"|"MID"} fileType
  * @property {string} redirectUrl
- * @property {"CurrentTab" | "NewTab"} redirectionType
+ * @property {"CurrentTab" | "NewTab"} redirectType
  * @property {"Y"|"N"} useYn
  * @property {number} sequence
  * @property {File | FormData} formData
@@ -18,6 +18,7 @@ export const uploadBannerRequestOptions = ({
   useYn,
   sequence,
   formData,
+  redirectType,
 }) => {
   return {
     deviceType,
@@ -25,12 +26,13 @@ export const uploadBannerRequestOptions = ({
     redirectUrl,
     useYn,
     sequence,
+    redirectType,
     formData: formDataForUploadBannerFromFile(formData),
   };
 };
 
 export const formDataForUploadBannerFromFile = (file) => {
-  const formData = new FormData(file);
+  const formData = new FormData();
   formData.append('file', file);
   return formData;
 };

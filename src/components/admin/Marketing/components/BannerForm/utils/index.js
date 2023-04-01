@@ -8,7 +8,7 @@ export function formBaseVOFromBanner(banner) {
   return {
     fileType: banner.isMain ? 'MAIN' : 'MID',
     redirectUrl: banner.redirectUrl,
-    redirectionType: banner.redirectType,
+    redirectType: banner.redirectType,
     useYn: banner.yn ? 'Y' : 'N',
     sequence: banner.sequence,
   };
@@ -21,7 +21,7 @@ export function formBaseVOFromBanner(banner) {
 export function formDiffVOFromPairedBanner(banner) {
   return {
     deviceType: banner.deviceType,
-    imageSourceUrl: banner.imageUri,
+    imageSourceUrl: banner.sourceUrl,
     formData: null,
   };
 }

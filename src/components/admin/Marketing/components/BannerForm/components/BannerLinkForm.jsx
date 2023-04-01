@@ -10,7 +10,7 @@ import {
 } from './BannerLinkForm.style';
 
 /**
- * @typedef {import('@/service/banner/banner-request').UploadBannerRequestOptions['redirectionType']} RedirectType
+ * @typedef {import('@/service/banner/banner-request').UploadBannerRequestOptions['redirectType']} RedirectType
  *
  *
  * @typedef {object} BannerLinkFormProps
@@ -28,18 +28,20 @@ export default function BannerLinkForm({
   setRedirectType,
   setRedirectURL,
 }) {
-  function handleRedirectTypeChange(e) {
-    if (e && e.target) {
-      setRedirectType(e.target.value);
+  // #region Handle
+  function handleRedirectTypeChange({ target }) {
+    if (target) {
+      setRedirectType(target.value);
     }
   }
 
   /** @param {React.ChangeEvent<HTMLInputElement>} e */
-  function handleRedirectURLChange(e) {
-    if (e && e.target.value) {
-      setRedirectURL(e.target.value);
+  function handleRedirectURLChange({ target }) {
+    if (target) {
+      setRedirectURL(target.value);
     }
   }
+  // #endregion
 
   return (
     <Container>

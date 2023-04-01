@@ -30,9 +30,9 @@ class BannerClient extends HttpClient {
       .map((e) => e.join('='))
       .join('&');
 
-    const requestMethod = isUpdate ? this.update : this.post;
+    const requestMethod = (isUpdate ? this.update : this.post).bind(this);
 
-    return await requestMethod('/image?' + query, formData, {
+    return await requestMethod('/image/?' + query, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

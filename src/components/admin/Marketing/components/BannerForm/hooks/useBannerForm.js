@@ -10,7 +10,7 @@ import { formBaseVOFromBanner, formDiffVOFromPairedBanner } from '../utils';
 /** @type {BannerFormBaseState} */
 const defaultBannerBaseFormState = {
   fileType: 'MAIN',
-  redirectionType: '',
+  redirectType: 'CurrentTab',
   redirectUrl: '',
   useYn: 'Y',
   sequence: 0,

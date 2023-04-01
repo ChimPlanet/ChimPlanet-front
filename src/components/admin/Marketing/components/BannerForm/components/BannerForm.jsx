@@ -30,23 +30,31 @@ export default function BannerForm({ type, payload }) {
   const [, { pop }] = useAdminSidebarMenu();
 
   const handleSubmit = () => {
+    if (type === 'new' && (!pcState.formData || !mobileState.formData)) {
+      alert('최초 등록시, PC와 모바일 이미지를 모두 등록 바랍니다.');
+      return;
+    }
+
     // type에 따라서 수정, 생성 분류
-    // PC Update
-    backend.banners.upload(
-      uploadBannerRequestOptions({
-        ...baseState,
-        ...pcState,
-      }),
-      type === 'update',
-    );
-    // Mobile Update
-    backend.banners.upload(
-      uploadBannerRequestOptions({
-        ...baseState,
-        ...mobileState,
-      }),
-      type === 'update',
-    );
+    Promise.all([
+      // PC Update
+      backend.banners.upload(
+        uploadBannerRequestOptions({
+          ...baseState,
+          ...pcState,
+        }),
+        type === 'update',
+      ),
+      // Mobile Update
+      backend.banners.upload(
+        uploadBannerRequestOptions({
+          ...baseState,
+          ...mobileState,
+        }),
+        type === 'update',
+      ),
+    ]);
+    // 돌아가기
     pop();
   };
 
@@ -73,8 +81,7 @@ export default function BannerForm({ type, payload }) {
 
   // #region Link Form
   function handleRedirectType(type) {
-    console.log(type);
-    baseDispatch({ redirectionType: type });
+    baseDispatch({ redirectType: type });
   }
   function handleRedirectURL(url) {
     baseDispatch({ redirectUrl: url });
@@ -95,7 +102,7 @@ export default function BannerForm({ type, payload }) {
         imageSourceSet={imageSourceSet}
       />
       <BannerLinkForm
-        redirectType={baseState.redirectionType}
+        redirectType={baseState.redirectType}
         redirectURL={baseState.redirectUrl}
         setRedirectType={handleRedirectType}
         setRedirectURL={handleRedirectURL}
