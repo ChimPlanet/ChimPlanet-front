@@ -53,3 +53,9 @@ export const InformationType = styled.span`
 export const InformationDetail = styled.span`
   margin-left: 4px;
 `;
+
+export const NonBannerComment = styled.p`
+  text-align: center;
+  padding: 10px 0px;
+  font-size: 14px;
+`;

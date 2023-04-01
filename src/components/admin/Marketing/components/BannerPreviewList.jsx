@@ -11,6 +11,7 @@ import {
   InformationDetail,
   InformationType,
   BannerPreviewImg,
+  NonBannerComment,
 } from './BannerPreviewList.style';
 import { BannerForm } from './BannerForm';
 
@@ -18,6 +19,10 @@ import { BannerForm } from './BannerForm';
 export default function BannerPreviewList({ title, items }) {
   return (
     <Container>
+      {items.length === 0 ? (
+        <NonBannerComment children="등록된 배너가 없습니다." />
+      ) : null}
+
       {items.map((element, i) => (
         <BannerPreviewListItem
           key={element.pc.id}
