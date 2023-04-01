@@ -25,18 +25,26 @@ class BannerClient extends HttpClient {
    * @param {import('../banner/banner-request').UploadBannerRequestOptions} options
    * @returns
    */
-  async upload({ formData, ...options }, isUpdate = false) {
+  async upload({ formData, fileId, ...options }, isUpdate = false) {
     const query = Object.entries(options)
       .map((e) => e.join('='))
       .join('&');
 
-    const requestMethod = (isUpdate ? this.update : this.post).bind(this);
-
-    return await requestMethod('/image/?' + query, formData, {
+    const config = {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    });
+    };
+
+    if (!isUpdate) {
+      return await this.post('/image/?' + query, formData, config);
+    } else {
+      return await this.put(
+        `/updateImage/${fileId}?` + query,
+        formData,
+        config,
+      );
+    }
   }
 }
 

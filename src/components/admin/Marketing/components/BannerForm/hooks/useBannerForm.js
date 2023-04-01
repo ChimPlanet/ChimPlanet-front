@@ -2,9 +2,9 @@ import { useReducer } from 'react';
 import { formBaseVOFromBanner, formDiffVOFromPairedBanner } from '../utils';
 
 /**
- * @typedef {Omit<import('@/service/banner/banner-request').UploadBannerRequestOptions, "formData" | "deviceType">} BannerFormBaseState
+ * @typedef {Omit<import('@/service/banner/banner-request').UploadBannerRequestOptions, "formData" | "deviceType" | "fileId">} BannerFormBaseState
  *
- * @typedef {Pick<import('@/service/banner/banner-request').UploadBannerRequestOptions, "deviceType" | "formData"> & {imageSourceUrl: string}} BannerFormDiffState
+ * @typedef {Pick<import('@/service/banner/banner-request').UploadBannerRequestOptions, "deviceType" | "formData" | "fileId"> & {imageSourceUrl: string}} BannerFormDiffState
  */
 
 /** @type {BannerFormBaseState} */
@@ -24,6 +24,7 @@ const defaultBannerDiffFormState = (type) => ({
   formData: null,
   deviceType: type,
   imageSourceUrl: null,
+  fileId: 0,
 });
 
 /**

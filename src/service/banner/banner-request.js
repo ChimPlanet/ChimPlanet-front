@@ -7,6 +7,7 @@
  * @property {"Y"|"N"} useYn
  * @property {number} sequence
  * @property {File | FormData} formData
+ * @property {number} fileId
  *
  * @param {UploadBannerRequestOptions}
  * @returns
@@ -19,6 +20,7 @@ export const uploadBannerRequestOptions = ({
   sequence,
   formData,
   redirectType,
+  fileId,
 }) => {
   return {
     deviceType,
@@ -27,6 +29,7 @@ export const uploadBannerRequestOptions = ({
     useYn,
     sequence,
     redirectType,
+    fileId,
     formData: formDataForUploadBannerFromFile(formData),
   };
 };

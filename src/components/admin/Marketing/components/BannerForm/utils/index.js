@@ -23,6 +23,7 @@ export function formDiffVOFromPairedBanner(banner) {
     deviceType: banner.deviceType,
     imageSourceUrl: banner.sourceUrl,
     formData: null,
+    fileId: banner.id,
   };
 }
 

@@ -41,7 +41,7 @@ class HttpClient {
    * @param {object} body
    * @param {import('axios').AxiosRequestConfig<any>} config
    */
-  async update(endpoint, body, config) {
+  async put(endpoint, body, config) {
     const response = await client.put(this.nested + endpoint, body, config);
     return response.data;
   }

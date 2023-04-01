@@ -29,6 +29,8 @@ export default function BannerForm({ type, payload }) {
 
   const [, { pop }] = useAdminSidebarMenu();
 
+  const isUpdate = useMemo(() => type === 'update', [type]);
+
   const handleSubmit = () => {
     if (type === 'new' && (!pcState.formData || !mobileState.formData)) {
       alert('최초 등록시, PC와 모바일 이미지를 모두 등록 바랍니다.');
@@ -43,7 +45,7 @@ export default function BannerForm({ type, payload }) {
           ...baseState,
           ...pcState,
         }),
-        type === 'update',
+        isUpdate,
       ),
       // Mobile Update
       backend.banners.upload(
@@ -51,7 +53,7 @@ export default function BannerForm({ type, payload }) {
           ...baseState,
           ...mobileState,
         }),
-        type === 'update',
+        isUpdate,
       ),
     ]);
     // 돌아가기
@@ -107,7 +109,10 @@ export default function BannerForm({ type, payload }) {
         setRedirectType={handleRedirectType}
         setRedirectURL={handleRedirectURL}
       />
-      <BannerSubmitFormButton onClick={handleSubmit} children="배너 등록" />
+      <BannerSubmitFormButton
+        onClick={handleSubmit}
+        children={isUpdate ? '배너 수정' : '배너 등록'}
+      />
     </Container>
   );
 }
