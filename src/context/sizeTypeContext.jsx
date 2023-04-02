@@ -1,6 +1,7 @@
 import useResize from '@/common/hooks/useResize';
 import { createContext, useContext } from 'react';
 
+/** @type {React.Context<"tablet" | "desktop">} */
 const sizeTypeContext = createContext(null);
 
 export function SizeTypeContextProvider({ children }) {

@@ -18,7 +18,7 @@ import {
   Typography,
   Content,
 } from './ConfigurationRegisterOptionMenu.style';
-import { groupBannerToPairItem } from './utils/index';
+import { groupBannerToPairItem } from '@/service/banner/banner-utils';
 
 export default function ConfigurationRegisterOptionMenu() {
   const [banners, setBanners] = useAdminBannerState();
@@ -28,7 +28,7 @@ export default function ConfigurationRegisterOptionMenu() {
   }, []);
 
   const getBannerFromServer = () => {
-    backend.banners.mainBanner().then((banners) => {
+    backend.banners.banners().then((banners) => {
       const processed = groupBannerToPairItem(groupBy(banners, 'redirectUrl'));
       setBanners(processed);
     });
