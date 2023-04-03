@@ -31,6 +31,8 @@ class Offer {
   isThumbnail;
   @field('boardtags')
   tags;
+  @field('unauthorized')
+  needAuth;
 }
 
 export default Offer;

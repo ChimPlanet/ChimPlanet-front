@@ -1,21 +1,15 @@
-import { useSubBanner } from '@/query/banner';
+import { usePreloadContext } from '@/context/preloadContext';
 import { Suspense } from 'react';
 import styled from 'styled-components';
 
 export default function SubBanner() {
+  const preload = usePreloadContext();
+
   return (
     <Container>
-      <Suspense>
-        <SubBannerContent />
-      </Suspense>
+      <SubBannerImage src={''} />
     </Container>
   );
-}
-
-function SubBannerContent() {
-  const { data: subBanner } = useSubBanner();
-
-  return <SubBannerImage src={subBanner} />;
 }
 
 const Container = styled.div`

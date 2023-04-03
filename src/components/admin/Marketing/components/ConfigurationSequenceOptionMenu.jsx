@@ -1,8 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
+import { useAdminBannerState } from '../atoms/adminBanner.atom';
+import { BannerSequenceForm } from './BannerSequenceForm';
+
+import {
+  Container,
+  Header,
+  HeaderTitle,
+  HeaderButton,
+} from './ConfigurationSequenceOptionMenu.style';
 
 export default function ConfigurationSequenceOptionMenu() {
-  return <div>ConfigurationSequenceOptionMenu</div>;
-}
+  const [banners] = useAdminBannerState();
 
-const Wrapper = styled.div``;
+  return (
+    <Container>
+      <Header>
+        <HeaderTitle>배너목록</HeaderTitle>
+        <HeaderButton>적용</HeaderButton>
+      </Header>
+      <BannerSequenceForm banners={banners} />
+    </Container>
+  );
+}

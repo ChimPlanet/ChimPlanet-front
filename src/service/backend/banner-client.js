@@ -12,12 +12,7 @@ class BannerClient extends HttpClient {
    * @returns {Promise<Banner[]>}
    */
   @select(typeBannerCollection)
-  async mainBanner() {
-    return await this.get('/banner');
-  }
-
-  @select(typeBannerCollection)
-  async subBanner() {
+  async banners() {
     return await this.get('/banner');
   }
 
