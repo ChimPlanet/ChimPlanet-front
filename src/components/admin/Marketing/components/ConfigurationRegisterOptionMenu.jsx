@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import backend from '@/service/backend';
 import {
@@ -19,23 +19,18 @@ import {
   Content,
 } from './ConfigurationRegisterOptionMenu.style';
 import { groupBannerToPairItem } from '@/service/banner/banner-utils';
+import { useMemo } from 'react';
 
 export default function ConfigurationRegisterOptionMenu() {
   const [banners, setBanners] = useAdminBannerState();
 
-  useEffect(() => {
-    getBannerFromServer();
-  }, []);
-
-  const getBannerFromServer = () => {
-    backend.banners.banners().then((banners) => {
-      const processed = groupBannerToPairItem(groupBy(banners, 'redirectUrl'));
-      setBanners(processed);
-    });
-  };
+  const pairedBanner = useMemo(
+    () => groupBannerToPairItem(groupBy(banners, 'redirectUrl')),
+    [banners],
+  );
 
   const handleRefresh = () => {
-    getBannerFromServer();
+    backend.banners.banners().then(setBanners);
   };
 
   return (
@@ -47,11 +42,11 @@ export default function ConfigurationRegisterOptionMenu() {
       <Content>
         <BannerPreviewList
           title="메인비주얼"
-          items={filterMainBanner(banners) || []}
+          items={filterMainBanner(pairedBanner) || []}
         />
         <BannerPreviewList
           title="서브배너"
-          items={filterSubBanner(banners) || []}
+          items={filterSubBanner(pairedBanner) || []}
         />
         <SubmitBannerButton />
       </Content>

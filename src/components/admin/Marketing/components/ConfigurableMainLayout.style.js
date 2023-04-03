@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const Layout = styled.div`
-  box-style: border-box;
+  box-sizing: content-box;
   height: 375px;
+
+  border: 4px solid transparent;
 
   &[data-configurable='true'] {
     border: 4px solid ${({ theme }) => theme.colors.logo};

@@ -6,11 +6,7 @@ import { Header } from '@/components/Header';
 import { usePreloadContext } from '@/context/preloadContext';
 import { HOME_PATH } from '@/constants/route';
 import { useMemo } from 'react';
-import {
-  filterMainBanner,
-  groupBannerToPairItem,
-} from '@/service/banner/banner-utils';
-import { groupBy } from '@/utils';
+import { getBannerByType } from '@/service/banner/banner-utils';
 import { useSizeType } from '@/context/sizeTypeContext';
 
 export default function ClientOutlet() {
@@ -22,10 +18,9 @@ export default function ClientOutlet() {
   const mainBanners = useMemo(
     () =>
       preloaded?.banner
-        ? filterMainBanner(
-            groupBannerToPairItem(groupBy(preloaded?.banner, 'redirectUrl')),
-          ).map((paired) =>
-            sizeType === 'desktop' ? paired.pc : paired.mobile,
+        ? getBannerByType(
+            preloaded.banner,
+            sizeType === 'desktop' ? 'PC' : 'MOBILE',
           )
         : [],
     [preloaded?.banner, sizeType],

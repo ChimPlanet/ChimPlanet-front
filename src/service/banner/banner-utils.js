@@ -1,4 +1,5 @@
 import Banner from './banner';
+import { groupBy } from '@/utils';
 
 /** @param {Banner[]} banners */
 export function filterMainBanner(banners) {
@@ -39,4 +40,14 @@ export function groupBannerToPairItem(group) {
   }, []);
 
   return paired;
+}
+
+/**
+ * @param {Banner[]} banners
+ * @param {"PC" | "MOBILE"} type
+ */
+export function getBannerByType(banners, type) {
+  return filterMainBanner(
+    groupBannerToPairItem(groupBy(banners, 'redirectUrl')),
+  ).map((b) => (type === 'PC' ? b.pc : b.mobile));
 }
