@@ -6,29 +6,25 @@ import { createContext, useState, useContext, useMemo, useEffect } from 'react';
 const preloadContext = createContext();
 
 export function PreloadProvider({ children }) {
-  const [preloads, setPreload] = useState();
+  const [preloads, setPreload] = useState(null);
 
   // NeedPreloadRequests & only work when page initialize
   useEffect(() => {
-    Promise.all(
-      NeedPreloadRequests.map(el => el.value())
-    ).then(responses => {
-      const _preload = {};
+    Promise.all(NeedPreloadRequests.map((el) => el.value())).then(
+      (responses) => {
+        const _preload = {};
 
-      responses.forEach((data, i) => {
-        const {key, preprocess} = NeedPreloadRequests[i];
-        _preload[key] = preprocess(data);
-      })
+        responses.forEach((data, i) => {
+          const { key, preprocess } = NeedPreloadRequests[i];
+          _preload[key] = preprocess(data);
+        });
 
-      setPreload(_preload);
-    })
+        setPreload(_preload);
+      },
+    );
   }, []);
 
-
-
-  return (
-    <preloadContext.Provider children={children} value={preloads} />
-  );
+  return <preloadContext.Provider children={children} value={preloads} />;
 }
 
 export function usePreloadContext() {
@@ -36,20 +32,16 @@ export function usePreloadContext() {
 }
 
 const NeedPreloadRequests = [
-///  {
-///    key: "main-banner",
-///    value: backend.banners.mainBanner
-///  },
   {
-    key: "sub-banner",
-    value: backend.banners.subBanner,
+    key: 'banner',
+    value: backend.banners.banners,
     preprocess: (collection) => {
-      if(Array.isArray(collection)){
-        collection.forEach(item => {
+      if (Array.isArray(collection)) {
+        collection.forEach((item) => {
           new Image().src = item.sourceUrl;
-        })
+        });
       }
       return collection;
-    }
-  }
+    },
+  },
 ];

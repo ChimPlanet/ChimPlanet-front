@@ -1,14 +1,38 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Banner from '@/components/Banner';
 import { Header } from '@/components/Header';
+import { usePreloadContext } from '@/context/preloadContext';
+import { HOME_PATH } from '@/constants/route';
+import { useMemo } from 'react';
+import { getBannerByType } from '@/service/banner/banner-utils';
+import { useSizeType } from '@/context/sizeTypeContext';
 
 export default function ClientOutlet() {
+  const { pathname } = useLocation();
+
+  const sizeType = useSizeType();
+  const preloaded = usePreloadContext();
+
+  const mainBanners = useMemo(
+    () =>
+      preloaded?.banner
+        ? getBannerByType(
+            preloaded.banner,
+            sizeType === 'desktop' ? 'PC' : 'MOBILE',
+          )
+        : [],
+    [preloaded?.banner, sizeType],
+  );
+
   return (
     <>
       <Header />
-      <Banner />
+
+      {pathname === HOME_PATH && (
+        <BannerWrapper children={<Banner banners={mainBanners} />} />
+      )}
       <Content>
         <Outlet />
       </Content>
@@ -25,4 +49,8 @@ const Content = styled.div`
   ${({ theme }) => theme.media.tablet`
     ${`width: ${theme.widths.tablet}px`};
   `}
+`;
+
+const BannerWrapper = styled.div`
+  margin: 30px 0px;
 `;

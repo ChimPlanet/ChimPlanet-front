@@ -1,21 +1,16 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import styled from "styled-components";
 import { MinXIcon } from "@/common/icons";
 
 
-export default function ContentSettingTag(){
+export default function ContentSettingTag({offer}){
     
     const [inputValue, setInputValue] = useState('');
-    const [tag, setTag] = useState([
-        '#백엔드',
-        '#프론트',
-        '#UI/UX',
-        '#개발자',
-        '#디자이너',
-        '#웹사이트',
-        '#XD',
-        '#Figma',
-    ]);
+    const [tag, setTag] = useState([]);
+
+    useMemo(()=>{
+        setTag(offer.tags.map(el=> '#'+el))
+    },[offer])
 
     const handleValue = (value) => {
         setInputValue(value.target.value);
@@ -27,7 +22,9 @@ export default function ContentSettingTag(){
             newTag.push(inputValue);
             setTag(newTag);
             setInputValue('');
-        };
+        }else if(e.key === 'Enter' && inputValue.charAt(0) !== '#'){
+            alert('# 을 입력해주세요')
+        }
     };
 
     const deleteTag = (el) => {
@@ -41,14 +38,14 @@ export default function ContentSettingTag(){
             </Title>
             <InputBox value={inputValue} placeholder="태그를 입력해주세요" onKeyPress={handleKeyDown} onChange={handleValue}/>
             <Tags> 
-                { Array.isArray(tag) ? tag.map((el, index)=>(
+                {Array.isArray(tag) ? tag.map((el, index)=>(
                     <Tag key={index}>
                         {el} 
                         <IconContainer onClick={()=>deleteTag(el)}>
                             <MinXIcon />
                         </IconContainer>
                     </Tag>
-                )) : null }
+                )) : null}
             </Tags>
         </Container>
     )

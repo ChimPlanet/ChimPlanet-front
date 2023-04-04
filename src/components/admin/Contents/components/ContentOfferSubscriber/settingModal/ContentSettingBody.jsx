@@ -1,3 +1,4 @@
+import { useState, useMemo, useEffect, useCallback } from 'react'
 import styled from "styled-components"
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -5,39 +6,63 @@ import Checkbox from '@mui/material/Checkbox';
 import { styled as muiStyled } from '@mui/material/styles';
 import ContentSettingCategory from './ContentSettingCategory'
 import ContentSettingTag from "./ContentSettingTag";
+import ImageUploadBox from './ImageUploadBox';
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+const states = [
+    '마감',
+    '구인 중',
+    '상시모집',
+]
 
-export default function ContentSettingBody(){
+export default function ContentSettingBody({offer}){
+
+    const [idValue, setIdValue] = useState('');
+    const [dateValue, setDateValue] = useState('');
+
+    useMemo(()=>{
+        setIdValue(offer.id)
+        setDateValue(offer.rawDateTime)
+    },[offer])
+
+    const a = useCallback(()=>{
+        if(offer.isClosed === true){
+            return '구인 중'
+        }else if(offer.isClosed === false){
+            return '마감'
+        }
+    },[offer])
 
     return(
         <Container>
             <JobOfferSection>
                 <ThumbnailContainer>
                     썸네일
-                    <ThumbnailInput  placeholder='이곳에 파일을 드롭하여 &#13;&#10;&#13;&#10; 업로드 해주세요'/>
+                    <ImageUploadBox />
                 </ThumbnailContainer>
                 <ValuesContainer>
                     <InputBoxTitle>
                         ID
                     </InputBoxTitle>
-                    <InputBox />
+                    <InputBox value={idValue} onChange={(e)=>{setIdValue(e.target.value)}}/>
                     <InputBoxTitle>
                         작성일
                     </InputBoxTitle>
-                    <InputBox />
+                    <InputBox value={dateValue} onChange={(e)=>{setDateValue(e.target.value)}}/>
                     <InputBoxTitle margin=''>
                         진행상황
                     </InputBoxTitle>
                     <CheckboxGroup>
-                        <CheckboxLabel sx={{ '& .MuiTypography-root': { fontSize: 12} }} control={<CheckBox defaultChecked />} label="마감" />
-                        <CheckboxLabel sx={{ '& .MuiTypography-root': { fontSize: 12} }} control={<CheckBox />} label="구인 중" />
-                        <CheckboxLabel sx={{ '& .MuiTypography-root': { fontSize: 12} }} control={<CheckBox />} label="상시모집" />
+                        {states.map(el=>(
+                            <CheckboxLabel 
+                            key={el}
+                            control={<CheckBox defaultChecked={a() === el ? true : false} />} 
+                            label={el} />
+                        ))}
                     </CheckboxGroup>
                 </ValuesContainer>
             </JobOfferSection>
-            <ContentSettingCategory />
-            <ContentSettingTag />
+            <ContentSettingCategory offer={offer}/>
+            <ContentSettingTag offer={offer}/>
         </Container>
     )
 }
@@ -60,13 +85,6 @@ const ThumbnailContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin-right: 33px;
-`;
-
-const ThumbnailInput = styled.input`
-    margin: 9px 0 0;
-    width: 200px;
-    height: 200px;
-    border: 1px solid #DBDEE2;
 `;
 
 const ValuesContainer = styled.div`
@@ -100,6 +118,7 @@ const CheckboxLabel = muiStyled(FormControlLabel)({
     fontWeight: '300',
     fontSize: '12px',
     lineHeight: '14px',
+    '& .MuiTypography-root': { fontSize: 12},
 });
 
 const CheckBox = muiStyled(Checkbox)({

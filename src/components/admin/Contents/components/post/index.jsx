@@ -4,7 +4,6 @@ import { ListSort } from "@/atoms/PostList";
 import ContnetsTab from "./ContentsTab";
 import ContentsOfferSection from "./ContentsOfferSection";
 import pseudoOffers from '../../__mocks__/pseudoOffers';
-import ContentMapJobOffer from '../JobOffer/ContentMapJobOffer';
 
 export default function ContentsPosts(){
 
@@ -42,7 +41,12 @@ export default function ContentsPosts(){
 
     return(
         <>
-            <ContnetsTab select={select} selectValue={selectValue} onSelect={onSelect} setValue={setValue} totalNum={postList.length} />
+            <ContnetsTab 
+            select={select} 
+            selectValue={selectValue} 
+            onSelect={onSelect} 
+            setValue={setValue} 
+            totalNum={postList.length} />
             <ContentsOfferSection jobs={newList} />
         </>
     );

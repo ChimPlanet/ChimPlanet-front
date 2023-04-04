@@ -1,26 +1,23 @@
 export default [
   {
     articleId: '10100289',
-    writer: '우주이루다',
-    boardTitle: '이세계 아이돌 홈페이지 만들어가실 인력을 모집하고 있습니다!',
+    writer: '카카오',
+    boardTitle: '안녕하세용',
     likeCount: 1,
     readCount: '310',
     regDate: '2023.03.03 12:44',
-    thumbnailURL:
-      'https://cafethumb.pstatic.net/MjAyMzAzMDNfMTE0/MDAxNjc3ODE0NTU2NDY0.pxN2tbcAFGht6LJPvbLmIgwF4bZwHv0XXr0ru6e0Dpog.qoUJDDewoR3NSps1IGDxtyr2vlXZEA4p7EFb7q2N7ZUg.PNG/제목_없음-3.png?type=f100_100',
+    thumbnailURL: null,
     redirectURL: 'https://cafe.naver.com/steamindiegame10100289',
     isEnd: 'ING',
   },
   {
     articleId: '10092174',
-    writer: '설가람',
-    boardTitle:
-      '이세돌 비주얼 노벨 RE:BIND(가제)에서 실력이 높은 일러스트레이터 분들을 모집합니다!!',
+    writer: '네이버',
+    boardTitle: 'Hello',
     likeCount: 2,
     readCount: '322',
     regDate: '2023.03.02 21:02',
-    thumbnailURL:
-      'https://cafethumb.pstatic.net/MjAyMzAzMDJfNTEg/MDAxNjc3NzU4NTM5MDc4.2sNtN66Oy-VBIFAjQGZl9WVQ0e5T7q5Xyl2yAal8L9cg.zKKPfM_dDnm3GXmM0VjJRipOlT9xkFNSUSPgiLFU2Sgg.JPEG/20230228＿180530.jpg?type=f100_100',
+    thumbnailURL: null,
     redirectURL: 'https://cafe.naver.com/steamindiegame10092174',
     isEnd: 'ING',
   },
@@ -31,20 +28,18 @@ export default [
     likeCount: 3,
     readCount: '70',
     regDate: '2023.03.02 17:49',
-    thumbnailURL:
-      'https://cafethumb.pstatic.net/MjAyMzAzMDJfMjUw/MDAxNjc3NzQ1ODkyMTU2.mCdtPCwN9vxw8syJhtsNx_V4NtWCM95NXu1rAF6I13sg.3oUNxwqdZqRWau_r9xStlsmgUL1Cm-8KwGgiXSUfOGYg.GIF/air.gif?type=f100_100',
+    thumbnailURL: null,
     redirectURL: 'https://cafe.naver.com/steamindiegame10089814',
     isEnd: 'ING',
   },
   {
     articleId: '10089070',
     writer: '야하로옹',
-    boardTitle: '하꼬 웹소설 작가 써주실 자비로운 팀을 구합니다!',
+    boardTitle: 'BE/FE 개발자 구함',
     likeCount: 4,
     readCount: '146',
     regDate: '2023.03.02 16:36',
-    thumbnailURL:
-      'https://cafethumb.pstatic.net/MjAyMzAzMDJfMTUx/MDAxNjc3NzQxNDY2Mzg2.uFp--j8p5mqsRXa6eVnj82ER7rcUpaINfX4QIPamm-sg.62wsPnq591aJj4NjIYVNKl4Oxln_Nqmv5Zl8oBegjQAg.JPEG/KakaoTalk_20230302_160237697.jpg?type=f100_100',
+    thumbnailURL: null,
     redirectURL: 'https://cafe.naver.com/steamindiegame10089070',
     isEnd: 'ING',
   },

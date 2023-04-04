@@ -19,12 +19,14 @@
     "hangul-js": "^0.2.6",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.8.1",
     "recoil": "^0.7.6",
     "styled-components": "^5.3.6",
-    "trie-prefix-tree": "^1.5.1"
+    "trie-prefix-tree": "^1.5.1",
+    "useful-decorator": "1.1.1"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",

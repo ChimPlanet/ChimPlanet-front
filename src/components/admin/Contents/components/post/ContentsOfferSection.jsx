@@ -65,3 +65,7 @@ const JobOfferContainer = styled.div`
   gap: 20px;
   row-gap: 70px;
 `;
+
+const Img = styled.div`
+  position: relative;
+`;

@@ -1,4 +1,4 @@
-import { data, field } from '@/service/domain.decorator';
+import { data, field } from 'useful-decorator';
 import * as pp from './offer.preprocess';
 
 @data
@@ -31,6 +31,8 @@ class Offer {
   isThumbnail;
   @field('boardtags')
   tags;
+  @field('unauthorized')
+  needAuth;
 }
 
 export default Offer;

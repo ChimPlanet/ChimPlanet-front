@@ -17,6 +17,8 @@ import UlIcon from './UlIcon';
 import UserIcon from './UserIcon';
 import PopupIcon from './PopupIcon';
 import LeftArrowIcon from './LeftArrowIcon';
+import WriteIcon from './WriteIcon';
+import OptionBelowArrowIcon from './OptionBelowArrowIcon';
 import DetailedSettingsIcon from './DetailedSettingsIcon';
 import PreviewIcon from './PreviewIcon';
 import MinXIcon from './MinXIcon';
@@ -44,4 +46,6 @@ export {
   DetailedSettingsIcon,
   PreviewIcon,
   MinXIcon,
+  OptionBelowArrowIcon,
+  WriteIcon,
 };

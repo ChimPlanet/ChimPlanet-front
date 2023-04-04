@@ -6,15 +6,14 @@ import { styled as muiStyled } from '@mui/material/styles';
 import ContentSettingHeader from './ContentSettingHeader';
 import ContentSettingBody from './ContentSettingBody';
 
-export default function ContentSetting({openModal, handleSettings}) {
-
+export default function ContentSetting({openModal, handleSettings, offer}) {
     return(
         <>
             <SettingsModal open={openModal} onClose={handleSettings} >
                 <ContentWrapper>
                     <Suspense fallback={<Loading />}>   
                         <ContentSettingHeader handleSettings={handleSettings}/>
-                        <ContentSettingBody />
+                        <ContentSettingBody offer={offer} />
                         <ButtonContainer>
                             <Button color='#000000' onClick={handleSettings}>
                                 취소
@@ -45,7 +44,7 @@ const SettingsModal = muiStyled(Modal)({
 
 const ContentWrapper = styled.div`
   width: 520px;
-  min-height: 70vh;
+  //min-height: 70vh;
   height: fit-content;
   background-color: white;
   border-radius: 8px;

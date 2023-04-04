@@ -8,6 +8,7 @@ import { styled as muiStyled } from '@mui/material/styles';
 import ContentOfferSidebar from './ContentOfferSidebar'
 import  ContentOfferDetail from './ContentOfferDetail'
 import ContentSetting from './settingModal/ContentSetting';
+import axios from 'axios';
 
 export default function ContentOfferSubscriber() {
 
@@ -35,7 +36,7 @@ export default function ContentOfferSubscriber() {
                     </ContentWrapper>
                     <ContentOfferSidebar handleSettings={handleSettings} />
                 </ContentContainer>
-                <ContentSetting openModal={openModal} handleSettings={handleSettings}/>
+                <ContentSetting offer={modalState} openModal={openModal} handleSettings={handleSettings}/>
             </>
         </ScrollModal>
     )

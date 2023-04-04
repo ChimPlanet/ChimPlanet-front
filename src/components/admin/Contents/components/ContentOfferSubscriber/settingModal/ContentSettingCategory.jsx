@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import styled from "styled-components";
 import { styled as muiStyled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
@@ -5,7 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 const categories = [
-    '영상/모션그래픽',
+    'api',
     '영상/모션그래픽',
     '영상/모션그래픽',
     '영상/모션그래픽',
@@ -19,7 +20,12 @@ const categories = [
     '영상/모션그래픽',
 ];
 
-export default function ContentSettingCategory() {
+export default function ContentSettingCategory({offer}) {
+
+    const a = useCallback(()=>{
+        
+        offer.tags.filter(x=> categories.includes(x))
+    },[offer])
 
     return(
         <Container>
@@ -30,8 +36,7 @@ export default function ContentSettingCategory() {
                 {categories.map((el, index)=> (
                     <CheckboxLabel 
                         key={index} 
-                        sx={{ '& .MuiTypography-root': { fontSize: 12} }} 
-                        control={<CheckBox defaultChecked />} 
+                        control={<CheckBox defaultChecked={true} />}
                         label={el}
                     />
                 ))}
@@ -53,9 +58,8 @@ const Title = styled.div`
 `;
 
 const CheckboxGroup = muiStyled(FormGroup)({
-    display: 'flex !important',
-    flexDirection: 'row !important',
-    justifyContent: 'space-around !important',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
     fontSize: '12px !important',
 });
 
@@ -64,7 +68,8 @@ const CheckboxLabel = muiStyled(FormControlLabel)({
     fontWeight: '300',
     fontSize: '12px',
     lineHeight: '14px',
-    margin: '0 auto 14px'
+    margin: '0 auto 14px',
+    '& .MuiTypography-root': { fontSize: 12 },
 });
 
 const CheckBox = muiStyled(Checkbox)({

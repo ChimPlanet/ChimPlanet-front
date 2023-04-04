@@ -1,29 +1,28 @@
-import {data, field} from "@/service/domain.decorator";
+import { data, field } from 'useful-decorator';
+import * as pp from './banner-preprocess';
 
 @data
 class Banner {
-
-  @field("createdDate")
+  @field('createdDate', pp.dateTime)
   createdDate;
-  @field("deviceType")
+  @field('deviceType')
   deviceType;
-  @field("fileId")
+  @field('fileId')
   id;
-  @field("fileName")
+  @field('fileName')
   fileName;
-  @field("imageType")
+  @field('imageType', pp.main)
   isMain;
-  @field("imageUri")
+  @field('imageUri')
   sourceUrl;
-  @field("redirectType")
+  @field('redirectType')
   redirectType;
-  @field("redirectUrl")
+  @field('redirectUrl')
   redirectUrl;
-  @field("sequence")
+  @field('sequence')
   sequence;
-  @field("useYn")
-  yn
-
+  @field('useYn', pp.active)
+  yn;
 }
 
 export default Banner;
