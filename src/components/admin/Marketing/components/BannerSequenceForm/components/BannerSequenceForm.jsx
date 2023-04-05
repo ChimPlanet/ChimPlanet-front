@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
 import BannerSequenceDragItem from './BannerSequenceDragItem';
@@ -9,6 +9,8 @@ import { Container } from './BannerSequenceForm.style';
  */
 export default function BannerSequenceForm({ banners }) {
   function handleDragEnd() {}
+
+  const maxLength = useMemo(() => banners.length, [banners.length]);
 
   return (
     <Container>
@@ -27,7 +29,13 @@ export default function BannerSequenceForm({ banners }) {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      children={<BannerSequenceDragItem data={item} />}
+                      children={
+                        <BannerSequenceDragItem
+                          maxLen={maxLength}
+                          seq={index + 1}
+                          data={item}
+                        />
+                      }
                     />
                   )}
                 </Draggable>

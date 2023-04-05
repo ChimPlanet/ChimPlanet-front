@@ -19,6 +19,8 @@ import PopupIcon from './PopupIcon';
 import LeftArrowIcon from './LeftArrowIcon';
 import WriteIcon from './WriteIcon';
 import OptionBelowArrowIcon from './OptionBelowArrowIcon';
+import DoubleSlashIcon from './DoubleSlashIcon';
+import TrashCanIcon from './TrashCanIcon';
 
 export {
   UserIcon,
@@ -42,4 +44,6 @@ export {
   LeftArrowIcon,
   OptionBelowArrowIcon,
   WriteIcon,
+  DoubleSlashIcon,
+  TrashCanIcon,
 };

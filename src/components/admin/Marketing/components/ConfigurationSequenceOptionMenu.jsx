@@ -7,25 +7,30 @@ import {
   Header,
   HeaderTitle,
   HeaderButton,
+  WrapForm,
 } from './ConfigurationSequenceOptionMenu.style';
-import { useMemo } from 'react';
+
 import { getBannerByType } from '@/service/banner/banner-utils';
+import { useState } from 'react';
 
 export default function ConfigurationSequenceOptionMenu() {
   const [rawBanners] = useAdminBannerState();
 
-  const banners = useMemo(
-    () => (rawBanners ? getBannerByType(rawBanners, 'PC') : []),
-    [rawBanners],
+  const [innerBanners, setInnerBanners] = useState(
+    getBannerByType(rawBanners, 'PC') || [],
   );
+
+  function handleSubmit() {}
 
   return (
     <Container>
       <Header>
         <HeaderTitle>배너목록</HeaderTitle>
-        <HeaderButton>적용</HeaderButton>
+        <HeaderButton onClick={handleSubmit}>적용</HeaderButton>
       </Header>
-      <BannerSequenceForm banners={banners} />
+      <WrapForm>
+        <BannerSequenceForm banners={innerBanners} />
+      </WrapForm>
     </Container>
   );
 }
