@@ -6,26 +6,21 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 
 const categories = [
-    'api',
-    '영상/모션그래픽',
-    '영상/모션그래픽',
-    '영상/모션그래픽',
-    '영상/모션그래픽',
-    '영상/모션그래픽',
-    '영상/모션그래픽',
-    '영상/모션그래픽',
-    '영상/모션그래픽',
-    '영상/모션그래픽',
-    '영상/모션그래픽',
-    '영상/모션그래픽',
+    'IT·게임',
+    '디자인·2D',
+    '3D·건축·인테리어',
+    '미디어·연예·창작',
+    '일러스트',
+    '기타',
 ];
 
-export default function ContentSettingCategory({offer}) {
+export default function ContentSettingCategory({offer, tag}) {
 
     const a = useCallback(()=>{
-        
         offer.tags.filter(x=> categories.includes(x))
     },[offer])
+
+    
 
     return(
         <Container>
@@ -33,12 +28,13 @@ export default function ContentSettingCategory({offer}) {
                 카테고리
             </Title>
             <CheckboxGroup>
-                {categories.map((el, index)=> (
+                {tag.map((el)=> (
+                    el.childTagId === el.parentTagId ? 
                     <CheckboxLabel 
-                        key={index} 
+                        key={el.tagId} 
                         control={<CheckBox defaultChecked={true} />}
-                        label={el}
-                    />
+                        label={el.tagName}
+                    /> : null
                 ))}
             </CheckboxGroup>
         </Container>
@@ -54,12 +50,12 @@ const Title = styled.div`
     font-weight: 500;
     font-size: 12px;
     line-height: 14px;
-    margin-bottom: 8px;
+    margin-bottom: 9px;
 `;
 
 const CheckboxGroup = muiStyled(FormGroup)({
     display: 'grid',
-    gridTemplateColumns: 'repeat(4, 1fr)',
+    gridTemplateColumns: '1fr 1fr 1fr',
     fontSize: '12px !important',
 });
 
@@ -68,8 +64,8 @@ const CheckboxLabel = muiStyled(FormControlLabel)({
     fontWeight: '300',
     fontSize: '12px',
     lineHeight: '14px',
-    margin: '0 auto 14px',
-    '& .MuiTypography-root': { fontSize: 12 },
+    margin: '0 0 14px',
+    '& .MuiTypography-root': { fontSize: 12, wordBreak: 'keep-all' },
 });
 
 const CheckBox = muiStyled(Checkbox)({
@@ -77,6 +73,7 @@ const CheckBox = muiStyled(Checkbox)({
     height: '16px',
     fontSize: '12px',
     color: '#DBDEE2',
-    '&.Mui-checked': {color: '#00BD2F',},
+    marginRight: '8px',
+    '&.Mui-checked': { color: '#00BD2F' },
 })
 

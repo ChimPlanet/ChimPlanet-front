@@ -27,7 +27,7 @@ export default function Job({ parId }) {
 
   useEffect(()=> {open(offerData)},[]);
 
-  const { data } = useRecentOffers();;
+  const { data } = useRecentOffers();
 
   const postValue = postSort.find((item) => item.isClicked === 1);
 

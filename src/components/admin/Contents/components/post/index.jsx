@@ -3,16 +3,18 @@ import { useSetRecoilState, useRecoilValue } from "recoil";
 import { ListSort } from "@/atoms/PostList";
 import ContnetsTab from "./ContentsTab";
 import ContentsOfferSection from "./ContentsOfferSection";
-import pseudoOffers from '../../__mocks__/pseudoOffers';
+import { useRecentOffers } from '@/query/offer';
 
 export default function ContentsPosts(){
 
-    const [postList, setPostList] = useState(pseudoOffers);
+    const [postList, setPostList] = useState([]);
     const [newList, setNewList] = useState([]);
     const [select, setSelect] = useState(false);
     const [selectValue, setSelectValue] = useState('최신순');
     const listSort = useRecoilValue(ListSort);
     const sort = useSetRecoilState(ListSort);
+
+    const { data } = useRecentOffers();
 
     const onSelect = () => {
         setSelect(!select);
@@ -24,7 +26,11 @@ export default function ContentsPosts(){
         onSelect();
     };
 
-   useMemo(() => {
+    useMemo(()=>{
+      setPostList(data);
+    },[data])
+
+    useMemo(() => {
         const newPostList = [...postList];
         if (listSort === '조회순') {
           setNewList(
@@ -37,7 +43,7 @@ export default function ContentsPosts(){
         } else {
           setNewList(postList);
         }
-      }, [listSort, postList]);
+    }, [listSort, postList]);
 
     return(
         <>

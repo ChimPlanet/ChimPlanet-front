@@ -5,15 +5,19 @@ import Loading from '@/common/components/Loading';
 import { styled as muiStyled } from '@mui/material/styles';
 import ContentSettingHeader from './ContentSettingHeader';
 import ContentSettingBody from './ContentSettingBody';
+import { useTagList } from '@/query/tag'
 
 export default function ContentSetting({openModal, handleSettings, offer}) {
+
+    const { data: tag } = useTagList();
+
     return(
         <>
             <SettingsModal open={openModal} onClose={handleSettings} >
                 <ContentWrapper>
                     <Suspense fallback={<Loading />}>   
                         <ContentSettingHeader handleSettings={handleSettings}/>
-                        <ContentSettingBody offer={offer} />
+                        <ContentSettingBody offer={offer} tag={tag} />
                         <ButtonContainer>
                             <Button color='#000000' onClick={handleSettings}>
                                 취소
@@ -34,7 +38,7 @@ const SettingsModal = muiStyled(Modal)({
     flexDirection: 'row',
     justifyContent: 'center',
     padding: '130px 0px',
-    margin: '0 0 0 130px',
+    margin: '0 0 0 115px',
     overflowY: 'scroll',
     '::-webkit-scrollbar': {
       width: 0,

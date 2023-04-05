@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { DetailedSettingsIcon, CafeIcon, PreviewIcon } from '@/common/icons'
 
 
-export default function ContentOfferSidebar({ id, handleSettings}) {
-
+export default function  ContentOfferSidebar({ id, handleSettings}) {
+  
   return (
     <>
       <Container>

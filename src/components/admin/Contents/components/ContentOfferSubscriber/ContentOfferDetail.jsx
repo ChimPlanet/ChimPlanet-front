@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-//import { useJobOfferDetail } from '@/query/offer';
-/* import { Offer } from '@/service/offer'; */
+import { useJobOfferDetail } from '@/query/offer';
+import { Offer } from '@/service/offer';
 import ContentOfferHeader from './ContentOfferHeader';
 import { useMemo } from 'react';
 import {
@@ -11,21 +11,22 @@ import {
 
 export default function ContentOfferDetail({ offer }) {
 
-  //const { data } = useJobOfferDetail(offer.id);
+  const { data } = useJobOfferDetail(offer.articleId);
 
+  /** @param {{offer: Offer}} */
   const content = useMemo(() => {
-    const dom = stringToDom(offer.content);
+    const dom = stringToDom(data.content);
     adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
     return dom.documentElement.outerHTML;
-  }, [offer]);
+  }, [data]);
 
   return (
     <Wrapper>
       <ContentOfferHeader
-        title={offer.title}
-        status={offer.isClosed}
-        date={offer.rawDateTime}
-        views={offer.viewCount}
+        title={offer.boardTitle}
+        status={offer.isEnd}
+        date={offer.regDate}
+        views={offer.readCount}
       />
       <Content>
         <PostText
@@ -36,7 +37,7 @@ export default function ContentOfferDetail({ offer }) {
       </Content>
       <SubTitle>태그</SubTitle>
       <PostTags>
-        {offer.tags?.map((items) => (
+        {offer.boardTags?.map((items) => (
           <Tag key={items} tag={items}>
             {items}
           </Tag>

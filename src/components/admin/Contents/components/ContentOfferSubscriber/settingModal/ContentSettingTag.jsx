@@ -3,13 +3,15 @@ import styled from "styled-components";
 import { MinXIcon } from "@/common/icons";
 
 
-export default function ContentSettingTag({offer}){
+export default function ContentSettingTag({offer, tag}){
     
     const [inputValue, setInputValue] = useState('');
-    const [tag, setTag] = useState([]);
+    const [tags, setTags] = useState([]);
+    
+    //console.log(tag.filter(el => el.childTagId !== el.parentTagId).map(el => el.tagName))
 
     useMemo(()=>{
-        setTag(offer.tags.map(el=> '#'+el))
+        setTags(offer.boardTags?.map(el=> '#' + el))
     },[offer])
 
     const handleValue = (value) => {
@@ -17,10 +19,10 @@ export default function ContentSettingTag({offer}){
     };
     
     const handleKeyDown = (e) => {
-        const newTag = [...tag];
+        const newTag = [...tags] ;
         if(e.key === 'Enter' && inputValue.charAt(0) === '#'){
             newTag.push(inputValue);
-            setTag(newTag);
+            setTags(newTag);
             setInputValue('');
         }else if(e.key === 'Enter' && inputValue.charAt(0) !== '#'){
             alert('# 을 입력해주세요')
@@ -28,7 +30,7 @@ export default function ContentSettingTag({offer}){
     };
 
     const deleteTag = (el) => {
-        setTag([...tag].filter(item=> item !== el ));
+        setTags([...tags].filter(item=> item !== el ));
     };
 
     return(
@@ -38,7 +40,7 @@ export default function ContentSettingTag({offer}){
             </Title>
             <InputBox value={inputValue} placeholder="태그를 입력해주세요" onKeyPress={handleKeyDown} onChange={handleValue}/>
             <Tags> 
-                {Array.isArray(tag) ? tag.map((el, index)=>(
+                {Array.isArray(tags) ? tags.map((el, index)=>(
                     <Tag key={index}>
                         {el} 
                         <IconContainer onClick={()=>deleteTag(el)}>

@@ -5,7 +5,7 @@ export default function ContentOfferHeader({ title, status, date, views }) {
     <HeaderContainer>
       <PostTitle>{title}</PostTitle>
       <PostInfo>
-        <PostStatus>{status ? '마감' : '모집중'}</PostStatus>
+        <PostStatus>{status === 'END' ? '마감' : '구인중'}</PostStatus>
         <PostDate>{date}</PostDate>
         <PostViews>조회 {views}</PostViews>
       </PostInfo>

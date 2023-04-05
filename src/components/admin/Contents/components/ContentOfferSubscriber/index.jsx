@@ -34,7 +34,7 @@ export default function ContentOfferSubscriber() {
                             <ContentOfferDetail offer={modalState} />
                         </Suspense>
                     </ContentWrapper>
-                    <ContentOfferSidebar handleSettings={handleSettings} />
+                    <ContentOfferSidebar handleSettings={handleSettings} id={modalState?.articleId}/>
                 </ContentContainer>
                 <ContentSetting offer={modalState} openModal={openModal} handleSettings={handleSettings}/>
             </>
