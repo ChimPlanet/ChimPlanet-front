@@ -46,7 +46,7 @@ export default [
   {
     articleId: '10088758',
     writer: '우파루파맨',
-    boardTitle: '[(이세돌 라이브)] 이세돌 비주얼노벨 스토리작가모집합니다',
+    boardTitle: '[급구] 스토리작가모집합니다',
     likeCount: 5,
     readCount: '97',
     regDate: '2023.03.02 15:57',

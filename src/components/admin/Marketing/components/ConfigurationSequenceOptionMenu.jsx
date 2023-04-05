@@ -8,9 +8,16 @@ import {
   HeaderTitle,
   HeaderButton,
 } from './ConfigurationSequenceOptionMenu.style';
+import { useMemo } from 'react';
+import { getBannerByType } from '@/service/banner/banner-utils';
 
 export default function ConfigurationSequenceOptionMenu() {
-  const [banners] = useAdminBannerState();
+  const [rawBanners] = useAdminBannerState();
+
+  const banners = useMemo(
+    () => (rawBanners ? getBannerByType(rawBanners, 'PC') : []),
+    [rawBanners],
+  );
 
   return (
     <Container>

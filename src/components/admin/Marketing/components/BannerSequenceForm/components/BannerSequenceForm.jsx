@@ -11,28 +11,32 @@ export default function BannerSequenceForm({ banners }) {
   function handleDragEnd() {}
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <Droppable droppableId="droppable">
-        {(provided, snapshot) => (
-          <Container {...provided.droppableProps} ref={provided.innerRef}>
-            {banners.map((item, i) => (
-              <Draggable
-                key={item.id}
-                draggableId={item.id.toString()}
-                index={i}
-              >
-                {(provided, snapshot) => (
-                  <BannerSequenceDragItem
-                    ref={provided.innerRef}
-                    data={item}
-                    {...provided.dragHandleProps}
-                  />
-                )}
-              </Draggable>
-            ))}
-          </Container>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <Container>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Droppable droppableId="droppable">
+          {(provided) => (
+            <div {...provided.droppableProps} ref={provided.innerRef}>
+              {banners.map((item, index) => (
+                <Draggable
+                  key={item.id.toString()}
+                  draggableId={item.id.toString()}
+                  index={index}
+                >
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      children={<BannerSequenceDragItem data={item} />}
+                    />
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </Container>
   );
 }

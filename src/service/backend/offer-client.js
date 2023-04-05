@@ -10,7 +10,8 @@ class OfferClient extends HttpClient {
 
   @select(typeOfferArray)
   async recent() {
-    return await this.get('/new');
+    // return await this.get('/new');
+    return mock_job_offers;
   }
 
   @select(typeOfferArray)
