@@ -4,6 +4,7 @@ import {
   reallocationSequences,
   updateSequences,
 } from '../utils';
+import backend from '@/service/backend';
 
 export default function useBannerSequenceForm(sequence, setSequence) {
   const handle = useMemo(
@@ -12,8 +13,14 @@ export default function useBannerSequenceForm(sequence, setSequence) {
       createDeleteHandle(index) {
         return () => {
           const duplicated = copySequences(sequence);
+          const item = duplicated[index];
           duplicated.splice(index, 1);
           setSequence(reallocationSequences(duplicated));
+
+          Promise.all([
+            backend.banners.deleteBanner(item.pc),
+            backend.banners.deleteBanner(item.mobile),
+          ]);
         };
       },
       /**

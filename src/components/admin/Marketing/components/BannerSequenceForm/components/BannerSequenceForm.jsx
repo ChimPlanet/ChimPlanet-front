@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
+
+import { VerticalDraggableList } from '@/common/components/VerticalDraggableList';
 
 import BannerSequenceDragItem from './BannerSequenceDragItem';
 import { Container } from './BannerSequenceForm.style';
@@ -10,15 +11,17 @@ import useBannerSequenceForm from '../hooks/useBannerSequenceForm';
  * @returns
  */
 export default function BannerSequenceForm({ sequence, setSequence }) {
+  // Form Hook for Handle Sequence
   const { moveTo, createDeleteHandle } = useBannerSequenceForm(
     sequence,
     setSequence,
   );
 
-  const maxLength = useMemo(() => sequence.length, [sequence.length]);
+  // Max length
+  const MAX_LEN = useMemo(() => sequence.length, [sequence.length]);
 
   function handleDragEnd({ draggableId, destination }) {
-    // Get Position For Calculate
+    // Get Origin, Destination Position For Calculate
     const [originPosition, destinationPosition] = [
       sequence.findIndex((item) => getIdBySequenceItem(item) === draggableId),
       destination.index,
@@ -28,38 +31,21 @@ export default function BannerSequenceForm({ sequence, setSequence }) {
 
   return (
     <Container>
-      <DragDropContext onDragEnd={handleDragEnd}>
-        <Droppable droppableId="droppable">
-          {(provided) => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
-              {sequence.map((item, index) => (
-                <Draggable
-                  key={getIdBySequenceItem(item)}
-                  draggableId={getIdBySequenceItem(item)}
-                  index={index}
-                >
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      children={
-                        <BannerSequenceDragItem
-                          maxLen={maxLength}
-                          seq={item.seq}
-                          data={item}
-                          onDelete={createDeleteHandle(index)}
-                        />
-                      }
-                    />
-                  )}
-                </Draggable>
-              ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+      <VerticalDraggableList
+        droppableId="banner-sequence"
+        items={sequence}
+        getIdByItem={getIdBySequenceItem}
+        onDragEnd={handleDragEnd}
+      >
+        {(item, index) => (
+          <BannerSequenceDragItem
+            maxLen={MAX_LEN}
+            seq={item.seq}
+            data={item}
+            onDelete={createDeleteHandle(index)}
+          />
+        )}
+      </VerticalDraggableList>
     </Container>
   );
 }

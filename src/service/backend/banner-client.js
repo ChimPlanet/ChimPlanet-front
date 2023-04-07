@@ -46,6 +46,11 @@ class BannerClient extends HttpClient {
   async updateSequences(body) {
     return await this.put('/sequence', body);
   }
+
+  /** @param {number} id */
+  async deleteBanner(id) {
+    return await this.delete(`/delete/${id}`);
+  }
 }
 
 function typeBannerCollection(collection) {
