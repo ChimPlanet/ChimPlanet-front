@@ -19,6 +19,8 @@ import PopupIcon from './PopupIcon';
 import LeftArrowIcon from './LeftArrowIcon';
 import WriteIcon from './WriteIcon';
 import OptionBelowArrowIcon from './OptionBelowArrowIcon';
+import DoubleSlashIcon from './DoubleSlashIcon';
+import TrashCanIcon from './TrashCanIcon';
 import DetailedSettingsIcon from './DetailedSettingsIcon';
 import PreviewIcon from './PreviewIcon';
 import MinXIcon from './MinXIcon';
@@ -48,4 +50,6 @@ export {
   MinXIcon,
   OptionBelowArrowIcon,
   WriteIcon,
+  DoubleSlashIcon,
+  TrashCanIcon,
 };

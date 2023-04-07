@@ -6,7 +6,7 @@ import { createContext, useState, useContext, useMemo, useEffect } from 'react';
 const preloadContext = createContext();
 
 export function PreloadProvider({ children }) {
-  const [preloads, setPreload] = useState(null);
+  const [preloads, setPreload] = useState({});
 
   // NeedPreloadRequests & only work when page initialize
   useEffect(() => {
@@ -33,12 +33,12 @@ export function usePreloadContext() {
 
 const NeedPreloadRequests = [
   {
-    key: 'banner',
+    key: 'banners',
     value: backend.banners.banners,
     preprocess: (collection) => {
       if (Array.isArray(collection)) {
         collection.forEach((item) => {
-          new Image().src = item.sourceUrl;
+          if (item.yn) new Image().src = item.sourceUrl;
         });
       }
       return collection;

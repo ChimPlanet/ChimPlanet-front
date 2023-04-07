@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Banner from '@/components/Banner';
+import { Banner } from '@/components/Banner';
 import { Header } from '@/components/Header';
 import { usePreloadContext } from '@/context/preloadContext';
 import { HOME_PATH } from '@/constants/route';
@@ -13,17 +13,14 @@ export default function ClientOutlet() {
   const { pathname } = useLocation();
 
   const sizeType = useSizeType();
-  const preloaded = usePreloadContext();
+  const { banners } = usePreloadContext();
 
   const mainBanners = useMemo(
     () =>
-      preloaded?.banner
-        ? getBannerByType(
-            preloaded.banner,
-            sizeType === 'desktop' ? 'PC' : 'MOBILE',
-          )
+      banners
+        ? getBannerByType(banners, sizeType === 'desktop' ? 'PC' : 'MOBILE')
         : [],
-    [preloaded?.banner, sizeType],
+    [banners, sizeType],
   );
 
   return (

@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
   cursor: pointer;
   padding: 15px;
   display: flex;
-  column-gap: 20px;
+  justify-content: space-between;
   border-bottom: 1px solid #454545;
   &:hover {
     background-color: #454545;
