@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-  color: #fff;
-  padding: 24px 32px;
-`;
-
 export const ControlBox = styled.div`
   display: flex;
   justify-content: space-between;

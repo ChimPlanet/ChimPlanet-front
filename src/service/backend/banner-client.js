@@ -1,6 +1,8 @@
 import HttpClient from './http-client';
 import { select } from 'useful-decorator';
 import { Banner } from '@/service/banner';
+import { pairBannerFromGroup } from '../banner/banner-utils';
+import { groupBy } from '@/utils';
 
 class BannerClient extends HttpClient {
   constructor() {
@@ -41,10 +43,22 @@ class BannerClient extends HttpClient {
       );
     }
   }
+
+  /** @param {import('../banner/banner-request').UpdateSequencesRequest} body */
+  async updateSequences(body) {
+    return await this.put('/sequence', body);
+  }
+
+  /** @param {number} id */
+  async deleteBanner(id) {
+    return await this.delete(`/delete/${id}`);
+  }
 }
 
 function typeBannerCollection(collection) {
-  return collection.map(Banner);
+  const banners = collection.map(Banner);
+
+  return pairBannerFromGroup(groupBy(banners, 'redirectUrl'));
 }
 
 export default BannerClient;

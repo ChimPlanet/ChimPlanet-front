@@ -4,7 +4,7 @@ import ConfigurationSequenceOptionMenu from './ConfigurationSequenceOptionMenu';
 
 /**
  *
- * @param {{type: "sequence" | "register"}} param0
+ * @param {{type: "sequence" | "register"}}
  * @returns
  */
 export default function ConfigurableSidebarMenu({ type }) {
@@ -19,4 +19,6 @@ export default function ConfigurableSidebarMenu({ type }) {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  padding: 24px 32px;
+`;
