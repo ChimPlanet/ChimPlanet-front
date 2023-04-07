@@ -41,6 +41,11 @@ class BannerClient extends HttpClient {
       );
     }
   }
+
+  /** @param {import('../banner/banner-request').UpdateSequencesRequest} body */
+  async updateSequences(body) {
+    return await this.put('/sequence', body);
+  }
 }
 
 function typeBannerCollection(collection) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAdminBannerState } from '../atoms/adminBanner.atom';
 import { BannerSequenceForm } from './BannerSequenceForm';
 
@@ -10,17 +10,30 @@ import {
   WrapForm,
 } from './ConfigurationSequenceOptionMenu.style';
 
-import { getBannerByType } from '@/service/banner/banner-utils';
-import { useState } from 'react';
+import {
+  filterMainBanner,
+  groupBannerToPairItem,
+} from '@/service/banner/banner-utils';
+
+import { sequenceFromPairedBanner } from './BannerSequenceForm/utils';
+import { groupBy } from '@/utils';
+import backend from '@/service/backend';
+import { updateSequencesRequest } from '@/service/banner/banner-request';
 
 export default function ConfigurationSequenceOptionMenu() {
   const [rawBanners] = useAdminBannerState();
 
-  const [innerBanners, setInnerBanners] = useState(
-    getBannerByType(rawBanners, 'PC') || [],
+  const [sequences, setSequences] = useState(
+    sequenceFromPairedBanner(
+      filterMainBanner(
+        groupBannerToPairItem(groupBy(rawBanners, 'redirectUrl')),
+      ),
+    ) || [],
   );
 
-  function handleSubmit() {}
+  function handleSubmit() {
+    backend.banners.updateSequences(updateSequencesRequest(sequences));
+  }
 
   return (
     <Container>
@@ -29,7 +42,7 @@ export default function ConfigurationSequenceOptionMenu() {
         <HeaderButton onClick={handleSubmit}>적용</HeaderButton>
       </Header>
       <WrapForm>
-        <BannerSequenceForm banners={innerBanners} />
+        <BannerSequenceForm setSequence={setSequences} sequence={sequences} />
       </WrapForm>
     </Container>
   );

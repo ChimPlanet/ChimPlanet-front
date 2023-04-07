@@ -11,15 +11,15 @@ import {
   DeleteButton,
 } from './BannerSequenceDragItem.style';
 
-function BannerSequenceDragItem({ data, maxLen, seq }) {
+function BannerSequenceDragItem({ data, maxLen, seq, onDelete }) {
   return (
     <Container data-last={maxLen === seq}>
       <Handle children={<DoubleSlashIcon />} />
-      <Image></Image>
+      <Image src={data.sourceUrl} />
       <Content>
         <ContentItem>
           <ContentTypo>메인비주얼[{`${seq}/${maxLen}`}]</ContentTypo>
-          <DeleteButton children={<TrashCanIcon />} />
+          <DeleteButton onClick={onDelete} children={<TrashCanIcon />} />
         </ContentItem>
         <ContentItem>
           <div>
