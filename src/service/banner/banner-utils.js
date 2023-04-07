@@ -20,7 +20,7 @@ export function filterSubBanner(banners) {
  *
  * @return {PairedBanner[]}
  */
-export function groupBannerToPairItem(group) {
+export function pairBannerFromGroup(group) {
   const paired = Object.entries(group).reduce((acc, [key, value]) => {
     if (value.length !== 2) {
       throw new Error('Invalid pair group', value);
@@ -47,7 +47,7 @@ export function groupBannerToPairItem(group) {
  * @param {"PC" | "MOBILE"} type
  */
 export function getBannerByType(banners, type) {
-  return filterMainBanner(
-    groupBannerToPairItem(groupBy(banners, 'redirectUrl')),
-  ).map((b) => (type === 'PC' ? b.pc : b.mobile));
+  return filterMainBanner(banners)
+    .map((b) => (type === 'PC' ? b.pc : b.mobile))
+    .sort((lhs, rhs) => lhs.sequence - rhs.sequence);
 }

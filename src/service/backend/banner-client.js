@@ -1,6 +1,8 @@
 import HttpClient from './http-client';
 import { select } from 'useful-decorator';
 import { Banner } from '@/service/banner';
+import { pairBannerFromGroup } from '../banner/banner-utils';
+import { groupBy } from '@/utils';
 
 class BannerClient extends HttpClient {
   constructor() {
@@ -54,7 +56,9 @@ class BannerClient extends HttpClient {
 }
 
 function typeBannerCollection(collection) {
-  return collection.map(Banner);
+  const banners = collection.map(Banner);
+
+  return pairBannerFromGroup(groupBy(banners, 'redirectUrl'));
 }
 
 export default BannerClient;
