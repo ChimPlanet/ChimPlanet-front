@@ -1,9 +1,5 @@
-import ContentsHeader from './components/ContentsHeader'
-import ContentsTab from './components/ContentsTab'
-import ContentsOfferSection from './components/ContentsOfferSection'
+import ContentsHeader from './components/ContentsHeader';
 
 export {
     ContentsHeader,
-    ContentsTab,
-    ContentsOfferSection,
-}
+};

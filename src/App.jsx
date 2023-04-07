@@ -5,7 +5,7 @@ import fetchTagList from '@/service/tag/fetchTagList';
 import TagTrie from '@/utils/tagTrie';
 import AppContextProvider from './context';
 import JobDetailSubscriber from '@/components/JobDetailSubscriber';
-
+import ContentOfferSubscriber from "@/components/admin/Contents/components/ContentOfferSubscriber";
 import '@/styles/App.scss';
 
 const Main = styled.main`
@@ -24,6 +24,7 @@ function App() {
       <Main id="App">
         <AppRoutes />
         <JobDetailSubscriber />
+        <ContentOfferSubscriber />
       </Main>
     </AppContextProvider>
   );

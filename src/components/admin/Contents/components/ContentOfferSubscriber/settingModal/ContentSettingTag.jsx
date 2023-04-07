@@ -1,0 +1,103 @@
+import { useState, useMemo } from "react";
+import styled from "styled-components";
+import { MinXIcon } from "@/common/icons";
+
+
+export default function ContentSettingTag({offer, tag}){
+    
+    const [inputValue, setInputValue] = useState('');
+    const [tags, setTags] = useState([]);
+    
+    //console.log(tag.filter(el => el.childTagId !== el.parentTagId).map(el => el.tagName))
+
+    useMemo(()=>{
+        setTags(offer.boardTags?.map(el=> '#' + el))
+    },[offer])
+
+    const handleValue = (value) => {
+        setInputValue(value.target.value);
+    };
+    
+    const handleKeyDown = (e) => {
+        const newTag = [...tags] ;
+        if(e.key === 'Enter' && inputValue.charAt(0) === '#'){
+            newTag.push(inputValue);
+            setTags(newTag);
+            setInputValue('');
+        }else if(e.key === 'Enter' && inputValue.charAt(0) !== '#'){
+            alert('# 을 입력해주세요')
+        }
+    };
+
+    const deleteTag = (el) => {
+        setTags([...tags].filter(item=> item !== el ));
+    };
+
+    return(
+        <Container>
+           <Title>
+                태그
+            </Title>
+            <InputBox value={inputValue} placeholder="태그를 입력해주세요" onKeyPress={handleKeyDown} onChange={handleValue}/>
+            <Tags> 
+                {Array.isArray(tags) ? tags.map((el, index)=>(
+                    <Tag key={index}>
+                        {el} 
+                        <IconContainer onClick={()=>deleteTag(el)}>
+                            <MinXIcon />
+                        </IconContainer>
+                    </Tag>
+                )) : null}
+            </Tags>
+        </Container>
+    )
+}
+
+const Container = styled.div`
+
+`;
+
+const Title = styled.div`
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 8px;
+`;
+
+const InputBox = styled.input`
+    width: 472px;
+    height: 42px;
+    border: 1px solid #DBDEE2;
+    border-radius: 4px;
+    padding: 13px 14px;
+    margin-bottom: 7px;
+    :focus{
+    outline: 1px solid #00BD2F;
+    }
+`;
+
+const Tags = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`;
+
+const Tag = styled.div`
+    display: flex;
+    padding: 5px 10px;
+    border: 1px solid #DBDEE2;
+    border-radius: 100px;
+    margin: 0 8px 8px 0 ;
+`;
+
+const IconContainer = styled.div`
+    width: 12px;
+    height: 12px;
+    border: 1px solid #00BD2F;
+    border-radius: 100%;
+    margin-left: 6px;
+    background: #00BD2F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;  

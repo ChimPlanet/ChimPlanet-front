@@ -1,34 +1,14 @@
 import styled from "styled-components";
+import Arrow from "../../../../../assets/Arrow.png";
 
-import Arrow from "../../../../assets/Arrow.png";
-import { useState } from 'react';
-import { useSetRecoilState } from "recoil";
-import { ListSort } from "@/atoms/PostList";
-
-export default function ContnetsTab(){
-
-
-
-    const [select, setSelect] = useState(false);
-    const [selectValue, setSelectValue] = useState('최신순');
-    const sort = useSetRecoilState(ListSort);
-
-    const onSelect = () => {
-        setSelect(!select);
-    };
-
-    const setValue = (value) => {
-        setSelectValue(value);
-        sort(value);
-        onSelect();
-    };
+export default function ContnetsTab({select, selectValue, onSelect, setValue, totalNum}){
 
     return(
         <Container>
             <Layout>
                 <Nav>
                     <Total>
-                        총 {'123'}개
+                        총 {totalNum}개
                     </Total>
                     <SortContainer>
                         <Sort onClick={onSelect}>
@@ -51,8 +31,8 @@ export default function ContnetsTab(){
                 </Nav>
             </Layout>
         </Container>
-    )
-} 
+    );
+} ;
 
 const Container = styled.div`
     padding: 32px;
@@ -68,7 +48,6 @@ const Nav = styled.nav`
     justify-content: space-between;
     align-items: center;
 `;
-
 
 const Total = styled.div`
     font-style: normal;

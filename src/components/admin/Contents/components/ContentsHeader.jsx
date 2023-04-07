@@ -3,13 +3,13 @@ import { useState } from "react";
 import ContentsSearch from "./ContentsSearch";
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 
-export default function ContentsHeader(){
+export default function ContentsHeader({onActiveTab, activeTab}){
 
-    const [activeTab, setActiveTab] = useState('게시글');
+    //const [activeTab, setActiveTab] = useState('게시글');
     const { context } = useJobSection();
 
     const TabActive = (e) => {
-        setActiveTab(e.target.innerText);
+        onActiveTab(e.target.innerText);
     };
 
     return(
@@ -29,8 +29,8 @@ export default function ContentsHeader(){
                 </NavContainer>
             </Header>
         </Container>
-    )
-}
+    );
+};
 
 const Container = styled.div`
     border-bottom: 1px solid #CDCFD6;
@@ -75,7 +75,7 @@ const MenuItem = styled.span`
     active ? `2px solid ${theme.colors.logo}` : 'none'};
     &:hover {
         border-bottom: ${({ theme }) => `2px solid ${theme.colors.border}`};
-    }
+    };
 `;
 
 

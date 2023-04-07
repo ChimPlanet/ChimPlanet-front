@@ -21,6 +21,9 @@ import WriteIcon from './WriteIcon';
 import OptionBelowArrowIcon from './OptionBelowArrowIcon';
 import DoubleSlashIcon from './DoubleSlashIcon';
 import TrashCanIcon from './TrashCanIcon';
+import DetailedSettingsIcon from './DetailedSettingsIcon';
+import PreviewIcon from './PreviewIcon';
+import MinXIcon from './MinXIcon';
 
 export {
   UserIcon,
@@ -42,6 +45,9 @@ export {
   DashboardIcon,
   UlIcon,
   LeftArrowIcon,
+  DetailedSettingsIcon,
+  PreviewIcon,
+  MinXIcon,
   OptionBelowArrowIcon,
   WriteIcon,
   DoubleSlashIcon,

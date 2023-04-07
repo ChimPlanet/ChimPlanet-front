@@ -20,7 +20,6 @@ export default function Job({ parId }) {
   const [,{ open }] = useArticleContext();
   const { context } = useJobSection();
   
-  
   if( parId !== null && parId !== 0){
     const { data : offer } = useJobOfferDetail(parId);
     useMemo(()=>setOfferData(offer),[offer]);
@@ -28,7 +27,7 @@ export default function Job({ parId }) {
 
   useEffect(()=> {open(offerData)},[]);
 
-  const { data } = useRecentOffers();;
+  const { data } = useRecentOffers();
 
   const postValue = postSort.find((item) => item.isClicked === 1);
 
