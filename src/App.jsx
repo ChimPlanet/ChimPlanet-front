@@ -5,7 +5,7 @@ import fetchTagList from '@/service/tag/fetchTagList';
 import TagTrie from '@/utils/tagTrie';
 import AppContextProvider from './context';
 import JobDetailSubscriber from '@/components/JobDetailSubscriber';
-import ContentOfferSubscriber from "@/components/admin/Contents/components/ContentOfferSubscriber";
+import { ContentOfferSubscriber } from '@/components/admin/Contents';
 import '@/styles/App.scss';
 
 const Main = styled.main`
