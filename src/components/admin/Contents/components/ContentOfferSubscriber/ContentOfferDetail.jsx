@@ -38,8 +38,8 @@ export default function ContentOfferDetail({ offer }) {
       <SubTitle>태그</SubTitle>
       <PostTags>
         {offer.boardTags?.map((items) => (
-          <Tag key={items} tag={items}>
-            {items}
+          <Tag key={items.tagObjResponseDto.tagId}>
+            {items.tagObjResponseDto.tagName}
           </Tag>
         ))} 
       </PostTags>

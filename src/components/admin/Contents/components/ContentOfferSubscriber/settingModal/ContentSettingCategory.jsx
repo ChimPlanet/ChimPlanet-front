@@ -14,13 +14,7 @@ const categories = [
     '기타',
 ];
 
-export default function ContentSettingCategory({offer, tag}) {
-
-    const a = useCallback(()=>{
-        offer.tags.filter(x=> categories.includes(x))
-    },[offer])
-
-    
+export default function ContentSettingCategory({boardTags, tag}) {
 
     return(
         <Container>
@@ -28,14 +22,15 @@ export default function ContentSettingCategory({offer, tag}) {
                 카테고리
             </Title>
             <CheckboxGroup>
-                {tag.map((el)=> (
+                {(tag.map((el)=> (boardTags?.map((item)=>(
                     el.childTagId === el.parentTagId ? 
                     <CheckboxLabel 
                         key={el.tagId} 
-                        control={<CheckBox defaultChecked={true} />}
+                        control={<CheckBox 
+                        defaultChecked={ item.tagObjResponseDto.parentTagId === el.parentTagId } />}
                         label={el.tagName}
                     /> : null
-                ))}
+                )))))}
             </CheckboxGroup>
         </Container>
     );

@@ -19,7 +19,10 @@ export default function ContentOfferSubscriber() {
     setOpenModal(false);
   };
 
-  const handleSettings = () => {
+  const handleSettings = (e) => {
+    if(e.target.innerHTML === '완료'){
+      console.log('완료')
+    }
     setOpenModal(!openModal);
   };
 
