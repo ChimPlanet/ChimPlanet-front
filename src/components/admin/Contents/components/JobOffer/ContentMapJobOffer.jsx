@@ -18,7 +18,7 @@ export default function ContentMapJobOffer({jobs}){
 
     return(
         <>
-            {jobs.map(offer => (
+            {jobs?.map(offer => (
                 <ContentJobOffer 
                     onClick={()=>onSort(offer.data)}
                     key={offer.id}

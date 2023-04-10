@@ -3,16 +3,14 @@ import styled from "styled-components";
 import { MinXIcon } from "@/common/icons";
 
 
-export default function ContentSettingTag({offer, tag}){
+export default function ContentSettingTag({boardTags, tag}){
     
     const [inputValue, setInputValue] = useState('');
     const [tags, setTags] = useState([]);
-    
-    //console.log(tag.filter(el => el.childTagId !== el.parentTagId).map(el => el.tagName))
 
     useMemo(()=>{
-        setTags(offer.boardTags?.map(el=> '#' + el))
-    },[offer])
+        setTags(boardTags?.map(tag=> '#' + tag.tagObjResponseDto.tagName))
+    },[boardTags])
 
     const handleValue = (value) => {
         setInputValue(value.target.value);

@@ -23,10 +23,6 @@ export default function ContentSettingBody({offer, tag}){
         }
     },[offer])
 
-    /* const progress = (e, label) => {
-        console.log(e.target.checked, label)
-    } */
-
     return(
         <Container>
             <JobOfferSection>
@@ -60,8 +56,8 @@ export default function ContentSettingBody({offer, tag}){
                     </CheckboxGroup>
                 </ValuesContainer>
             </JobOfferSection>
-            <ContentSettingCategory offer={offer} tag={tag}/>
-            <ContentSettingTag offer={offer} tag={tag}/>
+            <ContentSettingCategory boardTags={offer.boardTags} tag={tag}/>
+            <ContentSettingTag boardTags={offer.boardTags} tag={tag}/>
         </Container>
     )
 }

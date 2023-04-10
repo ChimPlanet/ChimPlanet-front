@@ -2,39 +2,29 @@ import { useMemo, useState, useRef, useEffect } from 'react';
 import styled from "styled-components";
 import { useSizeType } from '@/context/sizeTypeContext';
 import ContentMapJobOffer from '../JobOffer/ContentMapJobOffer';
+import Loading from '@/common/components/Loading'
 
-export default function ContnentsOfferSection({ jobs }) {
+export default function ContnentsOfferSection({ jobs, getMoreItem, last }) {
 
-    const [data, setData] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [num, setNum] = useState(5);
     const target = useRef();
 
-    useMemo(()=>{setData(jobs)},[jobs]);
-
-    const getMoreItem = () => {
-        if (data.length > num) {
-          setNum((num) => num + 5);
-          setIsLoading(false);
-        };
-    };
-
     const onIntersect = async ([entry], observer) => {
-        if (entry.isIntersecting) {
-          await getMoreItem();
-          observer.observe(entry.target);
-        };
-      };
-
+      if (entry.isIntersecting) {
+        //observer.unobserve(entry.target);
+        await getMoreItem();
+        observer.observe(entry.target);
+      }
+    };
+  
     useEffect(() => {
-    let observer;
-    if (target.current) {
+      let observer;
+      if (target.current) {
         observer = new IntersectionObserver(onIntersect, {
-        threshold: 0.4,
+          threshold: 0.4,
         });
         observer.observe(target.current);
-    }
-    return () => observer && observer.disconnect();
+      }
+      return () => observer && observer.disconnect();
     }, [target.current]);
 
     const sizeType = useSizeType();
@@ -42,12 +32,13 @@ export default function ContnentsOfferSection({ jobs }) {
 
     return(
         <Container>
-            <JobOfferContainer column={pageCount} >
-                <ContentMapJobOffer jobs={data.slice(0, num)}/>
-            </JobOfferContainer>
-            {isLoading && <div>로딩 중</div>}
-            {!isLoading && !(data.length <= num) && <div ref={target}>s</div>}
-            {data.length <= num && <div>게시물 끝</div>}
+          <JobOfferContainer column={pageCount} >
+            <ContentMapJobOffer jobs={jobs}/>
+          </JobOfferContainer>
+          <div>
+            {!last && <div ref={target}><Loading /></div>}
+            {last && <div></div>}
+          </div>
         </Container>
     );
 };
