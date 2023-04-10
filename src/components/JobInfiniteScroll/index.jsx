@@ -18,7 +18,7 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
       observer.observe(entry.target);
     }
   };
-  console.log(List)
+
   useEffect(() => {
     let observer;
     if (target.current) {
