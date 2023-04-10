@@ -26,7 +26,7 @@ export default function JobOfferThumbnail({
     e.stopPropagation();
     onBookmarkClick();
   };
-
+  console.log(isThumbnail)
   return (
     <Container>
       <ThumbnailImage

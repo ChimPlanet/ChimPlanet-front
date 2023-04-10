@@ -19,6 +19,11 @@ export function useJobOfferFromDynamic(key, fetchFunction) {
   return useQuery([JobOfferQueryKey, key], fetchFunction);
 }
 
+export function useJobOfferBasic(lastArticleId, size, page) {
+  return useQuery([JobOfferQueryKey, 'basic', page], () => 
+  backend.offers.basic(lastArticleId, size, page),
+)}
+
 export function useRecentOffers() {
   return useQuery([JobOfferQueryKey, 'recent'], backend.offers.recent);
 }
