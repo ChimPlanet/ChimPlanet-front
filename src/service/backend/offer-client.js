@@ -8,6 +8,10 @@ class OfferClient extends HttpClient {
     super('OfferService', '/boards');
   }
 
+  async basic(lastArticleId, size, page) {
+    return await this.post(`?lastArticleId=${lastArticleId}&size=${size}&page=${page}`);
+  }
+
   @select(typeOfferArray)
   async recent() {
     // return await this.get('/new');

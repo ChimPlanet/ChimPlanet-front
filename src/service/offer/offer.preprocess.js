@@ -23,7 +23,7 @@ export function thumbnailURL(value) {
 }
 
 export function isThumbnail(value) {
-  return typeof value === 'string' && value.length > 0;
+  return typeof value === 'string' && value.length > 5;
 }
 
 export function isClosed(value) {

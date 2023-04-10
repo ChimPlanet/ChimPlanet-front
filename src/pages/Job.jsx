@@ -1,95 +1,109 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
-import { useRecoilValue } from 'recoil';
-import { ListSort, PostSort } from '@/atoms/PostList';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobNavBar from '@/components/JobNavBar';
 import JobInfiniteScroll from '@/components/JobInfiniteScroll';
 import { useArticleContext } from '@/context/articleContext';
-import { useRecentOffers, useJobOfferDetail } from '@/query/offer';
+import { useJobOfferBasic , useJobOfferDetail } from '@/query/offer';
+import { Offer } from '@/service/offer';
 
 export default function Job({ parId }) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [offerData, setOfferData] =  useState(null);
-  const [num, setNum] = useState(5);
+
+  //게시글 리스트
+  const [Data, setData] = useState([])
   const [postList, setPostList] = useState([]);
   const [newList, setNewList] = useState([]);
-  const postSort = useRecoilValue(PostSort);
-  const listSort = useRecoilValue(ListSort);
-  const target = useRef();
+  //게시글 요청 파라미터
+  const [lastArticleId, setLastArticleId]= useState(null)
+  const [page, setPage] = useState(0)
+  //게시글 분류
+  const [selectValue, setSelectValue] = useState('최신순');
+  const [currentList, setCurrentList] = useState('구인중');
+  const [select, setSelect] = useState(false);
+  //디테일 모달
+  const [offerData, setOfferData] =  useState(null);
   const [,{ open }] = useArticleContext();
   const { context } = useJobSection();
-  
+  // 가져오는 게시글 수
+  const size = 12 
+
+  const onSelect = () => {
+    setSelect(!select);
+  };
+
+  const directButton = (e) =>{
+    setCurrentList(e.target.innerHTML)
+  };
+
+  const setValue = (e) => {
+    setSelectValue(e.target.innerHTML);
+    setSelect(!select);
+  };
+
   if( parId !== null && parId !== 0){
     const { data : offer } = useJobOfferDetail(parId);
-    useMemo(()=>setOfferData(offer),[offer]);
+    useMemo(()=>{
+      setOfferData(offer)
+    },[offer]);
   };
 
   useEffect(()=> {open(offerData)},[]);
 
-  const { data } = useRecentOffers();
+  const { data } = useJobOfferBasic(lastArticleId, size, page);
 
-  const postValue = postSort.find((item) => item.isClicked === 1);
+  useEffect(() => {
+    setData((prevData) => [...prevData ,...data.content]);
+  },[data])
 
-  useMemo(() => {
-    if (postValue.text === '구인중') {
-      setPostList(data.slice(0, num).filter((item) => item.isClosed === false));
-    } else if (postValue.text === '모집마감') {
-      setPostList(data.slice(0, num).filter((item) => item.isClosed === true));
-    } else if (postValue.text === '전체') {
-      setPostList(data.slice(0, num));
+  useEffect(() => {
+
+    const newData = [...Data];
+
+    if (currentList === '구인중') {
+      setPostList(newData.map(Offer).filter((item) => item.data.isEnd === 'ING'));
+    } else if (currentList === '모집마감') {
+      setPostList(newData.map(Offer).filter((item) => item.data.isEnd === 'END'));
+    } else if (currentList === '전체') {
+      setPostList(newData.map(Offer));
     }
-    setIsLoading(true);
-  }, [data, postValue, num]);
+    setLastArticleId(newData[newData.length - 1]?.articleId);
+  }, [currentList, Data]); 
 
-  useMemo(() => {
+  useEffect(() => {
     const newPostList = [...postList];
-    if (listSort === '조회순') {
+    
+    if (selectValue === '조회순') {
       setNewList(
         newPostList.sort((a, b) => b.data.readCount - a.data.readCount)
       );
-    } else if (listSort === '추천순') {
+    } else if (selectValue === '추천순') {
       setNewList(
         newPostList.sort((a, b) => b.data.likeCount - a.data.likeCount)
       );
     } else {
       setNewList(postList);
     }
-  }, [listSort, postList]);
-
+  }, [selectValue, postList]);
+ 
   const getMoreItem = () => {
-    if (data.length > num) {
-      setNum((num) => num + 5);
-      setIsLoading(false);
-    }
+    setPage((page) => page + 1);
   };
-
-  const onIntersect = async ([entry], observer) => {
-    if (entry.isIntersecting) {
-      //observer.unobserve(entry.target);
-      await getMoreItem();
-      observer.observe(entry.target);
-    }
-  };
-
-  useEffect(() => {
-    let observer;
-    if (target.current) {
-      observer = new IntersectionObserver(onIntersect, {
-        threshold: 0.4,
-      });
-      observer.observe(target.current);
-    }
-    return () => observer && observer.disconnect();
-  }, [target.current]);
 
   return (
     <Container width={`${context.perPage * 270 - 20}px`}>
-      <JobNavBar total={data.length} />
-      <JobInfiniteScroll List={newList} parId={parId} />
-      {!isLoading && <div>로딩 중</div>}
-      {isLoading && !(data.length <= num) && <div ref={target}>s</div>}
-      {data.length <= num && <div>게시물 끝</div>}
+      <JobNavBar 
+      total={Data.length} 
+      setValue={setValue} 
+      directButton={directButton} 
+      currentList={currentList} 
+      selectValue={selectValue}
+      onSelect={onSelect} 
+      select={select} />
+      <JobInfiniteScroll 
+      List={newList}
+      parId={parId}
+      getMoreItem={getMoreItem}
+      last={data.last} />
     </Container>
   );
 }

@@ -1,8 +1,60 @@
-import { useState } from 'react';
-import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { ListSort, PostSort } from "@/atoms/PostList";
 import Arrow from "../../assets/Arrow.png";
+
+export default function JobNavBar({
+    total, 
+    setValue, 
+    directButton, 
+    selectValue, 
+    currentList,
+    select,
+    onSelect,
+    }){
+
+    return(
+        <NavContainer>
+            <nav>
+                <NavListContainer>
+                   <NavList 
+                    onClick={directButton}
+                    color={currentList === '구인중' ? '#101C33' : '#AAB1BC' }
+                    >구인중</NavList>
+                   <NavList 
+                    onClick={directButton}
+                    color={currentList === '모집마감' ? '#101C33' : '#AAB1BC' }
+                    >모집마감</NavList>
+                   <NavList 
+                    onClick={directButton}
+                    color={currentList === '전체' ? '#101C33' : '#AAB1BC' }
+                    >전체</NavList>
+                </NavListContainer>
+            </nav>
+            <Nav>
+                <Total>
+                    총 {total}개
+                </Total>
+                <SortContainer>
+                    <Sort onClick={onSelect} /* onChange={(e)=>{sort(e.target.value)}} */>
+                        {selectValue}
+                    </Sort>
+                        { select &&
+                        <OptionContainer>
+                            <Option 
+                            onClick={setValue}
+                            color={selectValue === '최신순' ? '#00BD2F' : '#8E94A0'}>최신순</Option>
+                            <Option 
+                            onClick={setValue}
+                            color={selectValue === '조회순' ? '#00BD2F' : '#8E94A0'}>조회순</Option>
+                            <Option 
+                            onClick={setValue}
+                            color={selectValue === '추천순' ? '#00BD2F' : '#8E94A0'}>추천순</Option>
+                        </OptionContainer>
+                        }
+                </SortContainer>
+            </Nav>
+        </NavContainer>
+    );
+};
 
 const NavContainer = styled.div`
     margin-top: 30px;
@@ -76,68 +128,3 @@ const Option = styled.div`
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
     color: ${({color})=>color};
 `;
-
-export default function JobNavBar({total}){
-
-    const [select, setSelect] = useState(false);
-    const [selectValue, setSelectValue] = useState('최신순');
-    const [navState, setNavState] = useRecoilState(PostSort);
-    const sort = useSetRecoilState(ListSort);
-
-    const directButton = (key) =>{
-        setNavState([...navState].map(item=>{
-            return{
-                key : item.key,
-                isClicked: item.key === key ? 1 : 0, 
-                text : item.text
-            };
-        }));
-    };
-
-    const onSelect = () => {
-        setSelect(!select);
-    };
-
-    const setValue = (value) => {
-        setSelectValue(value);
-        sort(value);
-        onSelect();
-    };
-    
-    return(
-        <NavContainer>
-            <nav>
-                <NavListContainer>
-                    {navState.map(item=> <NavList 
-                    key={item.key}
-                    onClick={()=>directButton(item.key)}
-                    color={item.isClicked ? '#101C33' : '#AAB1BC' }
-                    >{item.text}</NavList>)}
-                </NavListContainer>
-            </nav>
-            <Nav>
-                <Total>
-                    총 {total}개
-                </Total>
-                <SortContainer>
-                    <Sort onClick={onSelect} /* onChange={(e)=>{sort(e.target.value)}} */>
-                        {selectValue}
-                    </Sort>
-                        { select &&
-                        <OptionContainer>
-                            <Option 
-                            onClick={()=>{setValue('최신순')}}
-                            color={selectValue === '최신순' ? '#00BD2F' : '#8E94A0'}>최신순</Option>
-                            <Option 
-                            onClick={()=>{setValue('조회순')}}
-                            color={selectValue === '조회순' ? '#00BD2F' : '#8E94A0'}>조회순</Option>
-                            <Option 
-                            onClick={()=>{setValue('추천순')}}
-                            color={selectValue === '추천순' ? '#00BD2F' : '#8E94A0'}>추천순</Option>
-                        </OptionContainer>
-                        }
-                </SortContainer>
-            </Nav>
-        </NavContainer>
-    );
-};
