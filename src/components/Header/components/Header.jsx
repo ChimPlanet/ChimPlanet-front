@@ -47,8 +47,13 @@ const Content = styled.div`
   ${({ theme }) => theme.media.desktop`
     ${`width: ${theme.widths.desktop}px`};
   `}
+
   ${({ theme }) => theme.media.tablet`
     ${`width: ${theme.widths.tablet}px`};
+  `}
+
+  ${({ theme }) => theme.media.mobile`
+    ${`width: ${theme.widths.mobile}px`};
   `}
 `;
 

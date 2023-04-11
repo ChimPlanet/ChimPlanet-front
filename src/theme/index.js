@@ -2,6 +2,7 @@ import { css } from 'styled-components';
 
 // ! @media 감지 너비
 const sizes = {
+  mobile: 420,
   tablet: 768,
   desktop: 1200,
 };
@@ -10,11 +11,13 @@ const sizes = {
 const widths = {
   tablet: 720,
   desktop: 1060,
+  mobile: 390,
 };
 
 const media = {
   tablet: (...args) => undefined,
   desktop: (...args) => undefined,
+  mobile: (...args) => undefined,
 };
 
 Object.keys(sizes).reduce((acc, label) => {
@@ -30,7 +33,15 @@ Object.keys(sizes).reduce((acc, label) => {
     case 'tablet':
       acc.tablet = (...args) =>
         css`
-          @media only screen and (max-width: ${sizes.desktop}px) {
+          @media only screen and (min-width: ${sizes.tablet}px) and (max-width: ${sizes.desktop}px) {
+            ${args}
+          }
+        `;
+      break;
+    case 'mobile':
+      acc.mobile = (...args) =>
+        css`
+          @media only screen and (max-width: ${sizes.tablet}px) {
             ${args}
           }
         `;

@@ -11,6 +11,11 @@ const sizeKeys = Object.keys(baseTheme.sizes).sort(
   (a, b) => baseTheme.sizes[b] - baseTheme.sizes[a],
 );
 
+/**
+ *
+ * @param {number} width
+ * @returns {keyof typeof baseTheme['sizes']}
+ */
 function getSizeType(width) {
   for (const key of sizeKeys) {
     if (width >= baseTheme.sizes[key]) return key;
