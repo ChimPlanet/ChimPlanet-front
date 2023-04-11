@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
 import JobTypography from './components/jobTypography';
 import JobStatusIndicator from './components/jobStatusIndicator';
 import JobOfferThumbnail from './components/jobOfferThumbnail';

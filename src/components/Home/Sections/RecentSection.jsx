@@ -23,9 +23,17 @@ function RecentSectionContent() {
 
   const pageCount = useMemo(() => (sizeType === 'desktop' ? 4 : 3), [sizeType]);
 
+  const offerWidth = useMemo(
+    () => (sizeType === 'desktop' ? 250 : 220),
+    [sizeType],
+  );
+
   return (
     <JobContent column={pageCount}>
-      <JobOfferMapContent jobs={offers.slice(0, pageCount * 2)} />
+      <JobOfferMapContent
+        jobs={offers.slice(0, pageCount * 2)}
+        offerWidth={offerWidth}
+      />
     </JobContent>
   );
 }

@@ -43,7 +43,7 @@ export default function JobOfferSection({
   );
 
   return (
-    <Container width={`${context.perPage * 270 - 20}px`}>
+    <Container>
       <JobOfferSectionHeader
         title={title}
         detail={detail}
@@ -74,5 +74,5 @@ JobOfferSection.propTypes = {
 const Container = styled.section`
   min-height: 460px;
   overflow-x: hidden;
-  width: ${(props) => props.width};
+  /* width: ${(props) => props.width}; */
 `;

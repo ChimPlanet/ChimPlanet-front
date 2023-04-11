@@ -51,8 +51,11 @@ const Container = styled.div`
   position: relative;
   top: 0;
   left: 0;
-  width: 100%;
   height: 250px;
+
+  ${({ theme }) => theme.media.tablet`
+    height: 220px;
+  `}
 `;
 
 const ThumbnailImage = styled.img`
@@ -60,8 +63,8 @@ const ThumbnailImage = styled.img`
   top: 0;
   left: 0;
   display: block;
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
   border-radius: 8px;
   margin: 0px auto;
   transform: translateZ(0);

@@ -1,10 +1,9 @@
-import styled from 'styled-components';
+import { memo } from 'react';
 
 import { JobOfferMapContent } from '@/common/components/JobOffer';
 import { SectionLeftIcon, SectionRightIcon } from '@/common/icons';
 import pseudoOffers from '../__mocks__/pseudoOffers';
 import ResizableGrid from '@/common/components/ResizableGrid';
-import { memo } from 'react';
 
 import {
   Container,
@@ -35,8 +34,6 @@ export default function PseudoOfferSection({ title, numOfLines = 1 }) {
   );
 }
 
-const PseudoJobOfferMapContent = memo(({ columns, numOfLines }) => {
-  return (
-    <JobOfferMapContent jobs={pseudoOffers.slice(0, columns * numOfLines)} />
-  );
-});
+const PseudoJobOfferMapContent = memo(({ columns, numOfLines }) => (
+  <JobOfferMapContent jobs={pseudoOffers.slice(0, columns * numOfLines)} />
+));

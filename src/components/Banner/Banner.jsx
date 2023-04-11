@@ -5,7 +5,7 @@ import { useSizeType } from '@/context/sizeTypeContext';
 import { Banner as BannerVO } from '@/service/banner';
 
 import Carousel from './Carousel';
-import { Padding, Container, AnchorBannerItem } from './Banner.style';
+import { horizontalPadding, Container, AnchorBannerItem } from './Banner.style';
 
 const carouselConfig = {
   delay: 5000,
@@ -40,7 +40,7 @@ export default function Banner({ banners }) {
     <Container>
       <Carousel
         onClick={handleClick}
-        itemWidth={itemWidth + 2 * Padding}
+        itemWidth={itemWidth + 2 * horizontalPadding}
         {...carouselConfig}
       >
         {banners?.map(({ id, sourceUrl, redirectUrl }) => (

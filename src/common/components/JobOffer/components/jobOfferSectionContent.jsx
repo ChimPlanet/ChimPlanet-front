@@ -1,8 +1,12 @@
-import { useJobOfferFromDynamic } from '@/query/offer';
+import { useEffect, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useEffect, useLayoutEffect } from 'react';
+
+import { useJobOfferFromDynamic } from '@/query/offer';
 import { JobOfferMapContent } from '@/common/components/JobOffer';
+import { prefetchImages } from '@/utils';
+import { useSizeType } from '@/context/sizeTypeContext';
+import { useMemo } from 'react';
 
 JobOfferSectionContent.propTypes = {
   cursor: PropTypes.number.isRequired,
@@ -29,6 +33,17 @@ export default function JobOfferSectionContent({
   fetchFunction,
 }) {
   const { data: offers } = useJobOfferFromDynamic(queryKey, fetchFunction);
+  const sizeType = useSizeType();
+
+  const offerWidth = useMemo(
+    () => (sizeType === 'desktop' ? 250 : 220),
+    [sizeType],
+  );
+
+  const offerColumnGap = useMemo(
+    () => (sizeType === 'desktop' ? 20 : 25),
+    [sizeType],
+  );
 
   useLayoutEffect(
     () => Array.isArray(offers) && setLength(offers.length),
@@ -38,15 +53,19 @@ export default function JobOfferSectionContent({
   // ! 미리 이미지 가져오기
   useEffect(() => {
     if (Array.isArray(offers)) {
-      offers.forEach((offer) => {
-        if (offer.isThumbnail) new Image().src = offer.thumbnailURL;
-      });
+      prefetchImages(
+        offers.filter(({ isThumbnail }) => isThumbnail),
+        (elem) => elem.thumbnailURL,
+      );
     }
   }, [offers]);
 
   return (
-    <Container moveX={-cursor * 270}>
-      <JobOfferMapContent jobs={offers} />
+    <Container
+      moveX={-cursor * (offerWidth + offerColumnGap)}
+      gap={offerColumnGap}
+    >
+      <JobOfferMapContent jobs={offers} offerWidth={offerWidth} />
     </Container>
   );
 }
@@ -54,7 +73,7 @@ export default function JobOfferSectionContent({
 const Container = styled.div`
   margin-top: 20px;
   display: flex;
-  gap: 20px;
+  gap: ${(p) => `${p.gap}px`};
   width: fit-content;
   transform: ${(p) => `translate3d(${p.moveX}px, 0px, 0px)`};
   transition: transform 0.2s ease-in-out;
