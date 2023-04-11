@@ -11,5 +11,5 @@ ThemeProvider.propTypes = {
  * @param {{children: JSX.Element}}
  */
 export function ThemeProvider({ children }) {
-  return <__ThemeProvider theme={darkTheme}>{children}</__ThemeProvider>;
+  return <__ThemeProvider theme={lightTheme}>{children}</__ThemeProvider>;
 }
