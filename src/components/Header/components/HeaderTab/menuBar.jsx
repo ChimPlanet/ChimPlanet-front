@@ -80,6 +80,8 @@ const MenuItem = styled.div`
   user-select: none;
   padding: 0px 23px;
 
+  color: ${({ theme }) => theme.colors.main};
+
   border-bottom: ${({ theme, active }) =>
     active ? `2px solid ${theme.colors.logo}` : 'none'};
 

@@ -12,19 +12,6 @@ const widths = {
   desktop: 1060,
 };
 
-const colors = {
-  main: '#101C33',
-  sub: '#868E96',
-  logo: '#00BD2F',
-  border: '#DBDEE2',
-  black: '#000000',
-};
-
-const backgroundColor = {
-  main: '#fff',
-  input: '#f5f6f7',
-};
-
 const media = {
   tablet: (...args) => undefined,
   desktop: (...args) => undefined,
@@ -54,12 +41,59 @@ Object.keys(sizes).reduce((acc, label) => {
   return acc;
 }, media);
 
-const theme = {
-  colors,
+const lightColors = {
+  main: '#101C33',
+  sub: '#868E96',
+  logo: '#00BD2F',
+  border: '#DBDEE2',
+  black: '#000000',
+  help: '#8e94a0',
+};
+
+const lightBackgroundColor = {
+  main: '#fff',
+  header: '#fff',
+  input: '#f5f6f7',
+  sub: '#f5f6f7',
+  searchbarActive: '#f5f6f7',
+  searchbar: '#fff',
+};
+
+const darkColors = {
+  main: '#fff',
+  sub: '#868E96',
+  logo: '#00BD2F',
+  border: '#3A3B3D',
+  borderSpecial: '#DBDEE2',
+  borderPoint: '#A4ACB3',
+  black: '#000000',
+  help: '#fff',
+};
+
+const darkBackgroundColor = {
+  main: '#1E1E1E',
+  header: '#292A2D',
+  modal: '#28292B',
+  input: '#f5f6f7',
+  sub: '#3E4145',
+  searchbar: '#28292B',
+  searchbarActive: '#242527',
+};
+
+export const baseTheme = {
   media,
   widths,
   sizes,
-  backgroundColor,
 };
 
-export default theme;
+export const lightTheme = {
+  colors: lightColors,
+  backgroundColor: lightBackgroundColor,
+  ...baseTheme,
+};
+
+export const darkTheme = {
+  colors: darkColors,
+  backgroundColor: darkBackgroundColor,
+  ...baseTheme,
+};

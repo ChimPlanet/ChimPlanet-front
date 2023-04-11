@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import theme from '@/theme';
+import { baseTheme } from '@/theme';
 import { useSizeType } from '@/context/sizeTypeContext';
 import { Banner as BannerVO } from '@/service/banner';
 
@@ -30,9 +30,9 @@ export default function Banner({ banners }) {
   const itemWidth = useMemo(() => {
     switch (sizeType) {
       case 'desktop':
-        return theme.widths.desktop;
+        return baseTheme.widths.desktop;
       default:
-        return theme.widths.tablet;
+        return baseTheme.widths.tablet;
     }
   }, [sizeType]);
 

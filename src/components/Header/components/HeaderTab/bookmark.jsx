@@ -24,6 +24,6 @@ const BookmarkLink = styled(Link)`
   align-items: center;
   justify-content: center;
   color: ${({ theme }) => theme.colors.main};
-  border: ${({ theme }) => `1px solid ${theme.colors.border}`};
+  border: ${({ theme }) => `1px solid ${theme.colors.borderSpecial}`};
   cursor: pointer;
 `;

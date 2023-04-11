@@ -67,6 +67,8 @@ const IconContainer = styled.div`
   width: 46px;
   height: 46px;
   background: #ffffff;
+  background: ${({ theme }) => theme.backgroundColor.modal};
+
   border-radius: 50%;
   align-items: center;
   justify-content: center;

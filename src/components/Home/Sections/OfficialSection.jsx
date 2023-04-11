@@ -26,5 +26,5 @@ const Detail = styled.div`
   margin-right: 30px;
   font-size: 16px;
   font-weight: 500;
-  color: #8e94a0;
+  color: ${({ theme }) => theme.colors.help};
 `;

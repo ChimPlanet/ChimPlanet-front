@@ -42,6 +42,7 @@ const Container = styled.div`
 
 const Content = styled.div`
   background-color: #f5f6f7;
+  background-color: ${({ theme }) => theme.backgroundColor.sub};
 `;
 
 const Background = styled.div``;

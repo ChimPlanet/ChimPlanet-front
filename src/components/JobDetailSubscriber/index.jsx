@@ -41,6 +41,6 @@ const ContentWrapper = styled.div`
   width: 700px;
   min-height: 70vh;
   height: fit-content;
-  background-color: white;
+  background-color: ${({ theme }) => theme.backgroundColor.modal};
   border-radius: 8px;
 `;

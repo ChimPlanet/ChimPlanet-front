@@ -1,4 +1,4 @@
-import theme from '@/theme';
+import { baseTheme } from '@/theme';
 import { useState, useLayoutEffect } from 'react';
 
 const getWidth = () =>
@@ -7,13 +7,13 @@ const getWidth = () =>
   document.body.clientWidth;
 
 // 너비 내림차순으로 정렬
-const sizeKeys = Object.keys(theme.sizes).sort(
-  (a, b) => theme.sizes[b] - theme.sizes[a],
+const sizeKeys = Object.keys(baseTheme.sizes).sort(
+  (a, b) => baseTheme.sizes[b] - baseTheme.sizes[a],
 );
 
 function getSizeType(width) {
   for (const key of sizeKeys) {
-    if (width >= theme.sizes[key]) return key;
+    if (width >= baseTheme.sizes[key]) return key;
   }
   return sizeKeys.at(-1);
 }

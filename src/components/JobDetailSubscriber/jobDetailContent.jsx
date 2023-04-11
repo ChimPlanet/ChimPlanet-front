@@ -52,6 +52,7 @@ export default function JobDetailContent({ offer }) {
 
 const Wrapper = styled.div`
   padding: 30px 2px 30px 45px;
+  color: ${({ theme }) => theme.colors.main};
 `;
 
 const Content = styled.div`
@@ -78,8 +79,8 @@ const SubTitle = styled.div`
   font-size: 22px;
   font-weight: 700;
   line-height: 26px;
-  color: #101c33;
   margin-bottom: 20px;
+  color: ${({ theme }) => theme.colors.main};
 `;
 
 const PostTags = styled.div`

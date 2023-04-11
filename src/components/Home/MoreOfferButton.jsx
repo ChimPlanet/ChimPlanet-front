@@ -23,6 +23,6 @@ const Container = styled(Link)`
   font-size: 16px;
   font-weight: 500;
   border-radius: 100px;
-  border: ${({ theme }) => `1px solid ${theme.colors.border}`};
+  border: ${({ theme }) => `1px solid ${theme.colors.borderPoint}`};
   margin-top: 70px;
 `;

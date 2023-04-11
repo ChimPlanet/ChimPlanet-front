@@ -37,7 +37,7 @@ const Container = styled.header`
   z-index: 100;
   width: 100%;
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.border}`};
-  background-color: ${({ theme }) => theme.backgroundColor.main};
+  background-color: ${({ theme }) => theme.backgroundColor.header};
 `;
 
 const Content = styled.div`
