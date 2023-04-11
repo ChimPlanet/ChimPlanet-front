@@ -23,6 +23,10 @@ const Container = styled.div`
   width: 350px;
   grid-template-columns: auto 16px;
   background-color: ${({ theme }) => theme.backgroundColor.input};
+
+  ${({ theme }) => theme.media.mobile`
+    display: none;
+  `}
 `;
 
 const SearchInput = styled.input`

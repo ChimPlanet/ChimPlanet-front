@@ -11,4 +11,8 @@ const LogoLink = styled(Link)`
   font-size: 28px;
   font-weight: 700;
   color: ${({ theme }) => theme.colors.logo};
+
+  ${({ theme }) => theme.media.mobile`
+      font-size: 18px;
+  `}
 `;

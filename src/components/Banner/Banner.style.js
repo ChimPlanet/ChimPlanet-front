@@ -18,6 +18,18 @@ export const Container = styled.section`
       height: 200px;
     }`}
   `}
+  
+  ${({ theme }) => theme.media.mobile`
+    ${`
+      .carousel__container {
+        width: ${290 + 2 * horizontalPadding}px;
+        height: 180px;
+      }
+      .carousel-handle {
+        display: none;
+      }
+    `}
+  `}
 `;
 
 export const AnchorBannerItem = styled.div`
@@ -29,6 +41,10 @@ export const AnchorBannerItem = styled.div`
   `}
   ${({ theme }) => theme.media.tablet`
     ${`width: ${theme.widths.tablet + 2 * horizontalPadding}px`};
+  `}
+
+  ${({ theme }) => theme.media.mobile`
+    ${`width: ${290 + 2 * horizontalPadding}px`};
   `}
 
   & img {

@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -6,7 +6,7 @@ import { useJobOfferFromDynamic } from '@/query/offer';
 import { JobOfferMapContent } from '@/common/components/JobOffer';
 import { prefetchImages } from '@/utils';
 import { useSizeType } from '@/context/sizeTypeContext';
-import { useMemo } from 'react';
+import { OfferWidthMap } from '@/utils/offerSizeMap';
 
 JobOfferSectionContent.propTypes = {
   cursor: PropTypes.number.isRequired,
@@ -35,10 +35,7 @@ export default function JobOfferSectionContent({
   const { data: offers } = useJobOfferFromDynamic(queryKey, fetchFunction);
   const sizeType = useSizeType();
 
-  const offerWidth = useMemo(
-    () => (sizeType === 'desktop' ? 250 : 220),
-    [sizeType],
-  );
+  const offerWidth = useMemo(() => OfferWidthMap[sizeType], [sizeType]);
 
   const offerColumnGap = useMemo(
     () => (sizeType === 'desktop' ? 20 : 25),

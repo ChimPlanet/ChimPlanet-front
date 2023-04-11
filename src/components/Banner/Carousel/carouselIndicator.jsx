@@ -14,6 +14,7 @@ export default function CarouselIndicator({
 }) {
   return (
     <Container
+      className="carousel-handle"
       onMouseEnter={() => setIsStop(true)}
       onMouseLeave={() => setIsStop(false)}
     >

@@ -46,6 +46,9 @@ const Content = styled.div`
   ${({ theme }) => theme.media.tablet`
     ${`width: ${theme.widths.tablet}px`};
   `}
+${({ theme }) => theme.media.mobile`
+    width: 350px;
+  `}
 `;
 
 const BannerWrapper = styled.div`

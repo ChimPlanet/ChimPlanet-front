@@ -17,7 +17,7 @@ export default function AdminMarketing() {
         <Layout>
           <PseudoOfferSection title="공식 콘텐츠 구인글" />
           <ConfigurableSubBanner />
-          <PseudoOfferSection title="실시간 인기 구인글" />
+          <PseudoOfferSection title="인기 구인글" />
           <PseudoOfferSection title="최근 올라온 구인글" numOfLines={2} />
         </Layout>
         <MoreOfferButton />

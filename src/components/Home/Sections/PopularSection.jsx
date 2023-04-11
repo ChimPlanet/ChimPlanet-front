@@ -5,7 +5,7 @@ export default function PopularSection() {
   return (
     <JobOfferSection
       queryKey="popular"
-      title="실시간 인기 구인글"
+      title="인기 구인글"
       fetchFunction={backend.offers.popular}
     />
   );
