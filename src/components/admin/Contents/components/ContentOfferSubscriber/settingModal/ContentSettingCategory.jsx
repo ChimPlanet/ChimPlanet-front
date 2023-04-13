@@ -1,4 +1,3 @@
-import { useCallback } from "react";
 import styled from "styled-components";
 import { styled as muiStyled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
@@ -22,15 +21,14 @@ export default function ContentSettingCategory({boardTags, tag}) {
                 카테고리
             </Title>
             <CheckboxGroup>
-                {(tag.map((el)=> (boardTags?.map((item)=>(
+                {(tag.map((el)=> 
                     el.childTagId === el.parentTagId ? 
                     <CheckboxLabel 
                         key={el.tagId} 
-                        control={<CheckBox 
-                        defaultChecked={ item.tagObjResponseDto.parentTagId === el.parentTagId } />}
+                        control={<CheckBox defaultChecked={ boardTags.includes(el.parentTagId) } />}
                         label={el.tagName}
                     /> : null
-                )))))}
+                ))}
             </CheckboxGroup>
         </Container>
     );

@@ -56,7 +56,7 @@ export default function ContentSettingBody({offer, tag}){
                     </CheckboxGroup>
                 </ValuesContainer>
             </JobOfferSection>
-            <ContentSettingCategory boardTags={offer.boardTags} tag={tag}/>
+            <ContentSettingCategory boardTags={offer.boardTags?.map(item=> item.tagObjResponseDto.parentTagId)} tag={tag}/>
             <ContentSettingTag boardTags={offer.boardTags} tag={tag}/>
         </Container>
     )
