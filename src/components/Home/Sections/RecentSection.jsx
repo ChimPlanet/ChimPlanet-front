@@ -22,15 +22,19 @@ function RecentSectionContent() {
   const { data: offers } = useRecentOffers();
   const sizeType = useSizeType();
 
-  const pageCount = useMemo(() => OfferColumnMap[sizeType], [sizeType]);
-
-  const offerWidth = useMemo(() => OfferWidthMap[sizeType], [sizeType]);
+  const config = useMemo(
+    () => ({
+      pageCount: OfferColumnMap[sizeType],
+      offerWidth: OfferWidthMap[sizeType],
+    }),
+    [sizeType],
+  );
 
   return (
-    <JobContent column={pageCount}>
+    <JobContent column={config.pageCount}>
       <JobOfferMapContent
-        jobs={offers.slice(0, pageCount * 2)}
-        offerWidth={offerWidth}
+        jobs={offers.slice(0, config.pageCount * 2)}
+        offerWidth={config.offerWidth}
       />
     </JobContent>
   );

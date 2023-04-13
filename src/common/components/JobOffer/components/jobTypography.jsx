@@ -42,15 +42,22 @@ const Title = styled.h3`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+
+  ${({ theme }) => theme.media.mobile`
+    font-size: 14px;
+  `}
 `;
 
 const Writer = styled.p`
-  margin-top: 15px;
+  margin-top: 12px;
   font-size: 16px;
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  ${({ theme }) => theme.media.mobile`
+    font-size: 14px;
+  `}
 `;
 
 const Detail = styled.p`

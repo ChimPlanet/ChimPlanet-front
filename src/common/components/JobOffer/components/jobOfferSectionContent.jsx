@@ -61,8 +61,13 @@ export default function JobOfferSectionContent({
     <Container
       moveX={-cursor * (offerWidth + offerColumnGap)}
       gap={offerColumnGap}
+      vertical={sizeType === 'mobile'}
     >
-      <JobOfferMapContent jobs={offers} offerWidth={offerWidth} />
+      <JobOfferMapContent
+        jobs={offers}
+        offerWidth={offerWidth}
+        offerOrientation={sizeType === 'mobile' ? 'horizontal' : 'vertical'}
+      />
     </Container>
   );
 }
@@ -70,6 +75,7 @@ export default function JobOfferSectionContent({
 const Container = styled.div`
   margin-top: 20px;
   display: flex;
+  flex-direction: ${({ vertical }) => (!vertical ? 'row' : 'column')};
   gap: ${(p) => `${p.gap}px`};
   width: fit-content;
   transform: ${(p) => `translate3d(${p.moveX}px, 0px, 0px)`};
