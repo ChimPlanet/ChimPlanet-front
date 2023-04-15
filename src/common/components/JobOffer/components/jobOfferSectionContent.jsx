@@ -19,6 +19,7 @@ JobOfferSectionContent.propTypes = {
  * @property {number} page
  * @property {number} perPage
  * @property {(length: number) => void} setLength
+ * @property {number | false} maxLength
  * @property {Function} fetchFunction
  *
  *
@@ -31,8 +32,13 @@ export default function JobOfferSectionContent({
   perPage,
   setLength,
   fetchFunction,
+  maxLength,
 }) {
-  const { data: offers } = useJobOfferFromDynamic(queryKey, fetchFunction);
+  const { data: offers } = useJobOfferFromDynamic(
+    queryKey,
+    fetchFunction,
+    maxLength,
+  );
   const sizeType = useSizeType();
 
   const offerWidth = useMemo(() => OfferWidthMap[sizeType], [sizeType]);

@@ -14,6 +14,7 @@ import JobSelectionSkeleton from '@/components/Skeletons/JobSectionSkeleton';
  * @property {JSX.Element} detail
  * @property {Function} fetchFunction
  * @property {string} queryKey
+ * @property {number} maxLength
  *
  *
  * @param {JobOfferSectionProps} props
@@ -25,6 +26,7 @@ export default function JobOfferSection({
   title,
   hideArrow = false,
   detail = <div></div>,
+  maxLength,
 }) {
   const { context, dispatch, ActionType } = useJobSection();
 
@@ -60,6 +62,7 @@ export default function JobOfferSection({
           setLength={setLength}
           perPage={context.perPage}
           cursor={context.cursor}
+          maxLength={maxLength}
         />
       </Suspense>
     </Container>
