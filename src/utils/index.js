@@ -14,3 +14,14 @@ export function groupBy(collection, attributeName) {
 
   return group;
 }
+
+/**
+ * @template T
+ * @param {Array<T>} array
+ * @param {(element: T) => string} sourceGetter
+ */
+export function prefetchImages(array, sourceGetter) {
+  array.forEach((elem) => {
+    new Image().src = sourceGetter(elem);
+  });
+}

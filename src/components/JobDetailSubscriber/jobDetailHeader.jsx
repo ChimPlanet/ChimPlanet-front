@@ -25,7 +25,7 @@ const PostTitle = styled.div`
   font-weight: 500;
   line-height: 21px;
   margin-bottom: 8px;
-  color: #000000;
+  color: ${({ theme }) => theme.colors.main};
 `;
 
 const PostStatus = styled.div`

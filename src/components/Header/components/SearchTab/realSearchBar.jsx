@@ -78,6 +78,8 @@ const SearchInput = styled.input`
   padding: 0px;
   margin: 0px;
   outline: none;
+
+  color: ${({ theme }) => theme.colors.main};
   &:focus {
     outline: none;
   }

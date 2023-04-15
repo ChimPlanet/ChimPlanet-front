@@ -37,7 +37,7 @@ const Container = styled.header`
   z-index: 100;
   width: 100%;
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.border}`};
-  background-color: ${({ theme }) => theme.backgroundColor.main};
+  background-color: ${({ theme }) => theme.backgroundColor.header};
 `;
 
 const Content = styled.div`
@@ -47,8 +47,13 @@ const Content = styled.div`
   ${({ theme }) => theme.media.desktop`
     ${`width: ${theme.widths.desktop}px`};
   `}
+
   ${({ theme }) => theme.media.tablet`
     ${`width: ${theme.widths.tablet}px`};
+  `}
+
+  ${({ theme }) => theme.media.mobile`
+    ${`width: ${theme.widths.mobile}px`};
   `}
 `;
 

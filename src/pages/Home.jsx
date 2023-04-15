@@ -21,5 +21,5 @@ export default function Home() {
 const Content = styled.div`
   margin: 0 auto;
   margin-top: 70px;
-  margin-bottom: 100px;
+  padding-bottom: 100px;
 `;

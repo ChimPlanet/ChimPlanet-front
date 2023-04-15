@@ -20,5 +20,5 @@ const Title = styled.p`
   margin: 2.2em 0em;
   text-align: center;
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.main};
 `;

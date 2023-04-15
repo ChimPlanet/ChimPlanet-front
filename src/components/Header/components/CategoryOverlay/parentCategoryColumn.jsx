@@ -46,10 +46,10 @@ const Container = styled.div`
 `;
 
 const Content = styled.div`
-  background-color: #fff;
   text-align: left;
   font-size: 14px;
   font-weight: 500;
+  background-color: ${({ theme }) => theme.backgroundColor.main};
 `;
 
 const Background = styled.div``;
@@ -60,6 +60,7 @@ const Item = styled.div`
   &[data-selected='true'],
   &:hover {
     background: #f5f6f7;
+    background-color: ${({ theme }) => theme.backgroundColor.sub};
     color: #00bd2f;
   }
 `;

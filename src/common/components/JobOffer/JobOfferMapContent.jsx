@@ -1,17 +1,20 @@
-import JobOffer from './JobOffer';
-import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import PropTypes from 'prop-types';
+
+import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import useBookmark from '@/hooks/useBookmark';
 import { useArticleContext } from '@/context/articleContext';
 
+import JobOffer from './JobOffer';
+
 /**
- * @param {{jobs: import("@/utils/job").JobOfferVO[], toggleBookmark(id: number):void}}
+ * @param {{jobs: import("@/utils/job").JobOfferVO[], offerWidth?: number, toggleBookmark(id: number):void}}
  */
 
-export default function JobOfferMapContent({ jobs }) {
+export default function JobOfferMapContent({ jobs, offerWidth = 250 }) {
   const [, { open }] = useArticleContext();
   const { toggle } = useBookmark();
   const bookmarkSet = BookmarkContext.getInstance().getBookmarkSet();
+
   return (
     <>
       {jobs.map((offer) => (
@@ -31,7 +34,7 @@ export default function JobOfferMapContent({ jobs }) {
           isRegular={offer.isRegular}
           onBookmarkClick={() => toggle(offer.id)}
           style={{
-            width: 250,
+            width: offerWidth,
           }}
         />
       ))}

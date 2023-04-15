@@ -35,7 +35,7 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  background-color: ${({ theme }) => theme.backgroundColor.main};
+  background-color: ${({ theme }) => theme.backgroundColor.searchbar};
 `;
 
 const Content = styled.div`

@@ -1,14 +1,15 @@
-import theme from '@/theme';
 import PropTypes from 'prop-types';
 import { ThemeProvider as __ThemeProvider } from 'styled-components';
+
+import { lightTheme, darkTheme } from '@/theme';
 
 ThemeProvider.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
 /**
- * @param {{children: JSX.Element}} param0
+ * @param {{children: JSX.Element}}
  */
 export function ThemeProvider({ children }) {
-  return <__ThemeProvider theme={theme}>{children}</__ThemeProvider>;
+  return <__ThemeProvider theme={lightTheme}>{children}</__ThemeProvider>;
 }
