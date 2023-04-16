@@ -5,10 +5,14 @@ import { useMemo } from 'react';
 import TagTrie from '@/utils/tagTrie';
 import Tag from '@/components/Tag';
 import { ignorePrefix } from '@/utils/str';
+import { selectRandomItemsInCollection } from '../../utils';
 
 export default function RecommendTagSection({ word, addTag }) {
   const recommends = useMemo(() => {
-    return TagTrie.getInstance().getSimilarTags(ignorePrefix(word));
+    return selectRandomItemsInCollection(
+      TagTrie.getInstance().getSimilarTags(ignorePrefix(word)),
+      40,
+    );
   }, [word]);
 
   return (

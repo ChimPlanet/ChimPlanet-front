@@ -56,6 +56,9 @@ const Container = styled.div`
   ${({ theme }) => theme.media.tablet`
     height: 220px;
   `}
+  ${({ theme }) => theme.media.mobile`
+    height: 120px;
+  `}
 `;
 
 const ThumbnailImage = styled.img`

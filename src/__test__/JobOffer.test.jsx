@@ -1,12 +1,17 @@
 import { render, screen } from '@testing-library/react';
 import { JobOffer } from '@/common/components/JobOffer';
+import { ThemeProvider } from '@/context/themeContext';
 
 jest.mock('@/constants', () => ({ getApiBase: () => 'localhost:3000' }));
+
+const MockJobOffer = (props) => (
+  <ThemeProvider children={<JobOffer {...props} />} />
+);
 
 describe('JobOffer Component', () => {
   test('문자열이 출력된다.', () => {
     render(
-      <JobOffer
+      <MockJobOffer
         id={0}
         title="UX/UI 디자이너 구인"
         writer="침플래닛"

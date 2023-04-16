@@ -15,14 +15,19 @@ export const usePopularJobOffer = () => {
  * ! 반드시 FetchFunction은 JobOffer Array를 반환해야 한다.
  * @returns {import('react-query').UseQueryResult<Offer[]>}
  */
-export function useJobOfferFromDynamic(key, fetchFunction) {
-  return useQuery([JobOfferQueryKey, key], fetchFunction);
+export function useJobOfferFromDynamic(key, fetchFunction, maxLength) {
+  return useQuery([JobOfferQueryKey, key], fetchFunction, {
+    select(offers) {
+      return maxLength ? offers.slice(0, maxLength) : offers;
+    },
+  });
 }
 
 export function useJobOfferBasic(lastArticleId, size, page) {
-  return useQuery([JobOfferQueryKey, 'basic', page], () => 
-  backend.offers.basic(lastArticleId, size, page),
-)}
+  return useQuery([JobOfferQueryKey, 'basic', page], () =>
+    backend.offers.basic(lastArticleId, size, page),
+  );
+}
 
 export function useRecentOffers() {
   return useQuery([JobOfferQueryKey, 'recent'], backend.offers.recent);

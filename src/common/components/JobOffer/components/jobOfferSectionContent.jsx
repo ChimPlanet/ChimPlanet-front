@@ -19,6 +19,7 @@ JobOfferSectionContent.propTypes = {
  * @property {number} page
  * @property {number} perPage
  * @property {(length: number) => void} setLength
+ * @property {number | false} maxLength
  * @property {Function} fetchFunction
  *
  *
@@ -31,8 +32,13 @@ export default function JobOfferSectionContent({
   perPage,
   setLength,
   fetchFunction,
+  maxLength,
 }) {
-  const { data: offers } = useJobOfferFromDynamic(queryKey, fetchFunction);
+  const { data: offers } = useJobOfferFromDynamic(
+    queryKey,
+    fetchFunction,
+    maxLength,
+  );
   const sizeType = useSizeType();
 
   const offerWidth = useMemo(() => OfferWidthMap[sizeType], [sizeType]);
@@ -61,8 +67,13 @@ export default function JobOfferSectionContent({
     <Container
       moveX={-cursor * (offerWidth + offerColumnGap)}
       gap={offerColumnGap}
+      vertical={sizeType === 'mobile'}
     >
-      <JobOfferMapContent jobs={offers} offerWidth={offerWidth} />
+      <JobOfferMapContent
+        jobs={offers}
+        offerWidth={offerWidth}
+        offerOrientation={sizeType === 'mobile' ? 'horizontal' : 'vertical'}
+      />
     </Container>
   );
 }
@@ -70,6 +81,7 @@ export default function JobOfferSectionContent({
 const Container = styled.div`
   margin-top: 20px;
   display: flex;
+  flex-direction: ${({ vertical }) => (!vertical ? 'row' : 'column')};
   gap: ${(p) => `${p.gap}px`};
   width: fit-content;
   transform: ${(p) => `translate3d(${p.moveX}px, 0px, 0px)`};

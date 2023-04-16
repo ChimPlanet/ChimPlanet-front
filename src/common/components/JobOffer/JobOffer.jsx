@@ -44,13 +44,15 @@ export default function JobOffer({
         isBookmarked={isBookmarked}
         onBookmarkClick={onBookmarkClick}
       />
-      <JobStatusIndicator isRegular={isRegular} isClosed={isClosed} />
-      <JobTypography
-        writer={writer}
-        writeAt={writeAt}
-        viewCount={viewCount}
-        title={title}
-      />
+      <Information>
+        <JobStatusIndicator isRegular={isRegular} isClosed={isClosed} />
+        <JobTypography
+          writer={writer}
+          writeAt={writeAt}
+          viewCount={viewCount}
+          title={title}
+        />
+      </Information>
     </Container>
   );
 }
@@ -73,7 +75,22 @@ const Container = styled.div`
   transform: translateY(0px);
   transition: transform 0.1s ease-in-out;
 
+  ${({ theme }) => theme.media.mobile`
+    display: grid;
+    grid-template-columns: 120px auto;
+    column-gap: 20px;
+    height: 120px;
+  `}
+
   &:hover {
     transform: translateY(-10px);
   }
+`;
+
+const Information = styled.div`
+  margin-top: 20px;
+
+  ${({ theme }) => theme.media.mobile`
+    margin-top: 0px;
+  `}
 `;
