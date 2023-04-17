@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { SectionLeftIcon, SectionRightIcon } from '@/common/icons';
+import { Link } from 'react-router-dom';
 
 /**
  * @typedef {Object} JobOfferSectionHeaderProps
@@ -24,12 +25,14 @@ export default function JobOfferSectionHeader({
   nextPage,
   prevPage,
   hideArrow,
-  detail,
+  goTo,
 }) {
   return (
     <Container>
       <Title>{title}</Title>
-      {detail}
+      <Detail>
+        <Link to={goTo}>{goTo && '자세히보기'}</Link>
+      </Detail>
       <ControlBox>
         {!hideArrow && (
           <>
@@ -62,8 +65,12 @@ const Title = styled.h1`
 `;
 
 const Detail = styled.div`
-  align-content: flex-end;
-  width: fit-content;
+  text-align: right;
+  margin-top: 2px;
+  margin-right: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.help};
 `;
 
 const ControlBox = styled.div`

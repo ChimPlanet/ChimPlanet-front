@@ -16,20 +16,7 @@ export default function OfficialSection() {
       fetchFunction={backend.offers.official}
       hideArrow={sizeType === 'mobile'}
       maxLength={sizeType === 'mobile' && 4}
-      detail={
-        <Detail>
-          <Link to={OFFICIAL_PATH}>자세히 보기</Link>
-        </Detail>
-      }
+      goTo={OFFICIAL_PATH}
     />
   );
 }
-
-const Detail = styled.div`
-  text-align: right;
-  margin-top: 2px;
-  margin-right: 30px;
-  font-size: 16px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.help};
-`;
