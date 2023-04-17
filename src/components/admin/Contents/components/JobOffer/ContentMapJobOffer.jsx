@@ -1,4 +1,3 @@
-
 import { ModalState } from '@/atoms/ContentManagement';
 import { useSetRecoilState } from "recoil";
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
@@ -20,7 +19,7 @@ export default function ContentMapJobOffer({jobs}){
         <>
             {jobs?.map(offer => (
                 <ContentJobOffer 
-                    onClick={()=>onSort(offer.data)}
+                    onClick={()=>onSort(offer.id)}
                     key={offer.id}
                     id={offer.id}
                     thumbnailURL={offer.thumbnailURL}

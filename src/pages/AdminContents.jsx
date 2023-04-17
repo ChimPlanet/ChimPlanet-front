@@ -1,9 +1,6 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
-import { ModalState } from '@/atoms/ContentManagement';
-import { useSetRecoilState } from "recoil";
 import { ContentsHeader } from '@/components/admin/Contents';
-import { useJobOfferDetail } from '@/query/offer';
 import ContentsPosts from '@/components/admin/Contents/components/post';
 import ContentsTags from '@/components/admin/Contents/components/tag';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';

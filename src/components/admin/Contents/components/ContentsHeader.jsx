@@ -2,36 +2,26 @@ import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
 import { SearchIcon } from '@/common/icons';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
-import { useJobOfferDetail } from '@/query/offer'
+import { ModalState } from '@/atoms/ContentManagement';
+import { useSetRecoilState } from "recoil";
 
 export default function ContentsHeader({onActiveTab, activeTab}){
+      
+    const [value, setValue] = useState('')
+    const inputRef = useRef();
+    const { context } = useJobSection();
+    const sort = useSetRecoilState(ModalState);
 
     const handleKeyDown = (e) => {
-        if(e.key === 'Enter'){
-            const { data:offer } = useJobOfferDetail(value);
-            console.log(offer)
-        }
+      if(e.key === 'Enter'){
+        sort(value)
+      }
     }
-    //const sort = useSetRecoilState(ModalState);
-    const { context } = useJobSection();
-    const [value, setValue] = useState('')
-    const [key, setKey] = useState('')
-    const [data, setData] = useState(null)
-
-  /*   if(key === 'Enter' && value.length !== 0 ){
-        //const { data:offer } = useJobOfferDetail(value);
-        useEffect(()=>{
-            setData(offer)
-        },[key])
-    } */
-    
-    const inputRef = useRef();
     
     const TabActive = (e) => {
         onActiveTab(e.target.innerText);
     };
 
-    
     const handleSearch = (e) => {
         setValue(e.target.value)
     }
