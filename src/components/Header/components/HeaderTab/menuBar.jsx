@@ -28,7 +28,7 @@ export default function MenuBar() {
     <>
       <Container>
         {/* Size에 따라서 메뉴바 변경 */}
-        {sizeType === 'desktop' ? (
+        {sizeType !== 'mobile' ? (
           <CategoryItem
             ref={categoryAnchor}
             onMouseOver={() => setIsCategoryVisible(true)}
