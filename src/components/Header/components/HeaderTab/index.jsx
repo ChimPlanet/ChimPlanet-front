@@ -5,8 +5,10 @@ import Bookmark from './bookmark';
 import Logo from './logo';
 import MenuBar from './menuBar';
 import OrnamentalSearchBar from './ornamentalSearchBar';
+import { useSizeType } from '@/context/sizeTypeContext';
+import { MenuIcon, SearchIcon } from '@/common/icons';
 
-export default function HeaderTab({ activeSearchTab }) {
+export default function HeaderTab({ activeSearchTab, mobile }) {
   return (
     <Container>
       <UpperContainer>
@@ -14,7 +16,14 @@ export default function HeaderTab({ activeSearchTab }) {
           <Logo />
           <OrnamentalSearchBar onClick={activeSearchTab} />
         </Group>
-        <Bookmark />
+        {!mobile ? (
+          <Bookmark />
+        ) : (
+          <div>
+            <IconButton onClick={activeSearchTab} children={<SearchIcon />} />
+            <IconButton children={<MenuIcon />} />
+          </div>
+        )}
       </UpperContainer>
       <BottomContainer>
         <MenuBar />
@@ -43,4 +52,10 @@ const Group = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 30px;
+`;
+
+const IconButton = styled.button`
+  & svg {
+    margin: auto;
+  }
 `;
