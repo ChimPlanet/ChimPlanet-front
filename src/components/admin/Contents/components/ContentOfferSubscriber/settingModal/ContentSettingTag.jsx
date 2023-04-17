@@ -1,34 +1,62 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import { MinXIcon } from "@/common/icons";
+import { useAdminBoardState } from "../../../atoms/adminBoard.atom";
 
+export default function ContentSettingTag({tag}){
 
-export default function ContentSettingTag({boardTags, tag}){
     
+    const [board, setBoard] = useAdminBoardState()
     const [inputValue, setInputValue] = useState('');
-    const [tags, setTags] = useState([]);
+    const [tagList, setTagList] = useState(
+        tag.filter(el=> (
+            board.boardTags.map(tag=> tag.childTagId).includes(el.childTagId)
+            )).map(el=>{
+                return({
+                childTagId : el.childTagId,
+                parentTagId : el.parentTagId,
+                tagId: el.tagId,
+                tagName: el.tagName
+            })
+        })
+    );
 
-    useMemo(()=>{
-        setTags(boardTags?.map(tag=> '#' + tag.tagObjResponseDto.tagName))
-    },[boardTags])
+    useEffect(()=>{
+        setBoard({
+            "articleId": board.articleId,
+            "boardTags": tagList.map(el=>{
+              return({
+                childTagId : el.childTagId,
+                parentTagId : el.parentTagId,
+              })
+            }),
+            "isEnd": board.isEnd
+        }) 
+    },[tagList])
 
     const handleValue = (value) => {
         setInputValue(value.target.value);
     };
     
     const handleKeyDown = (e) => {
-        const newTag = [...tags] ;
-        if(e.key === 'Enter' && inputValue.charAt(0) === '#'){
-            newTag.push(inputValue);
-            setTags(newTag);
-            setInputValue('');
+        const currentTag = tag.find(el=> (el.tagName.includes(inputValue)))
+        
+        if(e.key === 'Enter' && currentTag !== undefined){
+            
+            setTagList(tagList => [...tagList, {
+                childTagId : currentTag.childTagId,
+                parentTagId : currentTag.parentTagId,
+                tagId: currentTag.tagId,
+                tagName: currentTag.tagName
+            }])
+
         }else if(e.key === 'Enter' && inputValue.charAt(0) !== '#'){
-            alert('# 을 입력해주세요')
+            alert('일치하는 태그가 없습니다.')
         }
     };
 
     const deleteTag = (el) => {
-        setTags([...tags].filter(item=> item !== el ));
+        setTagList([...tagList].filter(item=> item !== el ));
     };
 
     return(
@@ -38,9 +66,9 @@ export default function ContentSettingTag({boardTags, tag}){
             </Title>
             <InputBox value={inputValue} placeholder="태그를 입력해주세요" onKeyPress={handleKeyDown} onChange={handleValue}/>
             <Tags> 
-                {Array.isArray(tags) ? tags.map((el, index)=>(
+                {Array.isArray(tagList) ? tagList.map((el, index)=>(
                     <Tag key={index}>
-                        {el} 
+                        {'# ' + el.tagName} 
                         <IconContainer onClick={()=>deleteTag(el)}>
                             <MinXIcon />
                         </IconContainer>

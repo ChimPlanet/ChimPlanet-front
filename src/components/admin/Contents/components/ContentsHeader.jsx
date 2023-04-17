@@ -1,35 +1,62 @@
-import styled from 'styled-components';
-
-import ContentsSearch from './ContentsSearch';
+import styled from "styled-components";
+import { useState, useRef, useEffect } from "react";
+import { SearchIcon } from '@/common/icons';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
+import { ModalState } from '@/atoms/ContentManagement';
+import { useSetRecoilState } from "recoil";
 
-export default function ContentsHeader({ onActiveTab, activeTab }) {
-  //const [activeTab, setActiveTab] = useState('게시글');
-  const { context } = useJobSection();
+export default function ContentsHeader({onActiveTab, activeTab}){
+      
+    const [value, setValue] = useState('')
+    const inputRef = useRef();
+    const { context } = useJobSection();
+    const sort = useSetRecoilState(ModalState);
 
-  const TabActive = (e) => {
-    onActiveTab(e.target.innerText);
-  };
+    const handleKeyDown = (e) => {
+      if(e.key === 'Enter'){
+        sort(value)
+      }
+    }
+    
+    const TabActive = (e) => {
+        onActiveTab(e.target.innerText);
+    };
 
-  return (
-    <Container>
-      <Header width={`${context.perPage * 320 - 20}px`}>
-        <Title>게시글 및 태그</Title>
-        <NavContainer>
-          <Menu>
-            <MenuItem onClick={TabActive} active={'게시글' === activeTab}>
-              게시글
-            </MenuItem>
-            <MenuItem onClick={TabActive} active={'태그' === activeTab}>
-              태그
-            </MenuItem>
-          </Menu>
-          <ContentsSearch />
-        </NavContainer>
-      </Header>
-    </Container>
-  );
-}
+    const handleSearch = (e) => {
+        setValue(e.target.value)
+    }
+    
+    const OnClick = () => {
+        inputRef.current.focus();
+    };
+
+    return(
+        <Container>
+            <Header width={`${context.perPage * 320 - 20}px`}>
+                <Title>게시글 및 태그</Title>
+                <NavContainer>
+                    <Menu>
+                        <MenuItem onClick={TabActive} active={'게시글' === activeTab}>
+                            게시글
+                        </MenuItem>
+                        <MenuItem onClick={TabActive} active={'태그' === activeTab}>
+                            태그
+                        </MenuItem>
+                    </Menu>
+                    <InputContainer onClick={OnClick}>
+                        <SearchInput 
+                        onKeyPress={handleKeyDown}
+                        onChange={handleSearch} 
+                        ref={inputRef}
+                        value={value} 
+                        placeholder="ID 또는 검색어를 입력하세요"/>
+                        <SearchIcon />
+                    </InputContainer>
+                </NavContainer>
+            </Header>
+        </Container>
+    );
+};
 
 const Container = styled.div`
   border-bottom: 1px solid #cdcfd6;
@@ -74,3 +101,35 @@ const MenuItem = styled.span`
     border-bottom: ${({ theme }) => `2px solid ${theme.colors.border}`};
   }
 `;
+
+const InputContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 350px;
+    height: 36px;
+    border-radius: 100px;
+    background: #F5F6F7;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+`;
+
+  const SearchInput = styled.input`
+    width: 280px;
+    height: 36px;
+    padding: 0px;
+    margin: 0px;
+    outline: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #868E96;
+    background: #F5F6F7;
+`;
+
+
+
+
+
+

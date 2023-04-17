@@ -1,8 +1,7 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import ContnetsTab from "./ContentsTab";
 import ContentsOfferSection from "./ContentsOfferSection";
 import { useJobOfferBasic  } from '@/query/offer';
-import JobInfiniteScroll from "@/components/JobInfiniteScroll";
 import { Offer } from '@/service/offer';
 
 export default function ContentsPosts(){
