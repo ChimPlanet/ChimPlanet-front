@@ -25,8 +25,10 @@ import DetailedSettingsIcon from './DetailedSettingsIcon';
 import PreviewIcon from './PreviewIcon';
 import MinXIcon from './MinXIcon';
 import LeftChevronIcon from './LeftChevronIcon';
+import GreenRightChevronIcon from './GreenRightChevronIcon';
 
 export {
+  GreenRightChevronIcon,
   UserIcon,
   PopupIcon,
   ArrowBelowIcon,

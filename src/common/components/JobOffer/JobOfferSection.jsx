@@ -6,15 +6,18 @@ import JobOfferSectionContent from './components/jobOfferSectionContent';
 import JobOfferSectionHeader from './components/jobOfferSectionHeader';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobSelectionSkeleton from '@/components/Skeletons/JobSectionSkeleton';
+import { useSizeType } from '@/context/sizeTypeContext';
+import { GreenRightChevronIcon } from '@/common/icons';
+import { Link } from 'react-router-dom';
 
 /**
  * @typedef {Object} JobOfferSectionProps
  * @property {string} title
  * @property {boolean?} hideArrow
- * @property {JSX.Element} detail
  * @property {Function} fetchFunction
  * @property {string} queryKey
  * @property {number} maxLength
+ * @property {string?} goTo
  *
  *
  * @param {JobOfferSectionProps} props
@@ -25,7 +28,7 @@ export default function JobOfferSection({
   fetchFunction,
   title,
   hideArrow = false,
-  detail = <div></div>,
+  goTo,
   maxLength,
 }) {
   const { context, dispatch, ActionType } = useJobSection();
@@ -34,6 +37,8 @@ export default function JobOfferSection({
     (length) => dispatch({ type: ActionType.SET_LENGTH, payload: length }),
     [dispatch],
   );
+
+  const sizeType = useSizeType();
 
   const nextPage = useCallback(
     () => dispatch({ type: ActionType.NEXT }),
@@ -48,7 +53,7 @@ export default function JobOfferSection({
     <Container>
       <JobOfferSectionHeader
         title={title}
-        detail={detail}
+        goTo={sizeType !== 'mobile' && goTo}
         hideArrow={hideArrow}
         isNext={context.isNext}
         isPrev={context.isPrev}
@@ -65,6 +70,12 @@ export default function JobOfferSection({
           maxLength={maxLength}
         />
       </Suspense>
+      {sizeType === 'mobile' && goTo && (
+        <Footer to={goTo}>
+          <FooterText>자세히보기</FooterText>
+          <GreenRightChevronIcon />
+        </Footer>
+      )}
     </Container>
   );
 }
@@ -78,4 +89,18 @@ const Container = styled.section`
   min-height: 460px;
   overflow-x: hidden;
   /* width: ${(props) => props.width}; */
+`;
+
+const Footer = styled(Link)`
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const FooterText = styled.span`
+  font-size: 16px;
+  font-weight: 500;
+  color: ${({ theme }) => theme.colors.logo};
+  margin-right: 15px;
 `;
