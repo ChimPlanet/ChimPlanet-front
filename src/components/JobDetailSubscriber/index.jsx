@@ -18,7 +18,7 @@ export default function JobDetailSubscriber() {
             {article && <JobDetailContent offer={article} />}
           </Suspense>
         </ContentWrapper>
-        <JobDetailMenuBar id={article?.id} />
+        <JobDetailMenuBar id={article?.id} writer={article?.writer}/>
       </>
     </ScrollModal>
   );

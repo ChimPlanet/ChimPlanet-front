@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useJobOfferDetail } from '@/query/offer';
 import { Offer } from '@/service/offer';
 import JobDetailHeader from './jobDetailHeader';
-import PostTag from './PostTag';
 
 import { useMemo } from 'react';
 import {
@@ -15,7 +14,7 @@ import {
 /** @param {{offer: Offer}} */
 export default function JobDetailContent({ offer }) {
   const { data } = useJobOfferDetail(offer.id);
-
+  console.log(data);
   const content = useMemo(() => {
     const dom = stringToDom(data.content);
     adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
@@ -27,7 +26,7 @@ export default function JobDetailContent({ offer }) {
       <JobDetailHeader
         title={offer.title}
         status={offer.isClosed}
-        date={offer.rawDateTime}
+        date={data.data.regDate}
         views={offer.viewCount}
       />
       {/* <PostImg referrerPolicy="no-referrer" src={imgLink} /> */}
@@ -40,10 +39,10 @@ export default function JobDetailContent({ offer }) {
       </Content>
       <SubTitle>태그</SubTitle>
       <PostTags>
-        {data.tags?.map((items) => (
-          <PostTag key={items} tag={items}>
-            {items}
-          </PostTag>
+        {data.data.tags?.map((items) => (
+          <Tag key={items.tagObjResponseDto.tagName}>
+            { '# ' + items.tagObjResponseDto.tagName}
+          </Tag>
         ))}
       </PostTags>
     </Wrapper>
@@ -86,4 +85,16 @@ const SubTitle = styled.div`
 const PostTags = styled.div`
   display: flex;
   flex-wrap: wrap;
+`;
+
+const Tag = styled.div`
+  padding: 5px 19px;
+  border: 1px solid #dbdee2;
+  border-radius: 100px;
+  margin-right: 8px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #8e94a0;
 `;

@@ -9,12 +9,14 @@ class OfferContent {
   content;
   @field('redirectURL')
   redirectURL;
-  @field('tagList')
+  @field('tags')
   tags;
   @field('isEnd')
   isClosed;
-  @field('title')
+  @field('boardTitle')
   title;
+  @field('writer')
+  writer;
   @field('regData', pp.dateTime)
   dateTime;
   @field('readCount', pp.number)

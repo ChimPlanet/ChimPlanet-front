@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import CafeIcon from '@/common/icons/CafeIcon';
-import DetailBookMark from '@/common/icons/DetailBookMark';
-import ShareIcon from '@/common/icons/ShareIcon';
+import { ProfileIcon, ShareIcon, DetailBookMark, CafeIcon } from '@/common/icons'
 
-export default function JobDetailMenuBar({ id }) {
+export default function JobDetailMenuBar({ id, writer }) {
   const handleCopyClipBoard = async (text) => {
     const input = document.createElement('input');
     input.value = text;
@@ -25,6 +23,12 @@ export default function JobDetailMenuBar({ id }) {
 
   return (
     <Container>
+      <div>
+        <IconContainer>
+          <ProfileIcon />
+        </IconContainer>
+        <IconText>{writer}</IconText>
+      </div>
       <a href={`https://cafe.naver.com/steamindiegame/${id}`} target="_blank">
         <IconContainer>
           <CafeIcon />
