@@ -7,17 +7,26 @@ import {
   SearchContextProvider,
   useSearchContext,
 } from '../../context/searchContext';
+import { LeftChevronIcon } from '@/common/icons';
 
 /**
- * @param {{afterSearch():void}} param0
+ * @param {{afterSearch():void, activeHeaderTab():void, mobile: boolean}}
  * @returns
  */
-export default function SearchTab({ afterSearch }) {
+export default function SearchTab({ afterSearch, activeHeaderTab, mobile }) {
   return (
     <Container>
-      <Content>
+      <Content data-mobile={mobile}>
         <SearchContextProvider onAfterSearch={afterSearch}>
-          <RealSearchBar />
+          <SearchBarWrapper>
+            {mobile && (
+              <ExitButton
+                onClick={activeHeaderTab}
+                children={<LeftChevronIcon />}
+              />
+            )}
+            <RealSearchBar mobile={mobile} />
+          </SearchBarWrapper>
           <SearchOptionalSection />
         </SearchContextProvider>
       </Content>
@@ -42,6 +51,10 @@ const Content = styled.div`
   margin: 0 auto;
   padding: 30px 0px;
 
+  &[data-mobile='true'] {
+    padding: 10px 20px 30px 20px;
+  }
+
   ${({ theme }) => theme.media.desktop`
     ${'width: ' + theme.widths.desktop + 'px'};
   `};
@@ -49,4 +62,16 @@ const Content = styled.div`
   ${({ theme }) => theme.media.tablet`
     ${'width: ' + theme.widths.tablet + 'px'};
   `};
+`;
+
+const SearchBarWrapper = styled.div`
+  margin-bottom: 35px;
+  display: flex;
+`;
+
+const ExitButton = styled.button`
+  padding-right: 25px;
+  & svg {
+    margin: auto;
+  }
 `;

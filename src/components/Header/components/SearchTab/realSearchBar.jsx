@@ -22,7 +22,7 @@ import RealSearchTagList from './realSearchTagList';
  * @param {RealSearchBarProps} props
  * @returns
  */
-export default function RealSearchBar() {
+export default function RealSearchBar({ mobile }) {
   const [{ input, tags }, { setInput, removeTag }] = useSearchContext();
 
   const inputRef = useRef(null);
@@ -38,7 +38,7 @@ export default function RealSearchBar() {
   const handleInput = ({ target }) => setInput(target.value);
 
   return (
-    <Container>
+    <Container data-mobile={mobile}>
       <SearchIcon />
       <SearchContent>
         <RealSearchTagList tags={tags} removeTag={removeTag} />
@@ -59,11 +59,15 @@ const Container = styled.div`
   grid-template-columns: 16px auto;
   padding: 0px 14px;
   border: ${({ theme }) => `1px solid ${theme.colors.logo}`};
-
   border-radius: 100px;
   align-items: center;
   height: 50px;
-  margin-bottom: 35px;
+  flex: 1;
+
+  &[data-mobile='true'] {
+    border: none;
+    background-color: #f5f5f5;
+  }
 `;
 
 const SearchContent = styled.div`

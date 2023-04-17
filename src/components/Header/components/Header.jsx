@@ -3,9 +3,14 @@ import styled from 'styled-components';
 
 import HeaderTab from './HeaderTab';
 import SearchTab from './SearchTab';
+import { useSizeType } from '@/context/sizeTypeContext';
+import { useMemo } from 'react';
 
 export default function Header() {
   const [activeTab, setActiveTab] = useState('header');
+  const sizeType = useSizeType();
+
+  const isMobile = useMemo(() => sizeType === 'mobile', [sizeType]);
 
   const activeSearchTab = useCallback(() => {
     setActiveTab('search');
@@ -17,12 +22,18 @@ export default function Header() {
 
   return (
     <>
-      {activeTab === 'search' && <BackgroundSheet onClick={activeHeaderTab} />}
+      {activeTab === 'search' && (
+        <BackgroundSheet data-mobile={isMobile} onClick={activeHeaderTab} />
+      )}
       <Container>
         <Content>
-          <HeaderTab activeSearchTab={activeSearchTab} />
+          <HeaderTab mobile={isMobile} activeSearchTab={activeSearchTab} />
           {activeTab === 'search' && (
-            <SearchTab afterSearch={activeHeaderTab} />
+            <SearchTab
+              mobile={isMobile}
+              activeHeaderTab={activeHeaderTab}
+              afterSearch={activeHeaderTab}
+            />
           )}
         </Content>
       </Container>
@@ -65,4 +76,8 @@ const BackgroundSheet = styled.div`
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.107);
+
+  &[data-mobile='true'] {
+    background-color: #fff;
+  }
 `;

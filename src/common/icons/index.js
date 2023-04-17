@@ -24,6 +24,7 @@ import TrashCanIcon from './TrashCanIcon';
 import DetailedSettingsIcon from './DetailedSettingsIcon';
 import PreviewIcon from './PreviewIcon';
 import MinXIcon from './MinXIcon';
+import LeftChevronIcon from './LeftChevronIcon';
 
 export {
   UserIcon,
@@ -52,4 +53,5 @@ export {
   WriteIcon,
   DoubleSlashIcon,
   TrashCanIcon,
+  LeftChevronIcon,
 };
