@@ -2,16 +2,19 @@ import styled from 'styled-components';
 import { useJobOfferDetail } from '@/query/offer';
 import { Offer } from '@/service/offer';
 import ContentOfferHeader from './ContentOfferHeader';
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import {
   stringToDom,
   getAllImgElementsFromDom,
   adaptImagesNoRefererPolicy,
 } from './util';
+import { useAdminBoardState } from '../../atoms/adminBoard.atom';
 
-export default function ContentOfferDetail({ offer }) {
+export default function ContentOfferDetail({ offer, handleDate }) {
 
-  const { data } = useJobOfferDetail(offer.articleId);
+  const { data } = useJobOfferDetail(offer);
+
+  const [{}, setBoard] = useAdminBoardState();
 
   /** @param {{offer: Offer}} */
   const content = useMemo(() => {
@@ -19,14 +22,29 @@ export default function ContentOfferDetail({ offer }) {
     adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
     return dom.documentElement.outerHTML;
   }, [data]);
+  
+  useEffect(()=>{
+    handleDate(data.data.regDate)
+    setBoard({
+        "articleId": data.data.articleId,
+        "boardTags": data.data.tags?.map(el=>{
+          return({
+            childTagId : el.tagObjResponseDto.childTagId,
+            parentTagId : el.tagObjResponseDto.parentTagId,
+          })
+        }),
+        "isEnd": data.data.isEnd
+    })
+  },[offer])
+  
 
   return (
     <Wrapper>
       <ContentOfferHeader
-        title={offer.boardTitle}
-        status={offer.isEnd}
-        date={offer.regDate}
-        views={offer.readCount}
+        title={data.data.boardTitle}
+        status={data.data.isEnd}
+        date={data.data.regDate}
+        views={data.data.readCount}
       />
       <Content>
         <PostText
@@ -37,7 +55,7 @@ export default function ContentOfferDetail({ offer }) {
       </Content>
       <SubTitle>태그</SubTitle>
       <PostTags>
-        {offer.boardTags?.map((items) => (
+        {data.data.tags?.map((items) => (
           <Tag key={items.tagObjResponseDto.tagId}>
             {items.tagObjResponseDto.tagName}
           </Tag>

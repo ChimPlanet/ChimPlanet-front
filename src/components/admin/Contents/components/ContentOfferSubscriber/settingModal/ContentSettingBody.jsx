@@ -1,4 +1,4 @@
-import {  useCallback } from 'react'
+import {  useCallback, useState, useEffect } from 'react'
 import styled from "styled-components"
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -6,22 +6,29 @@ import Checkbox from '@mui/material/Checkbox';
 import { styled as muiStyled } from '@mui/material/styles';
 import ContentSettingCategory from './ContentSettingCategory'
 import ContentSettingTag from "./ContentSettingTag";
+import { useAdminBoardState } from '../../../atoms/adminBoard.atom';
 
-const states = [
-    '마감',
-    '구인 중',
-    '상시모집',
-]
+export default function ContentSettingBody({tag, id, date}){
 
-export default function ContentSettingBody({offer, tag}){
+    const [board, setBoard] = useAdminBoardState()
+    const [checked, setChecked] = useState(board.isEnd === 'END' ? true : false);
 
-    const a = useCallback(()=>{
-        if(offer.isEnd === 'ING'){
-            return '구인 중'
-        }else if(offer.isEnd === 'END'){
-            return '마감'
-        }
-    },[offer])
+    useEffect(()=>{
+        setBoard({
+            "articleId": board.articleId,
+            "boardTags": board.boardTags.map(el=>{
+              return({
+                childTagId : el.childTagId,
+                parentTagId : el.parentTagId,
+              })
+            }),
+            "isEnd": checked ? 'END' : 'ING'
+        }) 
+    },[checked])
+
+    const handelCheck = () => {
+        setChecked(!checked)
+    }
 
     return(
         <Container>
@@ -37,27 +44,33 @@ export default function ContentSettingBody({offer, tag}){
                     <InputBoxTitle>
                         ID
                     </InputBoxTitle>
-                    <InputBox>{offer.articleId}</InputBox>
+                    <InputBox>{id}</InputBox>
                     <InputBoxTitle>
                         작성일
                     </InputBoxTitle>
-                    <InputBox>{offer.regDate}</InputBox>
-                    <InputBoxTitle margin=''>
+                    <InputBox>{date}</InputBox>
+                    <InputBoxTitle>
                         진행상황
                     </InputBoxTitle>
                     <CheckboxGroup>
-                        {states.map(el=>(
-                            <CheckboxLabel 
-                            //onChange={(e)=> progress(e, el)}
-                            key={el}
-                            control={<CheckBox defaultChecked={a() === el ? true : false} />} 
-                            label={el} />
-                        ))}
+                        <CheckboxLabel 
+                        onClick={handelCheck} 
+                        control={<CheckBox checked={checked} />} 
+                        label='마감' />
+                        <CheckboxLabel 
+                        onClick={handelCheck} 
+                        control={<CheckBox checked={!checked} />} 
+                        label='구인 중' />
+                        <CheckboxLabel 
+                        control={<CheckBox defaultChecked={false} />} 
+                        label='상시모집' />
                     </CheckboxGroup>
                 </ValuesContainer>
             </JobOfferSection>
-            <ContentSettingCategory boardTags={offer.boardTags} tag={tag}/>
-            <ContentSettingTag boardTags={offer.boardTags} tag={tag}/>
+            <ContentSettingCategory 
+            tag={tag} />
+            <ContentSettingTag 
+            tag={tag} />
         </Container>
     )
 }

@@ -8,20 +8,30 @@ import { styled as muiStyled } from '@mui/material/styles';
 import ContentOfferSidebar from './ContentOfferSidebar';
 import ContentOfferDetail from './ContentOfferDetail';
 import ContentSetting from './settingModal/ContentSetting';
+import { useAdminBoardState } from '../../atoms/adminBoard.atom';
+import backend from '@/service/backend';
+import { updateBoardRequest } from '@/service/board/board-request';
 
 export default function ContentOfferSubscriber() {
+
   const [openModal, setOpenModal] = useState(false);
   const modalState = useRecoilValue(ModalState);
-  const sort = useSetRecoilState(ModalState);
+  const sort = useSetRecoilState(ModalState); 
+  const [board] = useAdminBoardState()
+  const [date, setDate] = useState('')
+
+  const handleDate = (value) => {
+    setDate(value)
+  }
 
   const handleClickOutSide = (e) => {
     sort(null);
     setOpenModal(false);
   };
-
+  
   const handleSettings = (e) => {
     if(e.target.innerHTML === '완료'){
-      console.log('완료')
+      backend.board.updateBoard(updateBoardRequest(board))
     }
     setOpenModal(!openModal);
   };
@@ -32,16 +42,17 @@ export default function ContentOfferSubscriber() {
         <ContentContainer>
           <ContentWrapper>
             <Suspense fallback={<Loading />}>
-              <ContentOfferDetail offer={modalState} />
+              <ContentOfferDetail offer={modalState} handleDate={handleDate} />
             </Suspense>
           </ContentWrapper>
           <ContentOfferSidebar
             handleSettings={handleSettings}
-            id={modalState?.articleId}
+            id={modalState}
           />
         </ContentContainer>
         <ContentSetting
-          offer={modalState}
+          id={modalState}
+          date={date}
           openModal={openModal}
           handleSettings={handleSettings}
         />

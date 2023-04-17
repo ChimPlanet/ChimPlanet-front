@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Suspense, useRef, useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { Modal } from '@mui/material';
 import Loading from '@/common/components/Loading';
 import { styled as muiStyled } from '@mui/material/styles';
@@ -7,7 +7,7 @@ import ContentSettingHeader from './ContentSettingHeader';
 import ContentSettingBody from './ContentSettingBody';
 import { useTagList } from '@/query/tag'
 
-export default function ContentSetting({openModal, handleSettings, offer}) {
+export default function ContentSetting({openModal, handleSettings, id, date}) {
 
     const { data: tag } = useTagList();
 
@@ -17,7 +17,7 @@ export default function ContentSetting({openModal, handleSettings, offer}) {
                 <ContentWrapper>
                     <Suspense fallback={<Loading />}>   
                         <ContentSettingHeader handleSettings={handleSettings}/>
-                        <ContentSettingBody offer={offer} tag={tag} />
+                        <ContentSettingBody id={id} date={date} tag={tag} />
                         <ButtonContainer>
                             <Button color='#000000' onClick={handleSettings}>
                                 취소

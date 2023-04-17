@@ -1,20 +1,16 @@
-import { useCallback } from "react";
 import styled from "styled-components";
+import { useState, useEffect } from 'react'
 import { styled as muiStyled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { useAdminBoardState } from "../../../atoms/adminBoard.atom";
 
-const categories = [
-    'IT·게임',
-    '디자인·2D',
-    '3D·건축·인테리어',
-    '미디어·연예·창작',
-    '일러스트',
-    '기타',
-];
+export default function ContentSettingCategory({tag}) {
 
-export default function ContentSettingCategory({boardTags, tag}) {
+    const [board] = useAdminBoardState();
+ 
+    const category = tag.filter((el)=> el.childTagId === el.parentTagId)
 
     return(
         <Container>
@@ -22,15 +18,17 @@ export default function ContentSettingCategory({boardTags, tag}) {
                 카테고리
             </Title>
             <CheckboxGroup>
-                {(tag.map((el)=> (boardTags?.map((item)=>(
-                    el.childTagId === el.parentTagId ? 
+                {(category.map((el)=> 
                     <CheckboxLabel 
                         key={el.tagId} 
                         control={<CheckBox 
-                        defaultChecked={ item.tagObjResponseDto.parentTagId === el.parentTagId } />}
+                            name={el.tagName}
+                            checked={board.boardTags?.map(item=> 
+                                (item.parentTagId)
+                                ).includes(el.parentTagId)} />}
                         label={el.tagName}
-                    /> : null
-                )))))}
+                    />
+                ))}
             </CheckboxGroup>
         </Container>
     );
