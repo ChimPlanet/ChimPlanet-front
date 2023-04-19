@@ -44,14 +44,12 @@ export default function ContnentsOfferSection({ jobs, getMoreItem, last }) {
 };
 
 const Container = styled.div`
-    ${({ theme }) => theme.media.tablet`
-    ${`max-width: ${theme.widths.tablet}px`};
-  `};
+  width: 1060px;
 `;
 
 const JobOfferContainer = styled.div`
   display: grid;
-  grid-template-columns: ${({ column }) => `repeat(${column}, 1fr)`};
+  grid-template-columns: repeat(4, 1fr);
   justify-items: center;
   gap: 20px;
   row-gap: 70px;

@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useJobOfferDetail } from '@/query/offer';
 import { Offer } from '@/service/offer';
 import JobDetailHeader from './jobDetailHeader';
-import PostTag from './PostTag';
 
 import { useMemo } from 'react';
 import {
@@ -12,9 +11,13 @@ import {
   adaptImagesNoRefererPolicy,
 } from './util';
 
+import { useSizeType } from '@/context/sizeTypeContext';
+
 /** @param {{offer: Offer}} */
 export default function JobDetailContent({ offer }) {
-  const { data } = useJobOfferDetail(offer.id);
+  const { data } = useJobOfferDetail(offer.id); 
+  
+  const sizeType = useSizeType()
 
   const content = useMemo(() => {
     const dom = stringToDom(data.content);
@@ -23,11 +26,11 @@ export default function JobDetailContent({ offer }) {
   }, [data]);
 
   return (
-    <Wrapper>
+    <Wrapper sizeType={sizeType}>
       <JobDetailHeader
         title={offer.title}
         status={offer.isClosed}
-        date={offer.rawDateTime}
+        date={data.data.regDate}
         views={offer.viewCount}
       />
       {/* <PostImg referrerPolicy="no-referrer" src={imgLink} /> */}
@@ -41,9 +44,9 @@ export default function JobDetailContent({ offer }) {
       <SubTitle>태그</SubTitle>
       <PostTags>
         {data.tags?.map((items) => (
-          <PostTag key={items} tag={items}>
-            {items}
-          </PostTag>
+          <Tag key={items.tagObjResponseDto.tagName}>
+            { '# ' + items.tagObjResponseDto.tagName}
+          </Tag>
         ))}
       </PostTags>
     </Wrapper>
@@ -51,7 +54,9 @@ export default function JobDetailContent({ offer }) {
 }
 
 const Wrapper = styled.div`
-  padding: 30px 2px 30px 45px;
+  margin-top: ${({sizeType})=> sizeType === 'desktop' ? '' : '43px' };
+  padding: ${({sizeType})=> sizeType === 'mobile' 
+    ? "20px 10px 70px 20px" : "30px 2px 30px 45px"};
   color: ${({ theme }) => theme.colors.main};
 `;
 
@@ -86,4 +91,16 @@ const SubTitle = styled.div`
 const PostTags = styled.div`
   display: flex;
   flex-wrap: wrap;
+`;
+
+const Tag = styled.div`
+  padding: 5px 19px;
+  border: 1px solid #dbdee2;
+  border-radius: 100px;
+  margin-right: 8px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: #8e94a0;
 `;

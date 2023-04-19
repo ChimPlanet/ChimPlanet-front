@@ -1,6 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
-import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobNavBar from '@/components/JobNavBar';
 import JobInfiniteScroll from '@/components/JobInfiniteScroll';
 import { useArticleContext } from '@/context/articleContext';
@@ -23,7 +22,6 @@ export default function Job({ parId }) {
   //디테일 모달
   const [offerData, setOfferData] =  useState(null);
   const [,{ open }] = useArticleContext();
-  const { context } = useJobSection();
   // 가져오는 게시글 수
   const size = 12 
 
@@ -52,7 +50,7 @@ export default function Job({ parId }) {
   const { data } = useJobOfferBasic(lastArticleId, size, page);
 
   useEffect(() => {
-    setData((prevData) => [...prevData ,...data.content]);
+    setData((prevData) => [...prevData, ...data.content]);
   },[data])
 
   useEffect(() => {
@@ -90,7 +88,7 @@ export default function Job({ parId }) {
   };
 
   return (
-    <Container width={`${context.perPage * 270 - 20}px`}>
+    <Container>
       <JobNavBar 
       total={Data.length} 
       setValue={setValue} 
@@ -106,9 +104,10 @@ export default function Job({ parId }) {
       last={data.last} />
     </Container>
   );
-}
+};
 
 const Container = styled.section`
-  width: ${(props) => props.width};
   margin: 0 auto;
+  width: 100%;
+  overflow: hidden;
 `;

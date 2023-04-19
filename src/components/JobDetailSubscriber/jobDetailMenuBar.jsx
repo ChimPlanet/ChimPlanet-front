@@ -1,9 +1,16 @@
 import styled from 'styled-components';
-import CafeIcon from '@/common/icons/CafeIcon';
-import DetailBookMark from '@/common/icons/DetailBookMark';
-import ShareIcon from '@/common/icons/ShareIcon';
+import { ProfileIcon, ShareIcon, DetailBookMark, CafeIcon } from '@/common/icons'
+import { useSizeType } from '@/context/sizeTypeContext';
 
-export default function JobDetailMenuBar({ id }) {
+export default function JobDetailMenuBar({ 
+  id, 
+  writer,  
+  isBookmarked = false,
+  onBookmarkClick,
+}) {
+
+  const sizeType = useSizeType();
+
   const handleCopyClipBoard = async (text) => {
     const input = document.createElement('input');
     input.value = text;
@@ -12,28 +19,30 @@ export default function JobDetailMenuBar({ id }) {
     document.execCommand('copy');
     document.body.removeChild(input);
     alert('링크가 복사되었습니다.');
-    /*     
-    try {
-      await navigator.clipboard.writeText(text);
-      alert('클립보드에 링크가 복사되었습니다.');
-    } catch (e) {
-      console.log(e)
-      alert('복사에 실패하였습니다');
-    } 
-    */
+  };
+
+  const handleClick = (e) => {
+    e.stopPropagation();
+    onBookmarkClick();
   };
 
   return (
-    <Container>
+    <Container display={sizeType}>
+      <MenuContainer>
+        <IconContainer>
+          <ProfileIcon />
+        </IconContainer>
+        <IconText>{writer}</IconText>
+      </MenuContainer>
       <a href={`https://cafe.naver.com/steamindiegame/${id}`} target="_blank">
         <IconContainer>
           <CafeIcon />
         </IconContainer>
         <IconText>원문</IconText>
       </a>
-      <div>
+      <div onClick={handleClick}>
         <IconContainer>
-          <DetailBookMark />
+          <DetailBookMark filled={isBookmarked} />
         </IconContainer>
         <IconText>북마크</IconText>
       </div>
@@ -56,10 +65,17 @@ const Container = styled.div`
   position: sticky;
   top: 20px;
   left: 0px;
-  display: flex;
+  display: ${({display}) => display === 'desktop' ? 'flex' : 'none' };
   flex-direction: column;
   align-items: center;
   text-align: center;
+  
+`;
+
+const MenuContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const IconContainer = styled.div`
