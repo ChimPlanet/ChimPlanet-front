@@ -11,10 +11,14 @@ import {
   adaptImagesNoRefererPolicy,
 } from './util';
 
+import { useSizeType } from '@/context/sizeTypeContext';
+
 /** @param {{offer: Offer}} */
 export default function JobDetailContent({ offer }) {
-  const { data } = useJobOfferDetail(offer.id);
-  console.log(data);
+  const { data } = useJobOfferDetail(offer.id); 
+  
+  const sizeType = useSizeType()
+
   const content = useMemo(() => {
     const dom = stringToDom(data.content);
     adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
@@ -22,7 +26,7 @@ export default function JobDetailContent({ offer }) {
   }, [data]);
 
   return (
-    <Wrapper>
+    <Wrapper sizeType={sizeType}>
       <JobDetailHeader
         title={offer.title}
         status={offer.isClosed}
@@ -39,7 +43,7 @@ export default function JobDetailContent({ offer }) {
       </Content>
       <SubTitle>태그</SubTitle>
       <PostTags>
-        {data.data.tags?.map((items) => (
+        {data.tags?.map((items) => (
           <Tag key={items.tagObjResponseDto.tagName}>
             { '# ' + items.tagObjResponseDto.tagName}
           </Tag>
@@ -50,7 +54,9 @@ export default function JobDetailContent({ offer }) {
 }
 
 const Wrapper = styled.div`
-  padding: 30px 2px 30px 45px;
+  margin-top: ${({sizeType})=> sizeType === 'desktop' ? '' : '43px' };
+  padding: ${({sizeType})=> sizeType === 'mobile' 
+    ? "20px 10px 70px 20px" : "30px 2px 30px 45px"};
   color: ${({ theme }) => theme.colors.main};
 `;
 

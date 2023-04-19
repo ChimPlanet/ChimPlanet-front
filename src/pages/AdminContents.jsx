@@ -27,15 +27,10 @@ export default function AdminContents() {
 
 const Container = styled.div`
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Layout = styled.div`
-  margin-left: 150px;
-  ${({ theme }) => theme.media.desktop`
-  ${`max-width: ${theme.widths.desktop}px`};
-  `}
-  ${({ theme }) => theme.media.tablet`
-    ${`max-width: ${theme.widths.tablet}px`};
-  `};
-  min-width: 670px
+  margin: 0 auto;
 `;

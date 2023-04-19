@@ -36,6 +36,7 @@ export default function ContnetsTab({select, selectValue, onSelect, setValue, to
 
 const Container = styled.div`
     padding: 32px;
+    width: 1060px;
 `;
 
 const Layout = styled.div`

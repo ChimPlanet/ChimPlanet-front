@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
 import { SearchIcon } from '@/common/icons';
-import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import { ModalState } from '@/atoms/ContentManagement';
 import { useSetRecoilState } from "recoil";
 
@@ -9,7 +8,6 @@ export default function ContentsHeader({onActiveTab, activeTab}){
       
     const [value, setValue] = useState('')
     const inputRef = useRef();
-    const { context } = useJobSection();
     const sort = useSetRecoilState(ModalState);
 
     const handleKeyDown = (e) => {
@@ -32,7 +30,7 @@ export default function ContentsHeader({onActiveTab, activeTab}){
 
     return(
         <Container>
-            <Header width={`${context.perPage * 320 - 20}px`}>
+            <Header>
                 <Title>게시글 및 태그</Title>
                 <NavContainer>
                     <Menu>
@@ -43,31 +41,39 @@ export default function ContentsHeader({onActiveTab, activeTab}){
                             태그
                         </MenuItem>
                     </Menu>
-                    <InputContainer onClick={OnClick}>
-                        <SearchInput 
-                        onKeyPress={handleKeyDown}
-                        onChange={handleSearch} 
-                        ref={inputRef}
-                        value={value} 
-                        placeholder="ID 또는 검색어를 입력하세요"/>
-                        <SearchIcon />
-                    </InputContainer>
                 </NavContainer>
             </Header>
+            <Box>
+              <InputContainer onClick={OnClick}>
+                  <SearchInput 
+                  onKeyPress={handleKeyDown}
+                  onChange={handleSearch} 
+                  ref={inputRef}
+                  value={value} 
+                  placeholder="ID 또는 검색어를 입력하세요"/>
+                  <SearchIcon />
+              </InputContainer>
+            </Box>
         </Container>
     );
 };
+
+const Box = styled.div`
+  margin-left: 48%;
+`;
 
 const Container = styled.div`
   border-bottom: 1px solid #cdcfd6;
   font-family: 'Pretendard Variable';
   font-style: normal;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
 `;
 
 const Header = styled.header`
   padding: 32px;
   padding-bottom: 0;
-  max-width: ${(props) => props.width};
 `;
 
 const Title = styled.p`
@@ -108,6 +114,7 @@ const InputContainer = styled.div`
     justify-content: space-evenly;
     width: 350px;
     height: 36px;
+    margin-bottom: 13px;
     border-radius: 100px;
     background: #F5F6F7;
     font-weight: 500;

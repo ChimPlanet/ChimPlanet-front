@@ -1,15 +1,15 @@
 import { useMemo, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { useSizeType } from '@/context/sizeTypeContext';
 import { JobOfferMapContent } from '@/common/components/JobOffer';
 import Loading from '@/common/components/Loading'
+import { OfferColumnMap, OfferWidthMap } from '@/utils/offerSizeMap';
+import { useSizeType } from '@/context/sizeTypeContext';
 
 export default function JobInfiniteScroll({ List, getMoreItem, last }) {
 
   const target = useRef();
   
   const sizeType = useSizeType();
-  const pageCount = useMemo(() => (sizeType === 'desktop' ? 4 : 3), [sizeType]);
 
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
@@ -18,6 +18,14 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
       observer.observe(entry.target);
     }
   };
+
+  const config = useMemo(
+    () => ({
+      pageCount: OfferColumnMap[sizeType],
+      offerWidth: OfferWidthMap[sizeType],
+    }),
+    [sizeType],
+  );
 
   useEffect(() => {
     let observer;
@@ -32,8 +40,10 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
 
   return (
     <>
-      <JobOfferContainer column={pageCount}>
-        <JobOfferMapContent jobs={List} />
+      <JobOfferContainer column={config.pageCount}>
+        <JobOfferMapContent 
+          jobs={List}
+          offerWidth={config.offerWidth} />
       </JobOfferContainer>
       <div>
         {!last && <div ref={target}><Loading /></div>}

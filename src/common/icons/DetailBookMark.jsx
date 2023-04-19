@@ -1,4 +1,12 @@
-export default function DetailBookMark(){
+
+export default function DetailBookMark({ filled }){
+    if (filled) {
+        return <DetailBookMarkFilledIcon />;
+      }
+      return <DetailBookMarkOutlineIcon />;
+}
+
+function DetailBookMarkOutlineIcon() {
     return(
         <svg xmlns="http://www.w3.org/2000/svg" width="17" height="24" viewBox="0 0 17 24" fill="none">
             <g clipPath="url(#clip0_62_1898)">
@@ -10,5 +18,13 @@ export default function DetailBookMark(){
                 </clipPath>
             </defs>
         </svg>
-    )
-}
+    );
+};
+
+function DetailBookMarkFilledIcon() {
+    return (
+        <svg stroke="currentColor" fill="#CCCCCC" strokeWidth="0" viewBox="0 0 384 512" width="17" height="24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 512V48C0 21.49 21.49 0 48 0h288c26.51 0 48 21.49 48 48v464L192 400 0 512z" />
+        </svg>
+    );
+};

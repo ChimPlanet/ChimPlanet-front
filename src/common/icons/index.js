@@ -27,8 +27,20 @@ import MinXIcon from './MinXIcon';
 import LeftChevronIcon from './LeftChevronIcon';
 import ProfileIcon from './ProfileIcon';
 import GreenRightChevronIcon from './GreenRightChevronIcon';
+import ThreeDotIcon from './ThreeDotIcon';
+import LineIcon from './LineIcon'
+import MobileShareIcon from './MobileShareIcon'
+import MobileBookMarkIcon from './MobileBookMarkIcon';
+import MobileCafeIcon from './MobileCafeIcon';
+import CircleIcon from './CircleIcon';
 
 export {
+  CircleIcon,
+  MobileCafeIcon,
+  MobileBookMarkIcon,
+  MobileShareIcon,
+  LineIcon,
+  ThreeDotIcon,
   GreenRightChevronIcon,
   UserIcon,
   PopupIcon,
