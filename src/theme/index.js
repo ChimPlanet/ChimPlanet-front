@@ -11,7 +11,7 @@ const sizes = {
 const widths = {
   tablet: 720,
   desktop: 1060,
-  mobile: 390,
+  mobile: '100%',
 };
 
 const media = {

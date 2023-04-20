@@ -64,7 +64,7 @@ const Content = styled.div`
   `}
 
   ${({ theme }) => theme.media.mobile`
-    ${`width: ${theme.widths.mobile}px`};
+    ${`width: ${theme.widths.mobile}`};
   `}
 `;
 

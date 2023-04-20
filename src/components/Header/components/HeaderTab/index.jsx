@@ -5,7 +5,6 @@ import Bookmark from './bookmark';
 import Logo from './logo';
 import MenuBar from './menuBar';
 import OrnamentalSearchBar from './ornamentalSearchBar';
-import { useSizeType } from '@/context/sizeTypeContext';
 import { MenuIcon, SearchIcon } from '@/common/icons';
 
 export default function HeaderTab({ activeSearchTab, mobile }) {

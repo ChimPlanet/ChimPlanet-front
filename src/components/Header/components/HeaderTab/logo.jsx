@@ -14,5 +14,6 @@ const LogoLink = styled(Link)`
 
   ${({ theme }) => theme.media.mobile`
       font-size: 18px;
+      padding-left: 15px;
   `}
 `;
