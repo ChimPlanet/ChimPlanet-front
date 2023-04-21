@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Banner } from '@/components/Banner';
 import { Header } from '@/components/Header';
 import { usePreloadContext } from '@/context/preloadContext';
-import { HOME_PATH } from '@/constants/route';
+import { HOME_PATH, OFFICIAL_PATH , EVENT_PATH } from '@/constants/route';
 import { useMemo } from 'react';
 import { getBannerByType } from '@/service/banner/banner-utils';
 import { useSizeType } from '@/context/sizeTypeContext';
@@ -14,6 +14,8 @@ export default function ClientOutlet() {
 
   const sizeType = useSizeType();
   const { banners } = usePreloadContext();
+
+  const validPaths = [HOME_PATH, OFFICIAL_PATH, EVENT_PATH];
 
   const mainBanners = useMemo(
     () =>
@@ -26,8 +28,7 @@ export default function ClientOutlet() {
   return (
     <>
       <Header />
-
-      {pathname === HOME_PATH && (
+      {validPaths.includes(pathname) && (
         <BannerWrapper children={<Banner banners={mainBanners} />} />
       )}
       <Content>
