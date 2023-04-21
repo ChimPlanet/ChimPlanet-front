@@ -24,6 +24,11 @@ class OfferClient extends HttpClient {
   }
 
   @select(typeOfferArray)
+  async event() {
+    return mock_job_offers;
+  }
+
+  @select(typeOfferArray)
   async official() {
     return mock_job_offers;
   }
