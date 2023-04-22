@@ -4,7 +4,7 @@ import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import useBookmark from '@/hooks/useBookmark';
 import { useArticleContext } from '@/context/articleContext';
 
-import JobOffer from './JobOffer';
+import { JobOffer } from 'chimplanet-ui';
 
 /**
  * @param {{jobs: import("@/utils/job").JobOfferVO[], offerWidth?: number, toggleBookmark(id: number):void}}

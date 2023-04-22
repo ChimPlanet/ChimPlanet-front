@@ -3,10 +3,13 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { useJobOfferFromDynamic } from '@/query/offer';
-import { JobOfferMapContent } from '@/common/components/JobOffer';
+import { JobOfferMapContent } from 'chimplanet-ui';
 import { prefetchImages } from '@/utils';
 import { useSizeType } from '@/context/sizeTypeContext';
 import { OfferWidthMap } from '@/utils/offerSizeMap';
+import { BookmarkContext } from '@/utils/Context/bookmarkContext';
+import { useArticleContext } from '@/context/articleContext';
+import useBookmark from '@/hooks/useBookmark';
 
 JobOfferSectionContent.propTypes = {
   cursor: PropTypes.number.isRequired,
@@ -34,6 +37,8 @@ export default function JobOfferSectionContent({
   fetchFunction,
   maxLength,
 }) {
+  const [, { open }] = useArticleContext();
+  const { toggle } = useBookmark();
   const { data: offers } = useJobOfferFromDynamic(
     queryKey,
     fetchFunction,
@@ -73,6 +78,11 @@ export default function JobOfferSectionContent({
         jobs={offers}
         offerWidth={offerWidth}
         offerOrientation={sizeType === 'mobile' ? 'horizontal' : 'vertical'}
+        isBookmarked={(id) =>
+          BookmarkContext.getInstance().getBookmarkSet().has(id)
+        }
+        onClick={open}
+        onBookmarkClick={toggle}
       />
     </Container>
   );

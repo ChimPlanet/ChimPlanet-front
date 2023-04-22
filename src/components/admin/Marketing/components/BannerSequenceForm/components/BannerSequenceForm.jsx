@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { VerticalDraggableList } from '@/common/components/VerticalDraggableList';
+import { VerticalDraggableList } from 'chimplanet-ui';
 
 import BannerSequenceDragItem from './BannerSequenceDragItem';
 import { Container } from './BannerSequenceForm.style';

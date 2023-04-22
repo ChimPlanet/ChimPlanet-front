@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import DragAndDropImage from '@/common/components/DragAndDropImage';
+import { DragAndDropImage } from 'chimplanet-ui';
 
 import {
   Container,
