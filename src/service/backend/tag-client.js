@@ -12,9 +12,8 @@ class TagClient extends HttpClient {
     return await this.get('/tagList');
   }
 
-  @select(typeTagArray)
-  async tag() {
-    return await this.post('');
+  async tag(param) {
+    return await this.post('',param);
   }
 
 }
