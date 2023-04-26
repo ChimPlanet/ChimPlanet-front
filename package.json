@@ -11,9 +11,6 @@
     "prebuild": "npm run test",
     "cypress": "npx cypress open"
   },
-  "resolutions": {
-    "styled-components": "5.3.6"
-  },
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
