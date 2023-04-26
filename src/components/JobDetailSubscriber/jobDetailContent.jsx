@@ -15,9 +15,9 @@ import { useSizeType } from '@/context/sizeTypeContext';
 
 /** @param {{offer: Offer}} */
 export default function JobDetailContent({ offer }) {
-  const { data } = useJobOfferDetail(offer.id); 
-  
-  const sizeType = useSizeType()
+  const { data } = useJobOfferDetail(offer.id);
+
+  const sizeType = useSizeType();
 
   const content = useMemo(() => {
     const dom = stringToDom(data.content);
@@ -34,7 +34,7 @@ export default function JobDetailContent({ offer }) {
         views={offer.viewCount}
       />
       {/* <PostImg referrerPolicy="no-referrer" src={imgLink} /> */}
-      <Content>
+      <Content data-desktop={sizeType === 'desktop'}>
         <PostText
           dangerouslySetInnerHTML={{
             __html: content,
@@ -45,7 +45,7 @@ export default function JobDetailContent({ offer }) {
       <PostTags>
         {data.tags?.map((items) => (
           <Tag key={items.tagObjResponseDto.tagName}>
-            { '# ' + items.tagObjResponseDto.tagName}
+            {'# ' + items.tagObjResponseDto.tagName}
           </Tag>
         ))}
       </PostTags>
@@ -54,9 +54,9 @@ export default function JobDetailContent({ offer }) {
 }
 
 const Wrapper = styled.div`
-  margin-top: ${({sizeType})=> sizeType === 'desktop' ? '' : '43px' };
-  padding: ${({sizeType})=> sizeType === 'mobile' 
-    ? "20px 10px 70px 20px" : "30px 2px 30px 45px"};
+  margin-top: ${({ sizeType }) => (sizeType === 'desktop' ? '' : '43px')};
+  padding: ${({ sizeType }) =>
+    sizeType === 'mobile' ? '20px 10px 70px 20px' : '30px 2px 30px 45px'};
   color: ${({ theme }) => theme.colors.main};
 `;
 
@@ -66,7 +66,7 @@ const Content = styled.div`
     max-width: 100%;
     margin: 10px 0px;
   }
-  & img:hover {
+  &[data-desktop='true'] img:hover {
     z-index: 10000;
     transform: scale(1.3) translateX(30px);
     cursor: zoom-in;

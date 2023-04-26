@@ -11,7 +11,6 @@ import {
 import { useAdminBoardState } from '../../atoms/adminBoard.atom';
 
 export default function ContentOfferDetail({ offer, handleDate }) {
-
   const { data } = useJobOfferDetail(offer);
 
   const [{}, setBoard] = useAdminBoardState();
@@ -22,21 +21,20 @@ export default function ContentOfferDetail({ offer, handleDate }) {
     adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
     return dom.documentElement.outerHTML;
   }, [data]);
-  
-  useEffect(()=>{
-    handleDate(data.data.regDate)
+
+  useEffect(() => {
+    handleDate(data.data.regDate);
     setBoard({
-        "articleId": data.data.articleId,
-        "boardTags": data.data.tags?.map(el=>{
-          return({
-            childTagId : el.tagObjResponseDto.childTagId,
-            parentTagId : el.tagObjResponseDto.parentTagId,
-          })
-        }),
-        "isEnd": data.data.isEnd
-    })
-  },[offer])
-  
+      articleId: data.data.articleId,
+      boardTags: data.data.tags?.map((el) => {
+        return {
+          childTagId: el.tagObjResponseDto.childTagId,
+          parentTagId: el.tagObjResponseDto.parentTagId,
+        };
+      }),
+      isEnd: data.data.isEnd,
+    });
+  }, [offer]);
 
   return (
     <Wrapper>
@@ -59,7 +57,7 @@ export default function ContentOfferDetail({ offer, handleDate }) {
           <Tag key={items.tagObjResponseDto.tagId}>
             {items.tagObjResponseDto.tagName}
           </Tag>
-        ))} 
+        ))}
       </PostTags>
     </Wrapper>
   );
@@ -113,4 +111,3 @@ const Tag = styled.div`
   line-height: 14px;
   color: #8e94a0;
 `;
-
