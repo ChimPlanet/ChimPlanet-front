@@ -37,6 +37,9 @@ export default function ContentsHeader({onActiveTab, activeTab}){
                         <MenuItem onClick={TabActive} active={'게시글' === activeTab}>
                             게시글
                         </MenuItem>
+                        <MenuItem onClick={TabActive} active={'카테고리' === activeTab}>
+                            카테고리
+                        </MenuItem>
                         <MenuItem onClick={TabActive} active={'태그' === activeTab}>
                             태그
                         </MenuItem>
@@ -59,10 +62,11 @@ export default function ContentsHeader({onActiveTab, activeTab}){
 };
 
 const Box = styled.div`
-  margin-left: 48%;
-`;
+  margin-left: 42%;
+  `;
 
 const Container = styled.div`
+  background-color: #fff;
   border-bottom: 1px solid #cdcfd6;
   font-family: 'Pretendard Variable';
   font-style: normal;

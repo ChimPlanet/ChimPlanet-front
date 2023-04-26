@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useState, useEffect } from 'react'
 import { styled as muiStyled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -18,7 +17,7 @@ export default function ContentSettingCategory({tag}) {
                 카테고리
             </Title>
             <CheckboxGroup>
-                {(category.map((el)=> 
+                {(category?.map((el)=> 
                     <CheckboxLabel 
                         key={el.tagId} 
                         control={<CheckBox 

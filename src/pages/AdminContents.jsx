@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import styled from 'styled-components'
 import { ContentsHeader } from '@/components/admin/Contents';
-import ContentsPosts from '@/components/admin/Contents/components/post';
-import ContentsTags from '@/components/admin/Contents/components/tag';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
+
+import { ContentsPosts, ContentsTags, ContentsCategory } from '@/components/admin/Contents/components';
 
 export default function AdminContents() {
 
@@ -14,23 +14,30 @@ export default function AdminContents() {
     setActiveTab(value);
   };
 
+  const Tab = useMemo(()=>{
+    if(activeTab === '게시글'){
+      return <ContentsPosts />
+    }else if(activeTab === '태그'){
+      return <ContentsTags />
+    }else{
+      return <ContentsCategory />
+    }
+  },[activeTab])
+
   return (
     <Container>
       <ContentsHeader onActiveTab={onActiveTab} activeTab={activeTab} />
       <Layout width={`${context.perPage * 320 - 20}px`}>
-        { activeTab === '게시글' ?
-        <ContentsPosts /> : <ContentsTags />}
+        { Tab }
       </Layout>
     </Container>
   );
 };
 
 const Container = styled.div`
-  background-color: #fff;
+  background-color: #f0f3fa;
   display: flex;
   flex-direction: column;
 `;
 
-const Layout = styled.div`
-  margin: 0 auto;
-`;
+const Layout = styled.div``;

@@ -3,6 +3,7 @@ import ContnetsTab from "./ContentsTab";
 import ContentsOfferSection from "./ContentsOfferSection";
 import { useJobOfferBasic  } from '@/query/offer';
 import { Offer } from '@/service/offer';
+import styled from 'styled-components';
 
 export default function ContentsPosts(){
 
@@ -53,7 +54,8 @@ export default function ContentsPosts(){
   };
 
   return(
-      <>
+
+      <Container>
           <ContnetsTab 
           select={select} 
           selectValue={selectValue} 
@@ -64,6 +66,14 @@ export default function ContentsPosts(){
           jobs={newList}
           getMoreItem={getMoreItem}
           last={data.last} />
-      </>
+      </Container>
+
   );
 };
+
+const Container = styled.div`
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
