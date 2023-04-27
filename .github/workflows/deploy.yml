@@ -24,7 +24,7 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        run: yarn
+        run: yarn install
         
       - name: Create .Env
         run: | 
