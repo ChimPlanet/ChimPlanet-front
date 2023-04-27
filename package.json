@@ -12,7 +12,7 @@
     "cypress": "npx cypress open"
   },
   "resolutions": {
-    "styled-components": "5.3.6"
+    "styled-components": "5.3.9"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
