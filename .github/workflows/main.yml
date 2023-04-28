@@ -1,0 +1,39 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - test
+      
+env:
+  S3_BUCKET_NAME: chimplanet-bucket #s3버킷 이름
+  PROJECT_NAME: chimplanet
+
+jobs:
+  build:
+    name: Build Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+
+      - name: Clean Cache
+        run: yarn cache clean
+
+      - name: Install dependencies
+        run: yarn install
+        
+      - name: Create .Env
+        run: | 
+          echo "VITE_API_BASE=$VITE_API_BASE" >> .env
+        env: 
+          VITE_API_BASE: ${{ secrets.VITE_API_BASE }}
+          
+      - name: Build project
+        run: yarn build
