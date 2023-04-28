@@ -1,3 +1,6 @@
+import { usePreloadContext } from '@/context/preloadContext';
+import backend from '@/service/backend';
+import { Tag } from '@/service/tag';
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
 /**
@@ -7,6 +10,7 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
  * @property {"popular" | "recent" | "recommend"} orderBy
  * @property {import('@/utils/job').JobOfferVO[]} originalData
  * @property {import('@/utils/job').JobOfferVO[]} displayedData
+ * @property {"loading" | "done"} pending
  *
  * @typedef {[context: JobViewContextValue, dispatch:(newValue: Partial<JobViewContextValue>)=>void]} JobViewContextState
  */
@@ -25,11 +29,34 @@ export const useJobViewReducer = (metadata) => {
     orderBy: 'recent',
     originalData: [],
     displayedData: [],
+    pending: 'loading',
   });
+
+  /** @type {{tags: Tag[]}} */
+  const { tags } = usePreloadContext();
 
   useEffect(() => {
     state[1]({ searchMetadata: metadata });
-  }, [metadata]);
+    if (metadata.type === 'tag' && tags) {
+      const querySet = new Set(metadata.words);
+      /** @type {Tag[]} */
+      const items = tags.reduce((acc, it) => {
+        if (querySet.has(it.tagName)) {
+          acc.push(it);
+        }
+        return acc;
+      }, []);
+      backend.offers
+        .searchTags(items.map((e) => e.tagId))
+        .then((offers) => state[1]({ originalData: offers }))
+        .finally(() => state[1]({ pending: 'done' }));
+    } else if (metadata.type === 'normal') {
+      backend.offers
+        .searchTitle(metadata.words[0])
+        .then((offers) => state[1]({ originalData: offers }))
+        .finally(() => state[1]({ pending: 'done' }));
+    }
+  }, [metadata, tags]);
 
   return state;
 };

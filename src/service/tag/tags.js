@@ -1,5 +1,4 @@
 import { data, field } from 'useful-decorator';
-import * as pp from './tag.preprocess';
 
 @data
 class Tag {

@@ -50,6 +50,17 @@ export default function JobOfferSectionContent({
     [screenType],
   );
 
+  const layoutConfig = useMemo(
+    () =>
+      screenType === 'desktop'
+        ? {
+            columnGap: 20,
+            width: 250,
+          }
+        : { columnGap: 25, width: 220 },
+    [screenType],
+  );
+
   useLayoutEffect(
     () => Array.isArray(offers) && setLength(offers.length),
     [offers],
@@ -67,13 +78,13 @@ export default function JobOfferSectionContent({
 
   return (
     <Container
-      moveX={-cursor * (offerWidth + offerColumnGap)}
-      gap={offerColumnGap}
+      moveX={-cursor * (layoutConfig.width + layoutConfig.columnGap)}
+      gap={layoutConfig.columnGap}
       vertical={screenType === 'mobile'}
     >
       <JobOfferMapContent
         jobs={offers}
-        offerWidth={offerWidth}
+        offerWidth={layoutConfig.width}
         offerOrientation={screenType === 'mobile' ? 'horizontal' : 'vertical'}
         isBookmarked={(id) =>
           BookmarkContext.getInstance().getBookmarkSet().has(id)

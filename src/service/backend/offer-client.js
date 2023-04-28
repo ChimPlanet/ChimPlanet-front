@@ -21,7 +21,7 @@ class OfferClient extends HttpClient {
 
   @select(typeOfferArray)
   async popular() {
-    return mock_job_offers;
+    return (await this.post('?sort=readCount')).content;
   }
 
   @select(typeOfferArray)
@@ -39,6 +39,18 @@ class OfferClient extends HttpClient {
     return await this.get('/' + id);
   }
 
+  @select(typeOfferArrayNoDup)
+  async searchTags(ids) {
+    return await this.get(
+      `/search?searchTagId=${encodeURIComponent(ids.join(','))}`,
+    );
+  }
+
+  @select(typeOfferArrayNoDup)
+  async searchTitle(title) {
+    return await this.get(`/search?title=${title}`);
+  }
+
   /**
    * ! 추후 수정
    * @param {*} id
@@ -46,12 +58,25 @@ class OfferClient extends HttpClient {
    */
   @select(Offer)
   async byMultipleId(ids) {
-    return '';
+    return [];
   }
 }
 
 function typeOfferArray(values) {
   return values.map(Offer);
+}
+
+function typeOfferArrayNoDup(values) {
+  /** @type {Offer[]} */
+  const offers = values.map(Offer);
+  const idSet = new Set();
+  return offers.reduce((acc, item) => {
+    if (!idSet.has(item.id)) {
+      acc.push(item);
+      idSet.add(item.id);
+    }
+    return acc;
+  }, []);
 }
 
 export default OfferClient;
