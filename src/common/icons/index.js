@@ -28,13 +28,15 @@ import LeftChevronIcon from './LeftChevronIcon';
 import ProfileIcon from './ProfileIcon';
 import GreenRightChevronIcon from './GreenRightChevronIcon';
 import ThreeDotIcon from './ThreeDotIcon';
-import LineIcon from './LineIcon'
-import MobileShareIcon from './MobileShareIcon'
+import LineIcon from './LineIcon';
+import MobileShareIcon from './MobileShareIcon';
 import MobileBookMarkIcon from './MobileBookMarkIcon';
 import MobileCafeIcon from './MobileCafeIcon';
 import CircleIcon from './CircleIcon';
+import ChimplanetNotFoundIcon from './ChimplanetNotFoundIcon';
 
 export {
+  ChimplanetNotFoundIcon,
   CircleIcon,
   MobileCafeIcon,
   MobileBookMarkIcon,

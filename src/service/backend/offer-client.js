@@ -21,7 +21,7 @@ class OfferClient extends HttpClient {
 
   @select(typeOfferArray)
   async popular() {
-    return mock_job_offers;
+    return (await this.post('?sort=readCount')).content;
   }
 
   @select(typeOfferArray)

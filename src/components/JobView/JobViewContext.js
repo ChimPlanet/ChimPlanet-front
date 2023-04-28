@@ -10,6 +10,7 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
  * @property {"popular" | "recent" | "recommend"} orderBy
  * @property {import('@/utils/job').JobOfferVO[]} originalData
  * @property {import('@/utils/job').JobOfferVO[]} displayedData
+ * @property {"loading" | "done"} pending
  *
  * @typedef {[context: JobViewContextValue, dispatch:(newValue: Partial<JobViewContextValue>)=>void]} JobViewContextState
  */
@@ -28,6 +29,7 @@ export const useJobViewReducer = (metadata) => {
     orderBy: 'recent',
     originalData: [],
     displayedData: [],
+    pending: 'loading',
   });
 
   /** @type {{tags: Tag[]}} */
@@ -46,11 +48,13 @@ export const useJobViewReducer = (metadata) => {
       }, []);
       backend.offers
         .searchTags(items.map((e) => e.tagId))
-        .then((offers) => state[1]({ originalData: offers }));
+        .then((offers) => state[1]({ originalData: offers }))
+        .finally(() => state[1]({ pending: 'done' }));
     } else if (metadata.type === 'normal') {
       backend.offers
         .searchTitle(metadata.words[0])
-        .then((offers) => state[1]({ originalData: offers }));
+        .then((offers) => state[1]({ originalData: offers }))
+        .finally(() => state[1]({ pending: 'done' }));
     }
   }, [metadata, tags]);
 

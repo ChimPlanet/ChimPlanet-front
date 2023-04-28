@@ -1,23 +1,21 @@
 import { useJobViewContext } from '../JobViewContext';
-import { useEffect, useMemo } from 'react';
+import { useMemo } from 'react';
 import {
   JobOfferMapContent,
+  Loading,
   ResizableGrid,
   useScreenType,
 } from 'chimplanet-ui';
-import { useJobViewOffers } from '../api/query';
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import { useArticleContext } from '@/context/articleContext';
 import useBookmark from '@/hooks/useBookmark';
+import JobViewContentNotFound from './JobViewContentNotFound';
 
 export default function JobViewContent() {
   const [, { open }] = useArticleContext();
   const { toggle } = useBookmark();
   const [context, dispatch] = useJobViewContext();
-  const { data: offers } = useJobViewOffers(context.searchMetadata);
   const screenType = useScreenType();
-
-  useEffect(() => dispatch({ originalData: offers }), [offers]);
 
   const layoutConfig = useMemo(
     () =>
@@ -30,21 +28,27 @@ export default function JobViewContent() {
     [screenType],
   );
 
-  return (
-    <ResizableGrid
-      style={{ rowGap: 50, columnGap: layoutConfig.columnGap }}
-      calcNumberOfColumns={calcColumns}
-    >
-      <JobOfferMapContent
-        onClick={open}
-        onBookmarkClick={toggle}
-        isBookmarked={(id) =>
-          BookmarkContext.getInstance().getBookmarkSet().has(id)
-        }
-        jobs={context.displayedData}
-        offerWidth={layoutConfig.width}
-      />
-    </ResizableGrid>
+  return context.pending === 'done' ? (
+    context.originalData.length > 0 ? (
+      <ResizableGrid
+        style={{ rowGap: 50, columnGap: layoutConfig.columnGap }}
+        calcNumberOfColumns={calcColumns}
+      >
+        <JobOfferMapContent
+          onClick={open}
+          onBookmarkClick={toggle}
+          isBookmarked={(id) =>
+            BookmarkContext.getInstance().getBookmarkSet().has(id)
+          }
+          jobs={context.displayedData}
+          offerWidth={layoutConfig.width}
+        />
+      </ResizableGrid>
+    ) : (
+      <JobViewContentNotFound />
+    )
+  ) : (
+    <Loading />
   );
 }
 
