@@ -1,6 +1,10 @@
 import { useJobViewContext } from '../JobViewContext';
-import { useEffect } from 'react';
-import { JobOfferMapContent, ResizableGrid } from 'chimplanet-ui';
+import { useEffect, useMemo } from 'react';
+import {
+  JobOfferMapContent,
+  ResizableGrid,
+  useScreenType,
+} from 'chimplanet-ui';
 import { useJobViewOffers } from '../api/query';
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import { useArticleContext } from '@/context/articleContext';
@@ -11,12 +15,24 @@ export default function JobViewContent() {
   const { toggle } = useBookmark();
   const [context, dispatch] = useJobViewContext();
   const { data: offers } = useJobViewOffers(context.searchMetadata);
+  const screenType = useScreenType();
 
   useEffect(() => dispatch({ originalData: offers }), [offers]);
 
+  const layoutConfig = useMemo(
+    () =>
+      screenType === 'desktop'
+        ? {
+            columnGap: 20,
+            width: 250,
+          }
+        : { columnGap: 25, width: 220 },
+    [screenType],
+  );
+
   return (
     <ResizableGrid
-      style={{ rowGap: 50, columnGap: 20 }}
+      style={{ rowGap: 50, columnGap: layoutConfig.columnGap }}
       calcNumberOfColumns={calcColumns}
     >
       <JobOfferMapContent
@@ -26,6 +42,7 @@ export default function JobViewContent() {
           BookmarkContext.getInstance().getBookmarkSet().has(id)
         }
         jobs={context.displayedData}
+        offerWidth={layoutConfig.width}
       />
     </ResizableGrid>
   );
@@ -39,6 +56,6 @@ function calcColumns(screenType) {
     case 'tablet':
       return 3;
     default:
-      return 1;
+      return 2;
   }
 }

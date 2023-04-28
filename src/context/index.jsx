@@ -1,6 +1,5 @@
 import { CPThemeProvider, PropTypes, ScreenTypeProvider } from 'chimplanet-ui';
 import { ArticleProvider } from './articleContext';
-import { PreloadProvider } from './preloadContext';
 import { baseTheme } from '@/theme';
 
 /**
@@ -8,13 +7,11 @@ import { baseTheme } from '@/theme';
  */
 export default function AppContextProvider({ children }) {
   return (
-    <PreloadProvider>
-      <ScreenTypeProvider screens={baseTheme.sizes}>
-        <CPThemeProvider>
-          <ArticleProvider children={children} />
-        </CPThemeProvider>
-      </ScreenTypeProvider>
-    </PreloadProvider>
+    <ScreenTypeProvider screens={baseTheme.sizes}>
+      <CPThemeProvider>
+        <ArticleProvider children={children} />
+      </CPThemeProvider>
+    </ScreenTypeProvider>
   );
 }
 

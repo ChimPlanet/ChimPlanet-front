@@ -23,7 +23,8 @@ export function filterSubBanner(banners) {
 export function pairBannerFromGroup(group) {
   const paired = Object.entries(group).reduce((acc, [key, value]) => {
     if (value.length !== 2) {
-      throw new Error('Invalid pair group', value);
+      // throw new Error('Invalid pair group', value);
+      return acc; // ignore this case;
     }
 
     const [pc, mobile] =

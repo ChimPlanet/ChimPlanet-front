@@ -1,19 +1,17 @@
-import backend from '@/service/backend';
-import { Offer } from '@/service/offer';
-import { createContext, useState, useContext, useMemo, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 
-/** @type {React.Context<[Offer, {close():void, open(offer: Offer):void}]>} */
+import backend from '@/service/backend';
+import TagTrie from '@/utils/tagTrie';
+
 const preloadContext = createContext();
 
 export function PreloadProvider({ children }) {
   const [preloads, setPreload] = useState({});
-
   // NeedPreloadRequests & only work when page initialize
   useEffect(() => {
     Promise.all(NeedPreloadRequests.map((el) => el.value())).then(
       (responses) => {
         const _preload = {};
-
         responses.forEach((data, i) => {
           const { key, preprocess } = NeedPreloadRequests[i];
           _preload[key] = preprocess(data);
@@ -41,6 +39,14 @@ const NeedPreloadRequests = [
           if (item.yn) new Image().src = item.sourceUrl;
         });
       }
+      return collection;
+    },
+  },
+  {
+    key: 'tags',
+    value: backend.tags.tagList,
+    preprocess: (collection) => {
+      TagTrie.getInstance(collection.map((e) => e.tagName));
       return collection;
     },
   },
