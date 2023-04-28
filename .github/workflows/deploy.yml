@@ -27,7 +27,7 @@ jobs:
         run: yarn cache clean
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --network-concurrency 1
         
       - name: Create .Env
         run: | 
