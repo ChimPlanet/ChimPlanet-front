@@ -2,7 +2,7 @@ import { Link, styled } from 'chimplanet-ui';
 
 import { usePreloadContext } from '@/context/preloadContext';
 import { useMemo, useState } from 'react';
-import { getFamilyTree } from '../utils/tag';
+import { getFamilyTree } from '@/utils';
 
 import { styled as mStyled } from '@mui/material/styles';
 import MuiAccordion from '@mui/material/Accordion';

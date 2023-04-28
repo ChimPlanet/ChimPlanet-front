@@ -2,21 +2,18 @@ import { PropTypes, styled } from 'chimplanet-ui';
 
 import useSearch from '../../hooks/useSearchNavigate';
 
-/**
- * @param {{current: string, setCurrent(value: string):void, afterChoose():void }}
- * @returns
- */
 export default function ParentCategoryColumn({
   current,
   setCurrent,
   afterChoose,
+  items,
 }) {
   const search = useSearch();
 
   return (
     <Container>
       <Content>
-        {PARENTS.map((parent) => (
+        {items.map((parent) => (
           <Item
             key={parent}
             data-selected={parent === current}

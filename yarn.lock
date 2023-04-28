@@ -2513,7 +2513,7 @@ check-more-types@^2.24.0:
 
 "chimplanet-ui@git+https://github.com/ChimPlanet/chimplanet-ui.git":
   version "1.0.2"
-  resolved "git+https://github.com/ChimPlanet/chimplanet-ui.git#404d798bb2e7cadc81f4731bd54d1eec016de6c4"
+  resolved "git+https://github.com/ChimPlanet/chimplanet-ui.git#4a638edf64f1313b2e978287361d1f98c2703dc7"
   dependencies:
     prop-types "^15.8.1"
     react "^18.2.0"

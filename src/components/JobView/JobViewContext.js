@@ -1,4 +1,5 @@
 import { usePreloadContext } from '@/context/preloadContext';
+import backend from '@/service/backend';
 import { Tag } from '@/service/tag';
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
@@ -36,13 +37,20 @@ export const useJobViewReducer = (metadata) => {
     state[1]({ searchMetadata: metadata });
     if (metadata.type === 'tag' && tags) {
       const querySet = new Set(metadata.words);
+      /** @type {Tag[]} */
       const items = tags.reduce((acc, it) => {
         if (querySet.has(it.tagName)) {
           acc.push(it);
         }
         return acc;
       }, []);
-      console.log(items);
+      backend.offers
+        .searchTags(items.map((e) => e.tagId))
+        .then((offers) => state[1]({ originalData: offers }));
+    } else if (metadata.type === 'normal') {
+      backend.offers
+        .searchTitle(metadata.words[0])
+        .then((offers) => state[1]({ originalData: offers }));
     }
   }, [metadata, tags]);
 

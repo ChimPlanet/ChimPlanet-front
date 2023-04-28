@@ -1,8 +1,11 @@
 import { styled } from 'chimplanet-ui';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+
+import { getFamilyTree } from '@/utils';
 
 import ParentCategoryColumn from './parentCategoryColumn';
 import ChildCategoryColumn from './childCategoryColumn';
+import { usePreloadContext } from '@/context/preloadContext';
 
 /**
  * @param {{close():void}}
@@ -10,14 +13,36 @@ import ChildCategoryColumn from './childCategoryColumn';
  */
 export default function CategoryOverlay({ close }) {
   const [parent, setParent] = useState(null);
+
+  const { tags } = usePreloadContext();
+
+  const [ancestors, itemMap] = useMemo(() => {
+    const familyTree = getFamilyTree(tags);
+
+    const parents = Array.from(familyTree.keys());
+
+    const tree = parents.reduce((acc, parentTag) => {
+      acc[parentTag.tagName] = familyTree.get(parentTag).map((e) => e.tagName);
+
+      return acc;
+    }, {});
+
+    return [parents.map((e) => e.tagName), tree];
+  }, [tags]);
+
   return (
     <Container>
       <ParentCategoryColumn
         afterChoose={close}
         current={parent}
         setCurrent={setParent}
+        items={ancestors}
       />
-      <ChildCategoryColumn afterChoose={close} parent={parent} />
+      <ChildCategoryColumn
+        afterChoose={close}
+        parent={parent}
+        itemMap={itemMap}
+      />
     </Container>
   );
 }

@@ -3,18 +3,27 @@ import { PropTypes, styled } from 'chimplanet-ui';
 import useSearch from '../../hooks/useSearchNavigate';
 
 /**
- * @param {{parent: string, afterChoose():void}} param0
+ * @param {{parent: string, afterChoose():void}}
  * @returns
  */
-export default function ChildCategoryColumn({ parent, afterChoose }) {
+export default function ChildCategoryColumn({ parent, afterChoose, itemMap }) {
   const search = useSearch();
 
   return (
     <Container>
       <Content>
+        <Item
+          key={parent}
+          onClick={() => {
+            search(parent, 'tag');
+            afterChoose();
+          }}
+        >
+          {parent}
+        </Item>
         {parent &&
-          Array.isArray(childMap[parent]) &&
-          childMap[parent].map((el) => (
+          Array.isArray(itemMap[parent]) &&
+          itemMap[parent].map((el) => (
             <Item
               key={el}
               onClick={() => {
