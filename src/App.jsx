@@ -1,17 +1,13 @@
-import AppRoutes from '@/routes/AppRoutes';
-import styled from 'styled-components';
 import { useEffect } from 'react';
+import { styled } from 'chimplanet-ui';
+
+import AppRoutes from '@/routes/AppRoutes';
 import fetchTagList from '@/service/tag/fetchTagList';
 import TagTrie from '@/utils/tagTrie';
-import AppContextProvider from './context';
 import JobDetailSubscriber from '@/components/JobDetailSubscriber';
-import { ContentOfferSubscriber } from '@/components/admin/Contents';
-import '@/styles/App.scss';
+import BaseLayout from './layout/BaseLayout';
 
-const Main = styled.main`
-  color: ${({ theme }) => theme.colors.main};
-  background-color: ${({ theme }) => theme.backgroundColor.main};
-`;
+import '@/styles/App.scss';
 
 function App() {
   // ! 단 한번 필요한 데이터를 초기화
@@ -20,14 +16,18 @@ function App() {
   }, []);
 
   return (
-    <AppContextProvider>
-      <Main id="App">
+    <Main id="App">
+      <BaseLayout>
         <AppRoutes />
-        <JobDetailSubscriber />
-        <ContentOfferSubscriber />
-      </Main>
-    </AppContextProvider>
+      </BaseLayout>
+      <JobDetailSubscriber />
+    </Main>
   );
 }
 
 export default App;
+
+const Main = styled.main`
+  color: ${({ theme }) => theme.colors.main};
+  background-color: ${({ theme }) => theme.backgroundColor.main};
+`;

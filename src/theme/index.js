@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { css } from 'chimplanet-ui';
 
 // ! @media 감지 너비
 const sizes = {

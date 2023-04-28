@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'chimplanet-ui';
 
 export default function useSearchNavigate() {
   const navigate = useNavigate();

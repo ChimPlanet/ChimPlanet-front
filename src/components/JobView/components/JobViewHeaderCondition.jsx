@@ -1,5 +1,5 @@
 import { useJobViewContext } from '../JobViewContext';
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 
 export default function JobViewHeaderCondition() {
   const [context, dispatch] = useJobViewContext();

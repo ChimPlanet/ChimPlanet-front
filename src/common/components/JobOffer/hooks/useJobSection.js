@@ -1,5 +1,5 @@
 import { useLayoutEffect, useReducer } from 'react';
-import { useSizeType } from '@/context/sizeTypeContext';
+import { useScreenType } from 'chimplanet-ui';
 
 // 훅 기본값
 const INITIAL = Object.freeze({
@@ -47,7 +47,7 @@ const reducer = (state, action) => {
 export default function useJobSection() {
   const [context, dispatch] = useReducer(reducer, INITIAL);
   // ! 화면 크기에 따라 per Page 변경
-  const sizeType = useSizeType();
+  const sizeType = useScreenType();
 
   useLayoutEffect(() => {
     dispatch({

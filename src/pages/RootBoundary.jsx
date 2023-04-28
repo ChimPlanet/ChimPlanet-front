@@ -1,8 +1,6 @@
 import { Suspense } from 'react';
 
-import ErrorBoundary from '@/common/components/ErrorBoundary';
-import Fallback from '@/common/components/Fallback';
-import Loading from '@/common/components/Loading';
+import { Loading, Fallback, ErrorBoundary } from 'chimplanet-ui';
 /**
  * Suspend, ErrorBoundary 복합체
  * @param {{ children: React.ReactNode }}

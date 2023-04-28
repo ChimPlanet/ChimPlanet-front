@@ -1,8 +1,6 @@
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import { PropTypes, styled, Link } from 'chimplanet-ui';
 
 import { SectionLeftIcon, SectionRightIcon } from '@/common/icons';
-import { Link } from 'react-router-dom';
 
 /**
  * @typedef {Object} JobOfferSectionHeaderProps

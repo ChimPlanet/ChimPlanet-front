@@ -1,5 +1,4 @@
-import { node } from 'prop-types';
-import styled from 'styled-components';
+import { PropTypes, styled } from 'chimplanet-ui';
 
 export default function SidebarGroup({ children, title }) {
   return (
@@ -11,7 +10,7 @@ export default function SidebarGroup({ children, title }) {
 }
 
 SidebarGroup.propTypes = {
-  children: node.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 const Container = styled.div``;

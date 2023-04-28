@@ -1,15 +1,13 @@
 import { useMemo, useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import { styled, Loading, useScreenType } from 'chimplanet-ui';
 import { JobOfferMapContent } from '@/common/components/JobOffer';
-import Loading from '@/common/components/Loading'
+
 import { OfferColumnMap, OfferWidthMap } from '@/utils/offerSizeMap';
-import { useSizeType } from '@/context/sizeTypeContext';
 
 export default function JobInfiniteScroll({ List, getMoreItem, last }) {
-
   const target = useRef();
-  
-  const sizeType = useSizeType();
+
+  const sizeType = useScreenType();
 
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
@@ -41,12 +39,14 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
   return (
     <>
       <JobOfferContainer column={config.pageCount}>
-        <JobOfferMapContent 
-          jobs={List}
-          offerWidth={config.offerWidth} />
+        <JobOfferMapContent jobs={List} offerWidth={config.offerWidth} />
       </JobOfferContainer>
       <div>
-        {!last && <div ref={target}><Loading /></div>}
+        {!last && (
+          <div ref={target}>
+            <Loading />
+          </div>
+        )}
         {last && <div></div>}
       </div>
     </>

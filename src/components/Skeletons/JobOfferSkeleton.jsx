@@ -1,5 +1,5 @@
 import { Skeleton } from '@mui/material';
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 
 const Wrapper = styled.div`
   margin-top: 20px;

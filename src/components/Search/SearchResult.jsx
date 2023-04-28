@@ -1,7 +1,6 @@
 import JobView from '@/components/JobView';
-import styled from 'styled-components';
+import { styled, Loading } from 'chimplanet-ui';
 import { Suspense } from 'react';
-import { Loading } from '@/common/components';
 
 /**
  * @typedef {Object} SearchMetadata

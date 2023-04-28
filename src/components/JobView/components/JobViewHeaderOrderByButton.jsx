@@ -1,5 +1,4 @@
-import { FloatingMenu } from '@/common/components';
-import styled from 'styled-components';
+import { styled, FloatingMenu } from 'chimplanet-ui';
 import { useRef, useState } from 'react';
 import { useJobViewContext } from '../JobViewContext';
 import { ArrowBelowSmallIcon } from '@/common/icons';

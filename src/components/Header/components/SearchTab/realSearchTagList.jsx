@@ -1,6 +1,6 @@
 import Tag from '@/components/Tag';
 import { SearchTagSequenceColor } from '@/constants/color';
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 
 export default function RealSearchTagList({ tags, removeTag }) {
   return (

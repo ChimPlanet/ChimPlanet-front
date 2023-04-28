@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 import { useLayoutEffect, useRef } from 'react';
 
 import { SearchIcon } from '@/common/icons';

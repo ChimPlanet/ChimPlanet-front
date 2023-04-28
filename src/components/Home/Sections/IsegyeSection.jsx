@@ -1,10 +1,10 @@
 import { JobOfferSection } from '@/common/components/JobOffer';
 import { OFFICIAL_PATH } from '@/constants/route';
 import backend from '@/service/backend';
-import { useSizeType } from '@/context/sizeTypeContext';
+import { useScreenType } from 'chimplanet-ui';
 
 export default function IsegyeSection() {
-  const sizeType = useSizeType();
+  const sizeType = useScreenType();
 
   return (
     <JobOfferSection

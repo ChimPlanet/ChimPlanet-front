@@ -1,9 +1,8 @@
 import { Suspense, useMemo } from 'react';
-import styled from 'styled-components';
+import { styled, Loading, useScreenType } from 'chimplanet-ui';
 
 import { JobOfferMapContent } from '@/common/components/JobOffer';
-import Loading from '@/common/components/Loading';
-import { useSizeType } from '@/context/sizeTypeContext';
+
 import { useRecentOffers } from '@/query/offer';
 import { OfferColumnMap, OfferWidthMap } from '@/utils/offerSizeMap';
 
@@ -20,7 +19,7 @@ export default function RecentSection() {
 
 function RecentSectionContent() {
   const { data: offers } = useRecentOffers();
-  const sizeType = useSizeType();
+  const sizeType = useScreenType();
 
   const config = useMemo(
     () => ({

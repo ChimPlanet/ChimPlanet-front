@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 import { useState } from 'react';
 
 import ParentCategoryColumn from './parentCategoryColumn';

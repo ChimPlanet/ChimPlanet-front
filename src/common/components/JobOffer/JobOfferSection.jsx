@@ -1,14 +1,12 @@
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { PropTypes, styled, Link, useScreenType } from 'chimplanet-ui';
 import { Suspense, useCallback } from 'react';
 
 import JobOfferSectionContent from './components/jobOfferSectionContent';
 import JobOfferSectionHeader from './components/jobOfferSectionHeader';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobSelectionSkeleton from '@/components/Skeletons/JobSectionSkeleton';
-import { useSizeType } from '@/context/sizeTypeContext';
+
 import { GreenRightChevronIcon } from '@/common/icons';
-import { Link } from 'react-router-dom';
 
 /**
  * @typedef {Object} JobOfferSectionProps
@@ -38,7 +36,7 @@ export default function JobOfferSection({
     [dispatch],
   );
 
-  const sizeType = useSizeType();
+  const sizeType = useScreenType();
 
   const nextPage = useCallback(
     () => dispatch({ type: ActionType.NEXT }),

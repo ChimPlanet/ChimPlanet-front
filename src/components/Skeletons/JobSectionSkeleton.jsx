@@ -1,5 +1,5 @@
-import { useSizeType } from '@/context/sizeTypeContext';
-import styled from 'styled-components';
+import { useScreenType, styled } from 'chimplanet-ui';
+
 import { useMemo } from 'react';
 import JobOfferSkeleton from './JobOfferSkeleton';
 
@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 export default function JobSelectionSkeleton() {
-  const sizeType = useSizeType();
+  const sizeType = useScreenType();
 
   const columns = useMemo(() => (sizeType === 'desktop' ? 4 : 3), [sizeType]);
 

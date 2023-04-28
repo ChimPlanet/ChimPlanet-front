@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 import SubBanner from '@/components/Home/SubBanner';
 import EventSection from '@/components/Home/Sections/EventSection';
 

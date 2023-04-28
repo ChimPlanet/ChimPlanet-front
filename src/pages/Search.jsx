@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
-import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import { useLocation, styled } from 'chimplanet-ui';
 
 import InvalidSearch from '@/components/Search/InvalidSearch';
 import SearchResult from '@/components/Search/SearchResult';

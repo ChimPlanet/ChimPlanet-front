@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
-import styled from 'styled-components';
+import { styled, Loading } from 'chimplanet-ui';
 
 import BookmarkSection from '@/components/BookmarkSection';
-import Loading from '@/common/components/Loading';
 
 export default function Bookmark() {
   return (

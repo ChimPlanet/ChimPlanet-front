@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 import { useJobViewContext } from '../JobViewContext';
 import Tag from '@/components/Tag';
 import { SearchTagSequenceColor } from '@/constants/color';

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled, useScreenType } from 'chimplanet-ui';
 
 import { useJobOfferDetail } from '@/query/offer';
 import { Offer } from '@/service/offer';
@@ -11,13 +11,11 @@ import {
   adaptImagesNoRefererPolicy,
 } from './util';
 
-import { useSizeType } from '@/context/sizeTypeContext';
-
 /** @param {{offer: Offer}} */
 export default function JobDetailContent({ offer }) {
   const { data } = useJobOfferDetail(offer.id);
 
-  const sizeType = useSizeType();
+  const sizeType = useScreenType();
 
   const content = useMemo(() => {
     const dom = stringToDom(data.content);

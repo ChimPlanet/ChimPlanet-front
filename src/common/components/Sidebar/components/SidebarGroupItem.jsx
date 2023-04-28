@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, styled } from 'chimplanet-ui';
 import { useMemo } from 'react';
 
 import { ADMIN_WRAPPER_PATH } from '@/constants/route';
@@ -19,8 +18,8 @@ export default function SidebarGroupItem({ icon, children, to, openTab }) {
       target={!openTab ? '_self' : '_blank'}
       data-selected={currentPath === to}
     >
-      <WrapperIcon>{icon}</WrapperIcon> 
-        {children}
+      <WrapperIcon>{icon}</WrapperIcon>
+      {children}
     </Wrapper>
   );
 }
@@ -42,4 +41,3 @@ const Wrapper = styled(Link)`
     fill: #fff;
   }
 `;
-

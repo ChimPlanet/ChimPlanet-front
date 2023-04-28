@@ -1,13 +1,10 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
 import { JobOfferSection } from '@/common/components/JobOffer';
 import { OFFICIAL_PATH } from '@/constants/route';
 import backend from '@/service/backend';
-import { useSizeType } from '@/context/sizeTypeContext';
+import { useScreenType } from 'chimplanet-ui';
 
 export default function OfficialSection() {
-  const sizeType = useSizeType();
+  const sizeType = useScreenType();
 
   return (
     <JobOfferSection

@@ -1,5 +1,4 @@
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import { PropTypes, styled } from 'chimplanet-ui';
 
 import { XIcon } from '@/common/icons';
 

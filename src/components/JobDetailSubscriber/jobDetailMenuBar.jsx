@@ -1,15 +1,18 @@
-import styled from 'styled-components';
-import { ProfileIcon, ShareIcon, DetailBookMark, CafeIcon } from '@/common/icons'
-import { useSizeType } from '@/context/sizeTypeContext';
+import { styled, useScreenType } from 'chimplanet-ui';
+import {
+  ProfileIcon,
+  ShareIcon,
+  DetailBookMark,
+  CafeIcon,
+} from '@/common/icons';
 
-export default function JobDetailMenuBar({ 
-  id, 
-  writer,  
+export default function JobDetailMenuBar({
+  id,
+  writer,
   isBookmarked = false,
   onBookmarkClick,
 }) {
-
-  const sizeType = useSizeType();
+  const sizeType = useScreenType();
 
   const handleCopyClipBoard = async (text) => {
     const input = document.createElement('input');
@@ -65,11 +68,10 @@ const Container = styled.div`
   position: sticky;
   top: 20px;
   left: 0px;
-  display: ${({display}) => display === 'desktop' ? 'flex' : 'none' };
+  display: ${({ display }) => (display === 'desktop' ? 'flex' : 'none')};
   flex-direction: column;
   align-items: center;
   text-align: center;
-  
 `;
 
 const MenuContainer = styled.div`

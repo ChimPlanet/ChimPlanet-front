@@ -1,20 +1,19 @@
-import PropTypes from 'prop-types';
+import { CPThemeProvider, PropTypes, ScreenTypeProvider } from 'chimplanet-ui';
 import { ArticleProvider } from './articleContext';
-import { SizeTypeContextProvider } from './sizeTypeContext';
-import { ThemeProvider } from './themeContext';
 import { PreloadProvider } from './preloadContext';
+import { baseTheme } from '@/theme';
 
 /**
- * @param {{children: JSX.Element}} param0
+ * @param {{children: JSX.Element}}
  */
 export default function AppContextProvider({ children }) {
   return (
     <PreloadProvider>
-      <SizeTypeContextProvider>
-        <ThemeProvider>
+      <ScreenTypeProvider screens={baseTheme.sizes}>
+        <CPThemeProvider>
           <ArticleProvider children={children} />
-        </ThemeProvider>
-      </SizeTypeContextProvider>
+        </CPThemeProvider>
+      </ScreenTypeProvider>
     </PreloadProvider>
   );
 }

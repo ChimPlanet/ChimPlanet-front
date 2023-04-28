@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 import SubBanner from '@/components/Home/SubBanner';
 import FixMemberSection from '@/components/Home/Sections/FixMemberSection';
 import IsegyeSection from '@/components/Home/Sections/IsegyeSection';

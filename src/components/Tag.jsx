@@ -1,14 +1,13 @@
-import styled from 'styled-components';
-import { func, string } from 'prop-types';
+import { PropTypes, styled } from 'chimplanet-ui';
 
 import CloseIcon from '@/common/icons/CloseIcon';
 
 Tag.propTypes = {
-  name: string.isRequired,
-  color: string,
-  padding: string,
-  onClick: func,
-  removeSelf: func,
+  name: PropTypes.string.isRequired,
+  color: PropTypes.string,
+  padding: PropTypes.string,
+  onClick: PropTypes.func,
+  removeSelf: PropTypes.func,
 };
 
 /**

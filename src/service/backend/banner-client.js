@@ -17,42 +17,6 @@ class BannerClient extends HttpClient {
   async banners() {
     return await this.get('/banner');
   }
-
-  /**
-   * @param {import('../banner/banner-request').UploadBannerRequestOptions} options
-   * @returns
-   */
-  async upload({ formData, fileId, ...options }, isUpdate = false) {
-    const query = Object.entries(options)
-      .map((e) => e.join('='))
-      .join('&');
-
-    const config = {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    };
-
-    if (!isUpdate) {
-      return await this.post('/image/?' + query, formData, config);
-    } else {
-      return await this.put(
-        `/updateImage/${fileId}?` + query,
-        formData,
-        config,
-      );
-    }
-  }
-
-  /** @param {import('../banner/banner-request').UpdateSequencesRequest} body */
-  async updateSequences(body) {
-    return await this.put('/sequence', body);
-  }
-
-  /** @param {number} id */
-  async deleteBanner(id) {
-    return await this.delete(`/delete/${id}`);
-  }
 }
 
 function typeBannerCollection(collection) {

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 
 export default function Sidebar({ children, logo }) {
   return <Container>{children}</Container>;

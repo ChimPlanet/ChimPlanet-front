@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 
 import useHistory from '@/hooks/useHistory';
 import HistoryList from './historyList';

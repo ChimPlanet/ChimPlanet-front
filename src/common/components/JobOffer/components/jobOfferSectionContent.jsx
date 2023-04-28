@@ -1,21 +1,18 @@
 import { useEffect, useLayoutEffect, useMemo } from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import {
+  PropTypes,
+  styled,
+  JobOfferMapContent,
+  useScreenType,
+} from 'chimplanet-ui';
 
 import { useJobOfferFromDynamic } from '@/query/offer';
-import { JobOfferMapContent } from 'chimplanet-ui';
 import { prefetchImages } from '@/utils';
-import { useSizeType } from '@/context/sizeTypeContext';
+
 import { OfferWidthMap } from '@/utils/offerSizeMap';
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import { useArticleContext } from '@/context/articleContext';
 import useBookmark from '@/hooks/useBookmark';
-
-JobOfferSectionContent.propTypes = {
-  cursor: PropTypes.number.isRequired,
-  perPage: PropTypes.number.isRequired,
-  setLength: PropTypes.func.isRequired,
-};
 
 /**
  * @typedef {Object} JobOfferSectionContentProps
@@ -44,13 +41,13 @@ export default function JobOfferSectionContent({
     fetchFunction,
     maxLength,
   );
-  const sizeType = useSizeType();
+  const screenType = useScreenType();
 
-  const offerWidth = useMemo(() => OfferWidthMap[sizeType], [sizeType]);
+  const offerWidth = useMemo(() => OfferWidthMap[screenType], [screenType]);
 
   const offerColumnGap = useMemo(
-    () => (sizeType === 'desktop' ? 20 : 25),
-    [sizeType],
+    () => (screenType === 'desktop' ? 20 : 25),
+    [screenType],
   );
 
   useLayoutEffect(
@@ -72,12 +69,12 @@ export default function JobOfferSectionContent({
     <Container
       moveX={-cursor * (offerWidth + offerColumnGap)}
       gap={offerColumnGap}
-      vertical={sizeType === 'mobile'}
+      vertical={screenType === 'mobile'}
     >
       <JobOfferMapContent
         jobs={offers}
         offerWidth={offerWidth}
-        offerOrientation={sizeType === 'mobile' ? 'horizontal' : 'vertical'}
+        offerOrientation={screenType === 'mobile' ? 'horizontal' : 'vertical'}
         isBookmarked={(id) =>
           BookmarkContext.getInstance().getBookmarkSet().has(id)
         }
@@ -87,6 +84,11 @@ export default function JobOfferSectionContent({
     </Container>
   );
 }
+JobOfferSectionContent.propTypes = {
+  cursor: PropTypes.number.isRequired,
+  perPage: PropTypes.number.isRequired,
+  setLength: PropTypes.func.isRequired,
+};
 
 const Container = styled.div`
   margin-top: 20px;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 
 import RealSearchBar from './realSearchBar';
 import Recommend from './recommend';

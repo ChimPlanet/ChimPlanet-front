@@ -1,6 +1,5 @@
 import { usePreloadContext } from '@/context/preloadContext';
-import { Suspense } from 'react';
-import styled from 'styled-components';
+import { styled } from 'chimplanet-ui';
 
 export default function SubBanner() {
   const preload = usePreloadContext();

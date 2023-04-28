@@ -1,9 +1,9 @@
 import { JobOfferSection } from '@/common/components/JobOffer';
-import { useSizeType } from '@/context/sizeTypeContext';
+import { useScreenType } from 'chimplanet-ui';
 import backend from '@/service/backend';
 
 export default function PopularSection() {
-  const sizeType = useSizeType();
+  const sizeType = useScreenType();
 
   return (
     <JobOfferSection
