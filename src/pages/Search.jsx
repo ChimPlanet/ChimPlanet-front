@@ -28,4 +28,5 @@ export default function Search() {
 
 const Container = styled.div`
   margin-top: 30px;
+  padding-bottom: 50px;
 `;

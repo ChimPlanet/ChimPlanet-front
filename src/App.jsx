@@ -20,6 +20,8 @@ function App() {
 export default App;
 
 const Main = styled.main`
+  position: relative;
+  min-height: 100%;
   color: ${({ theme }) => theme.colors.main};
   background-color: ${({ theme }) => theme.backgroundColor.main};
 `;
