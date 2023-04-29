@@ -11,6 +11,8 @@ class OfferContent {
   redirectURL;
   @field('tags')
   tags;
+  @field('profileImageUrl', pp.profileImageUrl)
+  profileImageUrl;
   @field('isEnd')
   isClosed;
   @field('boardTitle')

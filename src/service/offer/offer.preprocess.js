@@ -22,6 +22,12 @@ export function thumbnailURL(value) {
     : value;
 }
 
+export function profileImageUrl(value) {
+  return typeof value === 'string'
+    ? value
+    : value;
+}
+
 export function isThumbnail(value) {
   return typeof value === 'string' && value.length > 5;
 }

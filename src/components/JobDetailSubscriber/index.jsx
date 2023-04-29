@@ -15,6 +15,7 @@ import useBookmark from '@/hooks/useBookmark';
 export default function JobDetailSubscriber() {
   const [article, { close }] = useArticleContext();
   const [modal, setModal] = useState(false);
+  const [userProfile, setUserProfile] = useState();
   const sizeType = useScreenType();
   const { toggle } = useBookmark();
   const bookmarkSet = BookmarkContext.getInstance().getBookmarkSet();
@@ -23,6 +24,10 @@ export default function JobDetailSubscriber() {
     setModal(!modal);
   };
 
+  const handelProfile = (user) => {
+    setUserProfile(user)
+  }
+  
   return (
     <ScrollModal open={article !== null} onClose={close} full={sizeType}>
       <>
@@ -36,12 +41,13 @@ export default function JobDetailSubscriber() {
             </div>
           </MobileContainer>
           <Suspense fallback={<Loading />}>
-            {article && <JobDetailContent full={sizeType} offer={article} />}
+            {article && <JobDetailContent handelProfile={handelProfile} full={sizeType} offer={article} />}
           </Suspense>
         </ContentWrapper>
         <JobDetailMenuBar
           id={article?.id}
           writer={article?.writer}
+          userProfile={userProfile}
           isBookmarked={bookmarkSet.has(article?.id)}
           onBookmarkClick={() => toggle(article?.id)}
         />
@@ -49,6 +55,7 @@ export default function JobDetailSubscriber() {
           id={article?.id}
           handleModal={handleModal}
           modal={modal}
+          userProfile={userProfile}
           writer={article?.writer}
           isBookmarked={bookmarkSet.has(article?.id)}
           onBookmarkClick={() => toggle(article?.id)}
