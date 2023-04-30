@@ -15,6 +15,6 @@ permissions:
     
 hooks:
   ApplicationStart:
-    - location: start.sh
+    - location: scripts/start.sh
       timeout: 180
       runas: chimplanet
