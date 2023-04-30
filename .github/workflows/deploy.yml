@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      
+
 env:
   S3_BUCKET_NAME: chimplanet-deploy #s3버킷 이름
   PROJECT_NAME: chimplanet
@@ -28,18 +28,21 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --network-concurrency 1
-        
+
       - name: Create .Env
-        run: | 
+        run: |
           echo "VITE_API_BASE=$VITE_API_BASE" >> .env
-        env: 
+        env:
           VITE_API_BASE: ${{ secrets.VITE_API_BASE }}
-          
+
       - name: Build project
         run: yarn build
-      
+
       - name: Include Appspec.yml
         run: mv appspec.yml ./dist
+
+      - name: Include Scripts
+        run: mv scripts ./dist
 
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip dist/
