@@ -6,12 +6,12 @@ import {
   MobileShareIcon,
   MobileBookMarkIcon,
   MobileCafeIcon,
-  CircleIcon,
 } from '@/common/icons';
 
 export default function JobDetailMobileMenuBar({
   modal,
   handleModal,
+  userProfile,
   writer,
   id,
   isBookmarked = false,
@@ -42,7 +42,7 @@ export default function JobDetailMobileMenuBar({
           <NavBar>
             <ItemList>
               <Item className="profile">
-                <CircleIcon />
+                <Profile src={userProfile ?? ""} alt={userProfile} />
                 <p className="text">{writer}</p>
               </Item>
               <a
@@ -133,4 +133,10 @@ const IconContainer = styled.div`
   align-items: center;
   width: 44px;
   height: 44px;
+`;
+
+const Profile = styled.img`
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
 `;

@@ -4,7 +4,7 @@ import { useJobOfferDetail } from '@/query/offer';
 import { Offer } from '@/service/offer';
 import JobDetailHeader from './jobDetailHeader';
 
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import {
   stringToDom,
   getAllImgElementsFromDom,
@@ -12,11 +12,15 @@ import {
 } from './util';
 
 /** @param {{offer: Offer}} */
-export default function JobDetailContent({ offer }) {
+export default function JobDetailContent({ offer, handelProfile }) {
   const { data } = useJobOfferDetail(offer.id);
 
   const sizeType = useScreenType();
 
+  useEffect(() => {
+      handelProfile(data.profileImageUrl)
+  }, [data]);
+  
   const content = useMemo(() => {
     const dom = stringToDom(data.content);
     adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
@@ -31,7 +35,6 @@ export default function JobDetailContent({ offer }) {
         date={data.data.regDate}
         views={offer.viewCount}
       />
-      {/* <PostImg referrerPolicy="no-referrer" src={imgLink} /> */}
       <Content data-desktop={sizeType === 'desktop'}>
         <PostText
           dangerouslySetInnerHTML={{

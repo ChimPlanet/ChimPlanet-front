@@ -1,6 +1,5 @@
 import { styled, useScreenType } from 'chimplanet-ui';
 import {
-  ProfileIcon,
   ShareIcon,
   DetailBookMark,
   CafeIcon,
@@ -9,6 +8,7 @@ import {
 export default function JobDetailMenuBar({
   id,
   writer,
+  userProfile,
   isBookmarked = false,
   onBookmarkClick,
 }) {
@@ -33,7 +33,7 @@ export default function JobDetailMenuBar({
     <Container display={sizeType}>
       <MenuContainer>
         <IconContainer>
-          <ProfileIcon />
+          <Profile src={userProfile} alt={userProfile} />
         </IconContainer>
         <IconText>{writer}</IconText>
       </MenuContainer>
@@ -78,6 +78,12 @@ const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const Profile = styled.img`
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
 `;
 
 const IconContainer = styled.div`
