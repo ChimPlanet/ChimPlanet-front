@@ -1,0 +1,48 @@
+name: Deploy Release
+
+on:
+  push:
+    branches:
+      - release
+      
+env:
+  S3_BUCKET_NAME: chimplanet-front-publish #s3버킷 이름
+  
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+
+      - name: Clean Cache
+        run: yarn cache clean
+
+      - name: Install dependencies
+        run: yarn install --network-concurrency 1
+        
+      - name: Create .Env
+        run: | 
+          echo "VITE_API_BASE=$VITE_API_BASE" >> .env
+        env: 
+          VITE_API_BASE: ${{ secrets.VITE_API_BASE }}
+          
+      - name: Build project
+        run: yarn build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_RELEASE }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_RELEASE }}
+          aws-region: ap-northeast-2
+
+      - name: Deploy
+        run: aws s3 sync s3://$S3_BUCKET_NAME
