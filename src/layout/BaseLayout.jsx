@@ -1,32 +1,44 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import { styled } from 'chimplanet-ui';
+import { styled, useScreenType, Banner } from 'chimplanet-ui';
+
+import { usePreloadContext } from '@/context/preloadContext';
+import { getBannerByType } from '@/service/banner/banner-utils';
 
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { Centering } from '@/common/components/Centering';
 
 export default function BaseLayout({ children }) {
+  const sizeType = useScreenType();
+  const { banners } = usePreloadContext();
+
+  const mainBanners = useMemo(
+    () =>
+      banners
+        ? getBannerByType(banners, sizeType === 'desktop' ? 'PC' : 'MOBILE')
+        : [],
+    [banners, sizeType],
+  );
+
   return (
     <>
       <Header />
-      <Content>{children}</Content>
+      <BannerWrapper children={<Banner banners={mainBanners} />} />
+
+      <Centering
+        styles={{
+          mobile: `padding-bottom: ${Footer.mobileHeight}px;`,
+          default: `padding-bottom: ${Footer.defaultHeight}px;`,
+        }}
+        children={children}
+      />
       <Footer />
     </>
   );
 }
 
-const Content = styled.div`
-  margin: 0 auto;
-  padding-bottom: ${Footer.defaultHeight}px;
-
-  ${({ theme }) => theme.media.desktop`
-    ${`width: ${theme.widths.desktop}px`};
-  `}
-  ${({ theme }) => theme.media.tablet`
-    ${`width: ${theme.widths.tablet}px`};
-  `}
-${({ theme }) => theme.media.mobile`
-    width: 350px;
-    ${`padding-bottom: ${Footer.mobileHeight}px`};
-  `}
+const BannerWrapper = styled.div`
+  margin: 30px 0px;
+  width: 100vw;
 `;
