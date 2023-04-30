@@ -4,6 +4,6 @@
 
 APP_NAME="fe-user-staged"
 
-pm2 kill ${APP_NAME}
+sudo pm2 kill ${APP_NAME}
 
-pm2 serve ./ 1008 --spa --name ${APP_NAME}
+sudo pm2 serve ./ --spa --name ${APP_NAME} --port 1008
