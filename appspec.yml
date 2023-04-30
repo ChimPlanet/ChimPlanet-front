@@ -5,10 +5,16 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ec2-user/chimplanet-front # 인스턴스에서 파일이 저장될 위치
+    destination: /home/chimplanet/fe-user-staged # 인스턴스에서 파일이 저장될 위치
 
 permissions:
   - object: /
     pattern: "**"
-    owner: ec2-user
-    group: ec2-user
+    owner: chimplanet
+    group: chimplanet
+    
+hooks:
+  ApplicationStart:
+    - location: start.sh
+      timeout: 180
+      runas: chimplanet
