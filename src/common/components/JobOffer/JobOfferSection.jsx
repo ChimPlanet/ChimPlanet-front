@@ -1,4 +1,11 @@
-import { PropTypes, styled, Link, useScreenType } from 'chimplanet-ui';
+import {
+  PropTypes,
+  styled,
+  Link,
+  useScreenType,
+  ErrorBoundary,
+  Fallback,
+} from 'chimplanet-ui';
 import { Suspense, useCallback } from 'react';
 
 import JobOfferSectionContent from './components/jobOfferSectionContent';
@@ -58,16 +65,18 @@ export default function JobOfferSection({
         nextPage={nextPage}
         prevPage={prevPage}
       />
-      <Suspense fallback={<JobSelectionSkeleton />}>
-        <JobOfferSectionContent
-          queryKey={queryKey}
-          fetchFunction={fetchFunction}
-          setLength={setLength}
-          perPage={context.perPage}
-          cursor={context.cursor}
-          maxLength={maxLength}
-        />
-      </Suspense>
+      <ErrorBoundary fallback={<Fallback />}>
+        <Suspense fallback={<JobSelectionSkeleton />}>
+          <JobOfferSectionContent
+            queryKey={queryKey}
+            fetchFunction={fetchFunction}
+            setLength={setLength}
+            perPage={context.perPage}
+            cursor={context.cursor}
+            maxLength={maxLength}
+          />
+        </Suspense>
+      </ErrorBoundary>
       {sizeType === 'mobile' && goTo && (
         <Footer to={goTo}>
           <FooterText>자세히보기</FooterText>

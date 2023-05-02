@@ -1,5 +1,11 @@
 import { Suspense, useMemo } from 'react';
-import { styled, Loading, useScreenType } from 'chimplanet-ui';
+import {
+  styled,
+  Loading,
+  useScreenType,
+  ErrorBoundary,
+  Fallback,
+} from 'chimplanet-ui';
 
 import { JobOfferMapContent } from '@/common/components/JobOffer';
 
@@ -10,9 +16,11 @@ export default function RecentSection() {
   return (
     <Container>
       <Title>최근에 올라온 구인글</Title>
-      <Suspense fallback={<Loading />}>
-        <RecentSectionContent />
-      </Suspense>
+      <ErrorBoundary fallback={<Loading />}>
+        <Suspense fallback={<Fallback />}>
+          <RecentSectionContent />
+        </Suspense>
+      </ErrorBoundary>
     </Container>
   );
 }

@@ -4,6 +4,7 @@ html,
 body {
   overscroll-behavior-y: none;
   height: 100%;
+  overflow-x: hidden;
 }
 
 #root {
