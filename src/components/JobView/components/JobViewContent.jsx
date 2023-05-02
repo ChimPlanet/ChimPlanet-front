@@ -41,7 +41,7 @@ export default function JobViewContent() {
             BookmarkContext.getInstance().getBookmarkSet().has(id)
           }
           jobs={context.displayedData}
-          offerWidth={layoutConfig.width}
+          offerWidth={160}
         />
       </ResizableGrid>
     ) : (

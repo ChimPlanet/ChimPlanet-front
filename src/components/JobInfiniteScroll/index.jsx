@@ -41,12 +41,11 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
 
   return (
     <>
-      <JobOfferContainer column={config.pageCount}>
+      <JobOfferContainer column={config.numOfColumn}>
         <JobOfferMapContent
           jobs={List}
           offerWidth={config.width}
           direction={config.direction}
-          rowLayoutConfig={config.rowConfig}
           onBookmarkClick={toggle}
           onClick={open}
           isBookmarked={is}
@@ -68,25 +67,17 @@ const OfferConfig = {
   desktop: {
     numOfColumn: 4,
     width: 250,
-    itemEnd: 8,
     direction: 'column',
   },
   tablet: {
     numOfColumn: 3,
     width: 220,
-    itemEnd: 6,
     direction: 'column',
   },
   mobile: {
-    numOfColumn: 1,
-    width: '100%',
-    itemEnd: 8,
-    direction: 'row',
-    /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
-    rowConfig: {
-      height: 120,
-      gap: 20,
-    },
+    numOfColumn: 2,
+    width: 160,
+    direction: 'column',
   },
 };
 
