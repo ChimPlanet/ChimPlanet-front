@@ -47,7 +47,6 @@
     "@types/react-query": "^1.2.9",
     "@vitejs/plugin-react": "^3.1.0",
     "babel-plugin-module-resolver": "^5.0.0",
-    "cypress": "^12.7.0",
     "husky": "^8.0.3",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.4.3",
