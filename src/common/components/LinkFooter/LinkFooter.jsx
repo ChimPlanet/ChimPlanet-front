@@ -21,6 +21,6 @@ const Container = styled(Link)`
 const Text = styled.span`
   font-size: 16px;
   font-weight: 500;
-  color: ${({ theme }) => theme.colors.logo};
+  color: ${({ theme }) => theme.specialColors.positive};
   margin-right: 15px;
 `;

@@ -1,9 +1,5 @@
 import { styled, useScreenType } from 'chimplanet-ui';
-import {
-  ShareIcon,
-  DetailBookMark,
-  CafeIcon,
-} from '@/common/icons';
+import { ShareIcon, DetailBookMark, CafeIcon } from '@/common/icons';
 
 export default function JobDetailMenuBar({
   id,
@@ -91,7 +87,7 @@ const IconContainer = styled.div`
   width: 46px;
   height: 46px;
   background: #ffffff;
-  background: ${({ theme }) => theme.backgroundColor.modal};
+  background: ${({ theme }) => theme.bgColors.primary};
 
   border-radius: 50%;
   align-items: center;

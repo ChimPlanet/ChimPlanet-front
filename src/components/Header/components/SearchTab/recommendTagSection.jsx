@@ -1,4 +1,4 @@
-import { PropTypes, styled } from 'chimplanet-ui';
+import { PropTypes, styled, useCurrentTheme } from 'chimplanet-ui';
 import { useMemo } from 'react';
 
 import TagTrie from '@/utils/tagTrie';
@@ -14,13 +14,15 @@ export default function RecommendTagSection({ word, addTag }) {
     );
   }, [word]);
 
+  const theme = useCurrentTheme();
+
   return (
     <Container>
       {recommends.map((tag) => (
         <Tag
           key={tag}
-          color="#8E94A0"
-          borderColor="#DBDEE2"
+          color={theme.textColors.septenary}
+          borderColor={theme.borderColors.quinary}
           name={' ' + tag}
           onClick={addTag.bind(null, '#' + tag, true)}
           padding="7px 18px 9px 16px"

@@ -34,6 +34,6 @@ const Items = styled.button`
   margin-right: 24px;
   font-size: 24px;
   font-weight: 700;
-  color: #aab1bc;
-  color: ${({ selected, theme }) => (selected ? theme.colors.main : '')};
+  color: ${({ selected, theme }) =>
+    selected ? theme.textColors.primary : theme.textColors.senary};
 `;

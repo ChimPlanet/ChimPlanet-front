@@ -42,7 +42,7 @@ export default function JobDetailMobileMenuBar({
           <NavBar>
             <ItemList>
               <Item className="profile">
-                <Profile src={userProfile ?? ""} alt={userProfile} />
+                <Profile src={userProfile ?? ''} alt={userProfile} />
                 <p className="text">{writer}</p>
               </Item>
               <a
@@ -111,7 +111,7 @@ const NavBar = styled.nav`
   flex-direction: column;
   height: 300px;
   padding: 40px;
-  background-color: ${({ theme }) => theme.backgroundColor.modal};
+  background-color: ${({ theme }) => theme.bgColors.primary};
 `;
 
 const ItemList = styled.div``;

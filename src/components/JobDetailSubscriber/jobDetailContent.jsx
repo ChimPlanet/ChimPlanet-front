@@ -18,9 +18,9 @@ export default function JobDetailContent({ offer, handelProfile }) {
   const sizeType = useScreenType();
 
   useEffect(() => {
-      handelProfile(data.profileImageUrl)
+    handelProfile(data.profileImageUrl);
   }, [data]);
-  
+
   const content = useMemo(() => {
     const dom = stringToDom(data.content);
     adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
@@ -58,7 +58,7 @@ const Wrapper = styled.div`
   margin-top: ${({ sizeType }) => (sizeType === 'desktop' ? '' : '43px')};
   padding: ${({ sizeType }) =>
     sizeType === 'mobile' ? '20px 10px 70px 20px' : '30px 2px 30px 45px'};
-  color: ${({ theme }) => theme.colors.main};
+  color: ${({ theme }) => theme.textColors.primary};
 `;
 
 const Content = styled.div`
@@ -86,7 +86,7 @@ const SubTitle = styled.div`
   font-weight: 700;
   line-height: 26px;
   margin-bottom: 20px;
-  color: ${({ theme }) => theme.colors.main};
+  color: ${({ theme }) => theme.textColors.primary};
 `;
 
 const PostTags = styled.div`
