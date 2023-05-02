@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from 'chimplanet-ui';
 import {
+  ChimplanetIcon,
   InstagramIcon,
   NaverCafeIcon,
   TwitchIcon,
@@ -15,7 +16,9 @@ function Footer() {
     <Container>
       <Wrapper>
         <Header>
-          <Logo>침플래닛</Logo>
+          <Logo>
+            <ChimplanetIcon mid />
+          </Logo>
           <HeaderMenu>
             <div>
               <HeaderAnchor>제작자</HeaderAnchor>
@@ -33,7 +36,7 @@ function Footer() {
         <Detail>
           팀장 : 이푸푸
           <br />
-          이메일 : chimplanet@gmail.com
+          이메일 : chimplanetwak@gmail.com
           <br />
           침플래닛 ⓒ 2023 CHIMPLANET. ALL RIGHT RESERVED
         </Detail>
@@ -108,7 +111,7 @@ const HeaderIcons = styled.div`
 const Logo = styled.div`
   font-size: 16px;
   font-weight: 700;
-  color: #00bd2f;
+  color: #fff;
 `;
 
 const Detail = styled.div`

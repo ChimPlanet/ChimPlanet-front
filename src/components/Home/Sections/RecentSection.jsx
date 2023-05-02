@@ -11,6 +11,9 @@ import {
 import { useRecentOffers } from '@/query/offer';
 import useBookmark from '@/hooks/useBookmark';
 import { useArticleContext } from '@/context/articleContext';
+import { JOB_PATH } from '@/constants/route';
+import { LinkFooter } from '@/common/components/LinkFooter';
+import MoreOfferButton from '../MoreOfferButton';
 
 export default function RecentSection() {
   return (
@@ -35,17 +38,24 @@ function RecentSectionContent() {
   const config = useMemo(() => OfferConfig[screenType], [screenType]);
 
   return (
-    <JobContent column={config.numOfColumn}>
-      <JobOfferMapContent
-        jobs={offers.slice(0, config.itemEnd)}
-        offerWidth={config.width}
-        direction={config.direction}
-        rowLayoutConfig={config.rowConfig}
-        onBookmarkClick={toggle}
-        onClick={open}
-        isBookmarked={is}
-      />
-    </JobContent>
+    <>
+      <JobContent column={config.numOfColumn}>
+        <JobOfferMapContent
+          jobs={offers.slice(0, config.itemEnd)}
+          offerWidth={config.width}
+          direction={config.direction}
+          rowLayoutConfig={config.rowConfig}
+          onBookmarkClick={toggle}
+          onClick={open}
+          isBookmarked={is}
+        />
+      </JobContent>
+      {screenType === 'mobile' ? (
+        <LinkFooter text="자세히보기" href={JOB_PATH} />
+      ) : (
+        <MoreOfferButton />
+      )}
+    </>
   );
 }
 
@@ -65,7 +75,7 @@ const OfferConfig = {
   mobile: {
     numOfColumn: 1,
     width: '100%',
-    itemEnd: 8,
+    itemEnd: 6,
     direction: 'row',
     /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
     rowConfig: {
