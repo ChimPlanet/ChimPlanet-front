@@ -1,5 +1,4 @@
-import { Suspense } from 'react';
-import { styled, Loading } from 'chimplanet-ui';
+import { styled } from 'chimplanet-ui';
 
 import BookmarkSection from '@/components/BookmarkSection';
 
@@ -7,9 +6,7 @@ export default function Bookmark() {
   return (
     <Container>
       <Header>북마크</Header>
-      <Suspense fallback={<Loading />}>
-        <BookmarkSection />
-      </Suspense>
+      <BookmarkSection />
     </Container>
   );
 }
@@ -17,6 +14,7 @@ export default function Bookmark() {
 const Container = styled.div`
   margin: 0 auto;
   margin-top: 55px;
+  padding-bottom: 75px;
 
   ${({ theme }) => theme.media.desktop`
     ${`width: ${theme.widths.desktop}px`};

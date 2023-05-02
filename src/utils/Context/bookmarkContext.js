@@ -10,10 +10,10 @@ export class BookmarkContext extends BaseContext {
     super('bookmark', []);
   }
 
-  toggle(id) {
-    const idx = this.get().indexOf(id);
+  toggle(offer) {
+    const idx = this.get().findIndex((el) => el.articleId === offer.articleId);
     if (idx === -1) {
-      this.get().push(id);
+      this.get().push(offer);
     } else {
       this.get().splice(idx, 1);
     }
@@ -21,7 +21,7 @@ export class BookmarkContext extends BaseContext {
   }
 
   getBookmarkSet() {
-    return new Set(this.get());
+    return new Set(this.get().map((el) => parseInt(el.articleId)));
   }
 
   /**

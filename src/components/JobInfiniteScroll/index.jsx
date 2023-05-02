@@ -1,6 +1,10 @@
 import { useMemo, useRef, useEffect } from 'react';
-import { styled, Loading, useScreenType } from 'chimplanet-ui';
-import { JobOfferMapContent } from '@/common/components/JobOffer';
+import {
+  JobOfferMapContent,
+  styled,
+  Loading,
+  useScreenType,
+} from 'chimplanet-ui';
 
 import { OfferColumnMap, OfferWidthMap } from '@/utils/offerSizeMap';
 

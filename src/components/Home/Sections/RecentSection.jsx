@@ -4,10 +4,9 @@ import {
   Loading,
   useScreenType,
   ErrorBoundary,
+  JobOfferMapContent,
   Fallback,
 } from 'chimplanet-ui';
-
-import { JobOfferMapContent } from '@/common/components/JobOffer';
 
 import { useRecentOffers } from '@/query/offer';
 import { OfferColumnMap, OfferWidthMap } from '@/utils/offerSizeMap';
@@ -33,6 +32,13 @@ function RecentSectionContent() {
     () => ({
       pageCount: OfferColumnMap[sizeType],
       offerWidth: OfferWidthMap[sizeType],
+      /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
+      rowLayoutConfig: {
+        height: 120,
+        gap: 20,
+      },
+      /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['direction']} */
+      direction: sizeType !== 'mobile' ? 'column' : 'row',
     }),
     [sizeType],
   );
@@ -42,6 +48,8 @@ function RecentSectionContent() {
       <JobOfferMapContent
         jobs={offers.slice(0, config.pageCount * 2)}
         offerWidth={config.offerWidth}
+        direction={config.direction}
+        rowLayoutConfig={config.rowLayoutConfig}
       />
     </JobContent>
   );
