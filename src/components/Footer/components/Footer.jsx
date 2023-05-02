@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled } from 'chimplanet-ui';
+import { styled, useCPTheme } from 'chimplanet-ui';
 import {
   ChimplanetIcon,
   InstagramIcon,
@@ -12,6 +12,8 @@ const defaultHeight = 141;
 const mobileHeight = 181;
 
 function Footer() {
+  const [, setTheme] = useCPTheme();
+
   return (
     <Container>
       <Wrapper>
@@ -31,6 +33,7 @@ function Footer() {
             <YoutubeIcon />
             <InstagramIcon />
             <NaverCafeIcon />
+            <button onClick={() => setTheme('dark')}>전환</button>
           </HeaderIcons>
         </Header>
         <Detail>
