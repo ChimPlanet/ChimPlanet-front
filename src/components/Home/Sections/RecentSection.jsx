@@ -9,7 +9,8 @@ import {
 } from 'chimplanet-ui';
 
 import { useRecentOffers } from '@/query/offer';
-import { OfferColumnMap, OfferWidthMap } from '@/utils/offerSizeMap';
+import useBookmark from '@/hooks/useBookmark';
+import { useArticleContext } from '@/context/articleContext';
 
 export default function RecentSection() {
   return (
@@ -26,34 +27,53 @@ export default function RecentSection() {
 
 function RecentSectionContent() {
   const { data: offers } = useRecentOffers();
-  const sizeType = useScreenType();
+  const [, { open }] = useArticleContext();
 
-  const config = useMemo(
-    () => ({
-      pageCount: OfferColumnMap[sizeType],
-      offerWidth: OfferWidthMap[sizeType],
-      /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
-      rowLayoutConfig: {
-        height: 120,
-        gap: 20,
-      },
-      /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['direction']} */
-      direction: sizeType !== 'mobile' ? 'column' : 'row',
-    }),
-    [sizeType],
-  );
+  const screenType = useScreenType();
+  const { toggle, is } = useBookmark();
+
+  const config = useMemo(() => OfferConfig[screenType], [screenType]);
 
   return (
-    <JobContent column={config.pageCount}>
+    <JobContent column={config.numOfColumn}>
       <JobOfferMapContent
-        jobs={offers.slice(0, config.pageCount * 2)}
-        offerWidth={config.offerWidth}
+        jobs={offers.slice(0, config.itemEnd)}
+        offerWidth={config.width}
         direction={config.direction}
-        rowLayoutConfig={config.rowLayoutConfig}
+        rowLayoutConfig={config.rowConfig}
+        onBookmarkClick={toggle}
+        onClick={open}
+        isBookmarked={is}
       />
     </JobContent>
   );
 }
+
+const OfferConfig = {
+  desktop: {
+    numOfColumn: 4,
+    width: 250,
+    itemEnd: 8,
+    direction: 'column',
+  },
+  tablet: {
+    numOfColumn: 3,
+    width: 220,
+    itemEnd: 6,
+    direction: 'column',
+  },
+  mobile: {
+    numOfColumn: 1,
+    width: '100%',
+    itemEnd: 8,
+    direction: 'row',
+    /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
+    rowConfig: {
+      height: 120,
+      gap: 20,
+    },
+  },
+};
 
 const Container = styled.div`
   margin-top: 65px;
@@ -70,5 +90,4 @@ const JobContent = styled.div`
   display: grid;
   grid-template-columns: ${({ column }) => `repeat(${column}, 1fr)`};
   gap: 20px;
-  row-gap: 70px;
 `;

@@ -13,11 +13,7 @@ import useBookmark from '@/hooks/useBookmark';
 export default function BookmarkSection() {
   const screenType = useScreenType();
   const [, { open }] = useArticleContext();
-  const { toggle } = useBookmark();
-
-  const offers = BookmarkContext.getInstance().get().map(Offer);
-
-  const bookmarkSet = BookmarkContext.getInstance().getBookmarkSet();
+  const { toggle, is, bookmarks } = useBookmark();
 
   const layoutConfig = useMemo(
     () => OfferLayoutConfig[screenType],
@@ -30,8 +26,8 @@ export default function BookmarkSection() {
       calcNumberOfColumns={calcColumns}
     >
       <JobOfferMapContent
-        jobs={offers || []}
-        isBookmarked={(offer) => bookmarkSet.has(offer.id)}
+        jobs={bookmarks.map(Offer) || []}
+        isBookmarked={is}
         onBookmarkClick={toggle}
         onClick={open}
         rowLayoutConfig={OfferLayoutConfig[screenType]}

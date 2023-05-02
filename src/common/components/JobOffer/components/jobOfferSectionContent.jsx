@@ -34,7 +34,7 @@ export default function JobOfferSectionContent({
   maxLength,
 }) {
   const [, { open }] = useArticleContext();
-  const { toggle } = useBookmark();
+  const { toggle, is } = useBookmark();
   const { data: offers } = useJobOfferFromDynamic(
     queryKey,
     fetchFunction,
@@ -71,9 +71,7 @@ export default function JobOfferSectionContent({
       <JobOfferMapContent
         jobs={offers}
         offerWidth={layoutConfig.width}
-        isBookmarked={(id) =>
-          BookmarkContext.getInstance().getBookmarkSet().has(id)
-        }
+        isBookmarked={is}
         direction={screenType !== 'mobile' ? 'column' : 'row'}
         rowLayoutConfig={defaultRowLayoutConfig}
         onClick={open}

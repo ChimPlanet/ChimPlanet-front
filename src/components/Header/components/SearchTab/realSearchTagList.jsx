@@ -27,5 +27,5 @@ const Container = styled.div`
   flex-direction: row;
   gap: 7px;
   padding-right: 10px;
-  overflow-x: auto;
+  flex-wrap: nowrap;
 `;

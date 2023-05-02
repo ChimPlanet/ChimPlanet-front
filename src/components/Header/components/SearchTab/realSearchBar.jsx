@@ -57,6 +57,7 @@ export default function RealSearchBar({ mobile }) {
 const Container = styled.div`
   display: grid;
   grid-template-columns: 16px auto;
+  /* display: flex; */
   padding: 0px 14px;
   border: ${({ theme }) => `1px solid ${theme.colors.logo}`};
   border-radius: 100px;
@@ -74,6 +75,7 @@ const SearchContent = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 12px;
+  overflow-x: auto;
 `;
 
 const SearchInput = styled.input`
