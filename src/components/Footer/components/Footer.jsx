@@ -55,7 +55,7 @@ const Container = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #333333;
+  background-color: ${({ theme }) => theme.bgColors.footer};
   padding: 20px 0px;
   height: ${defaultHeight}px;
   ${({ theme }) => theme.media.mobile`
@@ -82,8 +82,9 @@ const HeaderMenu = styled.div`
 `;
 
 const HeaderAnchor = styled.a`
-  border-right: 1px solid #f2f2f2;
-  color: #f2f2f2;
+  border-right: ${({ theme }) => `1px solid ${theme.textColors.footer}`};
+  color: ${({ theme }) => theme.textColors.footer};
+
   padding: 0px 25px;
 
   ${({ theme }) => theme.media.mobile`
@@ -99,7 +100,7 @@ const HeaderAnchor = styled.a`
 `;
 
 const HeaderIcons = styled.div`
-  color: #f2f2f2;
+  color: ${({ theme }) => theme.textColors.footer};
   display: flex;
   column-gap: 18px;
   & svg {
@@ -109,9 +110,10 @@ const HeaderIcons = styled.div`
 `;
 
 const Logo = styled.div`
+  margin-top: -2.5px;
   font-size: 16px;
   font-weight: 700;
-  color: #fff;
+  color: ${({ theme }) => theme.specialColors.footer};
 `;
 
 const Detail = styled.div`
