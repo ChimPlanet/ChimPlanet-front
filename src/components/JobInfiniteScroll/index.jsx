@@ -7,11 +7,16 @@ import {
 } from 'chimplanet-ui';
 
 import { OfferColumnMap, OfferWidthMap } from '@/utils/offerSizeMap';
+import useBookmark from '@/hooks/useBookmark';
+import { useArticleContext } from '@/context/articleContext';
 
 export default function JobInfiniteScroll({ List, getMoreItem, last }) {
   const target = useRef();
 
-  const sizeType = useScreenType();
+  const screenType = useScreenType();
+
+  const { toggle, is } = useBookmark();
+  const [, { open }] = useArticleContext();
 
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
@@ -21,13 +26,7 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
     }
   };
 
-  const config = useMemo(
-    () => ({
-      pageCount: OfferColumnMap[sizeType],
-      offerWidth: OfferWidthMap[sizeType],
-    }),
-    [sizeType],
-  );
+  const config = useMemo(() => OfferConfig[screenType], [screenType]);
 
   useEffect(() => {
     let observer;
@@ -43,7 +42,15 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
   return (
     <>
       <JobOfferContainer column={config.pageCount}>
-        <JobOfferMapContent jobs={List} offerWidth={config.offerWidth} />
+        <JobOfferMapContent
+          jobs={List}
+          offerWidth={config.width}
+          direction={config.direction}
+          rowLayoutConfig={config.rowConfig}
+          onBookmarkClick={toggle}
+          onClick={open}
+          isBookmarked={is}
+        />
       </JobOfferContainer>
       <div>
         {!last && (
@@ -57,10 +64,35 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
   );
 }
 
+const OfferConfig = {
+  desktop: {
+    numOfColumn: 4,
+    width: 250,
+    itemEnd: 8,
+    direction: 'column',
+  },
+  tablet: {
+    numOfColumn: 3,
+    width: 220,
+    itemEnd: 6,
+    direction: 'column',
+  },
+  mobile: {
+    numOfColumn: 1,
+    width: '100%',
+    itemEnd: 8,
+    direction: 'row',
+    /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
+    rowConfig: {
+      height: 120,
+      gap: 20,
+    },
+  },
+};
+
 const JobOfferContainer = styled.div`
   display: grid;
   grid-template-columns: ${({ column }) => `repeat(${column}, 1fr)`};
   justify-items: center;
   gap: 20px;
-  row-gap: 70px;
 `;
