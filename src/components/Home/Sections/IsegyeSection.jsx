@@ -13,7 +13,6 @@ export default function IsegyeSection() {
       fetchFunction={backend.offers.official}
       hideArrow={sizeType === 'mobile'}
       maxLength={sizeType === 'mobile' && 4}
-      goTo={OFFICIAL_PATH}
     />
   );
 }

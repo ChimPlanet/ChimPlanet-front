@@ -29,7 +29,9 @@ export default function JobDetailMenuBar({
     <Container display={sizeType}>
       <MenuContainer>
         <IconContainer>
-          <Profile src={userProfile} alt={userProfile} />
+          <Profile>
+            <img referrerpolicy="no-referrer" src={userProfile+'?type=f100_100'} alt={userProfile} />
+          </Profile>
         </IconContainer>
         <IconText>{writer}</IconText>
       </MenuContainer>
@@ -76,10 +78,14 @@ const MenuContainer = styled.div`
   align-items: center;
 `;
 
-const Profile = styled.img`
-  width: 46px;
+const Profile = styled.div`
+  display: flex;
   height: 46px;
+  width: 46px;
   border-radius: 50%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: stretch;
 `;
 
 const IconContainer = styled.div`

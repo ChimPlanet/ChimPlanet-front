@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { styled } from 'chimplanet-ui';
 import JobNavBar from '@/components/JobNavBar';
 import JobInfiniteScroll from '@/components/JobInfiniteScroll';
@@ -8,15 +8,19 @@ import { Offer } from '@/service/offer';
 
 export default function Job({ parId }) {
   //게시글 리스트
-  const [Data, setData] = useState([]);
-  const [postList, setPostList] = useState([]);
-  const [newList, setNewList] = useState([]);
+  const [dataList, setDataList] = useState([]);
   //게시글 요청 파라미터
   const [lastArticleId, setLastArticleId] = useState(null);
   const [page, setPage] = useState(0);
   //게시글 분류
-  const [selectValue, setSelectValue] = useState('최신순');
-  const [currentList, setCurrentList] = useState('구인중');
+  const [sortValue, setSortValue] = useState({
+    text: '최신순',
+    value: 'regDate'
+  });
+  const [isEnd, setIsEnd] = useState({
+    text: '구인중',
+    value: 'ING'
+  });
   const [select, setSelect] = useState(false);
   //디테일 모달
   const [offerData, setOfferData] = useState(null);
@@ -28,14 +32,26 @@ export default function Job({ parId }) {
     setSelect(!select);
   };
 
-  const directButton = (e) => {
-    setCurrentList(e.target.innerHTML);
-  };
+  const directButton = useCallback((e, value) => {
+    setIsEnd({
+      text: e.target.innerHTML,
+      value: value
+    });
+    setDataList([])
+    setPage(0)
+    setLastArticleId(null)
+  },[dataList])
 
-  const setValue = (e) => {
-    setSelectValue(e.target.innerHTML);
-    setSelect(!select);
-  };
+  const setValue = useCallback((e,value) => {
+    setSortValue({
+      text: e.target.innerHTML,
+      value: value
+    });
+    setDataList([])
+    setPage(0)
+    setLastArticleId(null)
+    setSelect(false);
+  },[dataList])
 
   if (parId !== null && parId !== 0) {
     const { data: offer } = useJobOfferDetail(parId);
@@ -48,45 +64,16 @@ export default function Job({ parId }) {
     open(offerData);
   }, []);
 
-  const { data } = useJobOfferBasic(lastArticleId, size, page);
+  const { data } = useJobOfferBasic(lastArticleId, size, page, sortValue.value, isEnd.value);
 
   useEffect(() => {
-    setData((prevData) => [...prevData, ...data.content]);
+    setDataList((prevData) => [...prevData, ...data.content.map(Offer)]);
   }, [data]);
 
-  useEffect(() => {
-    const newData = [...Data];
-
-    if (currentList === '구인중') {
-      setPostList(
-        newData.map(Offer).filter((item) => item.data.isEnd === 'ING'),
-      );
-    } else if (currentList === '모집마감') {
-      setPostList(
-        newData.map(Offer).filter((item) => item.data.isEnd === 'END'),
-      );
-    } else if (currentList === '전체') {
-      setPostList(newData.map(Offer));
-    }
-    setLastArticleId(newData[newData.length - 1]?.articleId);
-  }, [currentList, Data]);
-
-  useEffect(() => {
-    const newPostList = [...postList];
-
-    if (selectValue === '조회순') {
-      setNewList(
-        newPostList.sort((a, b) => b.data.readCount - a.data.readCount),
-      );
-    } else if (selectValue === '추천순') {
-      setNewList(
-        newPostList.sort((a, b) => b.data.likeCount - a.data.likeCount),
-      );
-    } else {
-      setNewList(postList);
-    }
-  }, [selectValue, postList]);
-
+  useEffect(()=>{
+    setLastArticleId(dataList[dataList.length - 1]?.id);
+  },[dataList])
+  
   const getMoreItem = () => {
     setPage((page) => page + 1);
   };
@@ -94,16 +81,16 @@ export default function Job({ parId }) {
   return (
     <Container>
       <JobNavBar
-        total={Data.length}
+        total={dataList.length}
         setValue={setValue}
         directButton={directButton}
-        currentList={currentList}
-        selectValue={selectValue}
+        isEnd={isEnd}
+        sortValue={sortValue}
         onSelect={onSelect}
         select={select}
       />
       <JobInfiniteScroll
-        List={newList}
+        List={dataList}
         parId={parId}
         getMoreItem={getMoreItem}
         last={data.last}

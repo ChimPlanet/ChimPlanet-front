@@ -23,9 +23,9 @@ export function useJobOfferFromDynamic(key, fetchFunction, maxLength) {
   });
 }
 
-export function useJobOfferBasic(lastArticleId, size, page) {
-  return useQuery([JobOfferQueryKey, 'basic', page], () =>
-    backend.offers.basic(lastArticleId, size, page),
+export function useJobOfferBasic(lastArticleId, size, page, sort, isEnd) {
+  return useQuery([JobOfferQueryKey, 'basic', page, sort, isEnd], () =>
+    backend.offers.basic(lastArticleId, size, page, sort, isEnd),
   );
 }
 

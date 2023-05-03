@@ -13,7 +13,6 @@ export default function EventSection() {
       fetchFunction={backend.offers.event}
       hideArrow={sizeType === 'mobile'}
       maxLength={sizeType === 'mobile' && 4}
-      goTo={EVENT_PATH}
     />
   );
 }
