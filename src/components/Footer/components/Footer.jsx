@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled, useThemeUpdater } from 'chimplanet-ui';
+import { styled } from 'chimplanet-ui';
 import {
   ChimplanetIcon,
   InstagramIcon,
@@ -12,8 +12,6 @@ const defaultHeight = 141;
 const mobileHeight = 181;
 
 function Footer() {
-  const toggleTheme = useThemeUpdater();
-
   return (
     <Container>
       <Wrapper>
@@ -41,7 +39,6 @@ function Footer() {
             <a href="https://cafe.naver.com/steamindiegame" target="_blank">
               <NaverCafeIcon />
             </a>
-            <button onClick={toggleTheme}>전환</button>
           </HeaderIcons>
         </Header>
         <Detail>
