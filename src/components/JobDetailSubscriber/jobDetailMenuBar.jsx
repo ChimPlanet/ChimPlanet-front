@@ -96,8 +96,8 @@ const IconContainer = styled.div`
   display: flex;
   width: 46px;
   height: 46px;
-  background: #ffffff;
   background: ${({ theme }) => theme.bgColors.primary};
+  color: ${({ theme }) => theme.textColors.modalIcon};
 
   border-radius: 50%;
   align-items: center;

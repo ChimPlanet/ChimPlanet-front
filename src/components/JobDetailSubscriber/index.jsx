@@ -1,6 +1,6 @@
 import { useArticleContext } from '@/context/articleContext';
 import { Modal } from '@mui/material';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { styled, Loading, useScreenType } from 'chimplanet-ui';
 import JobDetailMenuBar from './jobDetailMenuBar';
 import JobDetailMobileMenuBar from './jobDetailMobileMenuBar';
@@ -27,6 +27,21 @@ export default function JobDetailSubscriber() {
   const handelProfile = (user) => {
     setUserProfile(user);
   };
+
+  useEffect(() => {
+    if (!window) return;
+
+    window.onpageshow = (event) => {
+      if (
+        event.persisted ||
+        (window.performance && window.performance.navigation.type == 2)
+      ) {
+        if (modal) {
+          handleModal();
+        }
+      }
+    };
+  }, [modal]);
 
   return (
     <ScrollModal open={article !== null} onClose={close} full={sizeType}>

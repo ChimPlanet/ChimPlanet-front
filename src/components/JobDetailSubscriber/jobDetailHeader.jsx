@@ -5,7 +5,7 @@ export default function JobDetailHeader({ title, status, date, views }) {
     <HeaderContainer>
       <PostTitle>{title}</PostTitle>
       <PostInfo>
-        <PostStatus>{status === 'END' ? '마감' : '구인 중'}</PostStatus>
+        <PostStatus end={status}>{status ? '마감' : '구인 중'}</PostStatus>
         <PostDate>{date}</PostDate>
         <PostViews>조회 {views}</PostViews>
       </PostInfo>
@@ -25,18 +25,21 @@ const PostTitle = styled.div`
   font-weight: 500;
   line-height: 21px;
   margin-bottom: 8px;
+  padding-right: 45px;
   color: ${({ theme }) => theme.textColors.primary};
 `;
 
-const PostStatus = styled.div`
-  border: 1px solid #ed2040;
-  border-radius: 4px;
-  font-size: 12px;
-  line-height: 14px;
-  margin-right: 10px;
-  padding: 3px 12px 2px 13px;
-  color: #ed2040;
-`;
+const PostStatus = styled.div(({ theme, end }) => ({
+  borderRadius: '4px',
+  fontSize: '12px',
+  lineHeight: '14px',
+  marginRight: '10px',
+  padding: '3px 12px 2px 13px',
+  borderStyle: 'solid',
+  borderWidth: 1,
+  borderColor: theme.specialColors[end ? 'negative' : 'positive'],
+  color: theme.specialColors[end ? 'negative' : 'positive'],
+}));
 
 const PostInfo = styled.div`
   display: flex;
