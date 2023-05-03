@@ -7,7 +7,7 @@ on:
 
 env:
   S3_BUCKET_NAME: chimplanet-deploy #s3버킷 이름
-  PROJECT_NAME: chimplanet
+  PROJECT_NAME: chimplanet-fe-user
 
 jobs:
   build:
