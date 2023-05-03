@@ -10,8 +10,10 @@ export default function ThemeChangeButton() {
   return (
     <Wrapper onClick={toggle}>
       <Icon />
-      &nbsp;
-      {themeMode === 'light' ? '다크 모드' : '라이트 모드'} 전환
+      <span>
+        &nbsp;
+        {themeMode === 'light' ? '다크 모드' : '라이트 모드'} 전환
+      </span>
     </Wrapper>
   );
 }
@@ -24,7 +26,7 @@ const Wrapper = styled.button`
   margin-right: 5px;
   margin-bottom: 20px;
   border-radius: 30px;
-  font-size: 16px;
+  font-size: 14px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
   padding: 10px 20px;
   text-align: center;
@@ -38,4 +40,21 @@ const Wrapper = styled.button`
   &:hover svg {
     fill: ${({ theme }) => theme.specialColors.positive};
   }
+
+  ${({ theme }) => theme.media.mobile`
+    & {
+      border-radius: 50%;
+      width: 41px;
+      height: 41px;
+      padding: 0px;
+    }
+
+    & span {
+      display: none;
+    }
+
+    & svg {
+      margin-top: -2px;
+    }
+  `}
 `;
