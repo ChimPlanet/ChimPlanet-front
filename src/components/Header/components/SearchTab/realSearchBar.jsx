@@ -38,7 +38,7 @@ export default function RealSearchBar({ mobile }) {
   const handleInput = ({ target }) => setInput(target.value);
 
   return (
-    <Container data-mobile={mobile}>
+    <Container id="search-bar" data-mobile={mobile}>
       <Search width="18px" />
       <SearchContent>
         <RealSearchTagList tags={tags} removeTag={removeTag} />
@@ -78,6 +78,8 @@ const SearchContent = styled.div`
   flex-direction: row;
   margin-left: 12px;
   overflow-x: auto;
+  padding-bottom: 1px;
+  margin-top: 2px;
 `;
 
 const SearchInput = styled.input`

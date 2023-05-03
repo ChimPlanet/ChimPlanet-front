@@ -11,6 +11,17 @@ body {
   height: 100%;
 }
 
+#search-bar ::-webkit-scrollbar {
+  height: 3px;
+  width: 1px;
+}
+#search-bar ::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+}
+#search-bar ::-webkit-scrollbar-thumb:hover {
+  background-color: rgba($color: #00e4b3, $alpha: 0.7);
+}
+
 img {
   image-rendering: -moz-crisp-edges; /* Firefox */
   image-rendering: -o-crisp-edges; /* Opera */
