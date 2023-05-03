@@ -29,10 +29,18 @@ function Footer() {
             </div>
           </HeaderMenu>
           <HeaderIcons>
-            <TwitchIcon />
-            <YoutubeIcon />
-            <InstagramIcon />
-            <NaverCafeIcon />
+            <a href='https://www.twitch.tv/woowakgood' target='_blank' >
+              <TwitchIcon />
+            </a>
+            <a href='https://www.youtube.com/@woowakgood' target='_blank'>
+              <YoutubeIcon />
+            </a>
+            <a href='https://www.instagram.com/instawakgood/' target='_blank'>
+              <InstagramIcon />
+            </a>
+            <a href='https://cafe.naver.com/steamindiegame' target='_blank'>
+              <NaverCafeIcon />
+            </a>
             <button onClick={() => setTheme('dark')}>전환</button>
           </HeaderIcons>
         </Header>
