@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { Header as BaseHeader } from 'chimplanet-ui';
+import { styled as muiStyled } from '@mui/material/styles';
 
 import SearchTab from './SearchTab';
 import CategoryOverlay from './CategoryOverlay';
-import { useState } from 'react';
 import { Drawer } from '@mui/material';
 import { MobileMenu } from '@/components/MobileMenu';
 
@@ -20,9 +21,19 @@ export default function Header() {
         SearchTabComponent={SearchTab}
         activeMobileMenu={handleOpenMobilMenu}
       />
-      <Drawer anchor="right" open={visibleMobileMenu} onClick={handleClose}>
+      <StyledDrawer
+        anchor="right"
+        open={visibleMobileMenu}
+        onClick={handleClose}
+      >
         <MobileMenu close={handleClose} />
-      </Drawer>
+      </StyledDrawer>
     </>
   );
 }
+
+const StyledDrawer = muiStyled(Drawer)(() => ({
+  '& root': {
+    backgroundColor: 'red',
+  },
+}));

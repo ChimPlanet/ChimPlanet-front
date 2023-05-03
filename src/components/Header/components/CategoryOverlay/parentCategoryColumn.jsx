@@ -45,7 +45,7 @@ const Content = styled.div`
   text-align: left;
   font-size: 14px;
   font-weight: 500;
-  background-color: ${({ theme }) => theme.backgroundColor.main};
+  background-color: ${({ theme }) => theme.bgColors.secondary};
 `;
 
 const Background = styled.div``;
@@ -55,9 +55,8 @@ const Item = styled.div`
 
   &[data-selected='true'],
   &:hover {
-    background: #f5f6f7;
-    background-color: ${({ theme }) => theme.backgroundColor.sub};
-    color: #00bd2f;
+    background-color: ${({ theme }) => theme.bgColors.tertiary};
+    color: ${({ theme }) => theme.specialColors.positive};
   }
 `;
 

@@ -1,6 +1,7 @@
 import React from 'react';
-import { styled } from 'chimplanet-ui';
+import { styled, useCPTheme } from 'chimplanet-ui';
 import {
+  ChimplanetIcon,
   InstagramIcon,
   NaverCafeIcon,
   TwitchIcon,
@@ -11,11 +12,15 @@ const defaultHeight = 141;
 const mobileHeight = 181;
 
 function Footer() {
+  const [, setTheme] = useCPTheme();
+
   return (
     <Container>
       <Wrapper>
         <Header>
-          <Logo>침플래닛</Logo>
+          <Logo>
+            <ChimplanetIcon mid />
+          </Logo>
           <HeaderMenu>
             <div>
               <HeaderAnchor>제작자</HeaderAnchor>
@@ -28,12 +33,13 @@ function Footer() {
             <YoutubeIcon />
             <InstagramIcon />
             <NaverCafeIcon />
+            <button onClick={() => setTheme('dark')}>전환</button>
           </HeaderIcons>
         </Header>
         <Detail>
           팀장 : 이푸푸
           <br />
-          이메일 : chimplanet@gmail.com
+          이메일 : chimplanetwak@gmail.com
           <br />
           침플래닛 ⓒ 2023 CHIMPLANET. ALL RIGHT RESERVED
         </Detail>
@@ -52,7 +58,7 @@ const Container = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #333333;
+  background-color: ${({ theme }) => theme.bgColors.footer};
   padding: 20px 0px;
   height: ${defaultHeight}px;
   ${({ theme }) => theme.media.mobile`
@@ -79,8 +85,9 @@ const HeaderMenu = styled.div`
 `;
 
 const HeaderAnchor = styled.a`
-  border-right: 1px solid #f2f2f2;
-  color: #f2f2f2;
+  border-right: ${({ theme }) => `1px solid ${theme.textColors.footer}`};
+  color: ${({ theme }) => theme.textColors.footer};
+
   padding: 0px 25px;
 
   ${({ theme }) => theme.media.mobile`
@@ -96,7 +103,7 @@ const HeaderAnchor = styled.a`
 `;
 
 const HeaderIcons = styled.div`
-  color: #f2f2f2;
+  color: ${({ theme }) => theme.textColors.footer};
   display: flex;
   column-gap: 18px;
   & svg {
@@ -106,9 +113,10 @@ const HeaderIcons = styled.div`
 `;
 
 const Logo = styled.div`
+  margin-top: -2.5px;
   font-size: 16px;
   font-weight: 700;
-  color: #00bd2f;
+  color: ${({ theme }) => theme.specialColors.footer};
 `;
 
 const Detail = styled.div`

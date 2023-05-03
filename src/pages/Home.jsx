@@ -4,7 +4,6 @@ import OfficialSection from '@/components/Home/Sections/OfficialSection';
 import RecentSection from '@/components/Home/Sections/RecentSection';
 import PopularSection from '@/components/Home/Sections/PopularSection';
 import SubBanner from '@/components/Home/SubBanner';
-import MoreOfferButton from '@/components/Home/MoreOfferButton';
 
 export default function Home() {
   return (
@@ -13,7 +12,6 @@ export default function Home() {
       <SubBanner />
       <PopularSection />
       <RecentSection />
-      <MoreOfferButton />
     </Content>
   );
 }

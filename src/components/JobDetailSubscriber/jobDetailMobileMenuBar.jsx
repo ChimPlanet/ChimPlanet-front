@@ -113,7 +113,7 @@ const NavBar = styled.nav`
   flex-direction: column;
   height: 300px;
   padding: 40px;
-  background-color: ${({ theme }) => theme.backgroundColor.modal};
+  background-color: ${({ theme }) => theme.bgColors.primary};
 `;
 
 const ItemList = styled.div``;
@@ -146,3 +146,4 @@ const Profile = styled.div`
   justify-content: center;
   align-items: stretch;
 `;
+

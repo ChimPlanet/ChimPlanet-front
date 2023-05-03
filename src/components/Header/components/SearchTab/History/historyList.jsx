@@ -38,7 +38,7 @@ const Item = styled.li`
   border-radius: 8px;
   cursor: pointer;
   &:hover {
-    background-color: ${({ theme }) => theme.backgroundColor.searchbarActive};
+    background-color: ${({ theme }) => theme.bgColors.quinary};
   }
 `;
 

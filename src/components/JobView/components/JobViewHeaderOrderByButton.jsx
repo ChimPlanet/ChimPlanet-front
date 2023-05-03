@@ -58,7 +58,7 @@ const Select = styled.div`
   align-items: center;
   width: ${MenuWidth}px;
   border-radius: 4px;
-  border: 1px solid #dbdee2;
+  border: ${({ theme }) => `1px solid ${theme.borderColors.quaternary}`};
   padding: 8px 18px;
   cursor: pointer;
 `;
@@ -66,7 +66,7 @@ const Select = styled.div`
 const SelectText = styled.span`
   font-size: 16px;
   font-weight: 500;
-  color: ${({ theme }) => theme.colors.main};
+  color: ${({ theme }) => theme.textColors.primary};
   user-select: none;
 `;
 
@@ -83,7 +83,8 @@ const MenuOptions = styled.button`
   padding: 8px 18px;
   font-size: 16px;
   text-align: left;
-  color: ${({ selected, theme }) => (selected ? theme.colors.logo : '#8e94a0')};
+  color: ${({ selected, theme }) =>
+    selected ? theme.specialColors.positive : '#8e94a0'};
   cursor: pointer;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
 
