@@ -1,5 +1,5 @@
 import React from 'react';
-import { styled, useCPTheme } from 'chimplanet-ui';
+import { styled, useThemeUpdater } from 'chimplanet-ui';
 import {
   ChimplanetIcon,
   InstagramIcon,
@@ -12,7 +12,7 @@ const defaultHeight = 141;
 const mobileHeight = 181;
 
 function Footer() {
-  const [, setTheme] = useCPTheme();
+  const toggleTheme = useThemeUpdater();
 
   return (
     <Container>
@@ -29,19 +29,19 @@ function Footer() {
             </div>
           </HeaderMenu>
           <HeaderIcons>
-            <a href='https://www.twitch.tv/woowakgood' target='_blank' >
+            <a href="https://www.twitch.tv/woowakgood" target="_blank">
               <TwitchIcon />
             </a>
-            <a href='https://www.youtube.com/@woowakgood' target='_blank'>
+            <a href="https://www.youtube.com/@woowakgood" target="_blank">
               <YoutubeIcon />
             </a>
-            <a href='https://www.instagram.com/instawakgood/' target='_blank'>
+            <a href="https://www.instagram.com/instawakgood/" target="_blank">
               <InstagramIcon />
             </a>
-            <a href='https://cafe.naver.com/steamindiegame' target='_blank'>
+            <a href="https://cafe.naver.com/steamindiegame" target="_blank">
               <NaverCafeIcon />
             </a>
-            <button onClick={() => setTheme('dark')}>전환</button>
+            <button onClick={toggleTheme}>전환</button>
           </HeaderIcons>
         </Header>
         <Detail>
