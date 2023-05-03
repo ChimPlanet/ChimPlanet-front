@@ -72,9 +72,11 @@ const SelectText = styled.span`
 
 const Menu = styled.div`
   background-color: white;
+  background-color: ${({ theme }) => theme.bgColors.primary};
+  /* border: ${({ theme }) => `1px solid ${theme.borderColors.quaternary}`}; */
+
   width: ${MenuWidth}px;
   margin-top: 10px;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
 `;
 
@@ -86,14 +88,16 @@ const MenuOptions = styled.button`
   color: ${({ selected, theme }) =>
     selected ? theme.specialColors.positive : '#8e94a0'};
   cursor: pointer;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+  border: ${({ theme }) => `1px solid ${theme.borderColors.quaternary}`};
 
   &:first-child {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
+    border-bottom: none;
   }
   &:last-child {
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
+    border-top: none;
   }
 `;
