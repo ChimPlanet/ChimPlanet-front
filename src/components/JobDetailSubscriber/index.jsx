@@ -25,9 +25,9 @@ export default function JobDetailSubscriber() {
   };
 
   const handelProfile = (user) => {
-    setUserProfile(user)
-  }
-  
+    setUserProfile(user);
+  };
+
   return (
     <ScrollModal open={article !== null} onClose={close} full={sizeType}>
       <>
@@ -41,7 +41,13 @@ export default function JobDetailSubscriber() {
             </div>
           </MobileContainer>
           <Suspense fallback={<Loading />}>
-            {article && <JobDetailContent handelProfile={handelProfile} full={sizeType} offer={article} />}
+            {article && (
+              <JobDetailContent
+                handelProfile={handelProfile}
+                full={sizeType}
+                offer={article}
+              />
+            )}
           </Suspense>
         </ContentWrapper>
         <JobDetailMenuBar
@@ -83,7 +89,7 @@ const ContentWrapper = styled.div`
   min-height: ${({ full }) => (full === 'desktop' ? '70vh' : '100vh')};
   height: fit-content;
   //height: ${({ full }) => (full === 'desktop' ? '' : '100vh')};
-  background-color: ${({ theme }) => theme.backgroundColor.modal};
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
   border-radius: ${({ full }) => (full === 'desktop' ? '8px' : '')};
 `;
 
@@ -91,7 +97,7 @@ const MobileContainer = styled.header`
   position: fixed;
   width: 100vw;
   z-index: 20000;
-  background-color: ${({ theme }) => theme.backgroundColor.modal};
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
   display: ${({ full }) => (full === 'desktop' ? 'none' : 'flex')};
   justify-content: space-between;
   align-items: center;

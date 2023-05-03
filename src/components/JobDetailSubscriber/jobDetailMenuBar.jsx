@@ -30,7 +30,11 @@ export default function JobDetailMenuBar({
       <MenuContainer>
         <IconContainer>
           <Profile>
-            <img referrerpolicy="no-referrer" src={userProfile+'?type=f100_100'} alt={userProfile} />
+            <img
+              referrerPolicy="no-referrer"
+              src={userProfile + '?type=f100_100'}
+              alt={userProfile}
+            />
           </Profile>
         </IconContainer>
         <IconText>{writer}</IconText>
