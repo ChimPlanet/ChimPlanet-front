@@ -42,7 +42,9 @@ export default function JobDetailMobileMenuBar({
           <NavBar>
             <ItemList>
               <Item className="profile">
-                <Profile src={userProfile ?? ""} alt={userProfile} />
+                <Profile>
+                  <img referrerpolicy="no-referrer" src={userProfile+'?type=f100_100'} alt={userProfile} />
+                </Profile>
                 <p className="text">{writer}</p>
               </Item>
               <a
@@ -135,8 +137,12 @@ const IconContainer = styled.div`
   height: 44px;
 `;
 
-const Profile = styled.img`
-  width: 48px;
-  height: 48px;
+const Profile = styled.div`
+  display: flex;
+  height: 46px;
+  width: 46px;
   border-radius: 50%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: stretch;
 `;

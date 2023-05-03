@@ -51,14 +51,14 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
           isBookmarked={is}
         />
       </JobOfferContainer>
-      <div>
+      <Margin>
         {!last && (
           <div ref={target}>
             <Loading />
           </div>
         )}
         {last && <div></div>}
-      </div>
+      </Margin>
     </>
   );
 }
@@ -80,6 +80,10 @@ const OfferConfig = {
     direction: 'column',
   },
 };
+
+const Margin = styled.div`
+  margin: 20px 0;
+`;
 
 const JobOfferContainer = styled.div`
   display: grid;

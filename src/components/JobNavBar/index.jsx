@@ -6,8 +6,8 @@ export default function JobNavBar({
   total,
   setValue,
   directButton,
-  selectValue,
-  currentList,
+  sortValue,
+  isEnd,
   select,
   onSelect,
 }) {
@@ -28,28 +28,28 @@ export default function JobNavBar({
         <nav>
           <NavListContainer sizeType={sizeType}>
             <NavList
-              onClick={directButton}
+              onClick={(e)=>directButton(e,'ING')}
               sizeType={sizeType}
               current={
-                currentList === '구인중' ? currentBorderColor : '#AAB1BC'
+                isEnd.text === '구인중' ? currentBorderColor : '#AAB1BC'
               }
-              color={currentList === '구인중' ? currentColor : '#AAB1BC'}
+              color={isEnd.text === '구인중' ? currentColor : '#AAB1BC'}
             >
               구인중
             </NavList>
             <NavList
-              onClick={directButton}
+              onClick={(e)=>directButton(e,'END')}
               sizeType={sizeType}
-              current={currentList === '모집마감' ? currentBorderColor : ''}
-              color={currentList === '모집마감' ? currentColor : '#AAB1BC'}
+              current={isEnd.text === '모집마감' ? currentBorderColor : ''}
+              color={isEnd.text === '모집마감' ? currentColor : '#AAB1BC'}
             >
               모집마감
             </NavList>
             <NavList
-              onClick={directButton}
+              onClick={(e)=>directButton(e,'ALL')}
               sizeType={sizeType}
-              current={currentList === '전체' ? currentBorderColor : ''}
-              color={currentList === '전체' ? currentColor : '#AAB1BC'}
+              current={isEnd.text === '전체' ? currentBorderColor : ''}
+              color={isEnd.text === '전체' ? currentColor : '#AAB1BC'}
             >
               전체
             </NavList>
@@ -59,28 +59,28 @@ export default function JobNavBar({
           <Total sizeType={sizeType}>총 {total}개</Total>
           <SortContainer>
             <Sort onClick={onSelect} sizeType={sizeType}>
-              {selectValue}
+              {sortValue.text}
             </Sort>
             {select && (
               <OptionContainer sizeType={sizeType}>
                 <Option
-                  onClick={setValue}
-                  color={selectValue === '최신순' ? '#00BD2F' : '#8E94A0'}
+                  onClick={(e)=>setValue(e,'regDate')}
+                  color={sortValue.text === '최신순' ? '#00BD2F' : '#8E94A0'}
                 >
                   최신순
                 </Option>
                 <Option
-                  onClick={setValue}
-                  color={selectValue === '조회순' ? '#00BD2F' : '#8E94A0'}
+                  onClick={(e)=>setValue(e,'readCount')}
+                  color={sortValue.text === '조회순' ? '#00BD2F' : '#8E94A0'}
                 >
                   조회순
                 </Option>
-                <Option
+{/*                 <Option
                   onClick={setValue}
-                  color={selectValue === '추천순' ? '#00BD2F' : '#8E94A0'}
+                  color={sortValue === '추천순' ? '#00BD2F' : '#8E94A0'}
                 >
                   추천순
-                </Option>
+                </Option> */}
               </OptionContainer>
             )}
           </SortContainer>
