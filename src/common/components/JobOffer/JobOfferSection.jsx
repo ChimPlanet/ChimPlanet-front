@@ -91,7 +91,7 @@ JobOfferSection.propTypes = {
 };
 
 const Container = styled.section`
-  min-height: 460px;
+  min-height: 465px;
   overflow-x: hidden;
   /* width: ${(props) => props.width}; */
 `;
