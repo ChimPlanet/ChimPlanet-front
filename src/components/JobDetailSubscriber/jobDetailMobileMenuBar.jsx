@@ -43,7 +43,11 @@ export default function JobDetailMobileMenuBar({
             <ItemList>
               <Item className="profile">
                 <Profile>
-                  <img referrerpolicy="no-referrer" src={userProfile+'?type=f100_100'} alt={userProfile} />
+                  <img
+                    referrerpolicy="no-referrer"
+                    src={userProfile + '?type=f100_100'}
+                    alt={userProfile}
+                  />
                 </Profile>
                 <p className="text">{writer}</p>
               </Item>
@@ -113,7 +117,7 @@ const NavBar = styled.nav`
   flex-direction: column;
   height: 300px;
   padding: 40px;
-  background-color: ${({ theme }) => theme.bgColors.primary};
+  background-color: #ffffff;
 `;
 
 const ItemList = styled.div``;
@@ -146,4 +150,3 @@ const Profile = styled.div`
   justify-content: center;
   align-items: stretch;
 `;
-

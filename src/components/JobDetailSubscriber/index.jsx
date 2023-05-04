@@ -12,6 +12,9 @@ import { LeftChevronIcon, ThreeDotIcon } from '@/common/icons';
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import useBookmark from '@/hooks/useBookmark';
 
+import '@/styles/naver-se.css';
+import { ChevronLeft, MoreHorizontal } from 'chimplanet-ui/icons';
+
 export default function JobDetailSubscriber() {
   const [article, { close }] = useArticleContext();
   const [modal, setModal] = useState(false);
@@ -49,10 +52,10 @@ export default function JobDetailSubscriber() {
         <ContentWrapper full={sizeType}>
           <MobileContainer full={sizeType}>
             <div onClick={close}>
-              <LeftChevronIcon />
+              <ChevronLeft />
             </div>
             <div onClick={handleModal}>
-              <ThreeDotIcon />
+              <MoreHorizontal />
             </div>
           </MobileContainer>
           <Suspense fallback={<Loading />}>
@@ -119,4 +122,5 @@ const MobileContainer = styled.header`
   height: 43px;
   padding: ${({ full }) => (full === 'mobile' ? '0 20px' : '0 40px')};
   border-bottom: 1px solid #dbdee2;
+  color: ${({ theme }) => theme.textColors.modalMobileHeader};
 `;

@@ -10,7 +10,7 @@ export default function RecommendTagSection({ word, addTag }) {
   const recommends = useMemo(() => {
     return selectRandomItemsInCollection(
       TagTrie.getInstance().getSimilarTags(ignorePrefix(word)),
-      40,
+      30,
     );
   }, [word]);
 

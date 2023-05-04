@@ -3,6 +3,19 @@ export const stringToDom = (str) => {
 };
 
 /**
+ * @param {HTMLElement} doc
+ */
+export const removeHeader = (doc) => {
+  const headerEl = doc.querySelector(
+    '#SE-fe209951-d6e7-11ea-9687-e7fd650c59ac',
+  );
+
+  if (headerEl) {
+    headerEl.remove();
+  }
+};
+
+/**
  * @param {HTMLImageElement} imageElement
  */
 export const configureImageNoRefererPolicy = (imageElement) => {
