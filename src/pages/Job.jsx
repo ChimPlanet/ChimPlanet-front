@@ -9,6 +9,7 @@ import { Offer } from '@/service/offer';
 export default function Job({ parId }) {
   //게시글 리스트
   const [dataList, setDataList] = useState([]);
+  const [offerList, setOfferList] = useState([]);
   //게시글 요청 파라미터
   const [lastArticleId, setLastArticleId] = useState(null);
   const [page, setPage] = useState(0);
@@ -38,9 +39,10 @@ export default function Job({ parId }) {
       value: value
     });
     setDataList([])
+    setOfferList([])
     setPage(0)
     setLastArticleId(null)
-  },[dataList])
+  },[offerList])
 
   const setValue = useCallback((e,value) => {
     setSortValue({
@@ -48,10 +50,11 @@ export default function Job({ parId }) {
       value: value
     });
     setDataList([])
+    setOfferList([])
     setPage(0)
     setLastArticleId(null)
     setSelect(false);
-  },[dataList])
+  },[offerList])
 
   if (parId !== null && parId !== 0) {
     const { data: offer } = useJobOfferDetail(parId);
@@ -67,13 +70,15 @@ export default function Job({ parId }) {
   const { data } = useJobOfferBasic(lastArticleId, size, page, sortValue.value, isEnd.value);
 
   useEffect(() => {
-    setDataList((prevData) => [...prevData, ...data.content.map(Offer)]);
+    setDataList(data.content.map(Offer));
   }, [data]);
 
   useEffect(()=>{
+    const newList = [...dataList]
     setLastArticleId(dataList[dataList.length - 1]?.id);
+    setOfferList((prev) => [...prev, ...newList])
   },[dataList])
-  
+
   const getMoreItem = () => {
     setPage((page) => page + 1);
   };
@@ -81,7 +86,7 @@ export default function Job({ parId }) {
   return (
     <Container>
       <JobNavBar
-        total={dataList.length}
+        total={offerList.length}
         setValue={setValue}
         directButton={directButton}
         isEnd={isEnd}
@@ -90,7 +95,7 @@ export default function Job({ parId }) {
         select={select}
       />
       <JobInfiniteScroll
-        List={dataList}
+        List={offerList}
         parId={parId}
         getMoreItem={getMoreItem}
         last={data.last}
