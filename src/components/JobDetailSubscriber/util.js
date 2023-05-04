@@ -16,6 +16,26 @@ export const removeHeader = (doc) => {
 };
 
 /**
+ * @param {HTMLElement} doc
+ */
+export const adaptJavascriptData = (doc) => {
+  const scriptEls = doc.querySelectorAll('.__se_module_data');
+
+  scriptEls.forEach((el) => {
+    if (el.getAttribute('type') === 'text/data') {
+      const m = JSON.parse(el.dataset.module);
+
+      if (m.type === 'v2_oembed') {
+        const targetEl = doc.querySelector(`#${m.id}`);
+        if (targetEl) {
+          targetEl.innerHTML = m.data.html;
+        }
+      }
+    }
+  });
+};
+
+/**
  * @param {HTMLImageElement} imageElement
  */
 export const configureImageNoRefererPolicy = (imageElement) => {

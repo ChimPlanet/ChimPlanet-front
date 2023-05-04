@@ -10,6 +10,7 @@ import {
   getAllImgElementsFromDom,
   adaptImagesNoRefererPolicy,
   removeHeader,
+  adaptJavascriptData,
 } from './util';
 
 /** @param {{offer: Offer}} */
@@ -25,6 +26,7 @@ export default function JobDetailContent({ offer, handelProfile }) {
   const content = useMemo(() => {
     const dom = stringToDom(data.content);
     removeHeader(dom);
+    adaptJavascriptData(dom);
     adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
     return dom.documentElement.outerHTML;
   }, [data]);

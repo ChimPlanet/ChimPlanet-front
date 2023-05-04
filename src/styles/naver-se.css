@@ -9524,3 +9524,8 @@
   height: 12px;
   background-position: -414px -197px;
 }
+
+.se-component.se-oembed > iframe {
+  display: block;
+  margin: 0 auto !important;
+}
