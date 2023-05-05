@@ -9,7 +9,7 @@ import {
 } from 'chimplanet-ui/icons';
 
 const defaultHeight = 141;
-const mobileHeight = 181;
+const mobileHeight = 228;
 
 function Footer() {
   return (
@@ -19,27 +19,29 @@ function Footer() {
           <Logo>
             <ChimplanetIcon mid />
           </Logo>
-          <HeaderMenu>
-            <div>
-              <HeaderAnchor>제작자</HeaderAnchor>
-              <HeaderAnchor>이용약관</HeaderAnchor>
-              <HeaderAnchor>개인정보 처리방침</HeaderAnchor>
-            </div>
-          </HeaderMenu>
-          <HeaderIcons>
-            <a href="https://www.twitch.tv/woowakgood" target="_blank">
-              <TwitchIcon />
-            </a>
-            <a href="https://www.youtube.com/@woowakgood" target="_blank">
-              <YoutubeIcon />
-            </a>
-            <a href="https://www.instagram.com/instawakgood/" target="_blank">
-              <InstagramIcon />
-            </a>
-            <a href="https://cafe.naver.com/steamindiegame" target="_blank">
-              <NaverCafeIcon />
-            </a>
-          </HeaderIcons>
+          <Reverse>
+            <HeaderMenu>
+              <div>
+                <HeaderAnchor>제작자</HeaderAnchor>
+                <HeaderAnchor>이용약관</HeaderAnchor>
+                <HeaderAnchor>개인정보 처리방침</HeaderAnchor>
+              </div>
+            </HeaderMenu>
+            <HeaderIcons>
+              <a href="https://www.twitch.tv/woowakgood" target="_blank">
+                <TwitchIcon />
+              </a>
+              <a href="https://www.youtube.com/@woowakgood" target="_blank">
+                <YoutubeIcon />
+              </a>
+              <a href="https://www.instagram.com/instawakgood/" target="_blank">
+                <InstagramIcon />
+              </a>
+              <a href="https://cafe.naver.com/steamindiegame" target="_blank">
+                <NaverCafeIcon />
+              </a>
+            </HeaderIcons>
+          </Reverse>
         </Header>
         <Detail>
           팀장 : 이푸푸
@@ -115,6 +117,9 @@ const HeaderIcons = styled.div`
     margin: auto;
     stroke-width: 0;
   }
+  ${({ theme }) => theme.media.mobile`
+     margin: 20px 0; 
+  `}
 `;
 
 const Logo = styled.div`
@@ -142,5 +147,13 @@ const Wrapper = styled.div`
   `}
   ${({ theme }) => theme.media.mobile`
       width: 350px;
+  `}
+`;
+
+const Reverse = styled.div`
+  width: 1000px;
+  display: flex;
+  ${({ theme }) => theme.media.mobile`
+     flex-direction: column-reverse
   `}
 `;
