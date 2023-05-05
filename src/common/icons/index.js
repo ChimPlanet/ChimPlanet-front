@@ -34,6 +34,7 @@ import MobileBookMarkIcon from './MobileBookMarkIcon';
 import MobileCafeIcon from './MobileCafeIcon';
 import CircleIcon from './CircleIcon';
 import ChimplanetNotFoundIcon from './ChimplanetNotFoundIcon';
+import ArrowBottomIcon from './ArrowBottomIcon';
 
 export {
   ChimplanetNotFoundIcon,
@@ -72,4 +73,5 @@ export {
   TrashCanIcon,
   LeftChevronIcon,
   ProfileIcon,
+  ArrowBottomIcon,
 };

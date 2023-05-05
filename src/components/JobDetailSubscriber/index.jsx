@@ -1,7 +1,7 @@
 import { useArticleContext } from '@/context/articleContext';
 import { Modal } from '@mui/material';
 import { Suspense, useEffect, useState } from 'react';
-import { styled, Loading, useScreenType } from 'chimplanet-ui';
+import { styled, Loading, useScreenType, useTheme } from 'chimplanet-ui';
 import JobDetailMenuBar from './jobDetailMenuBar';
 import JobDetailMobileMenuBar from './jobDetailMobileMenuBar';
 import JobDetailContent from './jobDetailContent';
@@ -22,6 +22,7 @@ export default function JobDetailSubscriber() {
   const sizeType = useScreenType();
   const { toggle } = useBookmark();
   const bookmarkSet = BookmarkContext.getInstance().getBookmarkSet();
+  const theme = useTheme();
 
   const handleModal = () => {
     setModal(!modal);
@@ -52,10 +53,10 @@ export default function JobDetailSubscriber() {
         <ContentWrapper full={sizeType}>
           <MobileContainer full={sizeType}>
             <div onClick={close}>
-              <ChevronLeft />
+              <ChevronLeft color={theme.textColors.primary}/>
             </div>
             <div onClick={handleModal}>
-              <MoreHorizontal />
+              <MoreHorizontal color={theme.textColors.primary}/>
             </div>
           </MobileContainer>
           <Suspense fallback={<Loading />}>
