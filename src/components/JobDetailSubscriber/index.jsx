@@ -8,7 +8,6 @@ import JobDetailContent from './jobDetailContent';
 
 import { styled as muiStyled } from '@mui/material/styles';
 
-import { LeftChevronIcon, ThreeDotIcon } from '@/common/icons';
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import useBookmark from '@/hooks/useBookmark';
 
@@ -53,10 +52,10 @@ export default function JobDetailSubscriber() {
         <ContentWrapper full={sizeType}>
           <MobileContainer full={sizeType}>
             <div onClick={close}>
-              <ChevronLeft color={theme.textColors.primary}/>
+              <ChevronLeft color={theme.textColors.primary} />
             </div>
             <div onClick={handleModal}>
-              <MoreHorizontal color={theme.textColors.primary}/>
+              <MoreHorizontal color={theme.textColors.primary} />
             </div>
           </MobileContainer>
           <Suspense fallback={<Loading />}>

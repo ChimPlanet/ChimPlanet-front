@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { styled, useScreenType, useTheme } from 'chimplanet-ui';
-import { ArrowBottomIcon } from '@/common/icons';
+import { ChevronDown } from 'chimplanet-ui/icons';
 
 export default function JobNavBar({
   total,
@@ -29,17 +29,19 @@ export default function JobNavBar({
         <nav>
           <NavListContainer sizeType={sizeType}>
             <NavList
-              onClick={(e)=>directButton(e,'ING')}
+              onClick={(e) => directButton(e, 'ING')}
               sizeType={sizeType}
-              current={
-                isEnd.text === '구인중' ? currentBorderColor : '#AAB1BC'
+              current={isEnd.text === '구인중' ? currentBorderColor : '#AAB1BC'}
+              color={
+                isEnd.text === '구인중'
+                  ? currentColor
+                  : `${theme.textColors.senary}`
               }
-              color={isEnd.text === '구인중' ? currentColor : `${theme.textColors.senary}`}
             >
               구인중
             </NavList>
             <NavList
-              onClick={(e)=>directButton(e,'END')}
+              onClick={(e) => directButton(e, 'END')}
               sizeType={sizeType}
               current={isEnd.text === '모집마감' ? currentBorderColor : ''}
               color={isEnd.text === '모집마감' ? currentColor : '#AAB1BC'}
@@ -47,7 +49,7 @@ export default function JobNavBar({
               모집마감
             </NavList>
             <NavList
-              onClick={(e)=>directButton(e,'ALL')}
+              onClick={(e) => directButton(e, 'ALL')}
               sizeType={sizeType}
               current={isEnd.text === '전체' ? currentBorderColor : ''}
               color={isEnd.text === '전체' ? currentColor : '#AAB1BC'}
@@ -62,19 +64,19 @@ export default function JobNavBar({
             <Sort onClick={onSelect} sizeType={sizeType}>
               {sortValue.text}
               <Icon>
-                <ArrowBottomIcon color={theme.textColors.primary}/>
+                <ChevronDown color={theme.textColors.primary} />
               </Icon>
             </Sort>
             {select && (
               <OptionContainer sizeType={sizeType}>
                 <Option
-                  onClick={(e)=>setValue(e,'regDate')}
+                  onClick={(e) => setValue(e, 'regDate')}
                   color={sortValue.text === '최신순' ? '#00BD2F' : '#8E94A0'}
                 >
                   최신순
                 </Option>
                 <Option
-                  onClick={(e)=>setValue(e,'readCount')}
+                  onClick={(e) => setValue(e, 'readCount')}
                   color={sortValue.text === '조회순' ? '#00BD2F' : '#8E94A0'}
                 >
                   조회순
@@ -100,11 +102,14 @@ const Box = styled.div`
   left: 0;
   width: 100%;
   height: 12px;
-  background: ${({theme}) => theme.bgColors.quaternary};
+  background: ${({ theme }) => theme.bgColors.quaternary};
 `;
 
 const Icon = styled.span`
   margin-left: 10px;
+  & svg {
+    vertical-align: middle;
+  }
 `;
 
 const NavContainer = styled.div`
@@ -148,7 +153,7 @@ const Total = styled.div`
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  color: ${({theme }) => theme.textColors.primary};
+  color: ${({ theme }) => theme.textColors.primary};
 `;
 
 const SortContainer = styled.div`
@@ -159,13 +164,15 @@ const SortContainer = styled.div`
   right: 3px;
 `;
 
-const Sort = styled.div` 
-  width: 100px;
+const Sort = styled.div`
+  width: 110px;
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
   border: ${({ theme, sizeType }) =>
-    sizeType === 'desktop' ? `1px solid ${theme.borderColors.quaternary}` : '0'};
+    sizeType === 'desktop'
+      ? `1px solid ${theme.borderColors.quaternary}`
+      : '0'};
   border-radius: 4px;
   padding: 8px 15px 9px 18px;
   appearance: none;
@@ -174,7 +181,7 @@ const Sort = styled.div`
 const OptionContainer = styled.div`
   position: absolute;
   top: ${({ sizeType }) => (sizeType === 'desktop' ? '48px' : '0')};
-  background: ${({theme}) => theme.bgColors.primary};
+  background: ${({ theme }) => theme.bgColors.primary};
   box-shadow: ${({ sizeType }) =>
     sizeType === 'desktop' ? '0px 0px 2px rgba(0, 0, 0, 0.25)' : '0'};
   border-radius: 4px;

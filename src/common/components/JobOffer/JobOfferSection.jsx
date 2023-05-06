@@ -13,7 +13,6 @@ import JobOfferSectionHeader from './components/jobOfferSectionHeader';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobSelectionSkeleton from '@/components/Skeletons/JobSectionSkeleton';
 
-import { GreenRightChevronIcon } from '@/common/icons';
 import { LinkFooter } from '../LinkFooter';
 
 /**
