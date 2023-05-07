@@ -90,7 +90,11 @@ JobOfferSection.propTypes = {
 };
 
 const Container = styled.section`
-  min-height: 465px;
+  min-height: 460px;
+  height: fit-content;
   overflow-x: hidden;
-  /* width: ${(props) => props.width}; */
+
+  ${({ theme }) => theme.media.mobile`
+    overflow: hidden;
+  `}
 `;
