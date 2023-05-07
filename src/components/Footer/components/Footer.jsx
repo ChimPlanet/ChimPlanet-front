@@ -20,7 +20,10 @@ function Footer() {
             <ChimplanetIcon mid />
           </Logo>
           <Reverse>
-            <HeaderMenu>
+            <HeaderMenu
+              href="https://foremost-chess-96d.notion.site/e50cee7fab8a4601987566903301bbeb"
+              target="_blank"
+            >
               <div>
                 <HeaderAnchor>제작자</HeaderAnchor>
                 <HeaderAnchor>이용약관</HeaderAnchor>
@@ -81,7 +84,8 @@ const Header = styled.div`
   `}
 `;
 
-const HeaderMenu = styled.div`
+const HeaderMenu = styled.a`
+  display: block;
   flex: 1;
   display: flex;
   justify-content: space-between;

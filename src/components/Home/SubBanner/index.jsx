@@ -44,15 +44,24 @@ const Container = styled.a`
   height: 108px;
   border-radius: 8px;
   overflow: hidden;
+  width: ${({ theme }) => theme.widths.desktop}px;
 
-  ${({ theme }) => theme.media.desktop`
-    ${`width: ${theme.widths.desktop}px`};
-  `}
   ${({ theme }) => theme.media.tablet`
-    ${`width: ${theme.widths.tablet}px`};
+    ${`
+      width: ${theme.widths.tablet}px;
+      height: 103px;
+    `}
+  `}
+  ${({ theme }) => theme.media.mobile`
+    ${`
+      width: 350px;
+      height: 87px;
+    `}
   `};
 `;
 
 const SubBannerImage = styled.img`
+  width: 100%;
+  height: 100%;
   object-fit: fill;
 `;
