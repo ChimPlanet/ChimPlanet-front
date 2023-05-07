@@ -21,9 +21,9 @@ const Wrapper = styled.div`
   bottom: 40px;
   right: 40px;
   border-radius: 100px;
-  font-size: 20px;
+  font-size: 12px;
   filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.15));
-  padding: 20px;
+  padding: 16px 20px;
   text-align: center;
   background-color: ${({ theme }) => theme.buttonColors.background};
   color: ${({ theme }) => theme.buttonColors.text};
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
   }
 
   & span {
-    margin-left: 9px;
+    margin-left: 7px;
   }
 
   &:hover {

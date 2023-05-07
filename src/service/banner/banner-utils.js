@@ -44,11 +44,12 @@ export function pairBannerFromGroup(group) {
 }
 
 /**
+ * @param {(items: Banner[]) => Banner[]} filter
  * @param {Banner[]} banners
  * @param {"PC" | "MOBILE"} type
  */
-export function getBannerByType(banners, type) {
-  return filterMainBanner(banners)
+export function getBannerByType(filter, banners, type) {
+  return filter(banners)
     .map((b) => (type === 'PC' ? b.pc : b.mobile))
     .sort((lhs, rhs) => lhs.sequence - rhs.sequence);
 }
