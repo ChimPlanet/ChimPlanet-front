@@ -8,15 +8,27 @@ class OfferClient extends HttpClient {
     super('OfferService', '/boards');
   }
 
-  async basic(lastArticleId, size, page, sort, isEnd) {
+  async basic(id, size, page, sort, isEnd, value) {
     if(isEnd === 'ALL'){
-    return await this.post(
-      `?lastArticleId=${lastArticleId}&size=${size}&page=${page}&sort=${sort}`
-    );
+      if(value === null){
+        return await this.post(
+          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}`
+        );
+      }else{
+        return await this.post(
+          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}&lastInputValue=${value}`
+        );
+      }
     }else{
-      return await this.post(
-        `?lastArticleId=${lastArticleId}&size=${size}&page=${page}&sort=${sort}&isEnd=${isEnd}`
-      );
+      if(value === null){
+        return await this.post(
+          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}&isEnd=${isEnd}`
+        );
+      }else{
+        return await this.post(
+          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}&isEnd=${isEnd}&lastInputValue=${value}`
+        );
+      }
     }
   }
 

@@ -174,8 +174,9 @@ const Sort = styled.div`
       ? `1px solid ${theme.borderColors.quaternary}`
       : '0'};
   border-radius: 4px;
-  padding: 8px 15px 9px 18px;
+  padding: 8px 14px 8px 18px;
   appearance: none;
+
 `;
 
 const OptionContainer = styled.div`

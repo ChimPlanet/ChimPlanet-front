@@ -12,6 +12,7 @@ export default function Job({ parId }) {
   const [offerList, setOfferList] = useState([]);
   //게시글 요청 파라미터
   const [lastArticleId, setLastArticleId] = useState(null);
+  const [lastInputValue, setLastInputValue] = useState('');
   const [page, setPage] = useState(0);
   //게시글 분류
   const [sortValue, setSortValue] = useState({
@@ -42,18 +43,20 @@ export default function Job({ parId }) {
     setOfferList([])
     setPage(0)
     setLastArticleId(null)
+    setLastInputValue(null)
   },[offerList])
 
   const setValue = useCallback((e,value) => {
     setSortValue({
       text: e.target.innerHTML,
-      value: value
+      value: value === 'regDate' ? '' : value
     });
     setDataList([])
     setOfferList([])
     setPage(0)
     setLastArticleId(null)
     setSelect(false);
+    setLastInputValue(null)
   },[offerList])
 
   if (parId !== null && parId !== 0) {
@@ -67,7 +70,7 @@ export default function Job({ parId }) {
     open(offerData);
   }, []);
 
-  const { data } = useJobOfferBasic(lastArticleId, size, page, sortValue.value, isEnd.value);
+  const { data } = useJobOfferBasic(lastArticleId, size, page, sortValue.value, isEnd.value, lastInputValue);
 
   useEffect(() => {
     setDataList(data.content.map(Offer));
@@ -75,7 +78,17 @@ export default function Job({ parId }) {
 
   useEffect(()=>{
     const newList = [...dataList]
+    const inputValue =  sortValue.value
     setLastArticleId(dataList[dataList.length - 1]?.id);
+    if(inputValue === 'regDate'){
+      dataList.length === 0 ? 
+      setLastInputValue(null) :
+      setLastInputValue(dataList[dataList.length - 1]?.data.regDate);
+    }else if(inputValue === 'readCount'){
+      dataList.length === 0 ? 
+      setLastInputValue(null) :
+      setLastInputValue(dataList[dataList.length - 1]?.data.readCount);
+    }
     setOfferList((prev) => [...prev, ...newList])
   },[dataList])
 
