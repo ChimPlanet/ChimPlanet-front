@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   cursor: pointer;
   position: fixed;
   bottom: 40px;
-  right: 40px;
+  right: 60px;
   border-radius: 100px;
   font-size: 12px;
   filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.15));

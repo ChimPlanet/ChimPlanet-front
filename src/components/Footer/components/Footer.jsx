@@ -20,14 +20,26 @@ function Footer() {
             <ChimplanetIcon mid />
           </Logo>
           <Reverse>
-            <HeaderMenu
-              href="https://foremost-chess-96d.notion.site/e50cee7fab8a4601987566903301bbeb"
-              target="_blank"
-            >
+            <HeaderMenu>
               <div>
-                <HeaderAnchor>제작자</HeaderAnchor>
-                <HeaderAnchor>이용약관</HeaderAnchor>
-                <HeaderAnchor>개인정보 처리방침</HeaderAnchor>
+                <HeaderAnchor
+                  href="https://foremost-chess-96d.notion.site/e50cee7fab8a4601987566903301bbeb"
+                  target="_blank"
+                >
+                  제작자
+                </HeaderAnchor>
+                <HeaderAnchor
+                  href="https://foremost-chess-96d.notion.site/e50cee7fab8a4601987566903301bbeb"
+                  target="_blank"
+                >
+                  이용약관
+                </HeaderAnchor>
+                <HeaderAnchor
+                  href="https://foremost-chess-96d.notion.site/e50cee7fab8a4601987566903301bbeb"
+                  target="_blank"
+                >
+                  개인정보 처리방침
+                </HeaderAnchor>
               </div>
             </HeaderMenu>
             <HeaderIcons>
@@ -84,8 +96,7 @@ const Header = styled.div`
   `}
 `;
 
-const HeaderMenu = styled.a`
-  display: block;
+const HeaderMenu = styled.div`
   flex: 1;
   display: flex;
   justify-content: space-between;
@@ -117,6 +128,10 @@ const HeaderIcons = styled.div`
   color: ${({ theme }) => theme.textColors.footer};
   display: flex;
   column-gap: 18px;
+  & a {
+    display: block;
+  }
+
   & svg {
     margin: auto;
     stroke-width: 0;

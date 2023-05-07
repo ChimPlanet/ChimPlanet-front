@@ -7,6 +7,7 @@ import queryClient, { QueryClientProvider } from '@/query';
 import { BrowserRouter as RootRouter } from 'chimplanet-ui';
 import AppContextProvider from './context';
 import { PreloadProvider } from './context/preloadContext';
+import './assets/fonts/pretendard/pretendard.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <PreloadProvider>
