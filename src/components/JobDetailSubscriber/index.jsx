@@ -1,16 +1,18 @@
 import { useArticleContext } from '@/context/articleContext';
 import { Modal } from '@mui/material';
-import { Suspense, useState } from 'react';
-import { styled, Loading, useScreenType } from 'chimplanet-ui';
+import { Suspense, useEffect, useState } from 'react';
+import { styled, Loading, useScreenType, useTheme } from 'chimplanet-ui';
 import JobDetailMenuBar from './jobDetailMenuBar';
 import JobDetailMobileMenuBar from './jobDetailMobileMenuBar';
 import JobDetailContent from './jobDetailContent';
 
 import { styled as muiStyled } from '@mui/material/styles';
 
-import { LeftChevronIcon, ThreeDotIcon } from '@/common/icons';
 import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import useBookmark from '@/hooks/useBookmark';
+
+import '@/styles/naver-se.css';
+import { ChevronLeft, MoreHorizontal } from 'chimplanet-ui/icons';
 
 export default function JobDetailSubscriber() {
   const [article, { close }] = useArticleContext();
@@ -19,29 +21,51 @@ export default function JobDetailSubscriber() {
   const sizeType = useScreenType();
   const { toggle } = useBookmark();
   const bookmarkSet = BookmarkContext.getInstance().getBookmarkSet();
+  const theme = useTheme();
 
   const handleModal = () => {
     setModal(!modal);
   };
 
   const handelProfile = (user) => {
-    setUserProfile(user)
-  }
-  
+    setUserProfile(user);
+  };
+
+  useEffect(() => {
+    if (!window) return;
+
+    window.onpageshow = (event) => {
+      if (
+        event.persisted ||
+        (window.performance && window.performance.navigation.type == 2)
+      ) {
+        if (modal) {
+          handleModal();
+        }
+      }
+    };
+  }, [modal]);
+
   return (
     <ScrollModal open={article !== null} onClose={close} full={sizeType}>
       <>
         <ContentWrapper full={sizeType}>
           <MobileContainer full={sizeType}>
             <div onClick={close}>
-              <LeftChevronIcon />
+              <ChevronLeft color={theme.textColors.primary} />
             </div>
             <div onClick={handleModal}>
-              <ThreeDotIcon />
+              <MoreHorizontal color={theme.textColors.primary} />
             </div>
           </MobileContainer>
           <Suspense fallback={<Loading />}>
-            {article && <JobDetailContent handelProfile={handelProfile} full={sizeType} offer={article} />}
+            {article && (
+              <JobDetailContent
+                handelProfile={handelProfile}
+                full={sizeType}
+                offer={article}
+              />
+            )}
           </Suspense>
         </ContentWrapper>
         <JobDetailMenuBar
@@ -83,7 +107,7 @@ const ContentWrapper = styled.div`
   min-height: ${({ full }) => (full === 'desktop' ? '70vh' : '100vh')};
   height: fit-content;
   //height: ${({ full }) => (full === 'desktop' ? '' : '100vh')};
-  background-color: ${({ theme }) => theme.backgroundColor.modal};
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
   border-radius: ${({ full }) => (full === 'desktop' ? '8px' : '')};
 `;
 
@@ -91,11 +115,12 @@ const MobileContainer = styled.header`
   position: fixed;
   width: 100vw;
   z-index: 20000;
-  background-color: ${({ theme }) => theme.backgroundColor.modal};
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
   display: ${({ full }) => (full === 'desktop' ? 'none' : 'flex')};
   justify-content: space-between;
   align-items: center;
   height: 43px;
   padding: ${({ full }) => (full === 'mobile' ? '0 20px' : '0 40px')};
   border-bottom: 1px solid #dbdee2;
+  color: ${({ theme }) => theme.textColors.modalMobileHeader};
 `;

@@ -2,6 +2,7 @@ import { createContext, useState, useContext, useEffect } from 'react';
 
 import backend from '@/service/backend';
 import TagTrie from '@/utils/tagTrie';
+import { ERROR_PATH } from '@/constants/route';
 
 const preloadContext = createContext();
 
@@ -9,8 +10,13 @@ export function PreloadProvider({ children }) {
   const [preloads, setPreload] = useState({});
   // NeedPreloadRequests & only work when page initialize
   useEffect(() => {
-    Promise.all(NeedPreloadRequests.map((el) => el.value())).then(
-      (responses) => {
+    // ! ERROR 의 경우에는 Preload를 하지 않음
+    if (window.location.pathname === ERROR_PATH) {
+      return;
+    }
+
+    Promise.all(NeedPreloadRequests.map((el) => el.value()))
+      .then((responses) => {
         const _preload = {};
         responses.forEach((data, i) => {
           const { key, preprocess } = NeedPreloadRequests[i];
@@ -18,8 +24,10 @@ export function PreloadProvider({ children }) {
         });
 
         setPreload(_preload);
-      },
-    );
+      })
+      .catch(() => {
+        window.location.href = ERROR_PATH;
+      });
   }, []);
 
   return <preloadContext.Provider children={children} value={preloads} />;

@@ -28,9 +28,10 @@ export default function MobileMenu({ close }) {
 }
 
 const Container = styled.div`
-  background-color: ${({ theme }) => theme.backgroundColor.main};
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
   width: 330px;
   padding: 16px 0px;
+  min-height: 100%;
 `;
 
 const Header = styled.div`
@@ -44,7 +45,8 @@ const CategoryLinkAccordionWrap = styled.div`
 `;
 
 const Footer = styled.div`
-  margin: 0px 30px;
+  padding: 0px 30px;
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
 `;
 
 const Anchor = styled(Link)`
@@ -53,9 +55,12 @@ const Anchor = styled(Link)`
   margin: 15px 0px;
   font-weight: 700;
   font-size: 14px;
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
+  color: ${({ theme }) => theme.textColors.primary};
 `;
 
 const IconButton = styled.button`
+  color: ${({ theme }) => theme.textColors.primary};
   & svg {
     margin: auto;
   }

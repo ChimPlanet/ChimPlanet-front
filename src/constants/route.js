@@ -11,3 +11,5 @@ export const OFFICIAL_PATH = '/official';
 export const EVENT_PATH = '/event';
 
 export const SEARCH_PATH = '/search';
+
+export const ERROR_PATH = '/error';

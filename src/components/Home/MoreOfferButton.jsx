@@ -1,13 +1,13 @@
 import { Link, styled } from 'chimplanet-ui';
 
-import ArrowBelowIcon from '@/common/icons/ArrowBelowIcon';
 import { JOB_PATH } from '@/constants/route';
+import { ChevronDown } from 'chimplanet-ui/icons';
 
 export default function MoreOfferButton() {
   return (
     <Container to={JOB_PATH}>
-      더 많은 공고글 보기&nbsp;&nbsp;
-      <ArrowBelowIcon />
+      &nbsp; 더 많은 공고글 보기&nbsp;
+      <ChevronDown />
     </Container>
   );
 }
@@ -23,6 +23,6 @@ const Container = styled(Link)`
   font-size: 16px;
   font-weight: 500;
   border-radius: 100px;
-  border: ${({ theme }) => `1px solid ${theme.colors.borderPoint}`};
+  border: ${({ theme }) => `1px solid ${theme.borderColors.tertiary}`};
   margin-top: 70px;
 `;

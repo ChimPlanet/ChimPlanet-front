@@ -65,6 +65,7 @@ const TagContainer = styled.div`
   background-color: ${({ backgroundColor }) => backgroundColor};
   padding: ${({ padding }) => padding};
   cursor: pointer;
+  white-space: nowrap;
 `;
 
 const TagText = styled.span`

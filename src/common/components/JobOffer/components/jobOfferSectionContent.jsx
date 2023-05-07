@@ -29,13 +29,12 @@ import useBookmark from '@/hooks/useBookmark';
 export default function JobOfferSectionContent({
   queryKey,
   cursor,
-  perPage,
   setLength,
   fetchFunction,
   maxLength,
 }) {
   const [, { open }] = useArticleContext();
-  const { toggle } = useBookmark();
+  const { toggle, is } = useBookmark();
   const { data: offers } = useJobOfferFromDynamic(
     queryKey,
     fetchFunction,
@@ -43,21 +42,8 @@ export default function JobOfferSectionContent({
   );
   const screenType = useScreenType();
 
-  const offerWidth = useMemo(() => OfferWidthMap[screenType], [screenType]);
-
-  const offerColumnGap = useMemo(
-    () => (screenType === 'desktop' ? 20 : 25),
-    [screenType],
-  );
-
   const layoutConfig = useMemo(
-    () =>
-      screenType === 'desktop'
-        ? {
-            columnGap: 20,
-            width: 250,
-          }
-        : { columnGap: 25, width: 220 },
+    () => OfferLayoutConfig[screenType],
     [screenType],
   );
 
@@ -71,7 +57,7 @@ export default function JobOfferSectionContent({
     if (Array.isArray(offers)) {
       prefetchImages(
         offers.filter(({ isThumbnail }) => isThumbnail),
-        (elem) => elem.thumbnailURL,
+        offerThumbnailPropertyGetter,
       );
     }
   }, [offers]);
@@ -85,10 +71,9 @@ export default function JobOfferSectionContent({
       <JobOfferMapContent
         jobs={offers}
         offerWidth={layoutConfig.width}
-        offerOrientation={screenType === 'mobile' ? 'horizontal' : 'vertical'}
-        isBookmarked={(id) =>
-          BookmarkContext.getInstance().getBookmarkSet().has(id)
-        }
+        isBookmarked={is}
+        direction={screenType !== 'mobile' ? 'column' : 'row'}
+        rowLayoutConfig={defaultRowLayoutConfig}
         onClick={open}
         onBookmarkClick={toggle}
       />
@@ -99,6 +84,31 @@ JobOfferSectionContent.propTypes = {
   cursor: PropTypes.number.isRequired,
   perPage: PropTypes.number.isRequired,
   setLength: PropTypes.func.isRequired,
+};
+
+function offerThumbnailPropertyGetter(offer) {
+  return offer.thumbnailURL;
+}
+/** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
+const defaultRowLayoutConfig = {
+  height: 120,
+  gap: 20,
+};
+
+/** @type {{ [K in import('chimplanet-ui').ScreenType]: { columnGap: number, width: number | string } }} */
+const OfferLayoutConfig = {
+  desktop: {
+    columnGap: 20,
+    width: 250,
+  },
+  tablet: {
+    columnGap: 25,
+    width: 220,
+  },
+  mobile: {
+    columnGap: 20,
+    width: '100%',
+  },
 };
 
 const Container = styled.div`

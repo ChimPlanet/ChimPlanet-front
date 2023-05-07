@@ -1,6 +1,7 @@
 import React from 'react';
 import { styled } from 'chimplanet-ui';
 import {
+  ChimplanetIcon,
   InstagramIcon,
   NaverCafeIcon,
   TwitchIcon,
@@ -8,32 +9,44 @@ import {
 } from 'chimplanet-ui/icons';
 
 const defaultHeight = 141;
-const mobileHeight = 181;
+const mobileHeight = 228;
 
 function Footer() {
   return (
     <Container>
       <Wrapper>
         <Header>
-          <Logo>침플래닛</Logo>
-          <HeaderMenu>
-            <div>
-              <HeaderAnchor>제작자</HeaderAnchor>
-              <HeaderAnchor>이용약관</HeaderAnchor>
-              <HeaderAnchor>개인정보 처리방침</HeaderAnchor>
-            </div>
-          </HeaderMenu>
-          <HeaderIcons>
-            <TwitchIcon />
-            <YoutubeIcon />
-            <InstagramIcon />
-            <NaverCafeIcon />
-          </HeaderIcons>
+          <Logo>
+            <ChimplanetIcon mid />
+          </Logo>
+          <Reverse>
+            <HeaderMenu>
+              <div>
+                <HeaderAnchor>제작자</HeaderAnchor>
+                <HeaderAnchor>이용약관</HeaderAnchor>
+                <HeaderAnchor>개인정보 처리방침</HeaderAnchor>
+              </div>
+            </HeaderMenu>
+            <HeaderIcons>
+              <a href="https://www.twitch.tv/woowakgood" target="_blank">
+                <TwitchIcon />
+              </a>
+              <a href="https://www.youtube.com/@woowakgood" target="_blank">
+                <YoutubeIcon />
+              </a>
+              <a href="https://www.instagram.com/instawakgood/" target="_blank">
+                <InstagramIcon />
+              </a>
+              <a href="https://cafe.naver.com/steamindiegame" target="_blank">
+                <NaverCafeIcon />
+              </a>
+            </HeaderIcons>
+          </Reverse>
         </Header>
         <Detail>
           팀장 : 이푸푸
           <br />
-          이메일 : chimplanet@gmail.com
+          이메일 : chimplanetwak@gmail.com
           <br />
           침플래닛 ⓒ 2023 CHIMPLANET. ALL RIGHT RESERVED
         </Detail>
@@ -52,7 +65,7 @@ const Container = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #333333;
+  background-color: ${({ theme }) => theme.bgColors.footer};
   padding: 20px 0px;
   height: ${defaultHeight}px;
   ${({ theme }) => theme.media.mobile`
@@ -79,8 +92,9 @@ const HeaderMenu = styled.div`
 `;
 
 const HeaderAnchor = styled.a`
-  border-right: 1px solid #f2f2f2;
-  color: #f2f2f2;
+  border-right: ${({ theme }) => `1px solid ${theme.textColors.footer}`};
+  color: ${({ theme }) => theme.textColors.footer};
+
   padding: 0px 25px;
 
   ${({ theme }) => theme.media.mobile`
@@ -96,19 +110,23 @@ const HeaderAnchor = styled.a`
 `;
 
 const HeaderIcons = styled.div`
-  color: #f2f2f2;
+  color: ${({ theme }) => theme.textColors.footer};
   display: flex;
   column-gap: 18px;
   & svg {
     margin: auto;
     stroke-width: 0;
   }
+  ${({ theme }) => theme.media.mobile`
+     margin: 20px 0; 
+  `}
 `;
 
 const Logo = styled.div`
+  margin-top: -2.5px;
   font-size: 16px;
   font-weight: 700;
-  color: #00bd2f;
+  color: ${({ theme }) => theme.specialColors.footer};
 `;
 
 const Detail = styled.div`
@@ -129,5 +147,13 @@ const Wrapper = styled.div`
   `}
   ${({ theme }) => theme.media.mobile`
       width: 350px;
+  `}
+`;
+
+const Reverse = styled.div`
+  width: 1000px;
+  display: flex;
+  ${({ theme }) => theme.media.mobile`
+     flex-direction: column-reverse
   `}
 `;

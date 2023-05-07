@@ -1,13 +1,13 @@
-name: Deploy
+name: Deploy Staged
 
 on:
   push:
     branches:
       - master
-      
+
 env:
-  S3_BUCKET_NAME: chimplanet-bucket #s3버킷 이름
-  PROJECT_NAME: chimplanet
+  S3_BUCKET_NAME: chimplanet-deploy #s3버킷 이름
+  PROJECT_NAME: chimplanet-fe-user
 
 jobs:
   build:
@@ -28,18 +28,21 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --network-concurrency 1
-        
+
       - name: Create .Env
-        run: | 
+        run: |
           echo "VITE_API_BASE=$VITE_API_BASE" >> .env
-        env: 
+        env:
           VITE_API_BASE: ${{ secrets.VITE_API_BASE }}
-          
+
       - name: Build project
         run: yarn build
-      
+
       - name: Include Appspec.yml
         run: mv appspec.yml ./dist
+
+      - name: Include Scripts
+        run: mv scripts ./dist
 
       - name: Make zip file
         run: zip -r ./$GITHUB_SHA.zip dist/
@@ -50,10 +53,10 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-1
+          aws-region: ap-northeast-2
 
       - name: Upload to S3
-        run: aws s3 cp --region ap-northeast-1 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$PROJECT_NAME/$GITHUB_SHA.zip
 
       - name: Code Deploy
-        run: aws deploy create-deployment --application-name deploy_chimplanet_code --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name front --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip
+        run: aws deploy create-deployment --application-name chimplanet-deploy --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name chimplanet-fe-user-staged --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip

@@ -68,7 +68,7 @@ const Detail = styled.div`
   margin-right: 30px;
   font-size: 16px;
   font-weight: 500;
-  color: ${({ theme }) => theme.colors.help};
+  color: ${({ theme }) => theme.textColors.tertiary};
 `;
 
 const ControlBox = styled.div`
@@ -81,6 +81,7 @@ const Arrow = styled.span`
   cursor: pointer;
 
   & svg {
-    fill: ${({ enable, theme }) => (enable ? theme.colors.main : '#AAB1BC')};
+    fill: ${({ enable, theme }) =>
+      enable ? theme.textColors.primary : theme.textColors.senary};
   }
 `;

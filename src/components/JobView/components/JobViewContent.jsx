@@ -1,4 +1,3 @@
-import { useJobViewContext } from '../JobViewContext';
 import { useMemo } from 'react';
 import {
   JobOfferMapContent,
@@ -6,42 +5,34 @@ import {
   ResizableGrid,
   useScreenType,
 } from 'chimplanet-ui';
-import { BookmarkContext } from '@/utils/Context/bookmarkContext';
+
+import { useJobViewContext } from '../JobViewContext';
 import { useArticleContext } from '@/context/articleContext';
 import useBookmark from '@/hooks/useBookmark';
 import JobViewContentNotFound from './JobViewContentNotFound';
 
 export default function JobViewContent() {
   const [, { open }] = useArticleContext();
-  const { toggle } = useBookmark();
-  const [context, dispatch] = useJobViewContext();
+  const { toggle, is } = useBookmark();
+  const [context] = useJobViewContext();
   const screenType = useScreenType();
 
-  const layoutConfig = useMemo(
-    () =>
-      screenType === 'desktop'
-        ? {
-            columnGap: 20,
-            width: 250,
-          }
-        : { columnGap: 25, width: 220 },
-    [screenType],
-  );
+  const config = useMemo(() => OfferConfig[screenType], [screenType]);
 
   return context.pending === 'done' ? (
     context.originalData.length > 0 ? (
       <ResizableGrid
-        style={{ rowGap: 50, columnGap: layoutConfig.columnGap }}
-        calcNumberOfColumns={calcColumns}
+        style={{ columnGap: config.gap, rowGap: 20 }}
+        calcNumberOfColumns={() => config.numOfColumn}
       >
         <JobOfferMapContent
           onClick={open}
           onBookmarkClick={toggle}
-          isBookmarked={(id) =>
-            BookmarkContext.getInstance().getBookmarkSet().has(id)
-          }
+          isBookmarked={is}
           jobs={context.displayedData}
-          offerWidth={layoutConfig.width}
+          offerWidth={config.width}
+          direction={config.direction}
+          rowLayoutConfig={config.rowConfig}
         />
       </ResizableGrid>
     ) : (
@@ -51,6 +42,32 @@ export default function JobViewContent() {
     <Loading />
   );
 }
+
+const OfferConfig = {
+  desktop: {
+    numOfColumn: 4,
+    width: 250,
+    gap: 20,
+    direction: 'column',
+  },
+  tablet: {
+    numOfColumn: 3,
+    width: 220,
+    gap: 30,
+    direction: 'column',
+  },
+  mobile: {
+    numOfColumn: 2,
+    width: 160,
+    direction: 'column',
+    gap: 30,
+    /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
+    rowConfig: {
+      height: 120,
+      gap: 20,
+    },
+  },
+};
 
 /** @param {import('chimplanet-ui').ScreenType} */
 function calcColumns(screenType) {

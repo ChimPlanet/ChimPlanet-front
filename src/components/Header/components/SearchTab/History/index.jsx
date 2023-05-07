@@ -44,5 +44,5 @@ const Title = styled.h1`
 `;
 
 const RemoveButton = styled.button`
-  color: ${({ theme }) => theme.colors.sub};
+  color: ${({ theme }) => theme.textColors.secondary};
 `;

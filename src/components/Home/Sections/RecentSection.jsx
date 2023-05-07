@@ -1,43 +1,89 @@
 import { Suspense, useMemo } from 'react';
-import { styled, Loading, useScreenType } from 'chimplanet-ui';
-
-import { JobOfferMapContent } from '@/common/components/JobOffer';
+import {
+  styled,
+  Loading,
+  useScreenType,
+  ErrorBoundary,
+  JobOfferMapContent,
+  Fallback,
+} from 'chimplanet-ui';
 
 import { useRecentOffers } from '@/query/offer';
-import { OfferColumnMap, OfferWidthMap } from '@/utils/offerSizeMap';
+import useBookmark from '@/hooks/useBookmark';
+import { useArticleContext } from '@/context/articleContext';
+import { JOB_PATH } from '@/constants/route';
+import { LinkFooter } from '@/common/components/LinkFooter';
+import MoreOfferButton from '../MoreOfferButton';
 
 export default function RecentSection() {
   return (
     <Container>
       <Title>최근에 올라온 구인글</Title>
-      <Suspense fallback={<Loading />}>
-        <RecentSectionContent />
-      </Suspense>
+      <ErrorBoundary fallback={<Loading />}>
+        <Suspense fallback={<Fallback />}>
+          <RecentSectionContent />
+        </Suspense>
+      </ErrorBoundary>
     </Container>
   );
 }
 
 function RecentSectionContent() {
   const { data: offers } = useRecentOffers();
-  const sizeType = useScreenType();
+  const [, { open }] = useArticleContext();
 
-  const config = useMemo(
-    () => ({
-      pageCount: OfferColumnMap[sizeType],
-      offerWidth: OfferWidthMap[sizeType],
-    }),
-    [sizeType],
-  );
+  const screenType = useScreenType();
+  const { toggle, is } = useBookmark();
+
+  const config = useMemo(() => OfferConfig[screenType], [screenType]);
 
   return (
-    <JobContent column={config.pageCount}>
-      <JobOfferMapContent
-        jobs={offers.slice(0, config.pageCount * 2)}
-        offerWidth={config.offerWidth}
-      />
-    </JobContent>
+    <>
+      <JobContent column={config.numOfColumn}>
+        <JobOfferMapContent
+          jobs={offers.slice(0, config.itemEnd)}
+          offerWidth={config.width}
+          direction={config.direction}
+          rowLayoutConfig={config.rowConfig}
+          onBookmarkClick={toggle}
+          onClick={open}
+          isBookmarked={is}
+        />
+      </JobContent>
+      {screenType === 'mobile' ? (
+        <LinkFooter text="자세히보기" href={JOB_PATH} />
+      ) : (
+        <MoreOfferButton />
+      )}
+    </>
   );
 }
+
+const OfferConfig = {
+  desktop: {
+    numOfColumn: 4,
+    width: 250,
+    itemEnd: 8,
+    direction: 'column',
+  },
+  tablet: {
+    numOfColumn: 3,
+    width: 220,
+    itemEnd: 6,
+    direction: 'column',
+  },
+  mobile: {
+    numOfColumn: 1,
+    width: '100%',
+    itemEnd: 6,
+    direction: 'row',
+    /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
+    rowConfig: {
+      height: 120,
+      gap: 20,
+    },
+  },
+};
 
 const Container = styled.div`
   margin-top: 65px;
@@ -54,5 +100,4 @@ const JobContent = styled.div`
   display: grid;
   grid-template-columns: ${({ column }) => `repeat(${column}, 1fr)`};
   gap: 20px;
-  row-gap: 70px;
 `;

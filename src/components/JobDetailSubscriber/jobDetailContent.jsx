@@ -9,6 +9,8 @@ import {
   stringToDom,
   getAllImgElementsFromDom,
   adaptImagesNoRefererPolicy,
+  removeHeader,
+  adaptJavascriptData,
 } from './util';
 
 /** @param {{offer: Offer}} */
@@ -18,11 +20,13 @@ export default function JobDetailContent({ offer, handelProfile }) {
   const sizeType = useScreenType();
 
   useEffect(() => {
-      handelProfile(data.profileImageUrl)
+    handelProfile(data.profileImageUrl);
   }, [data]);
-  
+
   const content = useMemo(() => {
     const dom = stringToDom(data.content);
+    removeHeader(dom);
+    adaptJavascriptData(dom);
     adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
     return dom.documentElement.outerHTML;
   }, [data]);
@@ -58,7 +62,7 @@ const Wrapper = styled.div`
   margin-top: ${({ sizeType }) => (sizeType === 'desktop' ? '' : '43px')};
   padding: ${({ sizeType }) =>
     sizeType === 'mobile' ? '20px 10px 70px 20px' : '30px 2px 30px 45px'};
-  color: ${({ theme }) => theme.colors.main};
+  color: ${({ theme }) => theme.textColors.primary};
 `;
 
 const Content = styled.div`
@@ -67,15 +71,10 @@ const Content = styled.div`
     max-width: 100%;
     margin: 10px 0px;
   }
-  &[data-desktop='true'] img:hover {
-    z-index: 10000;
-    transform: scale(1.3) translateX(30px);
-    cursor: zoom-in;
-  }
 `;
 
 const PostText = styled.div`
-  padding-right: 25px;
+  padding-right: 45px;
   font-weight: 500;
   font-size: 16px;
 `;
@@ -86,7 +85,7 @@ const SubTitle = styled.div`
   font-weight: 700;
   line-height: 26px;
   margin-bottom: 20px;
-  color: ${({ theme }) => theme.colors.main};
+  color: ${({ theme }) => theme.textColors.primary};
 `;
 
 const PostTags = styled.div`
@@ -96,12 +95,12 @@ const PostTags = styled.div`
 
 const Tag = styled.div`
   padding: 5px 19px;
-  border: 1px solid #dbdee2;
+  border: ${({ theme }) => `1px solid ${theme.borderColors.quinary}`};
+  color: ${({ theme }) => `1px solid ${theme.borderColors.quinary}`};
   border-radius: 100px;
   margin-right: 8px;
   margin-bottom: 6px;
   font-weight: 500;
   font-size: 12px;
   line-height: 14px;
-  color: #8e94a0;
 `;

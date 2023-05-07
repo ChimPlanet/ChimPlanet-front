@@ -1,4 +1,4 @@
-import { Link, styled } from 'chimplanet-ui';
+import { Link, styled, useCurrentTheme } from 'chimplanet-ui';
 
 import { usePreloadContext } from '@/context/preloadContext';
 import { useMemo, useState } from 'react';
@@ -14,6 +14,8 @@ export default function CategoryLinkAccordion({ close }) {
   const [expandedId, setExpandedId] = useState(null);
 
   const { tags } = usePreloadContext();
+
+  const theme = useCurrentTheme();
 
   const [ancestors, familyTree] = useMemo(() => {
     const familyTree = getFamilyTree(tags);
@@ -36,13 +38,17 @@ export default function CategoryLinkAccordion({ close }) {
           expanded={expandedId === parent.tagId}
           onChange={handleChange(parent.tagId)}
         >
-          <AccordionSummary data-selected={expandedId === parent.tagId}>
+          <AccordionSummary
+            bgColors={theme.bgColors.quaternary}
+            activeBgColor={theme.bgColors.septenary}
+            data-selected={expandedId === parent.tagId}
+          >
             <Parent data-selected={expandedId === parent.tagId}>
               {parent.tagName}
               <Icon children={<ChevronDown />} />
             </Parent>
           </AccordionSummary>
-          <AccordionDetails onClick={close}>
+          <AccordionDetails bgColor={theme.bgColors.septenary} onClick={close}>
             <Child to={makeSearchQuery(parent.tagName)}>{parent.tagName}</Child>
             {familyTree.get(parent).map((child) => (
               <Child key={child.tagId} to={makeSearchQuery(child.tagName)}>
@@ -63,21 +69,23 @@ const Parent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: '#101C33';
   font-size: 14px;
   font-weight: 700;
+
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
+  color: ${({ theme }) => theme.textColors.primary};
 
   & svg {
     display: none;
   }
 
   &[data-selected='true'] {
-    color: #00bd2f;
+    color: ${({ theme }) => theme.specialColors.positive};
+    background-color: ${({ theme }) => theme.bgColors.septenary};
   }
 
   &[data-selected='true'] svg {
     display: inline;
-    color: #101c33;
   }
 `;
 
@@ -87,7 +95,7 @@ const Child = styled(Link)`
   padding: 10px 0px 10px 30px;
   font-size: 14px;
   font-weight: 500;
-  color: #444444;
+  color: ${({ theme }) => theme.textColors.octonary};
 `;
 
 const Icon = styled.div``;
@@ -106,8 +114,8 @@ const Accordion = mStyled((props) => (
 });
 
 const AccordionSummary = mStyled((props) => <MuiAccordionSummary {...props} />)(
-  ({ theme }) => ({
-    backgroundColor: '#fff',
+  ({ theme, bgColors, activeBgColor }) => ({
+    backgroundColor: bgColors,
     // theme.palette.mode === 'dark'
     //   ? 'rgba(255, 255, 255, .05)'
     //   : 'rgba(0, 0, 0, .03)',
@@ -122,12 +130,12 @@ const AccordionSummary = mStyled((props) => <MuiAccordionSummary {...props} />)(
       // marginLeft: theme.spacing(1),
     },
     '&[data-selected="true"]': {
-      background: '#F5F6F7',
+      background: activeBgColor,
     },
   }),
 );
 
-const AccordionDetails = mStyled(MuiAccordionDetails)({
-  background: '#F5F6F7',
+const AccordionDetails = mStyled(MuiAccordionDetails)(({ bgColor }) => ({
+  background: bgColor,
   padding: 0,
-});
+}));

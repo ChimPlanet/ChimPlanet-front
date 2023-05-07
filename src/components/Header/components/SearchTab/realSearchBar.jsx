@@ -1,10 +1,10 @@
 import { styled } from 'chimplanet-ui';
 import { useLayoutEffect, useRef } from 'react';
 
-import { SearchIcon } from '@/common/icons';
 import useSearchInput from '../../hooks/useSearchInput';
 import { useSearchContext } from '../../context/searchContext';
 import RealSearchTagList from './realSearchTagList';
+import { Search } from 'chimplanet-ui/icons';
 
 /**
  *
@@ -38,8 +38,8 @@ export default function RealSearchBar({ mobile }) {
   const handleInput = ({ target }) => setInput(target.value);
 
   return (
-    <Container data-mobile={mobile}>
-      <SearchIcon />
+    <Container id="search-bar" data-mobile={mobile}>
+      <Search width="18px" />
       <SearchContent>
         <RealSearchTagList tags={tags} removeTag={removeTag} />
         <SearchInput
@@ -58,15 +58,18 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 16px auto;
   padding: 0px 14px;
-  border: ${({ theme }) => `1px solid ${theme.colors.logo}`};
+  border: ${({ theme }) => `1px solid ${theme.specialColors.positive}`};
   border-radius: 100px;
   align-items: center;
   height: 50px;
   flex: 1;
+  color: ${({ theme }) => theme.textColors.primary};
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
 
   &[data-mobile='true'] {
     border: none;
-    background-color: #f5f5f5;
+    /* background-color: #f5f5f5; */
+    background-color: ${({ theme }) => theme.bgColors.tertiary};
   }
 `;
 
@@ -74,6 +77,9 @@ const SearchContent = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 12px;
+  overflow-x: auto;
+  padding-bottom: 1px;
+  margin-top: 2px;
 `;
 
 const SearchInput = styled.input`
@@ -83,7 +89,7 @@ const SearchInput = styled.input`
   margin: 0px;
   outline: none;
 
-  color: ${({ theme }) => theme.colors.main};
+  color: ${({ theme }) => theme.textColors.primary};
   &:focus {
     outline: none;
   }

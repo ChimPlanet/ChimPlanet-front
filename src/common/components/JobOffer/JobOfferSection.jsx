@@ -1,4 +1,11 @@
-import { PropTypes, styled, Link, useScreenType } from 'chimplanet-ui';
+import {
+  PropTypes,
+  styled,
+  Link,
+  useScreenType,
+  ErrorBoundary,
+  Fallback,
+} from 'chimplanet-ui';
 import { Suspense, useCallback } from 'react';
 
 import JobOfferSectionContent from './components/jobOfferSectionContent';
@@ -6,7 +13,7 @@ import JobOfferSectionHeader from './components/jobOfferSectionHeader';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobSelectionSkeleton from '@/components/Skeletons/JobSectionSkeleton';
 
-import { GreenRightChevronIcon } from '@/common/icons';
+import { LinkFooter } from '../LinkFooter';
 
 /**
  * @typedef {Object} JobOfferSectionProps
@@ -58,21 +65,20 @@ export default function JobOfferSection({
         nextPage={nextPage}
         prevPage={prevPage}
       />
-      <Suspense fallback={<JobSelectionSkeleton />}>
-        <JobOfferSectionContent
-          queryKey={queryKey}
-          fetchFunction={fetchFunction}
-          setLength={setLength}
-          perPage={context.perPage}
-          cursor={context.cursor}
-          maxLength={maxLength}
-        />
-      </Suspense>
+      <ErrorBoundary fallback={<Fallback />}>
+        <Suspense fallback={<JobSelectionSkeleton />}>
+          <JobOfferSectionContent
+            queryKey={queryKey}
+            fetchFunction={fetchFunction}
+            setLength={setLength}
+            perPage={context.perPage}
+            cursor={context.cursor}
+            maxLength={maxLength}
+          />
+        </Suspense>
+      </ErrorBoundary>
       {sizeType === 'mobile' && goTo && (
-        <Footer to={goTo}>
-          <FooterText>자세히보기</FooterText>
-          <GreenRightChevronIcon />
-        </Footer>
+        <LinkFooter text="자세히보기" to={goTo} />
       )}
     </Container>
   );
@@ -84,21 +90,7 @@ JobOfferSection.propTypes = {
 };
 
 const Container = styled.section`
-  min-height: 460px;
+  min-height: 465px;
   overflow-x: hidden;
   /* width: ${(props) => props.width}; */
-`;
-
-const Footer = styled(Link)`
-  width: 100%;
-  margin-top: 30px;
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const FooterText = styled.span`
-  font-size: 16px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.colors.logo};
-  margin-right: 15px;
 `;

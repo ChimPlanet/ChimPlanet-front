@@ -1,13 +1,22 @@
 import { useMemo, useRef, useEffect } from 'react';
-import { styled, Loading, useScreenType } from 'chimplanet-ui';
-import { JobOfferMapContent } from '@/common/components/JobOffer';
+import {
+  JobOfferMapContent,
+  styled,
+  Loading,
+  useScreenType,
+} from 'chimplanet-ui';
 
 import { OfferColumnMap, OfferWidthMap } from '@/utils/offerSizeMap';
+import useBookmark from '@/hooks/useBookmark';
+import { useArticleContext } from '@/context/articleContext';
 
 export default function JobInfiniteScroll({ List, getMoreItem, last }) {
   const target = useRef();
 
-  const sizeType = useScreenType();
+  const screenType = useScreenType();
+
+  const { toggle, is } = useBookmark();
+  const [, { open }] = useArticleContext();
 
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {
@@ -17,13 +26,7 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
     }
   };
 
-  const config = useMemo(
-    () => ({
-      pageCount: OfferColumnMap[sizeType],
-      offerWidth: OfferWidthMap[sizeType],
-    }),
-    [sizeType],
-  );
+  const config = useMemo(() => OfferConfig[screenType], [screenType]);
 
   useEffect(() => {
     let observer;
@@ -38,25 +41,53 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
 
   return (
     <>
-      <JobOfferContainer column={config.pageCount}>
-        <JobOfferMapContent jobs={List} offerWidth={config.offerWidth} />
+      <JobOfferContainer column={config.numOfColumn}>
+        <JobOfferMapContent
+          jobs={List}
+          offerWidth={config.width}
+          direction={config.direction}
+          onBookmarkClick={toggle}
+          onClick={open}
+          isBookmarked={is}
+        />
       </JobOfferContainer>
-      <div>
+      <Margin>
         {!last && (
           <div ref={target}>
             <Loading />
           </div>
         )}
         {last && <div></div>}
-      </div>
+      </Margin>
     </>
   );
 }
+
+const OfferConfig = {
+  desktop: {
+    numOfColumn: 4,
+    width: 250,
+    direction: 'column',
+  },
+  tablet: {
+    numOfColumn: 3,
+    width: 220,
+    direction: 'column',
+  },
+  mobile: {
+    numOfColumn: 2,
+    width: 160,
+    direction: 'column',
+  },
+};
+
+const Margin = styled.div`
+  margin: 20px 0;
+`;
 
 const JobOfferContainer = styled.div`
   display: grid;
   grid-template-columns: ${({ column }) => `repeat(${column}, 1fr)`};
   justify-items: center;
   gap: 20px;
-  row-gap: 70px;
 `;

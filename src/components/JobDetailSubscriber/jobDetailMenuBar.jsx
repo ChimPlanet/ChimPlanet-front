@@ -1,9 +1,5 @@
 import { styled, useScreenType } from 'chimplanet-ui';
-import {
-  ShareIcon,
-  DetailBookMark,
-  CafeIcon,
-} from '@/common/icons';
+import { ShareIcon, DetailBookMark, CafeIcon } from '@/common/icons';
 
 export default function JobDetailMenuBar({
   id,
@@ -33,7 +29,13 @@ export default function JobDetailMenuBar({
     <Container display={sizeType}>
       <MenuContainer>
         <IconContainer>
-          <Profile src={userProfile} alt={userProfile} />
+          <Profile>
+            <img
+              referrerPolicy="no-referrer"
+              src={userProfile + '?type=f100_100'}
+              alt={userProfile}
+            />
+          </Profile>
         </IconContainer>
         <IconText>{writer}</IconText>
       </MenuContainer>
@@ -80,18 +82,22 @@ const MenuContainer = styled.div`
   align-items: center;
 `;
 
-const Profile = styled.img`
-  width: 46px;
+const Profile = styled.div`
+  display: flex;
   height: 46px;
+  width: 46px;
   border-radius: 50%;
+  overflow: hidden;
+  justify-content: center;
+  align-items: stretch;
 `;
 
 const IconContainer = styled.div`
   display: flex;
   width: 46px;
   height: 46px;
-  background: #ffffff;
-  background: ${({ theme }) => theme.backgroundColor.modal};
+  background: ${({ theme }) => theme.bgColors.primary};
+  color: ${({ theme }) => theme.textColors.modalIcon};
 
   border-radius: 50%;
   align-items: center;

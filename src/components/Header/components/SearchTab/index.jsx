@@ -44,7 +44,7 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  background-color: ${({ theme }) => theme.backgroundColor.searchbar};
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
 `;
 
 const Content = styled.div`
