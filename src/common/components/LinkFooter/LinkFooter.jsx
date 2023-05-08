@@ -19,7 +19,7 @@ const Container = styled(Link)`
   color: ${({ theme }) => theme.specialColors.positive};
 
   & svg {
-    margin-top: -4px;
+    margin-top: -2.5px;
   }
 `;
 
