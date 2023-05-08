@@ -61,6 +61,7 @@ export default function JobDetailSubscriber() {
           <Suspense fallback={<Loading />}>
             {article && (
               <JobDetailContent
+                close={close}
                 handelProfile={handelProfile}
                 full={sizeType}
                 offer={article}

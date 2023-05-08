@@ -23,7 +23,14 @@ export function useJobOfferFromDynamic(key, fetchFunction, maxLength) {
   });
 }
 
-export function useJobOfferBasic(lastArticleId, size, page, sort, isEnd, value) {
+export function useJobOfferBasic(
+  lastArticleId,
+  size,
+  page,
+  sort,
+  isEnd,
+  value,
+) {
   return useQuery([JobOfferQueryKey, 'basic', page, sort, isEnd], () =>
     backend.offers.basic(lastArticleId, size, page, sort, isEnd, value),
   );
@@ -40,7 +47,11 @@ export const useJobOfferByArrayId = (ids) => {
 
 /** @returns {import('react-query').UseQueryResult<OfferContent>} */
 export const useJobOfferDetail = (id) => {
-  return useQuery([JobOfferQueryKey, 'detail', id], () =>
-    backend.offers.content(id),
+  return useQuery(
+    [JobOfferQueryKey, 'detail', id],
+    () => backend.offers.content(id),
+    {
+      useErrorBoundary: false,
+    },
   );
 };

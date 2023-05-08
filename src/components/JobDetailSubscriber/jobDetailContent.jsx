@@ -14,8 +14,18 @@ import {
 } from './util';
 
 /** @param {{offer: Offer}} */
-export default function JobDetailContent({ offer, handelProfile }) {
-  const { data } = useJobOfferDetail(offer.id);
+export default function JobDetailContent({ offer, handelProfile, close }) {
+  const { data, isError, error } = useJobOfferDetail(offer.id);
+
+  if (isError) {
+    if (error?.response?.status === 401) {
+      if (confirm('권한이 필요한 게시글입니다. 원문으로 보시겠습니까?')) {
+        window.open(`https://cafe.naver.com/steamindiegame/${offer.id}`);
+      }
+    }
+    close();
+    return <></>;
+  }
 
   const sizeType = useScreenType();
 
