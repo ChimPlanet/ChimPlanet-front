@@ -22,7 +22,7 @@ export default function JobViewContent() {
   return context.pending === 'done' ? (
     context.originalData.length > 0 ? (
       <ResizableGrid
-        style={{ columnGap: config.gap, rowGap: 20 }}
+        style={{ columnGap: config.gap, rowGap: config.rowGap }}
         calcNumberOfColumns={() => config.numOfColumn}
       >
         <JobOfferMapContent
@@ -48,12 +48,14 @@ const OfferConfig = {
     numOfColumn: 4,
     width: 250,
     gap: 20,
+    rowGap: 60,
     direction: 'column',
   },
   tablet: {
     numOfColumn: 3,
     width: 220,
     gap: 30,
+    rowGap: 60,
     direction: 'column',
   },
   mobile: {
@@ -61,6 +63,7 @@ const OfferConfig = {
     width: 160,
     direction: 'column',
     gap: 30,
+    rowGap: 40,
     /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
     rowConfig: {
       height: 120,

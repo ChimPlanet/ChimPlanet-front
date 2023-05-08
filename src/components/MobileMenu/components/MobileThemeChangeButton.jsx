@@ -47,6 +47,6 @@ export const OptionSwitch = muiStyled(MUISwitch)({
     boxShadow: 'none',
     width: 18,
     height: 18,
-    margin: 2,
+    margin: 1,
   },
 });

@@ -99,6 +99,7 @@ const Container = styled.div`
   position: absolute;
   bottom: 0;
   width: 100vw;
+  color: ${({ theme }) => theme.textColors.primary};
 `;
 
 const ContainerTab = styled.div`
@@ -108,7 +109,7 @@ const ContainerTab = styled.div`
   height: 20px;
   width: 100vw;
   border-radius: 20px 20px 0 0;
-  background-color: #f5f5f5;
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
 `;
 
 const NavBar = styled.nav`
@@ -117,7 +118,7 @@ const NavBar = styled.nav`
   flex-direction: column;
   height: 300px;
   padding: 40px;
-  background-color: #ffffff;
+  background-color: ${({ theme }) => theme.bgColors.quaternary};
 `;
 
 const ItemList = styled.div``;

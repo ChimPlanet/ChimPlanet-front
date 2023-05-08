@@ -71,6 +71,7 @@ const Content = styled.div`
     max-width: 100%;
     margin: 10px 0px;
   }
+  padding-bottom: 110px;
 `;
 
 const PostText = styled.div`
@@ -80,7 +81,6 @@ const PostText = styled.div`
 `;
 
 const SubTitle = styled.div`
-  padding-top: 10px;
   font-size: 22px;
   font-weight: 700;
   line-height: 26px;

@@ -100,4 +100,9 @@ const JobContent = styled.div`
   display: grid;
   grid-template-columns: ${({ column }) => `repeat(${column}, 1fr)`};
   gap: 20px;
+  row-gap: 60px;
+
+  ${({ theme }) => theme.media.mobile`
+    row-gap: 20px;
+  `}
 `;
