@@ -9,8 +9,8 @@ export default function FixMemberSection() {
   return (
     <JobOfferSection
       queryKey="member"
-      title="고멤 구인글"
-      fetchFunction={backend.offers.official}
+      title="이세돌, 고멤 구인글"
+      fetchFunction={backend.official.official}
       hideArrow={sizeType === 'mobile'}
       maxLength={sizeType === 'mobile' && 4}
     />

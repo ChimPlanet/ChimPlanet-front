@@ -10,7 +10,7 @@ export default function IsegyeSection() {
     <JobOfferSection
       queryKey="isegye"
       title="이세돌 구인글"
-      fetchFunction={backend.offers.official}
+      fetchFunction={backend.official.official}
       hideArrow={sizeType === 'mobile'}
       maxLength={sizeType === 'mobile' && 4}
     />
