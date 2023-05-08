@@ -4,6 +4,7 @@ import { Divider } from '@mui/material';
 
 import CategoryLinkAccordion from './CategoryLinkAccordion';
 import { EVENT_PATH, OFFICIAL_PATH } from '@/constants/route';
+import MobileThemeChangeButton from './MobileThemeChangeButton';
 
 export default function MobileMenu({ close }) {
   const handlePreventPropagation = (e) => e.stopPropagation();
@@ -22,6 +23,8 @@ export default function MobileMenu({ close }) {
         <Anchor to={EVENT_PATH}>이벤트</Anchor>
         <Divider />
         <Anchor to={OFFICIAL_PATH}>공식</Anchor>
+        <Divider />
+        <MobileThemeChangeButton />
       </Footer>
     </Container>
   );

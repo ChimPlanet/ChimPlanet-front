@@ -18,7 +18,7 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Centering } from '@/common/components/Centering';
 import { HOME_PATH, OFFICIAL_PATH } from '@/constants/route';
-import ThemeChangeButton from '@/components/ThemeChangeButton';
+import DesktopThemeChangeButton from '@/components/ThemeChangeButton';
 
 export default function BaseLayout({ children }) {
   const sizeType = useScreenType();
@@ -55,7 +55,7 @@ export default function BaseLayout({ children }) {
         <Suspense fallback={<Loading />}>{children}</Suspense>
       </Centering>
       <Footer />
-      <ThemeChangeButton />
+      {sizeType === 'desktop' ? <DesktopThemeChangeButton /> : null}
     </>
   );
 }

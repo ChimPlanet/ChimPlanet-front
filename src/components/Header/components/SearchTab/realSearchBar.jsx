@@ -22,7 +22,7 @@ import { Search } from 'chimplanet-ui/icons';
  * @param {RealSearchBarProps} props
  * @returns
  */
-export default function RealSearchBar({ mobile }) {
+export default function RealSearchBar({ desktop }) {
   const [{ input, tags }, { setInput, removeTag }] = useSearchContext();
 
   const inputRef = useRef(null);
@@ -38,7 +38,7 @@ export default function RealSearchBar({ mobile }) {
   const handleInput = ({ target }) => setInput(target.value);
 
   return (
-    <Container id="search-bar" data-mobile={mobile}>
+    <Container id="search-bar" data-desktop={desktop}>
       <Search width="18px" />
       <SearchContent>
         <RealSearchTagList tags={tags} removeTag={removeTag} />
@@ -66,7 +66,7 @@ const Container = styled.div`
   color: ${({ theme }) => theme.textColors.primary};
   background-color: ${({ theme }) => theme.bgColors.quaternary};
 
-  &[data-mobile='true'] {
+  &[data-desktop='false'] {
     border: none;
     /* background-color: #f5f5f5; */
     background-color: ${({ theme }) => theme.bgColors.tertiary};

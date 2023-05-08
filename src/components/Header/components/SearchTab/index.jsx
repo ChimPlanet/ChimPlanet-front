@@ -10,22 +10,22 @@ import {
 import { LeftChevronIcon } from '@/common/icons';
 
 /**
- * @param {{afterSearch():void, activeHeaderTab():void, mobile: boolean}}
+ * @param {{afterSearch():void, activeHeaderTab():void, desktop: boolean}}
  * @returns
  */
-export default function SearchTab({ afterSearch, activeHeaderTab, mobile }) {
+export default function SearchTab({ afterSearch, activeHeaderTab, desktop }) {
   return (
     <Container>
-      <Content data-mobile={mobile}>
+      <Content data-desktop={desktop}>
         <SearchContextProvider onAfterSearch={afterSearch}>
           <SearchBarWrapper>
-            {mobile && (
+            {!desktop && (
               <ExitButton
                 onClick={activeHeaderTab}
                 children={<LeftChevronIcon />}
               />
             )}
-            <RealSearchBar mobile={mobile} />
+            <RealSearchBar desktop={desktop} />
           </SearchBarWrapper>
           <SearchOptionalSection />
         </SearchContextProvider>
@@ -51,7 +51,7 @@ const Content = styled.div`
   margin: 0 auto;
   padding: 30px 0px;
 
-  &[data-mobile='true'] {
+  &[data-desktop='false'] {
     padding: 10px 20px 30px 20px;
   }
 

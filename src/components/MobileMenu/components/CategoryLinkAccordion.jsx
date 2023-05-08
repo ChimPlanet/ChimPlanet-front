@@ -123,8 +123,9 @@ const AccordionSummary = mStyled((props) => <MuiAccordionSummary {...props} />)(
     paddingRight: '26px',
     flexDirection: 'row-reverse',
     minHeight: 40,
+    transition: 'none',
     '& .MuiAccordionSummary-expandIconWrapper.Mui-expanded': {
-      transform: 'rotate(90deg)',
+      // transform: 'rotate(90deg)',
     },
     '& .MuiAccordionSummary-content': {
       // marginLeft: theme.spacing(1),

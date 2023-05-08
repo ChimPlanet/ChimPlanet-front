@@ -1,7 +1,7 @@
 import { styled, useThemeMode, useThemeUpdater } from 'chimplanet-ui';
 import { MoonIcon, SunIcon } from '@/common/icons';
 
-export default function ThemeChangeButton() {
+export default function DesktopThemeChangeButton() {
   const themeMode = useThemeMode();
   const toggle = useThemeUpdater();
 
@@ -48,21 +48,4 @@ const Wrapper = styled.div`
     color: ${({ theme }) => theme.specialColors.positive};
     stroke: ${({ theme }) => theme.specialColors.positive};
   }
-
-  ${({ theme }) => theme.media.mobile`
-    & {
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      padding: 0px;
-    }
-
-    & span {
-      display: none;
-    }
-
-    & svg {
-      margin-top: 10px;
-    }
-  `}
 `;
