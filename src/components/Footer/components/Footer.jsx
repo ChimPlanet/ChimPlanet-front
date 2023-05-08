@@ -128,6 +128,7 @@ const HeaderIcons = styled.div`
   color: ${({ theme }) => theme.textColors.footer};
   display: flex;
   column-gap: 18px;
+  margin-top: -5px;
   & a {
     display: block;
   }
@@ -135,6 +136,7 @@ const HeaderIcons = styled.div`
   & svg {
     margin: auto;
     stroke-width: 0;
+    height: 100%;
   }
   ${({ theme }) => theme.media.mobile`
      margin: 20px 0; 
