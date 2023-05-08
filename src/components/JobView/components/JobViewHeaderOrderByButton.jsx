@@ -82,7 +82,7 @@ const Menu = styled.div`
 
 const MenuOptions = styled.button`
   width: 100%;
-  padding: 8px 18px;
+  padding: 8px 16px;
   font-size: 16px;
   text-align: left;
   color: ${({ selected, theme }) =>

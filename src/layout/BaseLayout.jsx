@@ -9,7 +9,10 @@ import {
 } from 'chimplanet-ui';
 
 import { usePreloadContext } from '@/context/preloadContext';
-import { getBannerByType } from '@/service/banner/banner-utils';
+import {
+  filterMainBanner,
+  getBannerByType,
+} from '@/service/banner/banner-utils';
 
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -27,7 +30,11 @@ export default function BaseLayout({ children }) {
   const mainBanners = useMemo(
     () =>
       banners
-        ? getBannerByType(banners, sizeType === 'desktop' ? 'PC' : 'MOBILE')
+        ? getBannerByType(
+            filterMainBanner,
+            banners,
+            sizeType === 'desktop' ? 'PC' : 'MOBILE',
+          )
         : [],
     [banners, sizeType],
   );
