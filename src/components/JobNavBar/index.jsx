@@ -71,13 +71,13 @@ export default function JobNavBar({
               <OptionContainer sizeType={sizeType}>
                 <Option
                   onClick={(e) => setValue(e, 'regDate')}
-                  color={sortValue.text === '최신순' ? '#00BD2F' : '#8E94A0'}
+                  color={sortValue.text === '최신순' ? '#00E4B3' : '#8E94A0'}
                 >
                   최신순
                 </Option>
                 <Option
                   onClick={(e) => setValue(e, 'readCount')}
-                  color={sortValue.text === '조회순' ? '#00BD2F' : '#8E94A0'}
+                  color={sortValue.text === '조회순' ? '#00E4B3' : '#8E94A0'}
                 >
                   조회순
                 </Option>
@@ -165,7 +165,7 @@ const SortContainer = styled.div`
 `;
 
 const Sort = styled.div`
-  width: 110px;
+  width: 100px;
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
@@ -174,28 +174,34 @@ const Sort = styled.div`
       ? `1px solid ${theme.borderColors.quaternary}`
       : '0'};
   border-radius: 4px;
-  padding: 8px 14px 8px 18px;
+  padding: 8px 8px 8px 14px ;
   appearance: none;
-
 `;
 
 const OptionContainer = styled.div`
   position: absolute;
   top: ${({ sizeType }) => (sizeType === 'desktop' ? '48px' : '0')};
-  background: ${({ theme }) => theme.bgColors.primary};
-  box-shadow: ${({ sizeType }) =>
-    sizeType === 'desktop' ? '0px 0px 2px rgba(0, 0, 0, 0.25)' : '0'};
-  border-radius: 4px;
+  right: ${({ sizeType }) => (sizeType === 'desktop' ? '' : '-2px')};
   width: 100px;
+  border-spacing: 0;
   z-index: 1;
 `;
 
 const Option = styled.div`
-  height: 36px;
   padding: 8px 40px 9px 18px;
+  background: ${({ theme }) => theme.bgColors.primary};
   font-weight: 500;
   font-size: 16px;
   line-height: 19px;
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
   color: ${({ color }) => color};
+
+  &:first-child{
+    border-radius: 4px 4px 0 0 ;
+  }
+
+  &:last-child{
+    border-radius: 0 0 4px 4px;
+  }
+
 `;

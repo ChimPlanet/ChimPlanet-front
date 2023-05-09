@@ -14,7 +14,7 @@ export default function JobDetailMobileMenuBar({
   userProfile,
   writer,
   id,
-  isBookmarked = false,
+  isBookmarked,
   onBookmarkClick,
 }) {
   const handleClick = (e) => {
