@@ -21,7 +21,7 @@ export class BookmarkContext extends BaseContext {
   }
 
   getBookmarkSet() {
-    return new Set(this.get().map((el) => parseInt(el.articleId)));
+    return new Set(this.get()?.map((el) => parseInt(el?.articleId)));
   }
 
   /**

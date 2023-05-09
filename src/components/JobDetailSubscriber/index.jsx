@@ -74,7 +74,7 @@ export default function JobDetailSubscriber() {
           writer={article?.writer}
           userProfile={userProfile}
           isBookmarked={bookmarkSet.has(article?.id)}
-          onBookmarkClick={() => toggle(article?.id)}
+          onBookmarkClick={() => toggle(article?.data)}
         />
         <JobDetailMobileMenuBar
           id={article?.id}
@@ -83,7 +83,7 @@ export default function JobDetailSubscriber() {
           userProfile={userProfile}
           writer={article?.writer}
           isBookmarked={bookmarkSet.has(article?.id)}
-          onBookmarkClick={() => toggle(article?.id)}
+          onBookmarkClick={() => toggle(article?.data)}
         />
       </>
     </ScrollModal>
