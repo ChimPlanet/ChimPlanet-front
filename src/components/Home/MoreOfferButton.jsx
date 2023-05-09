@@ -6,7 +6,7 @@ import { ChevronDown } from 'chimplanet-ui/icons';
 export default function MoreOfferButton() {
   return (
     <Container to={JOB_PATH}>
-      &nbsp; 더 많은 공고글 보기&nbsp;
+      <span>더 많은 공고글 보기</span>
       <ChevronDown />
     </Container>
   );
@@ -25,4 +25,8 @@ const Container = styled(Link)`
   border-radius: 100px;
   border: ${({ theme }) => `1px solid ${theme.borderColors.tertiary}`};
   margin-top: 70px;
+
+  & span {
+    margin-right: 5px;
+  }
 `;

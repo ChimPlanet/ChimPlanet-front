@@ -45,7 +45,7 @@ export default function RealSearchBar({ desktop }) {
         <SearchInput
           ref={inputRef}
           value={input}
-          placeholder="#태그, 팀, 포지션 검색"
+          placeholder={tags.length > 0 ? '#태그 검색' : '#태그, 팀 검색'}
           onChange={handleInput}
           onKeyDown={handleEnter}
         />
