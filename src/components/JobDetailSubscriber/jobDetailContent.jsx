@@ -35,7 +35,7 @@ export default function JobDetailContent({ offer, handelProfile, close }) {
 
   const content = useMemo(() => {
     const dom = stringToDom(data.content);
-    removeHeader(dom);
+    //removeHeader(dom);
     adaptJavascriptData(dom);
     adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
     return dom.documentElement.outerHTML;
