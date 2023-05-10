@@ -1,7 +1,9 @@
-import { useArticleContext } from '@/context/articleContext';
-import { Modal } from '@mui/material';
 import { Suspense, useEffect, useState } from 'react';
 import { styled, Loading, useScreenType, useTheme } from 'chimplanet-ui';
+import { ChevronLeft, MoreHorizontal } from 'chimplanet-ui/icons';
+
+import { useArticleContext } from '@/context/articleContext';
+import { Modal } from '@mui/material';
 import JobDetailMenuBar from './jobDetailMenuBar';
 import JobDetailMobileMenuBar from './jobDetailMobileMenuBar';
 import JobDetailContent from './jobDetailContent';
@@ -12,16 +14,25 @@ import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import useBookmark from '@/hooks/useBookmark';
 
 import '@/styles/naver-se.css';
-import { ChevronLeft, MoreHorizontal } from 'chimplanet-ui/icons';
+import useModalGoBack from '@/hooks/useModalGoBack';
 
 export default function JobDetailSubscriber() {
   const [article, { close }] = useArticleContext();
+  const [isOpen, toggleActive] = useModalGoBack('#article-view');
   const [modal, setModal] = useState(false);
   const [userProfile, setUserProfile] = useState();
   const sizeType = useScreenType();
   const { toggle } = useBookmark();
   const bookmarkSet = BookmarkContext.getInstance().getBookmarkSet();
   const theme = useTheme();
+
+  useEffect(() => {
+    if (article) toggleActive(true);
+  }, [article]);
+
+  useEffect(() => {
+    if (!isOpen) close();
+  }, [isOpen, close]);
 
   const handleModal = () => {
     setModal(!modal);
@@ -30,21 +41,6 @@ export default function JobDetailSubscriber() {
   const handelProfile = (user) => {
     setUserProfile(user);
   };
-
-  useEffect(() => {
-    if (!window) return;
-
-    window.onpageshow = (event) => {
-      if (
-        event.persisted ||
-        (window.performance && window.performance.navigation.type == 2)
-      ) {
-        if (modal) {
-          handleModal();
-        }
-      }
-    };
-  }, [modal]);
 
   return (
     <ScrollModal open={article !== null} onClose={close} full={sizeType}>

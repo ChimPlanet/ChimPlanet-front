@@ -24,11 +24,11 @@ export default function JobDetailContent({ offer, handelProfile, close }) {
   const sizeType = useScreenType();
 
   useEffect(() => {
-    handelProfile(data.profileImageUrl);
+    if (data.profileImageUrl) handelProfile(data.profileImageUrl);
   }, [data]);
 
   const content = useMemo(() => {
-    if (!data.content) return '';
+    if (!data || !data.content) return '';
 
     const dom = stringToDom(data.content);
     const images = getAllImgElementsFromDom(dom);
