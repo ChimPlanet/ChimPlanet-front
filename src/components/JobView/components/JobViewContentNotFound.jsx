@@ -16,7 +16,7 @@ export default function JobViewContentNotFound() {
 }
 
 const Container = styled.div`
-  padding-top: 120px;
+  padding: 120px 0px;
   display: flex;
   flex-direction: column;
   align-items: center;

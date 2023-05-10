@@ -55,3 +55,13 @@ export const adaptImagesNoRefererPolicy = (nodeList) => {
   nodeList.forEach(configureImageNoRefererPolicy);
   return nodeList;
 };
+
+/**
+ * @param {NodeList} nodeList
+ * @param {(imageElement: Element) => void} listener
+ */
+export const adaptImageClickListener = (nodeList, listener) => {
+  nodeList.forEach((el) => {
+    el.onclick = (e) => e.target && listener(e.target);
+  });
+};

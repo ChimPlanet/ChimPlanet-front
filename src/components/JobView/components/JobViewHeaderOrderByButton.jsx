@@ -1,5 +1,5 @@
 import { styled, FloatingMenu } from 'chimplanet-ui';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useJobViewContext } from '../JobViewContext';
 import { ArrowBelowSmallIcon } from '@/common/icons';
 
@@ -32,7 +32,7 @@ export default function JobViewHeaderOrderByButton() {
         </SelectText>
       </Select>
       {visible && (
-        <FloatingMenu anchorRef={anchorRef} close={close}>
+        <FloatingMenu anchorRef={anchorRef} zIndex={1} close={close}>
           <Menu>
             {orderByTypes.map(({ key, name }) => (
               <MenuOptions

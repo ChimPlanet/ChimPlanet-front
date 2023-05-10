@@ -46,6 +46,6 @@ const Wrapper = styled.div`
 
   &:hover svg {
     color: ${({ theme }) => theme.specialColors.positive};
-    stroke: ${({ theme }) => theme.specialColors.positive};
+    /* stroke: ${({ theme }) => theme.specialColors.positive}; */
   }
 `;

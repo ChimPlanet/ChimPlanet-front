@@ -16,7 +16,9 @@ export default function JobViewHeader() {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  z-index: 0;
+`;
 
 const Row = styled.div`
   display: flex;

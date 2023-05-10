@@ -1,21 +1,47 @@
+import { useMemo, useEffect, useState } from 'react';
 import { styled, useScreenType } from 'chimplanet-ui';
 
 import { useJobOfferDetail } from '@/query/offer';
 import { Offer } from '@/service/offer';
 import JobDetailHeader from './jobDetailHeader';
 
-import { useMemo, useEffect } from 'react';
 import {
   stringToDom,
   getAllImgElementsFromDom,
   adaptImagesNoRefererPolicy,
-  removeHeader,
+  adaptImageClickListener,
   adaptJavascriptData,
 } from './util';
+import PurifyHtml from '@/common/components/PurifyHtml';
+import JobImageModal from './JobImageModal';
 
 /** @param {{offer: Offer}} */
 export default function JobDetailContent({ offer, handelProfile, close }) {
   const { data, isError, error } = useJobOfferDetail(offer.id);
+
+  const [focusedImageSrc, setFocusedImageSrc] = useState(null);
+
+  const sizeType = useScreenType();
+
+  useEffect(() => {
+    handelProfile(data.profileImageUrl);
+  }, [data]);
+
+  const content = useMemo(() => {
+    if (!data.content) return '';
+
+    const dom = stringToDom(data.content);
+    const images = getAllImgElementsFromDom(dom);
+    //removeHeader(dom);
+    adaptJavascriptData(dom);
+    adaptImagesNoRefererPolicy(images);
+    return dom.documentElement.outerHTML;
+  }, [data]);
+
+  /** @param {HTMLImageElement} e */
+  const handleImageClick = (e) => setFocusedImageSrc(e.src);
+
+  const handleImageModalClose = () => setFocusedImageSrc(null);
 
   if (isError) {
     if (error?.response?.status === 401) {
@@ -27,44 +53,39 @@ export default function JobDetailContent({ offer, handelProfile, close }) {
     return <></>;
   }
 
-  const sizeType = useScreenType();
-
-  useEffect(() => {
-    handelProfile(data.profileImageUrl);
-  }, [data]);
-
-  const content = useMemo(() => {
-    const dom = stringToDom(data.content);
-    //removeHeader(dom);
-    adaptJavascriptData(dom);
-    adaptImagesNoRefererPolicy(getAllImgElementsFromDom(dom));
-    return dom.documentElement.outerHTML;
-  }, [data]);
-
   return (
-    <Wrapper sizeType={sizeType}>
-      <JobDetailHeader
-        title={offer.title}
-        status={offer.isClosed}
-        date={data.data.regDate}
-        views={offer.viewCount}
-      />
-      <Content data-desktop={sizeType === 'desktop'}>
-        <PostText
-          dangerouslySetInnerHTML={{
-            __html: content,
-          }}
+    <>
+      <Wrapper sizeType={sizeType}>
+        <JobDetailHeader
+          title={offer.title}
+          status={offer.isClosed}
+          date={data.data.regDate}
+          views={offer.viewCount}
         />
-      </Content>
-      <SubTitle>태그</SubTitle>
-      <PostTags>
-        {data.tags?.map((items) => (
-          <Tag key={items.tagObjResponseDto.tagName}>
-            {'# ' + items.tagObjResponseDto.tagName}
-          </Tag>
-        ))}
-      </PostTags>
-    </Wrapper>
+        <Content data-desktop={sizeType === 'desktop'}>
+          <PurifyHtml
+            html={content}
+            onLoad={(e) => {
+              const images = getAllImgElementsFromDom(e);
+              adaptImageClickListener(images, handleImageClick);
+            }}
+          />
+        </Content>
+        <SubTitle>태그</SubTitle>
+        <PostTags>
+          {data.tags?.map((items) => (
+            <Tag key={items.tagObjResponseDto.tagName}>
+              {'# ' + items.tagObjResponseDto.tagName}
+            </Tag>
+          ))}
+        </PostTags>
+      </Wrapper>
+      <JobImageModal
+        open={focusedImageSrc}
+        close={handleImageModalClose}
+        src={focusedImageSrc}
+      />
+    </>
   );
 }
 
@@ -82,6 +103,13 @@ const Content = styled.div`
     margin: 10px 0px;
   }
   padding-bottom: 110px;
+  font-weight: 500;
+  font-size: 16px;
+  padding-right: 20px;
+
+  &[data-desktop='true'] {
+    padding-right: 40px;
+  }
 `;
 
 const PostText = styled.div`
