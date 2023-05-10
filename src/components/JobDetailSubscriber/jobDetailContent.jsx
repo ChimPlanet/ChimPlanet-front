@@ -24,7 +24,7 @@ export default function JobDetailContent({ offer, handelProfile, close }) {
   const sizeType = useScreenType();
 
   useEffect(() => {
-    if (data.profileImageUrl) handelProfile(data.profileImageUrl);
+    if (data) handelProfile(data.profileImageUrl);
   }, [data]);
 
   const content = useMemo(() => {
