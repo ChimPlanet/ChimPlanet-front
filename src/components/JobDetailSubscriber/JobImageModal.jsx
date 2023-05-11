@@ -43,8 +43,8 @@ const Image = styled.img`
 
 const OpenSourceLink = styled.a`
   display: block;
-  margin-top: 10px;
-  font-size: 16px;
+  margin-top: 18px;
+  font-size: 18px;
   font-weight: 500;
-  color: #fff;
+  color: #a8a8a8;
 `;
