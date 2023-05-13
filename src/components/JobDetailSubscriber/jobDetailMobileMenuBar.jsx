@@ -7,6 +7,10 @@ import {
   MobileBookMarkIcon,
   MobileCafeIcon,
 } from '@/common/icons';
+import { useState } from 'react';
+
+const defaultImage =
+  'https://images-ext-2.discordapp.net/external/NubY254DitZhl4T3xlPsSwQrnlIvVacwb87LmSn0xq0/%3Ftype%3Df100_100/https/ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?width=154&height=154';
 
 export default function JobDetailMobileMenuBar({
   modal,
@@ -17,6 +21,8 @@ export default function JobDetailMobileMenuBar({
   isBookmarked,
   onBookmarkClick,
 }) {
+  const [imageError, setImageError] = useState(false);
+
   const handleClick = (e) => {
     e.stopPropagation();
     onBookmarkClick();
@@ -32,6 +38,10 @@ export default function JobDetailMobileMenuBar({
     alert('링크가 복사되었습니다.');
   };
 
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   return (
     <Modal open={modal} onClose={handleModal}>
       <>
@@ -45,8 +55,13 @@ export default function JobDetailMobileMenuBar({
                 <Profile>
                   <img
                     referrerpolicy="no-referrer"
-                    src={userProfile + '?type=f100_100'}
+                    src={
+                      !imageError
+                        ? userProfile + '?type=f100_100'
+                        : defaultImage
+                    }
                     alt={userProfile}
+                    onError={handleImageError}
                   />
                 </Profile>
                 <p className="text">{writer}</p>

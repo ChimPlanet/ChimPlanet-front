@@ -20,6 +20,8 @@ export default function Header() {
         CategoryOverlayComponent={CategoryOverlay}
         SearchTabComponent={SearchTab}
         activeMobileMenu={handleOpenMobilMenu}
+        hideMenuBar={false}
+        alternativeComponent={null}
       />
       <StyledDrawer
         anchor="right"

@@ -81,7 +81,7 @@ export default function JobDetailContent({ offer, handelProfile, close }) {
         </PostTags>
       </Wrapper>
       <JobImageModal
-        open={focusedImageSrc}
+        open={focusedImageSrc ?? false}
         close={handleImageModalClose}
         src={focusedImageSrc}
       />

@@ -1,6 +1,7 @@
-import { PropTypes, styled } from 'chimplanet-ui';
+import { PropTypes, styled, useNavigate } from 'chimplanet-ui';
 
 import useSearch from '../../hooks/useSearchNavigate';
+import { JOB_PATH } from '@/constants/route';
 
 export default function ParentCategoryColumn({
   current,
@@ -9,10 +10,20 @@ export default function ParentCategoryColumn({
   items,
 }) {
   const search = useSearch();
+  const navigate = useNavigate();
 
   return (
     <Container>
       <Content>
+        <Item
+          onMouseEnter={() => setCurrent(null)}
+          onClick={() => {
+            navigate(JOB_PATH);
+            afterChoose();
+          }}
+        >
+          전체
+        </Item>
         {items.map((parent) => (
           <Item
             key={parent}
@@ -23,7 +34,7 @@ export default function ParentCategoryColumn({
               afterChoose();
             }}
           >
-            {parent}
+            {parent.replace('전체', '').trim()}
           </Item>
         ))}
       </Content>

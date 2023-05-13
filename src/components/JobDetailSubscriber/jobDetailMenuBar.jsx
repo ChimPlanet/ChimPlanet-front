@@ -1,5 +1,9 @@
 import { styled, useScreenType } from 'chimplanet-ui';
 import { ShareIcon, DetailBookMark, CafeIcon } from '@/common/icons';
+import { useState } from 'react';
+
+const defaultImage =
+  'https://images-ext-2.discordapp.net/external/NubY254DitZhl4T3xlPsSwQrnlIvVacwb87LmSn0xq0/%3Ftype%3Df100_100/https/ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?width=154&height=154';
 
 export default function JobDetailMenuBar({
   id,
@@ -10,6 +14,7 @@ export default function JobDetailMenuBar({
   close,
 }) {
   const sizeType = useScreenType();
+  const [imageError, setImageError] = useState(false);
 
   const handleCopyClipBoard = async (text) => {
     const input = document.createElement('input');
@@ -26,6 +31,10 @@ export default function JobDetailMenuBar({
     onBookmarkClick();
   };
 
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   return (
     <Container display={sizeType}>
       <MenuContainer>
@@ -33,8 +42,9 @@ export default function JobDetailMenuBar({
           <Profile>
             <img
               referrerPolicy="no-referrer"
-              src={userProfile + '?type=f100_100'}
+              src={!imageError ? userProfile + '?type=f100_100' : defaultImage}
               alt={userProfile}
+              onError={handleImageError}
             />
           </Profile>
         </IconContainer>

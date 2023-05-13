@@ -19,7 +19,12 @@ export function JobTableHeader() {
 }
 export default JobTableHeader;
 
-const Container = styled.div``;
+const Container = styled.div`
+  & hr {
+    border-bottom: ${({ theme }) =>
+      `1px solid ${theme.borderColors.quaternary}`};
+  }
+`;
 
 const Content = styled.div`
   z-index: 1;

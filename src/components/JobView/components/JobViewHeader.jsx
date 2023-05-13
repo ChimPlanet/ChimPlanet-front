@@ -20,19 +20,23 @@ export default function JobViewHeader() {
     );
   } else {
     return (
-      <>
+      <Container>
         <MobileContainer>
           <JobViewHeaderCondition reverse />
           <JobViewHeaderOrderByButton />
         </MobileContainer>
         <Divider />
-      </>
+      </Container>
     );
   }
 }
 
 const Container = styled.div`
   z-index: 0;
+  & hr {
+    border-bottom: ${({ theme }) =>
+      `1px solid ${theme.borderColors.quaternary}`};
+  }
 `;
 
 const Row = styled.div`

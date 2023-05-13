@@ -57,12 +57,13 @@ const Select = styled.div`
   justify-content: center;
   align-items: center;
   width: ${MenuWidth}px;
-  border-radius: 4px;
+
   padding: 8px 18px;
   cursor: pointer;
   border-left: ${({ theme }) => ` 1px solid ${theme.borderColors.quaternary}`};
   ${({ theme }) => theme.media.desktop`
     ${`border: 1px solid ${theme.borderColors.quaternary}`};
+    border-radius: 4px;
   `};
 `;
 
