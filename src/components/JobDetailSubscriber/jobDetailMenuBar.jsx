@@ -7,6 +7,7 @@ export default function JobDetailMenuBar({
   userProfile,
   isBookmarked = false,
   onBookmarkClick,
+  close,
 }) {
   const sizeType = useScreenType();
 
@@ -61,6 +62,7 @@ export default function JobDetailMenuBar({
         </IconContainer>
         <IconText>공유하기</IconText>
       </div>
+      <Rest onClick={close}></Rest>
     </Container>
   );
 }
@@ -111,4 +113,9 @@ const IconText = styled.div`
   line-height: 16px;
   color: #ffffff;
   margin-bottom: 16px;
+`;
+
+const Rest = styled.div`
+  width: 100%;
+  height: 100%;
 `;

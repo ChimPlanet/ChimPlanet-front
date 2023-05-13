@@ -30,7 +30,10 @@ export default function SubBanner() {
       href={bannerItem?.redirectUrl || '#'}
       target={bannerItem?.redirectType === 'NewTab' ? '_blank' : '_self'}
     >
-      <SubBannerImage src={bannerItem?.sourceUrl || ''} />
+      <SubBannerImage
+        src={bannerItem?.sourceUrl || ''}
+        alt={bannerItem?.sourceUrl || ''}
+      />
     </Container>
   );
 }

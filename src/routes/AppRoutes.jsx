@@ -9,6 +9,7 @@ import {
   JOB_PATH,
   SEARCH_PATH,
   ERROR_PATH,
+  POPULAR_PATH,
 } from '@/constants/route';
 import Article from '@/pages/Article';
 import Bookmark from '@/pages/Bookmark';
@@ -20,6 +21,7 @@ import Official from '@/pages/Official';
 import Job from '@/pages/Job';
 import Search from '@/pages/Search';
 import Error from '@/pages/Error';
+import Popular from '@/pages/Popular';
 
 export default function AppRoutes() {
   const [id] = useSearchParams();
@@ -33,6 +35,7 @@ export default function AppRoutes() {
       <Route path={EVENT_PATH} element={<Event />} />
       <Route path={OFFICIAL_PATH} element={<Official />} />
       <Route path={SEARCH_PATH} element={<Search />} />
+      <Route path={POPULAR_PATH} element={<Popular />} />
       <Route path={ERROR_PATH} element={<Error />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

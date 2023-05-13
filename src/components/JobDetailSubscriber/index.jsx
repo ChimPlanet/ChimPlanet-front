@@ -66,6 +66,7 @@ export default function JobDetailSubscriber() {
           </Suspense>
         </ContentWrapper>
         <JobDetailMenuBar
+          close={close}
           id={article?.id}
           writer={article?.writer}
           userProfile={userProfile}

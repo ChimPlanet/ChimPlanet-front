@@ -1,8 +1,8 @@
-import { useJobViewContext } from '../JobViewContext';
+import { useJobTableContext } from '../contexts/table';
 import { styled } from 'chimplanet-ui';
 
-export default function JobViewHeaderCondition({ reverse }) {
-  const [context, dispatch] = useJobViewContext();
+export default function JobTableHeaderCondition({ reverse }) {
+  const [context, dispatch] = useJobTableContext();
 
   const handleClick = (condition) => dispatch({ condition });
 
@@ -12,7 +12,7 @@ export default function JobViewHeaderCondition({ reverse }) {
         ({ key, name }) => (
           <Items
             key={key}
-            data-selected={`${key === context.condition}`}
+            data-selected={key === context.condition}
             onClick={handleClick.bind(null, key)}
           >
             {name}

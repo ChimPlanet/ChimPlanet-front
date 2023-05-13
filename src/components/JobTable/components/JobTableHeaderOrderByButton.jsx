@@ -1,6 +1,6 @@
 import { styled, FloatingMenu } from 'chimplanet-ui';
-import { useEffect, useRef, useState } from 'react';
-import { useJobViewContext } from '../JobViewContext';
+import { useRef, useState } from 'react';
+import { useJobTableContext } from '../contexts/table';
 import { ArrowBelowSmallIcon } from '@/common/icons';
 
 const MenuWidth = 100;
@@ -11,10 +11,10 @@ const orderByTypes = Object.freeze([
   { key: 'recommend', name: '추천순' },
 ]);
 //"popular" | "recent" | "recommend"
-export default function JobViewHeaderOrderByButton() {
+export default function JobTableHeaderOrderByButton() {
   const [visible, setVisible] = useState(false);
   const anchorRef = useRef();
-  const [context, dispatch] = useJobViewContext();
+  const [context, dispatch] = useJobTableContext();
 
   const handleSelectClick = () => setVisible((prev) => !prev);
   const close = () => setVisible(false);
@@ -58,12 +58,12 @@ const Select = styled.div`
   align-items: center;
   width: ${MenuWidth}px;
   border-radius: 4px;
-  padding: 8px 18px;
-  cursor: pointer;
   border-left: ${({ theme }) => ` 1px solid ${theme.borderColors.quaternary}`};
   ${({ theme }) => theme.media.desktop`
     ${`border: 1px solid ${theme.borderColors.quaternary}`};
   `};
+  padding: 8px 18px;
+  cursor: pointer;
 `;
 
 const SelectText = styled.span`

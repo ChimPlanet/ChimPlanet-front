@@ -22,7 +22,11 @@ export default function JobImageModal({ open, close, src }) {
     >
       <Content>
         <Image referrerPolicy="no-referrer" src={src} alt={src} />
-        <OpenSourceLink href={src ?? ''} target="_blank">
+        <OpenSourceLink
+          referrerPolicy="no-referrer"
+          href={src ?? ''}
+          target="_blank"
+        >
           원본 이미지 보기
         </OpenSourceLink>
       </Content>

@@ -1,4 +1,4 @@
-import { styled } from 'chimplanet-ui';
+import { styled, useNavigate } from 'chimplanet-ui';
 import { useJobViewContext } from '../JobViewContext';
 import Tag from '@/components/Tag';
 import { SearchTagSequenceColor } from '@/constants/color';
@@ -23,6 +23,21 @@ export default function JobViewHeaderQuery() {
 
 /** @param {{words: string[]}} */
 function TagQuery({ words }) {
+  const navigate = useNavigate();
+
+  const removeTagQuery = (tag) => {
+    let query = words
+      .filter((e) => e !== tag)
+      .map((el) => el.trim())
+      .join(',');
+
+    if (query.length > 1) {
+      navigate(`/search?type=tag&q=${encodeURIComponent(query)}`);
+    } else {
+      alert('하나 이상의 태그가 존재해야합니다.');
+    }
+  };
+
   return (
     <TagContainer>
       {words.map((tag, i) => (
@@ -35,7 +50,7 @@ function TagQuery({ words }) {
           padding="7px 10px"
           weight={400}
           backgroundColor={SearchTagSequenceColor[i]}
-          // removeSelf={() => removeTag(tag)}
+          removeSelf={() => removeTagQuery(tag)}
         />
       ))}
     </TagContainer>

@@ -78,7 +78,7 @@ export default function JobOfferSection({
         </Suspense>
       </ErrorBoundary>
       {sizeType === 'mobile' && goTo && (
-        <LinkFooter text="자세히보기" to={goTo} />
+        <LinkFooter text="자세히보기" href={goTo} />
       )}
     </Container>
   );
