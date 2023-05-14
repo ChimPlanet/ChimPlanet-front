@@ -39,8 +39,8 @@ export default function CategoryLinkAccordion({ close }) {
           onChange={handleChange(parent.tagId)}
         >
           <AccordionSummary
-            bgColors={theme.bgColors.quaternary}
-            activeBgColor={theme.bgColors.septenary}
+            background={theme.bgColors.quaternary}
+            activebackground={theme.bgColors.septenary}
             data-selected={expandedId === parent.tagId}
           >
             <Parent data-selected={expandedId === parent.tagId}>
@@ -48,7 +48,10 @@ export default function CategoryLinkAccordion({ close }) {
               <Icon children={<ChevronDown />} />
             </Parent>
           </AccordionSummary>
-          <AccordionDetails bgColor={theme.bgColors.septenary} onClick={close}>
+          <AccordionDetails
+            background={theme.bgColors.septenary}
+            onClick={close}
+          >
             <Child to={makeSearchQuery(parent.tagName)}>{parent.tagName}</Child>
             {familyTree.get(parent).map((child) => (
               <Child key={child.tagId} to={makeSearchQuery(child.tagName)}>
@@ -114,8 +117,8 @@ const Accordion = mStyled((props) => (
 });
 
 const AccordionSummary = mStyled((props) => <MuiAccordionSummary {...props} />)(
-  ({ theme, bgColors, activeBgColor }) => ({
-    backgroundColor: bgColors,
+  ({ theme, background, activebackground }) => ({
+    backgroundColor: background,
     // theme.palette.mode === 'dark'
     //   ? 'rgba(255, 255, 255, .05)'
     //   : 'rgba(0, 0, 0, .03)',
@@ -131,12 +134,12 @@ const AccordionSummary = mStyled((props) => <MuiAccordionSummary {...props} />)(
       // marginLeft: theme.spacing(1),
     },
     '&[data-selected="true"]': {
-      background: activeBgColor,
+      background: activebackground,
     },
   }),
 );
 
-const AccordionDetails = mStyled(MuiAccordionDetails)(({ bgColor }) => ({
-  background: bgColor,
+const AccordionDetails = mStyled(MuiAccordionDetails)(({ background }) => ({
+  background: background,
   padding: 0,
 }));

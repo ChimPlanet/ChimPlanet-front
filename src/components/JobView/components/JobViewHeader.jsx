@@ -48,5 +48,5 @@ const Row = styled.div`
 const MobileContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
 `;

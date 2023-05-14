@@ -43,9 +43,12 @@ const Items = styled.button`
   font-size: 16px;
   font-weight: 500;
   color: ${({ theme }) => theme.textColors.senary};
+  padding-top: 8px;
+  padding-bottom: 12px;
 
   &[data-selected='true'] {
     color: ${({ theme }) => theme.specialColors.positive};
+    border-bottom: 1px solid ${({ theme }) => theme.specialColors.positive};
   }
 
   ${({ theme }) => theme.media.desktop`

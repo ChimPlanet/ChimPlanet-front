@@ -37,15 +37,20 @@ const Items = styled.button`
   display: inline-block;
   margin: auto 0px;
   height: 100%;
+
   cursor: pointer;
 
   margin-right: 16px;
   font-size: 16px;
   font-weight: 500;
   color: ${({ theme }) => theme.textColors.senary};
+  /* padding: 10px 0px; */
+  padding-top: 8px;
+  padding-bottom: 12px;
 
   &[data-selected='true'] {
     color: ${({ theme }) => theme.specialColors.positive};
+    border-bottom: 1px solid ${({ theme }) => theme.specialColors.positive};
   }
 
   ${({ theme }) => theme.media.desktop`
