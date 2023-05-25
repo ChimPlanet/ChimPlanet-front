@@ -42,7 +42,7 @@ export default function BaseLayout({ children }) {
   return (
     <>
       <Header />
-      {validPaths.includes(pathname) && (
+      {validPaths.includes(pathname) && banners && (
         <BannerWrapper children={<Banner banners={mainBanners} />} />
       )}
 
