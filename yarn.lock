@@ -2389,7 +2389,7 @@ char-regex@^1.0.2:
 
 "chimplanet-ui@git+https://github.com/ChimPlanet/chimplanet-ui.git":
   version "1.0.2"
-  resolved "git+https://github.com/ChimPlanet/chimplanet-ui.git#7bd7c6e84527dcb5510c26f37ce0e5805354b211"
+  resolved "git+https://github.com/ChimPlanet/chimplanet-ui.git#2eae96f59ece5e3492147feb4aa8cd06d00b0d0c"
   dependencies:
     prop-types "^15.8.1"
     react "^18.2.0"
