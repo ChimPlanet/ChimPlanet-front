@@ -2,16 +2,18 @@ import { createContext, useState, useContext, useEffect } from 'react';
 
 import backend from '@/service/backend';
 import TagTrie from '@/utils/tagTrie';
-import { ERROR_PATH } from '@/constants/route';
+import { ERROR_PATH, NOTFOUND_PATH } from '@/constants/route';
 
 const preloadContext = createContext();
+
+const IGNORE_PATHS = [ERROR_PATH, NOTFOUND_PATH];
 
 export function PreloadProvider({ children }) {
   const [preloads, setPreload] = useState({});
   // NeedPreloadRequests & only work when page initialize
   useEffect(() => {
     // ! ERROR 의 경우에는 Preload를 하지 않음
-    if (window.location.pathname === ERROR_PATH) {
+    if (IGNORE_PATHS.indexOf(window.location.pathname) > -1) {
       return;
     }
 

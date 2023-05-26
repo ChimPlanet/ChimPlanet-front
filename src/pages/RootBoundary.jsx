@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 
-import { Loading, Fallback, ErrorBoundary } from 'chimplanet-ui';
+import { Loading, ErrorBoundary } from 'chimplanet-ui';
+import { ERROR_PATH } from '@/constants/route';
 /**
  * Suspend, ErrorBoundary 복합체
  * @param {{ children: React.ReactNode }}
@@ -13,7 +14,14 @@ export default function RootBoundary({ children }) {
 
   return (
     <Suspense fallback={<Loading />}>
-      <ErrorBoundary fallback={<Fallback />}>{children}</ErrorBoundary>
+      <ErrorBoundary
+        fallback={() => {
+          window.location.href = ERROR_PATH;
+          return <></>;
+        }}
+      >
+        {children}
+      </ErrorBoundary>
     </Suspense>
   );
 }

@@ -5,7 +5,6 @@ import {
   useScreenType,
   ErrorBoundary,
   JobOfferMapContent,
-  Fallback,
 } from 'chimplanet-ui';
 
 import { useRecentOffers } from '@/query/offer';
@@ -14,13 +13,14 @@ import { useArticleContext } from '@/context/articleContext';
 import { JOB_PATH } from '@/constants/route';
 import { LinkFooter } from '@/common/components/LinkFooter';
 import MoreOfferButton from '../MoreOfferButton';
+import { FallbackFetching } from '@/common/components/FallbackFetching';
 
 export default function RecentSection() {
   return (
     <Container>
       <Title>최근에 올라온 구인글</Title>
       <ErrorBoundary fallback={<Loading />}>
-        <Suspense fallback={<Fallback />}>
+        <Suspense fallback={<FallbackFetching />}>
           <RecentSectionContent />
         </Suspense>
       </ErrorBoundary>

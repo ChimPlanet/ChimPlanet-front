@@ -17,7 +17,7 @@ import {
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { Centering } from '@/common/components/Centering';
-import { HOME_PATH, OFFICIAL_PATH } from '@/constants/route';
+import { ERROR_PATH, HOME_PATH, OFFICIAL_PATH } from '@/constants/route';
 import DesktopThemeChangeButton from '@/components/ThemeChangeButton';
 
 export default function BaseLayout({ children }) {
@@ -41,7 +41,7 @@ export default function BaseLayout({ children }) {
 
   return (
     <>
-      <Header />
+      {pathname !== ERROR_PATH && <Header />}
       {validPaths.includes(pathname) && banners && (
         <BannerWrapper children={<Banner banners={mainBanners} />} />
       )}
@@ -54,7 +54,7 @@ export default function BaseLayout({ children }) {
       >
         <Suspense fallback={<Loading />}>{children}</Suspense>
       </Centering>
-      <Footer />
+      {pathname !== ERROR_PATH && <Footer />}
       {sizeType === 'desktop' ? <DesktopThemeChangeButton /> : null}
     </>
   );

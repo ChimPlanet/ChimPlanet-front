@@ -9,8 +9,6 @@ import {
 import { useJobOfferFromDynamic } from '@/query/offer';
 import { prefetchImages } from '@/utils';
 
-import { OfferWidthMap } from '@/utils/offerSizeMap';
-import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import { useArticleContext } from '@/context/articleContext';
 import useBookmark from '@/hooks/useBookmark';
 

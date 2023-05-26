@@ -10,6 +10,7 @@ import {
   SEARCH_PATH,
   ERROR_PATH,
   POPULAR_PATH,
+  NOTFOUND_PATH,
 } from '@/constants/route';
 import Article from '@/pages/Article';
 import Bookmark from '@/pages/Bookmark';
@@ -37,6 +38,7 @@ export default function AppRoutes() {
       <Route path={SEARCH_PATH} element={<Search />} />
       <Route path={POPULAR_PATH} element={<Popular />} />
       <Route path={ERROR_PATH} element={<Error />} />
+      <Route path={NOTFOUND_PATH} element={<NotFound />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

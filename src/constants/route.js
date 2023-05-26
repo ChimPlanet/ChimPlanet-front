@@ -14,4 +14,6 @@ export const SEARCH_PATH = '/search';
 
 export const ERROR_PATH = '/error';
 
+export const NOTFOUND_PATH = '/404';
+
 export const POPULAR_PATH = '/popular';

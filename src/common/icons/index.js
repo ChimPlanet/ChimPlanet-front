@@ -16,8 +16,10 @@ import Chimplanet500 from './Chimplanet500';
 import ChimplanetNotFoundIcon from './ChimplanetNotFoundIcon';
 import MoonIcon from './MoonIcon';
 import SunIcon from './SunIcon';
+import ChimplanetFloor from './ChimplanetFloor';
 
 export {
+  ChimplanetFloor,
   Chimplanet500,
   MoonIcon,
   SunIcon,

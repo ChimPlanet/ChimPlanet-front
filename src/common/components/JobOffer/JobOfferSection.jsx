@@ -14,6 +14,8 @@ import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobSelectionSkeleton from '@/components/Skeletons/JobSectionSkeleton';
 
 import { LinkFooter } from '../LinkFooter';
+import { ChimplanetFloor } from '@/common/icons';
+import { FallbackFetching } from '../FallbackFetching';
 
 /**
  * @typedef {Object} JobOfferSectionProps
@@ -65,7 +67,7 @@ export default function JobOfferSection({
         nextPage={nextPage}
         prevPage={prevPage}
       />
-      <ErrorBoundary fallback={<Fallback />}>
+      <ErrorBoundary fallback={<FallbackFetching />}>
         <Suspense fallback={<JobSelectionSkeleton />}>
           <JobOfferSectionContent
             queryKey={queryKey}

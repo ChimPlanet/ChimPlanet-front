@@ -1,8 +1,11 @@
-import { JOB_PATH, SEARCH_PATH } from '@/constants/route';
+import { JOB_PATH, NOTFOUND_PATH, SEARCH_PATH } from '@/constants/route';
 
 export const hideHeaderMenubar = (screenType, pathname) => {
   if (screenType === 'desktop') {
     return false;
+  }
+  if (screenType === 'mobile' && pathname === NOTFOUND_PATH) {
+    return true;
   }
 
   return pathname.startsWith(JOB_PATH);

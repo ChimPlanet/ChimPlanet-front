@@ -17,6 +17,7 @@ import {
   enableAlternativeMenu,
   hideHeaderMenubar,
 } from '@/components/AlternativeHeader';
+import { ERROR_PATH } from '@/constants/route';
 
 export default function Header() {
   const { pathname } = useLocation();
