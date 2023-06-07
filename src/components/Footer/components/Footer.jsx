@@ -1,4 +1,3 @@
-import React from 'react';
 import { styled } from 'chimplanet-ui';
 import {
   ChimplanetIcon,
@@ -23,13 +22,13 @@ function Footer() {
             <HeaderMenu>
               <div>
                 <HeaderAnchor
-                  href="https://foremost-chess-96d.notion.site/e50cee7fab8a4601987566903301bbeb"
+                  href="https://www.notion.so/1cdd81d2d15a486eaab1a5a17100da47?pvs=4"
                   target="_blank"
                 >
                   제작자
                 </HeaderAnchor>
                 <HeaderAnchor
-                  href="https://foremost-chess-96d.notion.site/e50cee7fab8a4601987566903301bbeb"
+                  href="https://www.notion.so/993b53e505304ce2a5db37de29d2a3b9?pvs=4"
                   target="_blank"
                 >
                   이용약관

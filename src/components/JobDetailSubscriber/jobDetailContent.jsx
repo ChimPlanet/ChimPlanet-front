@@ -1,19 +1,19 @@
-import { useMemo, useEffect, useState } from 'react';
 import { styled, useScreenType } from 'chimplanet-ui';
+import { useEffect, useMemo, useState } from 'react';
 
 import { useJobOfferDetail } from '@/query/offer';
 import { Offer } from '@/service/offer';
 import JobDetailHeader from './jobDetailHeader';
 
-import {
-  stringToDom,
-  getAllImgElementsFromDom,
-  adaptImagesNoRefererPolicy,
-  adaptImageClickListener,
-  adaptJavascriptData,
-} from './util';
 import PurifyHtml from '@/common/components/PurifyHtml';
 import JobImageModal from './JobImageModal';
+import {
+  adaptImageClickListener,
+  adaptImagesNoRefererPolicy,
+  adaptJavascriptData,
+  getAllImgElementsFromDom,
+  stringToDom,
+} from './util';
 
 /** @param {{offer: Offer}} */
 export default function JobDetailContent({ offer, handelProfile, close }) {
@@ -45,7 +45,11 @@ export default function JobDetailContent({ offer, handelProfile, close }) {
 
   if (isError) {
     if (error?.response?.status === 401) {
-      if (confirm('권한이 필요한 게시글입니다. 원문으로 보시겠습니까?')) {
+      if (
+        confirm(
+          '삭제되었거나 권한이 필요한 게시글입니다. 원문으로 보시겠습니까?',
+        )
+      ) {
         window.open(`https://cafe.naver.com/steamindiegame/${offer.id}`);
       }
     }

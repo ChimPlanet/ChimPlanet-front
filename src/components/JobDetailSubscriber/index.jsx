@@ -1,20 +1,20 @@
-import { Suspense, useEffect, useState } from 'react';
-import { styled, Loading, useScreenType, useTheme } from 'chimplanet-ui';
+import { Loading, styled, useScreenType, useTheme } from 'chimplanet-ui';
 import { ChevronLeft, MoreHorizontal } from 'chimplanet-ui/icons';
+import { Suspense, useEffect, useState } from 'react';
 
 import { useArticleContext } from '@/context/articleContext';
 import { Modal } from '@mui/material';
+import JobDetailContent from './jobDetailContent';
 import JobDetailMenuBar from './jobDetailMenuBar';
 import JobDetailMobileMenuBar from './jobDetailMobileMenuBar';
-import JobDetailContent from './jobDetailContent';
 
 import { styled as muiStyled } from '@mui/material/styles';
 
-import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 import useBookmark from '@/hooks/useBookmark';
+import { BookmarkContext } from '@/utils/Context/bookmarkContext';
 
-import '@/styles/naver-se.css';
 import useModalGoBack from '@/hooks/useModalGoBack';
+import '@/styles/naver-se.css';
 
 export default function JobDetailSubscriber() {
   const [article, { close }] = useArticleContext();

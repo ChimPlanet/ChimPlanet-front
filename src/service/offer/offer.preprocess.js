@@ -5,7 +5,12 @@ export function number(value) {
 }
 
 export function title(title) {
-  return title.replace(UselessWordsRegex, '');
+  return title
+    .replace(UselessWordsRegex, '')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
 }
 
 export function date(value) {
@@ -23,9 +28,7 @@ export function thumbnailURL(value) {
 }
 
 export function profileImageUrl(value) {
-  return typeof value === 'string'
-    ? value
-    : value;
+  return typeof value === 'string' ? value : value;
 }
 
 export function isThumbnail(value) {

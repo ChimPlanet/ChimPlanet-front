@@ -23,6 +23,7 @@ export default function JobImageModal({ open, close, src }) {
       <Content>
         <Image referrerPolicy="no-referrer" src={src} alt={src} />
         <OpenSourceLink
+          rel="noreferrer"
           referrerPolicy="no-referrer"
           href={src ?? ''}
           target="_blank"

@@ -1,5 +1,5 @@
-import { useJobViewContext } from '../JobViewContext';
 import { styled } from 'chimplanet-ui';
+import { useJobViewContext } from '../JobViewContext';
 
 export default function JobViewHeaderCondition({ reverse }) {
   const [context, dispatch] = useJobViewContext();
@@ -62,6 +62,7 @@ const Items = styled.button`
       ${`
         &[data-selected='true'] {
           color: ${theme.textColors.primary};
+          border-bottom: none;
         }
       `};
   `}

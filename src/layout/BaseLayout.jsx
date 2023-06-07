@@ -1,11 +1,11 @@
-import React, { Suspense, useMemo } from 'react';
+import { Suspense, useMemo } from 'react';
 
 import {
-  styled,
-  useScreenType,
   Banner,
-  useLocation,
   Loading,
+  styled,
+  useLocation,
+  useScreenType,
 } from 'chimplanet-ui';
 
 import { usePreloadContext } from '@/context/preloadContext';
@@ -14,18 +14,32 @@ import {
   getBannerByType,
 } from '@/service/banner/banner-utils';
 
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
 import { Centering } from '@/common/components/Centering';
-import { ERROR_PATH, HOME_PATH, OFFICIAL_PATH } from '@/constants/route';
+import { Footer } from '@/components/Footer';
+import { Header } from '@/components/Header';
 import DesktopThemeChangeButton from '@/components/ThemeChangeButton';
+import {
+  ARTICLE_PATH,
+  BOOKMARK_PATH,
+  ERROR_PATH,
+  JOB_PATH,
+  NOTFOUND_PATH,
+  SEARCH_PATH,
+} from '@/constants/route';
+
+const invalidPaths = [
+  ERROR_PATH,
+  SEARCH_PATH,
+  NOTFOUND_PATH,
+  ARTICLE_PATH,
+  JOB_PATH,
+  BOOKMARK_PATH,
+];
 
 export default function BaseLayout({ children }) {
   const sizeType = useScreenType();
   const { pathname } = useLocation();
   const { banners } = usePreloadContext();
-
-  const validPaths = [HOME_PATH, OFFICIAL_PATH];
 
   const mainBanners = useMemo(
     () =>
@@ -42,9 +56,9 @@ export default function BaseLayout({ children }) {
   return (
     <>
       {pathname !== ERROR_PATH && <Header />}
-      {validPaths.includes(pathname) && banners && (
+      {!invalidPaths.includes(pathname) && banners ? (
         <BannerWrapper children={<Banner banners={mainBanners} />} />
-      )}
+      ) : null}
 
       <Centering
         styles={{
