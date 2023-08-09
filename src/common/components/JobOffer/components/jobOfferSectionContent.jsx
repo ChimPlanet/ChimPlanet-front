@@ -1,16 +1,17 @@
-import { useEffect, useLayoutEffect, useMemo } from 'react';
 import {
+  JobOfferMapContent,
   PropTypes,
   styled,
-  JobOfferMapContent,
   useScreenType,
 } from 'chimplanet-ui';
+import { useEffect, useLayoutEffect, useMemo } from 'react';
 
 import { useJobOfferFromDynamic } from '@/query/offer';
 import { prefetchImages } from '@/utils';
 
 import { useArticleContext } from '@/context/articleContext';
 import useBookmark from '@/hooks/useBookmark';
+import { FallbackFetching } from '../../FallbackFetching';
 
 /**
  * @typedef {Object} JobOfferSectionContentProps
@@ -66,15 +67,19 @@ export default function JobOfferSectionContent({
       gap={layoutConfig.columnGap}
       vertical={screenType === 'mobile'}
     >
-      <JobOfferMapContent
-        jobs={offers}
-        offerWidth={layoutConfig.width}
-        isBookmarked={is}
-        direction={screenType !== 'mobile' ? 'column' : 'row'}
-        rowLayoutConfig={defaultRowLayoutConfig}
-        onClick={open}
-        onBookmarkClick={toggle}
-      />
+      {offers && offers.length === 0 ? (
+        <FallbackFetching label="데이터가 없습니다." />
+      ) : (
+        <JobOfferMapContent
+          jobs={offers}
+          offerWidth={layoutConfig.width}
+          isBookmarked={is}
+          direction={screenType !== 'mobile' ? 'column' : 'row'}
+          rowLayoutConfig={defaultRowLayoutConfig}
+          onClick={open}
+          onBookmarkClick={toggle}
+        />
+      )}
     </Container>
   );
 }
@@ -114,6 +119,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: ${({ vertical }) => (!vertical ? 'row' : 'column')};
   gap: ${(p) => `${p.gap}px`};
+  min-width: 100%;
   width: fit-content;
   transform: ${(p) => `translate3d(${p.moveX}px, 0px, 0px)`};
   transition: transform 0.2s ease-in-out;
