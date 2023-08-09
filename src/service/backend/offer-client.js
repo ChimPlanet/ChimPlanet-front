@@ -1,7 +1,7 @@
-import { select } from 'useful-decorator';
-import { Offer, OfferContent } from '@/service/offer';
-import HttpClient from './http-client';
 import mock_job_offers from '@/__mocks__/mock_job_offers';
+import { Offer, OfferContent } from '@/service/offer';
+import { select } from 'useful-decorator';
+import HttpClient from './http-client';
 
 class OfferClient extends HttpClient {
   constructor() {
@@ -9,24 +9,24 @@ class OfferClient extends HttpClient {
   }
 
   async basic(id, size, page, sort, isEnd, value) {
-    if(isEnd === 'ALL'){
-      if(value === null){
+    if (isEnd === 'ALL') {
+      if (value === null) {
         return await this.post(
-          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}`
+          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}`,
         );
-      }else{
+      } else {
         return await this.post(
-          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}&lastInputValue=${value}`
+          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}&lastInputValue=${value}`,
         );
       }
-    }else{
-      if(value === null){
+    } else {
+      if (value === null) {
         return await this.post(
-          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}&isEnd=${isEnd}`
+          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}&isEnd=${isEnd}`,
         );
-      }else{
+      } else {
         return await this.post(
-          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}&isEnd=${isEnd}&lastInputValue=${value}`
+          `?lastArticleId=${id}&size=${size}&page=${page}&sort=${sort}&isEnd=${isEnd}&lastInputValue=${value}`,
         );
       }
     }
@@ -44,11 +44,6 @@ class OfferClient extends HttpClient {
 
   @select(typeOfferArray)
   async event() {
-    return mock_job_offers;
-  }
-
-  @select(typeOfferArray)
-  async official() {
     return mock_job_offers;
   }
 
@@ -80,7 +75,7 @@ class OfferClient extends HttpClient {
   }
 }
 
-function typeOfferArray(values) {
+export function typeOfferArray(values) {
   return values.map(Offer);
 }
 
