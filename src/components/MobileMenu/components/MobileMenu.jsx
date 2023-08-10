@@ -1,9 +1,9 @@
+import { Divider } from '@mui/material';
 import { BookmarkButton, Link, styled } from 'chimplanet-ui';
 import { X } from 'chimplanet-ui/icons';
-import { Divider } from '@mui/material';
 
+import { OFFICIAL_PATH } from '@/constants/route';
 import CategoryLinkAccordion from './CategoryLinkAccordion';
-import { EVENT_PATH, OFFICIAL_PATH } from '@/constants/route';
 import MobileThemeChangeButton from './MobileThemeChangeButton';
 
 export default function MobileMenu({ close }) {
@@ -19,8 +19,8 @@ export default function MobileMenu({ close }) {
         <CategoryLinkAccordion close={close} />
       </CategoryLinkAccordionWrap>
       <Footer>
-        <Divider />
-        <Anchor to={EVENT_PATH}>이벤트</Anchor>
+        {/* <Divider /> */}
+        {/* <Anchor to={EVENT_PATH}>이벤트</Anchor> */}
         <Divider />
         <Anchor to={OFFICIAL_PATH}>공식</Anchor>
         <Divider />
