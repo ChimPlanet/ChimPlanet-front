@@ -5,7 +5,7 @@ import InvalidSearch from '@/components/Search/InvalidSearch';
 import SearchResult from '@/components/Search/SearchResult';
 import { getSearchMetadata } from '@/utils';
 
-export default function Search() {
+export const Search = () => {
   const location = useLocation();
 
   const metadata = useMemo(() => {
@@ -22,7 +22,7 @@ export default function Search() {
       )}
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   margin-top: 30px;

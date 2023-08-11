@@ -2,14 +2,14 @@ import { styled } from '@chimplanet/ui';
 
 import BookmarkSection from '@/components/BookmarkSection';
 
-export default function Bookmark() {
+export const Bookmark = () => {
   return (
     <Container>
       <Header>북마크</Header>
       <BookmarkSection />
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   margin: 0 auto;

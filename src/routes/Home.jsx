@@ -5,7 +5,7 @@ import PopularSection from '@/components/Home/Sections/PopularSection';
 import RecentSection from '@/components/Home/Sections/RecentSection';
 import SubBanner from '@/components/Home/SubBanner';
 
-export default function Home() {
+export const Home = () => {
   return (
     <Content>
       <OfficialSection />
@@ -14,7 +14,7 @@ export default function Home() {
       <RecentSection />
     </Content>
   );
-}
+};
 
 const Content = styled.div`
   margin: 0 auto;

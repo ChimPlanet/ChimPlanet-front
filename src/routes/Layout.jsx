@@ -1,8 +1,11 @@
 import { Suspense, useMemo } from 'react';
 
+import '../styles/layout.scss';
+
 import {
   Banner,
   Loading,
+  Outlet,
   styled,
   useLocation,
   useScreenType,
@@ -17,6 +20,7 @@ import {
 import { Centering } from '@/common/components/Centering';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
+import JobDetailSubscriber from '@/components/JobDetailSubscriber';
 import DesktopThemeChangeButton from '@/components/ThemeChangeButton';
 import {
   ARTICLE_PATH,
@@ -36,7 +40,7 @@ const invalidPaths = [
   BOOKMARK_PATH,
 ];
 
-export default function BaseLayout({ children }) {
+export default function Layout({ children }) {
   const sizeType = useScreenType();
   const { pathname } = useLocation();
   const { banners } = usePreloadContext();
@@ -54,7 +58,7 @@ export default function BaseLayout({ children }) {
   );
 
   return (
-    <>
+    <Container>
       {pathname !== ERROR_PATH && <Header />}
       {!invalidPaths.includes(pathname) && banners ? (
         <BannerWrapper children={<Banner banners={mainBanners} />} />
@@ -66,13 +70,23 @@ export default function BaseLayout({ children }) {
           default: `padding-bottom: ${Footer.defaultHeight}px;`,
         }}
       >
-        <Suspense fallback={<Loading />}>{children}</Suspense>
+        <Suspense fallback={<Loading />}>
+          <Outlet />
+        </Suspense>
       </Centering>
+      <JobDetailSubscriber />
       {pathname !== ERROR_PATH && <Footer />}
       {sizeType === 'desktop' ? <DesktopThemeChangeButton /> : null}
-    </>
+    </Container>
   );
 }
+
+const Container = styled.main`
+  position: relative;
+  min-height: 100%;
+  color: ${({ theme }) => theme.textColors.primary};
+  background-color: ${({ theme }) => theme.bgColors.primary};
+`;
 
 const BannerWrapper = styled.div`
   margin: 30px 0px;

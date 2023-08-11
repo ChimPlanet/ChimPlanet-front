@@ -2,7 +2,7 @@ import { Chimplanet500 } from '@/common/icons';
 import { HOME_PATH } from '@/constants/route';
 import { styled } from '@chimplanet/ui';
 
-export default function Error() {
+export const Error = () => {
   const handleRefresh = () => {
     window.location.href = HOME_PATH;
   };
@@ -23,7 +23,7 @@ export default function Error() {
       </Content>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   display: flex;

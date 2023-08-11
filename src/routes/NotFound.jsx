@@ -4,7 +4,7 @@ import { Chimplanet404 } from '@/common/icons';
 import { HOME_PATH, NOTFOUND_PATH } from '@/constants/route';
 import { useEffect } from 'react';
 
-export default function NotFound() {
+export const NotFound = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function NotFound() {
       </Icon>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   --header-size: 121px;

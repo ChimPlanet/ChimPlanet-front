@@ -3,7 +3,7 @@ import SubBanner from '@/components/Home/SubBanner';
 import { styled } from '@chimplanet/ui';
 //import IsegyeSection from '@/components/Home/Sections/IsegyeSection';
 
-export default function Official() {
+export const Official = () => {
   return (
     <Container>
       <SubBanner />
@@ -14,7 +14,7 @@ export default function Official() {
       */}
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   margin: 0 auto;

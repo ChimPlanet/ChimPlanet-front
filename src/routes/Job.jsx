@@ -6,7 +6,7 @@ import { Offer } from '@/service/offer';
 import { styled } from '@chimplanet/ui';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-export default function Job({ parId }) {
+export const Job = ({ parId }) => {
   //게시글 리스트
   const [dataList, setDataList] = useState([]);
   const [offerList, setOfferList] = useState([]);
@@ -128,7 +128,7 @@ export default function Job({ parId }) {
       />
     </Container>
   );
-}
+};
 
 const Container = styled.section`
   margin: 0 auto;
