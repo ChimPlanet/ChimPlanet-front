@@ -52,13 +52,17 @@ const Container = styled.a`
   ${({ theme }) => theme.media.tablet`
     ${`
       width: ${theme.widths.tablet}px;
-      height: 103px;
+      height: auto;
+
+      aspect-ratio: 370 / 43;
     `}
   `}
   ${({ theme }) => theme.media.mobile`
     ${`
       width: 350px;
-      height: 87px;
+      height: auto;
+
+      aspect-ratio: 370 / 43;
     `}
   `};
 `;
