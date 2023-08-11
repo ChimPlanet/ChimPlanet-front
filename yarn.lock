@@ -1218,9 +1218,9 @@
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
 "@chimplanet/ui@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@chimplanet/ui/-/ui-1.0.2.tgz#a19884a24d16949e3723eb98a06d435ea01564a2"
-  integrity sha512-VhTaVkPxejauobHh2tgcCk3E3gMiDQ0QxRq6zoY/mkJQDQk+g7cchAXS4Dh1uQvrCXy5Vo1ZMJ9WkKm88vRWLA==
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@chimplanet/ui/-/ui-1.1.0.tgz#94a8431bbf06a2440cfee694fdf572c3ec3a5c51"
+  integrity sha512-N5EyKoY4ihQWdQDFbXiHS8LHo3xcaqvPW6pctXUvntYoA8Hih1GhH+F6Q8b/TWAcFxHxZDHAtpG7DYao9ecCqg==
   dependencies:
     prop-types "^15.8.1"
     react "^18.2.0"
