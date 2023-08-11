@@ -1,4 +1,4 @@
-import { styled, useThemeMode, useThemeUpdater } from 'chimplanet-ui';
+import { styled, useThemeMode, useThemeUpdater } from '@chimplanet/ui';
 
 import { styled as muiStyled } from '@mui/material/styles';
 import MUISwitch from '@mui/material/Switch';

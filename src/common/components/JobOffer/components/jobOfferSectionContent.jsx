@@ -3,7 +3,7 @@ import {
   PropTypes,
   styled,
   useScreenType,
-} from 'chimplanet-ui';
+} from '@chimplanet/ui';
 import { useEffect, useLayoutEffect, useMemo } from 'react';
 
 import { useJobOfferFromDynamic } from '@/query/offer';
@@ -92,13 +92,13 @@ JobOfferSectionContent.propTypes = {
 function offerThumbnailPropertyGetter(offer) {
   return offer.thumbnailURL;
 }
-/** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
+/** @type {import('@chimplanet/ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
 const defaultRowLayoutConfig = {
   height: 120,
   gap: 20,
 };
 
-/** @type {{ [K in import('chimplanet-ui').ScreenType]: { columnGap: number, width: number | string } }} */
+/** @type {{ [K in import('@chimplanet/ui').ScreenType]: { columnGap: number, width: number | string } }} */
 const OfferLayoutConfig = {
   desktop: {
     columnGap: 20,

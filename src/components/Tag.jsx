@@ -1,4 +1,4 @@
-import { PropTypes, styled } from 'chimplanet-ui';
+import { PropTypes, styled } from '@chimplanet/ui';
 
 import CloseIcon from '@/common/icons/CloseIcon';
 

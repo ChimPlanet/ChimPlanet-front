@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 
-import { Loading, ErrorBoundary } from 'chimplanet-ui';
 import { ERROR_PATH } from '@/constants/route';
+import { ErrorBoundary, Loading } from '@chimplanet/ui';
 /**
  * Suspend, ErrorBoundary 복합체
  * @param {{ children: React.ReactNode }}

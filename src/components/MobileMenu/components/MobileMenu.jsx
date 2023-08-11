@@ -1,6 +1,6 @@
+import { BookmarkButton, Link, styled } from '@chimplanet/ui';
+import { X } from '@chimplanet/ui/icons';
 import { Divider } from '@mui/material';
-import { BookmarkButton, Link, styled } from 'chimplanet-ui';
-import { X } from 'chimplanet-ui/icons';
 
 import { OFFICIAL_PATH } from '@/constants/route';
 import CategoryLinkAccordion from './CategoryLinkAccordion';

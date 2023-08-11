@@ -1,7 +1,5 @@
-import React from 'react';
-
-import { styled } from 'chimplanet-ui';
 import { ChimplanetNotFoundIcon } from '@/common/icons';
+import { styled } from '@chimplanet/ui';
 
 export default function JobViewContentNotFound() {
   return (

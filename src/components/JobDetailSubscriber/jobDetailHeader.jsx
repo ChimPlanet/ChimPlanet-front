@@ -1,4 +1,4 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 
 export default function JobDetailHeader({ title, status, date, views }) {
   return (

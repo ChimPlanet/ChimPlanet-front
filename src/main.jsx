@@ -1,6 +1,6 @@
 import RootBoundary from '@/pages/RootBoundary';
 import queryClient, { QueryClientProvider } from '@/query';
-import { BrowserRouter as RootRouter } from 'chimplanet-ui';
+import { BrowserRouter as RootRouter } from '@chimplanet/ui';
 import ReactDOM from 'react-dom/client';
 import { RecoilRoot } from 'recoil';
 import App from './App';

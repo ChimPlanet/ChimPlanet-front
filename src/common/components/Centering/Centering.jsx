@@ -1,4 +1,4 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 
 const defaultStyles = {
   mobile: '',

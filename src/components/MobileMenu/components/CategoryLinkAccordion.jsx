@@ -1,14 +1,14 @@
-import { Link, styled, useCurrentTheme } from 'chimplanet-ui';
+import { Link, styled, useCurrentTheme } from '@chimplanet/ui';
 
 import { usePreloadContext } from '@/context/preloadContext';
-import { useMemo, useState } from 'react';
 import { getFamilyTree } from '@/utils';
+import { useMemo, useState } from 'react';
 
-import { styled as mStyled } from '@mui/material/styles';
+import { ChevronDown } from '@chimplanet/ui/icons';
 import MuiAccordion from '@mui/material/Accordion';
-import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
-import { ChevronDown } from 'chimplanet-ui/icons';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import { styled as mStyled } from '@mui/material/styles';
 
 export default function CategoryLinkAccordion({ close }) {
   const [expandedId, setExpandedId] = useState(null);

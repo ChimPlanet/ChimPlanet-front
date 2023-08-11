@@ -1,4 +1,4 @@
-import { PropTypes, styled, Link } from 'chimplanet-ui';
+import { Link, PropTypes, styled } from '@chimplanet/ui';
 
 import { SectionLeftIcon, SectionRightIcon } from '@/common/icons';
 

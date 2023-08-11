@@ -1,5 +1,5 @@
-import { Loading, styled, useScreenType, useTheme } from 'chimplanet-ui';
-import { ChevronLeft, MoreHorizontal } from 'chimplanet-ui/icons';
+import { Loading, styled, useScreenType, useTheme } from '@chimplanet/ui';
+import { ChevronLeft, MoreHorizontal } from '@chimplanet/ui/icons';
 import { Suspense, useEffect, useState } from 'react';
 
 import { useArticleContext } from '@/context/articleContext';

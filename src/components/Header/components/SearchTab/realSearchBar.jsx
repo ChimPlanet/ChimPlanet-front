@@ -1,10 +1,10 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 import { useLayoutEffect, useRef } from 'react';
 
-import useSearchInput from '../../hooks/useSearchInput';
+import { Search } from '@chimplanet/ui/icons';
 import { useSearchContext } from '../../context/searchContext';
+import useSearchInput from '../../hooks/useSearchInput';
 import RealSearchTagList from './realSearchTagList';
-import { Search } from 'chimplanet-ui/icons';
 
 /**
  *

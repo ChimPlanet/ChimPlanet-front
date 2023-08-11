@@ -1,4 +1,4 @@
-import { styled, useScreenType } from 'chimplanet-ui';
+import { styled, useScreenType } from '@chimplanet/ui';
 import { useEffect, useMemo, useState } from 'react';
 
 import { useJobOfferDetail } from '@/query/offer';

@@ -1,5 +1,5 @@
-import { styled, useThemeMode, useThemeUpdater } from 'chimplanet-ui';
 import { MoonIcon, SunIcon } from '@/common/icons';
+import { styled, useThemeMode, useThemeUpdater } from '@chimplanet/ui';
 
 export default function DesktopThemeChangeButton() {
   const themeMode = useThemeMode();

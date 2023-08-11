@@ -1,4 +1,4 @@
-import { Link, styled, useNavigate } from 'chimplanet-ui';
+import { Link, styled, useNavigate } from '@chimplanet/ui';
 
 import { Chimplanet404 } from '@/common/icons';
 import { HOME_PATH, NOTFOUND_PATH } from '@/constants/route';

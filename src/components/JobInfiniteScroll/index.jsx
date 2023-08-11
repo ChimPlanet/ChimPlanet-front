@@ -1,14 +1,13 @@
-import { useMemo, useRef, useEffect } from 'react';
 import {
   JobOfferMapContent,
-  styled,
   Loading,
+  styled,
   useScreenType,
-} from 'chimplanet-ui';
+} from '@chimplanet/ui';
+import { useEffect, useMemo, useRef } from 'react';
 
-import { OfferColumnMap, OfferWidthMap } from '@/utils/offerSizeMap';
-import useBookmark from '@/hooks/useBookmark';
 import { useArticleContext } from '@/context/articleContext';
+import useBookmark from '@/hooks/useBookmark';
 
 export default function JobInfiniteScroll({ List, getMoreItem, last }) {
   const target = useRef();

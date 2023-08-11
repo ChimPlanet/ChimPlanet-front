@@ -1,7 +1,7 @@
-import { styled, FloatingMenu } from 'chimplanet-ui';
-import { useEffect, useRef, useState } from 'react';
-import { useJobViewContext } from '../JobViewContext';
 import { ArrowBelowSmallIcon } from '@/common/icons';
+import { FloatingMenu, styled } from '@chimplanet/ui';
+import { useRef, useState } from 'react';
+import { useJobViewContext } from '../JobViewContext';
 
 const MenuWidth = 100;
 

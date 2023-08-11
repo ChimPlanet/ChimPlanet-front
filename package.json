@@ -16,11 +16,11 @@
     "styled-components": "5.3.10"
   },
   "dependencies": {
+    "@chimplanet/ui": "^1.0.2",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@mui/material": "^5.11.10",
     "axios": "^1.3.3",
-    "chimplanet-ui": "git+https://github.com/ChimPlanet/chimplanet-ui.git",
     "hangul-js": "^0.2.6",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",

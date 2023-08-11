@@ -1,4 +1,4 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 import { useSearchContext } from '../../context/searchContext';
 
 import RecommendTagSection from './recommendTagSection';

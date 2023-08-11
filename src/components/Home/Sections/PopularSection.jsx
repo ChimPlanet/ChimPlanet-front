@@ -1,7 +1,7 @@
 import { JobOfferSection } from '@/common/components/JobOffer';
-import { useScreenType } from 'chimplanet-ui';
-import backend from '@/service/backend';
 import { POPULAR_PATH } from '@/constants/route';
+import backend from '@/service/backend';
+import { useScreenType } from '@chimplanet/ui';
 
 export default function PopularSection() {
   const sizeType = useScreenType();

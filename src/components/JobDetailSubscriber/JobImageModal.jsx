@@ -1,4 +1,4 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 
 import { Modal } from '@mui/material';
 

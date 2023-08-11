@@ -6,7 +6,7 @@ import {
 } from '@/components/JobTable';
 import { useJobOfferFromDynamic } from '@/query/offer';
 import backend from '@/service/backend';
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 import { useEffect } from 'react';
 
 export const Popular = wrapJobTableContext(() => {

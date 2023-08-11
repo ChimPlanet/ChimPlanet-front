@@ -1,6 +1,6 @@
-import { Link, styled } from 'chimplanet-ui';
+import { Link, styled } from '@chimplanet/ui';
 
-import { ChevronRight } from 'chimplanet-ui/icons';
+import { ChevronRight } from '@chimplanet/ui/icons';
 
 export default function LinkFooter({ href, text }) {
   return (

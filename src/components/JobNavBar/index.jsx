@@ -1,6 +1,6 @@
+import { styled, useScreenType, useTheme } from '@chimplanet/ui';
+import { ChevronDown } from '@chimplanet/ui/icons';
 import { useMemo } from 'react';
-import { styled, useScreenType, useTheme } from 'chimplanet-ui';
-import { ChevronDown } from 'chimplanet-ui/icons';
 
 export default function JobNavBar({
   total,
@@ -174,7 +174,7 @@ const Sort = styled.div`
       ? `1px solid ${theme.borderColors.quaternary}`
       : '0'};
   border-radius: 4px;
-  padding: 8px 8px 8px 14px ;
+  padding: 8px 8px 8px 14px;
   appearance: none;
 `;
 
@@ -196,12 +196,11 @@ const Option = styled.div`
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
   color: ${({ color }) => color};
 
-  &:first-child{
-    border-radius: 4px 4px 0 0 ;
+  &:first-child {
+    border-radius: 4px 4px 0 0;
   }
 
-  &:last-child{
+  &:last-child {
     border-radius: 0 0 4px 4px;
   }
-
 `;

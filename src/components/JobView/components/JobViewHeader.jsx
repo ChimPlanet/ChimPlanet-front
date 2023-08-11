@@ -1,8 +1,8 @@
 import JobViewHeaderCondition from './JobViewHeaderCondition';
-import JobViewHeaderQuery from './JobViewHeaderQuery';
 import JobViewHeaderOrderByButton from './JobViewHeaderOrderByButton';
+import JobViewHeaderQuery from './JobViewHeaderQuery';
 
-import { styled, useScreenType } from 'chimplanet-ui';
+import { styled, useScreenType } from '@chimplanet/ui';
 import { Divider } from '@mui/material';
 
 export default function JobViewHeader() {

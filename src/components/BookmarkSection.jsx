@@ -2,13 +2,12 @@ import {
   JobOfferMapContent,
   ResizableGrid,
   useScreenType,
-} from 'chimplanet-ui';
+} from '@chimplanet/ui';
 
-import { BookmarkContext } from '@/utils/Context/bookmarkContext';
-import { useMemo } from 'react';
-import { Offer } from '@/service/offer';
 import { useArticleContext } from '@/context/articleContext';
 import useBookmark from '@/hooks/useBookmark';
+import { Offer } from '@/service/offer';
+import { useMemo } from 'react';
 
 export default function BookmarkSection() {
   const screenType = useScreenType();
@@ -36,7 +35,7 @@ export default function BookmarkSection() {
     </ResizableGrid>
   );
 }
-/** @param {import('chimplanet-ui').ScreenType} */
+/** @param {import('@chimplanet/ui').ScreenType} */
 function calcColumns(screenType) {
   switch (screenType) {
     case 'desktop':

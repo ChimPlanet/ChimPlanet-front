@@ -1,5 +1,5 @@
+import { useScreenType } from '@chimplanet/ui';
 import { useLayoutEffect, useReducer } from 'react';
-import { useScreenType } from 'chimplanet-ui';
 
 // 훅 기본값
 const INITIAL = Object.freeze({

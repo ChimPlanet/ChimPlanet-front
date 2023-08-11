@@ -1,7 +1,6 @@
 import { Chimplanet500 } from '@/common/icons';
 import { HOME_PATH } from '@/constants/route';
-import { styled } from 'chimplanet-ui';
-import React from 'react';
+import { styled } from '@chimplanet/ui';
 
 export default function Error() {
   const handleRefresh = () => {

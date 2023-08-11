@@ -6,7 +6,7 @@ import {
   styled,
   useLocation,
   useScreenType,
-} from 'chimplanet-ui';
+} from '@chimplanet/ui';
 
 import { usePreloadContext } from '@/context/preloadContext';
 import {

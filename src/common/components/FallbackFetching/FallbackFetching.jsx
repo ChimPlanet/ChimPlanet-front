@@ -1,5 +1,5 @@
 import { ChimplanetFloor } from '@/common/icons';
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 
 export const FallbackFetching = ({
   label = '오류! 데이터를 가져올 수 없습니다.',

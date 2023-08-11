@@ -1,14 +1,14 @@
-import { useMemo } from 'react';
 import {
   JobOfferMapContent,
   Loading,
   ResizableGrid,
   useScreenType,
-} from 'chimplanet-ui';
+} from '@chimplanet/ui';
+import { useMemo } from 'react';
 
-import { useJobViewContext } from '../JobViewContext';
 import { useArticleContext } from '@/context/articleContext';
 import useBookmark from '@/hooks/useBookmark';
+import { useJobViewContext } from '../JobViewContext';
 import JobViewContentNotFound from './JobViewContentNotFound';
 
 export default function JobViewContent() {
@@ -64,7 +64,7 @@ const OfferConfig = {
     direction: 'column',
     gap: 30,
     rowGap: 40,
-    /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
+    /** @type {import('@chimplanet/ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
     rowConfig: {
       height: 120,
       gap: 20,
@@ -72,7 +72,7 @@ const OfferConfig = {
   },
 };
 
-/** @param {import('chimplanet-ui').ScreenType} */
+/** @param {import('@chimplanet/ui').ScreenType} */
 function calcColumns(screenType) {
   switch (screenType) {
     case 'desktop':

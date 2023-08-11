@@ -1,8 +1,8 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 
 import useHistory from '@/hooks/useHistory';
-import HistoryList from './historyList';
 import { useSearchContext } from '../../../context/searchContext';
+import HistoryList from './historyList';
 
 export default function History() {
   const [, { addTag, setInput }] = useSearchContext();

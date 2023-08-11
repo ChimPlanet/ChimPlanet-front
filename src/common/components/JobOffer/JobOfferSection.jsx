@@ -1,21 +1,18 @@
 import {
+  ErrorBoundary,
   PropTypes,
   styled,
-  Link,
   useScreenType,
-  ErrorBoundary,
-  Fallback,
-} from 'chimplanet-ui';
+} from '@chimplanet/ui';
 import { Suspense, useCallback } from 'react';
 
-import JobOfferSectionContent from './components/jobOfferSectionContent';
-import JobOfferSectionHeader from './components/jobOfferSectionHeader';
 import useJobSection from '@/common/components/JobOffer/hooks/useJobSection';
 import JobSelectionSkeleton from '@/components/Skeletons/JobSectionSkeleton';
+import JobOfferSectionContent from './components/jobOfferSectionContent';
+import JobOfferSectionHeader from './components/jobOfferSectionHeader';
 
-import { LinkFooter } from '../LinkFooter';
-import { ChimplanetFloor } from '@/common/icons';
 import { FallbackFetching } from '../FallbackFetching';
+import { LinkFooter } from '../LinkFooter';
 
 /**
  * @typedef {Object} JobOfferSectionProps

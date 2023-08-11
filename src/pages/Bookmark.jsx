@@ -1,4 +1,4 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 
 import BookmarkSection from '@/components/BookmarkSection';
 

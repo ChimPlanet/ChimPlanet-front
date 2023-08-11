@@ -5,7 +5,7 @@ import {
   PropTypes,
   ScreenTypeProvider,
   useLocation,
-} from 'chimplanet-ui';
+} from '@chimplanet/ui';
 import { ArticleProvider } from './articleContext';
 
 /**

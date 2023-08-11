@@ -1,11 +1,11 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 import {
   ChimplanetIcon,
   InstagramIcon,
   NaverCafeIcon,
   TwitchIcon,
   YoutubeIcon,
-} from 'chimplanet-ui/icons';
+} from '@chimplanet/ui/icons';
 
 const defaultHeight = 141;
 const mobileHeight = 228;

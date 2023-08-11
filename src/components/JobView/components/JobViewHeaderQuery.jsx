@@ -1,7 +1,7 @@
-import { styled, useNavigate } from 'chimplanet-ui';
-import { useJobViewContext } from '../JobViewContext';
 import Tag from '@/components/Tag';
 import { SearchTagSequenceColor } from '@/constants/color';
+import { styled, useNavigate } from '@chimplanet/ui';
+import { useJobViewContext } from '../JobViewContext';
 
 export default function JobViewHeaderQuery() {
   const [context] = useJobViewContext();

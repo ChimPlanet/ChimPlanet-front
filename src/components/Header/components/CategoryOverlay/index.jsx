@@ -1,11 +1,11 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 import { useMemo, useState } from 'react';
 
 import { getFamilyTree } from '@/utils';
 
-import ParentCategoryColumn from './parentCategoryColumn';
-import ChildCategoryColumn from './childCategoryColumn';
 import { usePreloadContext } from '@/context/preloadContext';
+import ChildCategoryColumn from './childCategoryColumn';
+import ParentCategoryColumn from './parentCategoryColumn';
 
 /**
  * @param {{close():void}}

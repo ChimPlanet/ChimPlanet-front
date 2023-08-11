@@ -1,5 +1,5 @@
+import { styled } from '@chimplanet/ui';
 import { useJobTableContext } from '../contexts/table';
-import { styled } from 'chimplanet-ui';
 
 export default function JobTableHeaderCondition({ reverse }) {
   const [context, dispatch] = useJobTableContext();

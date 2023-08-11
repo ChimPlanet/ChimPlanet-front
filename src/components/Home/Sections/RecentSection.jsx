@@ -1,19 +1,19 @@
-import { Suspense, useMemo } from 'react';
 import {
-  styled,
-  Loading,
-  useScreenType,
   ErrorBoundary,
   JobOfferMapContent,
-} from 'chimplanet-ui';
+  Loading,
+  styled,
+  useScreenType,
+} from '@chimplanet/ui';
+import { Suspense, useMemo } from 'react';
 
-import { useRecentOffers } from '@/query/offer';
-import useBookmark from '@/hooks/useBookmark';
-import { useArticleContext } from '@/context/articleContext';
-import { JOB_PATH } from '@/constants/route';
-import { LinkFooter } from '@/common/components/LinkFooter';
-import MoreOfferButton from '../MoreOfferButton';
 import { FallbackFetching } from '@/common/components/FallbackFetching';
+import { LinkFooter } from '@/common/components/LinkFooter';
+import { JOB_PATH } from '@/constants/route';
+import { useArticleContext } from '@/context/articleContext';
+import useBookmark from '@/hooks/useBookmark';
+import { useRecentOffers } from '@/query/offer';
+import MoreOfferButton from '../MoreOfferButton';
 
 export default function RecentSection() {
   return (
@@ -77,7 +77,7 @@ const OfferConfig = {
     width: '100%',
     itemEnd: 6,
     direction: 'row',
-    /** @type {import('chimplanet-ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
+    /** @type {import('@chimplanet/ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
     rowConfig: {
       height: 120,
       gap: 20,

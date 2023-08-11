@@ -1,7 +1,7 @@
-import { Link, styled } from 'chimplanet-ui';
+import { Link, styled } from '@chimplanet/ui';
 
 import { JOB_PATH } from '@/constants/route';
-import { ChevronDown } from 'chimplanet-ui/icons';
+import { ChevronDown } from '@chimplanet/ui/icons';
 
 export default function MoreOfferButton() {
   return (

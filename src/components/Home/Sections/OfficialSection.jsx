@@ -1,7 +1,7 @@
 import { JobOfferSection } from '@/common/components/JobOffer';
 import { OFFICIAL_PATH } from '@/constants/route';
 import backend from '@/service/backend';
-import { useScreenType } from 'chimplanet-ui';
+import { useScreenType } from '@chimplanet/ui';
 
 export default function OfficialSection() {
   const sizeType = useScreenType();

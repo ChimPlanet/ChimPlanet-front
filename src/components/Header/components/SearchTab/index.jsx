@@ -1,13 +1,13 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 
-import RealSearchBar from './realSearchBar';
-import Recommend from './recommend';
-import History from './History';
+import { LeftChevronIcon } from '@/common/icons';
 import {
   SearchContextProvider,
   useSearchContext,
 } from '../../context/searchContext';
-import { LeftChevronIcon } from '@/common/icons';
+import History from './History';
+import RealSearchBar from './realSearchBar';
+import Recommend from './recommend';
 
 /**
  * @param {{afterSearch():void, activeHeaderTab():void, desktop: boolean}}

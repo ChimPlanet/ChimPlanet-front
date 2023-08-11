@@ -1,28 +1,28 @@
-import { Route, Routes, useSearchParams } from 'chimplanet-ui';
+import { Route, Routes, useSearchParams } from '@chimplanet/ui';
 
 import {
   ARTICLE_PATH,
   BOOKMARK_PATH,
+  ERROR_PATH,
   EVENT_PATH,
   HOME_PATH,
-  OFFICIAL_PATH,
   JOB_PATH,
-  SEARCH_PATH,
-  ERROR_PATH,
-  POPULAR_PATH,
   NOTFOUND_PATH,
+  OFFICIAL_PATH,
+  POPULAR_PATH,
+  SEARCH_PATH,
 } from '@/constants/route';
 import Article from '@/pages/Article';
 import Bookmark from '@/pages/Bookmark';
 import Event from '@/pages/Event';
 import Home from '@/pages/Home';
 
+import Error from '@/pages/Error';
+import Job from '@/pages/Job';
 import NotFound from '@/pages/NotFound';
 import Official from '@/pages/Official';
-import Job from '@/pages/Job';
-import Search from '@/pages/Search';
-import Error from '@/pages/Error';
 import Popular from '@/pages/Popular';
+import Search from '@/pages/Search';
 
 export default function AppRoutes() {
   const [id] = useSearchParams();

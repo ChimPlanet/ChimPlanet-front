@@ -1,6 +1,6 @@
 import { JOB_PATH } from '@/constants/route';
-import { styled, useNavigate } from 'chimplanet-ui';
-import { ChevronLeft } from 'chimplanet-ui/icons';
+import { styled, useNavigate } from '@chimplanet/ui';
+import { ChevronLeft } from '@chimplanet/ui/icons';
 import { useMemo } from 'react';
 
 export const AlternativeHeader = ({ pathname }) => {

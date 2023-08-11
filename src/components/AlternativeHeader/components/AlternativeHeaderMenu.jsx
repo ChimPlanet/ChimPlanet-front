@@ -3,8 +3,13 @@ import Tag from '@/components/Tag';
 import { SearchTagSequenceColor } from '@/constants/color';
 import { SEARCH_PATH } from '@/constants/route';
 import { getSearchMetadata } from '@/utils';
-import { styled, useLocation, useNavigate, useScreenType } from 'chimplanet-ui';
-import { X } from 'chimplanet-ui/icons';
+import {
+  styled,
+  useLocation,
+  useNavigate,
+  useScreenType,
+} from '@chimplanet/ui';
+import { X } from '@chimplanet/ui/icons';
 import { useMemo, useState } from 'react';
 
 export const AlternativeHeaderMenu = () => {

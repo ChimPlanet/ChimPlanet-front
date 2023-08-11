@@ -1,6 +1,6 @@
-import { styled } from 'chimplanet-ui';
-import SubBanner from '@/components/Home/SubBanner';
 import EventSection from '@/components/Home/Sections/EventSection';
+import SubBanner from '@/components/Home/SubBanner';
+import { styled } from '@chimplanet/ui';
 
 export default function Event() {
   return (

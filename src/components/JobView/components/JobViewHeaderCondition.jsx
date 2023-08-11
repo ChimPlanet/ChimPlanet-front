@@ -1,4 +1,4 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 import { useJobViewContext } from '../JobViewContext';
 
 export default function JobViewHeaderCondition({ reverse }) {

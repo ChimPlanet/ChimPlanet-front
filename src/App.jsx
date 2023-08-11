@@ -1,7 +1,7 @@
-import { styled } from 'chimplanet-ui';
+import { styled } from '@chimplanet/ui';
 
-import AppRoutes from '@/routes/AppRoutes';
 import JobDetailSubscriber from '@/components/JobDetailSubscriber';
+import AppRoutes from '@/routes/AppRoutes';
 import BaseLayout from './layout/BaseLayout';
 
 import '@/styles/App.scss';

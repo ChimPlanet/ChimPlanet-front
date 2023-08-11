@@ -1,7 +1,7 @@
-import { PropTypes, styled, useNavigate } from 'chimplanet-ui';
+import { PropTypes, styled, useNavigate } from '@chimplanet/ui';
 
-import useSearch from '../../hooks/useSearchNavigate';
 import { JOB_PATH } from '@/constants/route';
+import useSearch from '../../hooks/useSearchNavigate';
 
 export default function ParentCategoryColumn({
   current,

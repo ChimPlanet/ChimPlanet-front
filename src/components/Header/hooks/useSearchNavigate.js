@@ -1,4 +1,4 @@
-import { useNavigate } from 'chimplanet-ui';
+import { useNavigate } from '@chimplanet/ui';
 import { useCallback } from 'react';
 
 export default function useSearchNavigate() {

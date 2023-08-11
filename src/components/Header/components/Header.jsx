@@ -1,15 +1,11 @@
-import { useState } from 'react';
 import {
   Header as BaseHeader,
   useLocation,
   useScreenType,
-} from 'chimplanet-ui';
+} from '@chimplanet/ui';
 import { styled as muiStyled } from '@mui/material/styles';
+import { useState } from 'react';
 
-import SearchTab from './SearchTab';
-import CategoryOverlay from './CategoryOverlay';
-import { Drawer } from '@mui/material';
-import { MobileMenu } from '@/components/MobileMenu';
 import {
   AlternativeHeader,
   AlternativeHeaderMenu,
@@ -17,7 +13,10 @@ import {
   enableAlternativeMenu,
   hideHeaderMenubar,
 } from '@/components/AlternativeHeader';
-import { ERROR_PATH } from '@/constants/route';
+import { MobileMenu } from '@/components/MobileMenu';
+import { Drawer } from '@mui/material';
+import CategoryOverlay from './CategoryOverlay';
+import SearchTab from './SearchTab';
 
 export default function Header() {
   const { pathname } = useLocation();

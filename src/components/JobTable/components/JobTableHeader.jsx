@@ -1,8 +1,8 @@
-import { styled, useScreenType } from 'chimplanet-ui';
+import { styled, useScreenType } from '@chimplanet/ui';
 
+import { Divider } from '@mui/material';
 import JobTableHeaderCondition from './JobTableHeaderCondition';
 import JobTableHeaderOrderByButton from './JobTableHeaderOrderByButton';
-import { Divider } from '@mui/material';
 
 export function JobTableHeader() {
   const screenType = useScreenType();
