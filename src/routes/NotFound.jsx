@@ -1,17 +1,10 @@
 import { Link, styled, useNavigate } from '@chimplanet/ui';
 
 import { Chimplanet404 } from '@/common/icons';
-import { HOME_PATH, NOTFOUND_PATH } from '@/constants/route';
-import { useEffect } from 'react';
+import { HOME_PATH } from '@/constants/route';
 
 export const NotFound = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (window.location.pathname !== NOTFOUND_PATH) {
-      navigate(NOTFOUND_PATH);
-    }
-  }, [window.location.pathname]);
 
   return (
     <Container>
@@ -28,7 +21,7 @@ export const NotFound = () => {
         </Detail>
         <ButtonGroup>
           <ToMain to={HOME_PATH}>메인으로</ToMain>
-          <Prev onClick={() => navigate(-2)}>이전으로</Prev>
+          <Prev onClick={() => navigate(-1)}>이전으로</Prev>
         </ButtonGroup>
       </Content>
       <Icon>

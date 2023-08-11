@@ -27,6 +27,11 @@ const Wrapper = styled.div`
   text-align: center;
   background-color: ${({ theme }) => theme.buttonColors.background};
   color: ${({ theme }) => theme.buttonColors.text};
+  display: none;
+
+  ${({ theme }) => theme.media.desktop`
+    display: block;
+  `}
 
   & svg {
     overflow: visible;

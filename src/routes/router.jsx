@@ -19,7 +19,6 @@ const router = createBrowserRouter([
   {
     path: Paths.Home,
     element: <Layout />,
-    errorElement: <Error />,
     children: [
       {
         path: Paths.Home,
@@ -49,19 +48,15 @@ const router = createBrowserRouter([
         path: Paths.Popular,
         element: <Popular />,
       },
+      {
+        path: '*',
+        element: <NotFound />,
+      },
     ],
   },
   {
     path: Paths.Error,
     element: <Error />,
-  },
-  {
-    path: Paths.NotFound,
-    element: <NotFound />,
-  },
-  {
-    path: '*',
-    element: <NotFound />,
   },
 ]);
 

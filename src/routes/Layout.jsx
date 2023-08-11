@@ -1,10 +1,9 @@
-import { Suspense, useMemo } from 'react';
+import { useMemo } from 'react';
 
 import '../styles/layout.scss';
 
 import {
   Banner,
-  Loading,
   Outlet,
   styled,
   useLocation,
@@ -22,25 +21,11 @@ import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import JobDetailSubscriber from '@/components/JobDetailSubscriber';
 import DesktopThemeChangeButton from '@/components/ThemeChangeButton';
-import {
-  ARTICLE_PATH,
-  BOOKMARK_PATH,
-  ERROR_PATH,
-  JOB_PATH,
-  NOTFOUND_PATH,
-  SEARCH_PATH,
-} from '@/constants/route';
+import { Paths } from './path';
 
-const invalidPaths = [
-  ERROR_PATH,
-  SEARCH_PATH,
-  NOTFOUND_PATH,
-  ARTICLE_PATH,
-  JOB_PATH,
-  BOOKMARK_PATH,
-];
+const BannerWhileList = [Paths.Home, Paths.Event, Paths.Official];
 
-export default function Layout({ children }) {
+export default function Layout() {
   const sizeType = useScreenType();
   const { pathname } = useLocation();
   const { banners } = usePreloadContext();
@@ -59,8 +44,8 @@ export default function Layout({ children }) {
 
   return (
     <Container>
-      {pathname !== ERROR_PATH && <Header />}
-      {!invalidPaths.includes(pathname) && banners ? (
+      <Header />
+      {BannerWhileList.includes(pathname) && banners ? (
         <BannerWrapper children={<Banner banners={mainBanners} />} />
       ) : null}
 
@@ -70,13 +55,11 @@ export default function Layout({ children }) {
           default: `padding-bottom: ${Footer.defaultHeight}px;`,
         }}
       >
-        <Suspense fallback={<Loading />}>
-          <Outlet />
-        </Suspense>
+        <Outlet />
       </Centering>
       <JobDetailSubscriber />
-      {pathname !== ERROR_PATH && <Footer />}
-      {sizeType === 'desktop' ? <DesktopThemeChangeButton /> : null}
+      <Footer />
+      <DesktopThemeChangeButton />
     </Container>
   );
 }

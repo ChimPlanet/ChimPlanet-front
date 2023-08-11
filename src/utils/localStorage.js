@@ -5,7 +5,7 @@
 const MIN_KEY_LENGTH = 3;
 
 /**
- * Type에 따라 값이 올바른지 확인합니다
+ * @description Type에 따라 값이 올바른지 확인합니다
  * @param {_Type} type 입력된 값의 type(key | value) 제약조건 구분
  * @param {*} value value 사용될 값
  */
