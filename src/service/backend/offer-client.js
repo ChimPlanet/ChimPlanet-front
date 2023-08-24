@@ -39,7 +39,7 @@ class OfferClient extends HttpClient {
 
   @select(typeOfferArray)
   async popular() {
-    return (await this.post('?sort=readCount')).content;
+    return await this.get('/popular');
   }
 
   @select(typeOfferArray)
