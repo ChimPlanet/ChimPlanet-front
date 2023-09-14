@@ -47,11 +47,7 @@ export const useJobOfferByArrayId = (ids) => {
 
 /** @returns {import('react-query').UseQueryResult<OfferContent>} */
 export const useJobOfferDetail = (id) => {
-  return useQuery(
-    [JobOfferQueryKey, 'detail', id],
-    () => backend.offers.content(id),
-    {
-      useErrorBoundary: false,
-    },
+  return useQuery([JobOfferQueryKey, 'detail', id], () =>
+    backend.offers.content(id),
   );
 };

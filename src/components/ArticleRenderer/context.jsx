@@ -1,13 +1,19 @@
-import { Offer } from '@services/offer';
-import { createContext, useContext } from 'react';
+import { useJobOfferDetail } from '@query/offer';
+import { OfferContent } from '@services/offer';
+import { createContext, useContext, useMemo } from 'react';
 
-/** @type {React.Context<[Offer, {close():void, open(offer: Offer):void}]>} */
+/** @type {React.Context<{data: OfferContent, isError: boolean}>} */
 const ArticleContext = createContext();
 
-export function ArticleProvider({ article, children }) {
-  return <ArticleContext.Provider children={children} value={article} />;
-}
+export const ArticleProvider = ({ children, id }) => {
+  const { data, isError } = useJobOfferDetail(id);
+  return (
+    <ArticleContext.Provider
+      value={useMemo(() => ({ data, isError }), [data, isError])}
+    >
+      {children}
+    </ArticleContext.Provider>
+  );
+};
 
-export function useArticleContext() {
-  return useContext(ArticleContext);
-}
+export const useArticleContext = () => useContext(ArticleContext);

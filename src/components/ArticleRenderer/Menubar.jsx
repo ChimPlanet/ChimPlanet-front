@@ -1,20 +1,17 @@
 import { styled, useScreenType } from '@chimplanet/ui';
 import { CafeIcon, DetailBookMark, ShareIcon } from '@common/icons';
 import { useState } from 'react';
+import { useArticleContext } from './context';
 
 const defaultImage =
   'https://images-ext-2.discordapp.net/external/NubY254DitZhl4T3xlPsSwQrnlIvVacwb87LmSn0xq0/%3Ftype%3Df100_100/https/ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?width=154&height=154';
 
-export default function JobDetailMenuBar({
-  id,
-  writer,
-  userProfile,
-  isBookmarked = false,
-  onBookmarkClick,
-  close,
-}) {
+export const Menubar = ({ id }) => {
+  const { data } = useArticleContext();
   const sizeType = useScreenType();
   const [imageError, setImageError] = useState(false);
+
+  const { profileImageUrl, writer } = data;
 
   const handleCopyClipBoard = async (text) => {
     const input = document.createElement('input');
@@ -35,6 +32,7 @@ export default function JobDetailMenuBar({
     setImageError(true);
   };
 
+  // TODO: 북마크 기능
   return (
     <Container display={sizeType}>
       <MenuContainer>
@@ -42,8 +40,10 @@ export default function JobDetailMenuBar({
           <Profile>
             <img
               referrerPolicy="no-referrer"
-              src={!imageError ? userProfile + '?type=f100_100' : defaultImage}
-              alt={userProfile}
+              src={
+                !imageError ? profileImageUrl + '?type=f100_100' : defaultImage
+              }
+              alt={profileImageUrl}
               onError={handleImageError}
             />
           </Profile>
@@ -58,13 +58,13 @@ export default function JobDetailMenuBar({
       </a>
       <div onClick={handleClick}>
         <IconContainer>
-          <DetailBookMark filled={isBookmarked} />
+          <DetailBookMark filled={true} />
         </IconContainer>
         <IconText>북마크</IconText>
       </div>
       <div
         onClick={() => {
-          handleCopyClipBoard(window.location.origin + `/job/?id=${id}`);
+          handleCopyClipBoard(window.location.origin + `/?a=${id}`);
         }}
       >
         <IconContainer>
@@ -75,7 +75,7 @@ export default function JobDetailMenuBar({
       <Rest onClick={close}></Rest>
     </Container>
   );
-}
+};
 
 const Container = styled.div`
   margin-top: 20px;

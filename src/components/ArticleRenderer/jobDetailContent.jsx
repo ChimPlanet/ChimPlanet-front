@@ -1,12 +1,11 @@
 import { styled, useScreenType } from '@chimplanet/ui';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-import { useJobOfferDetail } from '@query/offer';
-import { Offer } from '@services/offer';
 import JobDetailHeader from './jobDetailHeader';
 
 import PurifyHtml from '@common/components/PurifyHtml';
-import JobImageModal from './JobImageModal';
+import { useArticleContext } from './context';
+import { useArticle } from './hook';
 import {
   adaptImageClickListener,
   adaptImagesNoRefererPolicy,
@@ -15,20 +14,20 @@ import {
   stringToDom,
 } from './util';
 
-/** @param {{offer: Offer}} */
-export default function JobDetailContent({ offer, handelProfile, close }) {
-  const { data, isError, error } = useJobOfferDetail(offer.id);
+export default function JobDetailContent({ setFocusedImageSrc, id }) {
+  const [, { close }] = useArticle();
+  const { data, isError } = useArticleContext();
 
-  const [focusedImageSrc, setFocusedImageSrc] = useState(null);
+  if (isError && errorHandler(id, close)) return <></>;
 
   const sizeType = useScreenType();
+  const { title, isClosed, viewCount } = data;
 
-  useEffect(() => {
-    if (data) handelProfile(data.profileImageUrl);
-  }, [data]);
+  /** @param {HTMLImageElement} e */
+  const handleImageClick = (e) => setFocusedImageSrc(e.src);
 
   const content = useMemo(() => {
-    if (!data || !data.content) return '';
+    if (!data.content) return '';
 
     const dom = stringToDom(data.content);
     const images = getAllImgElementsFromDom(dom);
@@ -38,60 +37,44 @@ export default function JobDetailContent({ offer, handelProfile, close }) {
     return dom.documentElement.outerHTML;
   }, [data]);
 
-  /** @param {HTMLImageElement} e */
-  const handleImageClick = (e) => setFocusedImageSrc(e.src);
-
-  const handleImageModalClose = () => setFocusedImageSrc(null);
-
-  if (isError) {
-    if (error?.response?.status === 401) {
-      if (
-        confirm(
-          '삭제되었거나 권한이 필요한 게시글입니다. 원문으로 보시겠습니까?',
-        )
-      ) {
-        window.open(`https://cafe.naver.com/steamindiegame/${offer.id}`);
-      }
-    }
-    close();
-    return <></>;
-  }
-
   return (
-    <>
-      <Wrapper sizeType={sizeType}>
-        <JobDetailHeader
-          title={offer.title}
-          status={offer.isClosed}
-          date={data.data.regDate}
-          views={offer.viewCount}
-        />
-        <Content data-desktop={sizeType === 'desktop'}>
-          <PurifyHtml
-            html={content}
-            onLoad={(e) => {
-              const images = getAllImgElementsFromDom(e);
-              adaptImageClickListener(images, handleImageClick);
-            }}
-          />
-        </Content>
-        <SubTitle>태그</SubTitle>
-        <PostTags>
-          {data.tags?.map((items) => (
-            <Tag key={items.tagObjResponseDto.tagName}>
-              {'# ' + items.tagObjResponseDto.tagName}
-            </Tag>
-          ))}
-        </PostTags>
-      </Wrapper>
-      <JobImageModal
-        open={focusedImageSrc ?? false}
-        close={handleImageModalClose}
-        src={focusedImageSrc}
+    <Wrapper sizeType={sizeType}>
+      <JobDetailHeader
+        title={title}
+        status={isClosed}
+        date={data.data.regDate}
+        views={viewCount}
       />
-    </>
+      <Content data-desktop={sizeType === 'desktop'}>
+        <PurifyHtml
+          html={content}
+          onLoad={(e) => {
+            const images = getAllImgElementsFromDom(e);
+            adaptImageClickListener(images, handleImageClick);
+          }}
+        />
+      </Content>
+      <SubTitle>태그</SubTitle>
+      <PostTags>
+        {data.tags?.map((items) => (
+          <Tag key={items.tagObjResponseDto.tagName}>
+            {'# ' + items.tagObjResponseDto.tagName}
+          </Tag>
+        ))}
+      </PostTags>
+    </Wrapper>
   );
 }
+
+const errorHandler = (id, close) => {
+  if (
+    confirm('삭제되었거나 권한이 필요한 게시글입니다. 원문으로 보시겠습니까?')
+  ) {
+    window.open(`https://cafe.naver.com/steamindiegame/${id}`);
+    close();
+  }
+  return true;
+};
 
 const Wrapper = styled.div`
   margin-top: ${({ sizeType }) => (sizeType === 'desktop' ? '' : '43px')};

@@ -1,19 +1,19 @@
 {
+  "extends": [
+    "./jsconfig.paths.json"
+  ],
   "compilerOptions": {
     "experimentalDecorators": true,
     "target": "ESNext",
-    "module": "ES6",
-    "moduleResolution": "classic",
+    "module": "CommonJS",
+    "moduleResolution": "node",
   },
   "include": [
     "src",
-    "vite.config.js"
   ],
   "exclude": [
     "node_modules",
-    "dist"
-  ],
-  "extends": [
-    "./jsconfig.paths.json"
+    "build",
+    "dist",
   ]
 }

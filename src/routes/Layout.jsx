@@ -17,7 +17,12 @@ import {
 } from '@services/banner/banner-utils';
 
 import { Centering } from '@common/components/Centering';
-import { DesktopThemeChangeButton, Footer, Header } from '@components';
+import {
+  ArticleRenderer,
+  DesktopThemeChangeButton,
+  Footer,
+  Header,
+} from '@components';
 import { Paths } from './path';
 
 const BannerWhileList = [Paths.Home, Paths.Event, Paths.Official];
@@ -40,23 +45,26 @@ export default function Layout() {
   );
 
   return (
-    <Container>
-      <Header />
-      {BannerWhileList.includes(pathname) && banners ? (
-        <BannerWrapper children={<Banner banners={mainBanners} />} />
-      ) : null}
+    <>
+      <Container>
+        <Header />
+        {BannerWhileList.includes(pathname) && banners ? (
+          <BannerWrapper children={<Banner banners={mainBanners} />} />
+        ) : null}
 
-      <Centering
-        styles={{
-          mobile: `padding-bottom: ${Footer.mobileHeight}px;`,
-          default: `padding-bottom: ${Footer.defaultHeight}px;`,
-        }}
-      >
-        <Outlet />
-      </Centering>
-      <Footer />
-      <DesktopThemeChangeButton />
-    </Container>
+        <Centering
+          styles={{
+            mobile: `padding-bottom: ${Footer.mobileHeight}px;`,
+            default: `padding-bottom: ${Footer.defaultHeight}px;`,
+          }}
+        >
+          <Outlet />
+        </Centering>
+        <Footer />
+        <DesktopThemeChangeButton />
+      </Container>
+      <ArticleRenderer />
+    </>
   );
 }
 

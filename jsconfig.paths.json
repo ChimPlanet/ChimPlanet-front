@@ -35,6 +35,9 @@
       "@query": [
         "./query/index"
       ],
+      "@query/*": [
+        "./query/*"
+      ],
       "@routes": [
         "./routes/index"
       ],

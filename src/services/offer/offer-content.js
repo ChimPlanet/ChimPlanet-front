@@ -19,7 +19,7 @@ class OfferContent {
   title;
   @field('writer')
   writer;
-  @field('regData', pp.dateTime)
+  @field('regDate', pp.dateTime)
   dateTime;
   @field('readCount', pp.number)
   viewCount;

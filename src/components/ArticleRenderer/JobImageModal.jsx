@@ -2,10 +2,10 @@ import { styled } from '@chimplanet/ui';
 
 import { Modal } from '@mui/material';
 
-export default function JobImageModal({ open, close, src }) {
+export default function JobImageModal({ close, src }) {
   return (
     <Modal
-      open={open}
+      open={src !== null}
       onClose={close}
       style={{
         display: 'flex',

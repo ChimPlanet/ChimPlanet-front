@@ -10,7 +10,8 @@ export const useArticle = () => {
 
   const handle = useMemo(
     () => ({
-      open: () => navigate(`?${ARTICLE_QUERY_KEY}=${id}`, { replace: true }),
+      open: (o) =>
+        navigate(`?${ARTICLE_QUERY_KEY}=${o.id}`, { replace: false }),
       close: () => navigate('', { replace: true }),
     }),
     [navigate],
