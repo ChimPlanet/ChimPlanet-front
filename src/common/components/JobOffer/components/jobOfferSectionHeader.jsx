@@ -1,6 +1,6 @@
 import { Link, PropTypes, styled } from '@chimplanet/ui';
 
-import { SectionLeftIcon, SectionRightIcon } from '@/common/icons';
+import { SectionLeftIcon, SectionRightIcon } from '@common/icons';
 
 /**
  * @typedef {Object} JobOfferSectionHeaderProps

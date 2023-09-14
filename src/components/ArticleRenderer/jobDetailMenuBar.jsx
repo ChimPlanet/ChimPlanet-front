@@ -1,5 +1,5 @@
-import { CafeIcon, DetailBookMark, ShareIcon } from '@/common/icons';
 import { styled, useScreenType } from '@chimplanet/ui';
+import { CafeIcon, DetailBookMark, ShareIcon } from '@common/icons';
 import { useState } from 'react';
 
 const defaultImage =

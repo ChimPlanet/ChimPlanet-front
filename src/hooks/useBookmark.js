@@ -1,4 +1,4 @@
-import { BookmarkContext } from '@/utils/Context/bookmarkContext';
+import { BookmarkContext } from '@utils/Context/bookmarkContext';
 import useUpdate from '../common/hooks/useUpdate';
 
 export default function useBookmark() {

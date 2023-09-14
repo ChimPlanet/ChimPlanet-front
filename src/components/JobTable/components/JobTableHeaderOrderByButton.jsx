@@ -1,5 +1,5 @@
-import { ArrowBelowSmallIcon } from '@/common/icons';
 import { FloatingMenu, styled } from '@chimplanet/ui';
+import { ArrowBelowSmallIcon } from '@common/icons';
 import { useRef, useState } from 'react';
 import { useJobTableContext } from '../contexts/table';
 

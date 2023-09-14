@@ -10,7 +10,7 @@ import {
 const defaultHeight = 141;
 const mobileHeight = 228;
 
-function Footer() {
+const Footer = () => {
   return (
     <Container>
       <Wrapper>
@@ -67,7 +67,7 @@ function Footer() {
       </Wrapper>
     </Container>
   );
-}
+};
 
 Footer.defaultHeight = defaultHeight;
 Footer.mobileHeight = mobileHeight;

@@ -12,8 +12,8 @@ import {
   enableAlternativeHeader,
   enableAlternativeMenu,
   hideHeaderMenubar,
-} from '@/components/AlternativeHeader';
-import { MobileMenu } from '@/components/MobileMenu';
+} from '@components/AlternativeHeader';
+import { MobileMenu } from '@components/MobileMenu';
 import { Drawer } from '@mui/material';
 import CategoryOverlay from './CategoryOverlay';
 import SearchTab from './SearchTab';

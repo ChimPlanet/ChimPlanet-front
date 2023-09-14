@@ -14,7 +14,7 @@ export default class BaseContext {
    * @param {T} initialValue
    */
   constructor(contextKey, initialValue) {
-    if (!contextKey) throw new Error('contextKey is required');
+    if (!contextKey) throw new Error('@contextKey is required');
     this.contextKey = contextKey;
     this.initialValue = initialValue;
     this.initialize();

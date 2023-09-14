@@ -1,5 +1,4 @@
 import Banner from './banner';
-import { groupBy } from '@/utils';
 
 /** @param {Banner[]} banners */
 export function filterMainBanner(banners) {

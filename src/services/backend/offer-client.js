@@ -1,5 +1,4 @@
-import mock_job_offers from '@/__mocks__/mock_job_offers';
-import { Offer, OfferContent } from '@/service/offer';
+import { Offer, OfferContent } from '@services/offer';
 import { select } from 'useful-decorator';
 import HttpClient from './http-client';
 

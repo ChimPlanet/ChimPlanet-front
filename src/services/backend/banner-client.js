@@ -1,8 +1,8 @@
-import HttpClient from './http-client';
+import { Banner } from '@services/banner';
+import { groupBy } from '@utils';
 import { select } from 'useful-decorator';
-import { Banner } from '@/service/banner';
 import { pairBannerFromGroup } from '../banner/banner-utils';
-import { groupBy } from '@/utils';
+import HttpClient from './http-client';
 
 class BannerClient extends HttpClient {
   constructor() {

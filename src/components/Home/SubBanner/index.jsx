@@ -1,12 +1,12 @@
 import { styled, useScreenType } from '@chimplanet/ui';
 import { useMemo } from 'react';
 
-import { usePreloadContext } from '@/context/preloadContext';
-import { Banner } from '@/service/banner';
+import { usePreloadContext } from '@context/preloadContext';
+import { Banner } from '@services/banner';
 import {
   filterSubBanner,
   getBannerByType,
-} from '@/service/banner/banner-utils';
+} from '@services/banner/banner-utils';
 
 export default function SubBanner() {
   const screenType = useScreenType();

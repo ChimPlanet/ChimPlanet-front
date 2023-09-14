@@ -1,10 +1,10 @@
+import { styled } from '@chimplanet/ui';
 import {
   LineIcon,
   MobileBookMarkIcon,
   MobileCafeIcon,
   MobileShareIcon,
-} from '@/common/icons';
-import { styled } from '@chimplanet/ui';
+} from '@common/icons';
 import { Modal } from '@mui/material';
 import { styled as muiStyled } from '@mui/material/styles';
 import { useState } from 'react';

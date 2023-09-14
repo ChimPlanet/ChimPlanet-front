@@ -1,6 +1,6 @@
-import { JOB_PATH } from '@/constants/route';
 import { styled, useNavigate } from '@chimplanet/ui';
 import { ChevronLeft } from '@chimplanet/ui/icons';
+import { Paths } from '@routes';
 import { useMemo } from 'react';
 
 export const AlternativeHeader = ({ pathname }) => {
@@ -11,7 +11,7 @@ export const AlternativeHeader = ({ pathname }) => {
   };
 
   const text = useMemo(
-    () => (pathname.startsWith(JOB_PATH) ? '전체' : '검색'),
+    () => (pathname.startsWith(Paths.Job) ? '전체' : '검색'),
     [pathname],
   );
 

@@ -1,10 +1,21 @@
-import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import { defineConfig } from 'vite';
+import aliasPaths from './jsconfig.paths.json';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   // loadEnv(mode, process.cwd());
+
+  const alias = Object.keys(aliasPaths.compilerOptions.paths)
+    .filter((k) => !k.includes('/*'))
+    .map((k) => {
+      return {
+        find: k,
+        replacement: path.resolve(__dirname, 'src/' + k.slice(1)),
+      };
+    });
+
   return {
     plugins: [
       react({
@@ -22,12 +33,7 @@ export default defineConfig(({ mode }) => {
       port: 3001,
     },
     resolve: {
-      alias: [
-        {
-          find: '@',
-          replacement: path.resolve(__dirname, 'src'),
-        },
-      ],
+      alias: alias,
     },
     build: {
       commonjsOptions: {

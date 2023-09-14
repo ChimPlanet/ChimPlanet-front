@@ -1,7 +1,7 @@
 import { Link, styled, useNavigate } from '@chimplanet/ui';
 
-import { Chimplanet404 } from '@/common/icons';
-import { HOME_PATH } from '@/constants/route';
+import { Chimplanet404 } from '@common/icons';
+import { Paths } from './path';
 
 export const NotFound = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export const NotFound = () => {
           입력하신 주소가 정확한지 다시 한번 확인해 주시기 바랍니다.
         </Detail>
         <ButtonGroup>
-          <ToMain to={HOME_PATH}>메인으로</ToMain>
+          <ToMain to={Paths.Home}>메인으로</ToMain>
           <Prev onClick={() => navigate(-1)}>이전으로</Prev>
         </ButtonGroup>
       </Content>

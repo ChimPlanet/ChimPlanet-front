@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
-import { BannerQueryKey } from '@/constants/query';
-import backend from '@/service/backend';
+import { BannerQueryKey } from '@constants/query';
+import backend from '@services/backend';
 
 function preloadImages(data) {
   if (Array.isArray(data)) {

@@ -1,4 +1,4 @@
-import { HistoryContext } from '@/utils/Context/historyContext';
+import { HistoryContext } from '@utils/Context/historyContext';
 import useUpdate from '../common/hooks/useUpdate';
 
 export default function useHistory() {

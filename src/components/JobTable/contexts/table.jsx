@@ -4,8 +4,8 @@ import { createContext, useContext, useReducer } from 'react';
  * @typedef {object} JobViewContextValue
  * @property {"all"|"end"|"ongoing"} condition
  * @property {"popular" | "recent" | "recommend"} orderBy
- * @property {import('@/utils/job').JobOfferVO[]} originalData
- * @property {import('@/utils/job').JobOfferVO[]} displayedData
+ * @property {import('@utils/job').JobOfferVO[]} originalData
+ * @property {import('@utils/job').JobOfferVO[]} displayedData
  * @property {JSX.Element} componentResultNotFound
  * @property {"loading" | "done"} pending
  *
@@ -57,7 +57,7 @@ function preprocess(state) {
 /**
  * 정렬
  * @param {JobViewContextValue['orderBy']} type
- * @param {import('@/utils/job').JobOfferVO[]} offers
+ * @param {import('@utils/job').JobOfferVO[]} offers
  */
 function sortOffers(type, offers) {
   switch (type) {
@@ -77,7 +77,7 @@ function sortOffers(type, offers) {
 /**
  * 필터링
  * @param {JobViewContextValue['condition']} type
- * @param {import('@/utils/job').JobOfferVO[]} offers
+ * @param {import('@utils/job').JobOfferVO[]} offers
  */
 function filterOffers(type, offers) {
   //"all"|"end"|"ongoing"

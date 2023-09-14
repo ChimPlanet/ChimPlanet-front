@@ -1,22 +1,22 @@
-import { JOB_PATH, NOTFOUND_PATH, SEARCH_PATH } from '@/constants/route';
+import { Paths } from '@routes';
 
 export const hideHeaderMenubar = (screenType, pathname) => {
   if (screenType === 'desktop') {
     return false;
   }
-  if (screenType === 'mobile' && pathname === NOTFOUND_PATH) {
+  if (screenType === 'mobile' && pathname === Paths.NotFound) {
     return true;
   }
 
-  return pathname.startsWith(JOB_PATH);
+  return pathname.startsWith(Paths.Job);
 };
 
 export const enableAlternativeHeader = (screenType, pathname) => {
-  if (screenType === 'desktop' || !pathname.startsWith(SEARCH_PATH)) {
+  if (screenType === 'desktop' || !pathname.startsWith(Paths.Search)) {
     return false;
   }
 
-  if (pathname.startsWith(SEARCH_PATH) || pathname.startsWith(JOB_PATH)) {
+  if (pathname.startsWith(Paths.Search) || pathname.startsWith(Paths.Job)) {
     return true;
   }
 
@@ -28,5 +28,5 @@ export const enableAlternativeMenu = (screenType, pathname) => {
     return false;
   }
 
-  return pathname.startsWith(SEARCH_PATH);
+  return pathname.startsWith(Paths.Search);
 };

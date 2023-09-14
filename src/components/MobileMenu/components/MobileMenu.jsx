@@ -2,7 +2,7 @@ import { BookmarkButton, Link, styled } from '@chimplanet/ui';
 import { X } from '@chimplanet/ui/icons';
 import { Divider } from '@mui/material';
 
-import { OFFICIAL_PATH } from '@/constants/route';
+import { Paths } from '@routes';
 import CategoryLinkAccordion from './CategoryLinkAccordion';
 import MobileThemeChangeButton from './MobileThemeChangeButton';
 
@@ -22,7 +22,7 @@ export default function MobileMenu({ close }) {
         {/* <Divider /> */}
         {/* <Anchor to={EVENT_PATH}>이벤트</Anchor> */}
         <Divider />
-        <Anchor to={OFFICIAL_PATH}>공식</Anchor>
+        <Anchor to={Paths.Official}>공식</Anchor>
         <Divider />
         <MobileThemeChangeButton />
       </Footer>

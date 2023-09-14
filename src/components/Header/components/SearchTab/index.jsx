@@ -1,6 +1,6 @@
 import { styled } from '@chimplanet/ui';
 
-import { LeftChevronIcon } from '@/common/icons';
+import { LeftChevronIcon } from '@common/icons';
 import {
   SearchContextProvider,
   useSearchContext,

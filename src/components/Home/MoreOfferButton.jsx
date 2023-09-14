@@ -1,11 +1,11 @@
 import { Link, styled } from '@chimplanet/ui';
 
-import { JOB_PATH } from '@/constants/route';
 import { ChevronDown } from '@chimplanet/ui/icons';
+import { Paths } from '@routes';
 
 export default function MoreOfferButton() {
   return (
-    <Container to={JOB_PATH}>
+    <Container to={Paths.Job}>
       <span>더 많은 공고글 보기</span>
       <ChevronDown />
     </Container>

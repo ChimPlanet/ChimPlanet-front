@@ -1,9 +1,11 @@
-import queryClient, { QueryClientProvider } from '@/query';
+import { CPThemeProvider, ScreenTypeProvider } from '@chimplanet/ui';
+import { CompositeProvider } from '@components';
+import { ArticleRenderer } from '@components/ArticleRenderer/ArticleRenderer';
+import { PreloadProvider } from '@context/preloadContext';
+import queryClient, { QueryClientProvider } from '@query';
+import { RouterProvider } from '@routes';
+import { baseTheme } from '@theme';
 import { RecoilRoot } from 'recoil';
-import { CompositeProvider } from './components/CompositeProvider';
-import AppContextProvider from './context';
-import { PreloadProvider } from './context/preloadContext';
-import { RouterProvider } from './routes';
 
 export default function App() {
   return (
@@ -12,10 +14,12 @@ export default function App() {
         <PreloadProvider />,
         <QueryClientProvider client={queryClient} />,
         <RecoilRoot />,
-        <AppContextProvider />,
+        <ScreenTypeProvider screens={baseTheme.sizes} />,
+        <CPThemeProvider />,
+        <RouterProvider />,
       ]}
     >
-      <RouterProvider />
+      <ArticleRenderer />
     </CompositeProvider>
   );
 }

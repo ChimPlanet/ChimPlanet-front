@@ -1,7 +1,7 @@
-import { MoonIcon, SunIcon } from '@/common/icons';
 import { styled, useThemeMode, useThemeUpdater } from '@chimplanet/ui';
+import { MoonIcon, SunIcon } from '@common/icons';
 
-export default function DesktopThemeChangeButton() {
+const DesktopThemeChangeButton = () => {
   const themeMode = useThemeMode();
   const toggle = useThemeUpdater();
 
@@ -13,7 +13,9 @@ export default function DesktopThemeChangeButton() {
       <span>{themeMode === 'light' ? '다크 모드' : '라이트 모드'}로 전환</span>
     </Wrapper>
   );
-}
+};
+
+export default DesktopThemeChangeButton;
 
 const Wrapper = styled.div`
   cursor: pointer;

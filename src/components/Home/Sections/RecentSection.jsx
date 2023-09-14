@@ -7,12 +7,12 @@ import {
 } from '@chimplanet/ui';
 import { Suspense, useMemo } from 'react';
 
-import { FallbackFetching } from '@/common/components/FallbackFetching';
-import { LinkFooter } from '@/common/components/LinkFooter';
-import { JOB_PATH } from '@/constants/route';
-import { useArticleContext } from '@/context/articleContext';
-import useBookmark from '@/hooks/useBookmark';
-import { useRecentOffers } from '@/query/offer';
+import { FallbackFetching } from '@common/components/FallbackFetching';
+import { LinkFooter } from '@common/components/LinkFooter';
+import { useArticle } from '@components/ArticleRenderer/hook';
+import useBookmark from '@hooks/useBookmark';
+import { useRecentOffers } from '@query/offer';
+import { Paths } from '@routes';
 import MoreOfferButton from '../MoreOfferButton';
 
 export default function RecentSection() {
@@ -30,7 +30,7 @@ export default function RecentSection() {
 
 function RecentSectionContent() {
   const { data: offers } = useRecentOffers();
-  const [, { open }] = useArticleContext();
+  const [, { open }] = useArticle();
 
   const screenType = useScreenType();
   const { toggle, is } = useBookmark();
@@ -51,7 +51,7 @@ function RecentSectionContent() {
         />
       </JobContent>
       {screenType === 'mobile' ? (
-        <LinkFooter text="자세히보기" href={JOB_PATH} />
+        <LinkFooter text="자세히보기" href={Paths.Job} />
       ) : (
         <MoreOfferButton />
       )}

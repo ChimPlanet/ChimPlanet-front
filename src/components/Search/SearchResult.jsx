@@ -1,5 +1,5 @@
-import JobView from '@/components/JobView';
 import { Loading, styled } from '@chimplanet/ui';
+import JobView from '@components/JobView';
 import { Suspense } from 'react';
 
 /**

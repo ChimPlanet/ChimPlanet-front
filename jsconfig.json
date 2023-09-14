@@ -1,21 +1,19 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
-    "baseUrl": ".",
-    // "target": "ES6",
-    // "noLib": true,
-    // "jsx": "react-jsx",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    }
+    "target": "ESNext",
+    "module": "ES6",
+    "moduleResolution": "classic",
   },
   "include": [
-    "./src/**/*"
+    "src",
+    "vite.config.js"
   ],
   "exclude": [
     "node_modules",
     "dist"
+  ],
+  "extends": [
+    "./jsconfig.paths.json"
   ]
 }

@@ -1,7 +1,7 @@
-import { JobOfferSection } from '@/common/components/JobOffer';
-import { POPULAR_PATH } from '@/constants/route';
-import backend from '@/service/backend';
 import { useScreenType } from '@chimplanet/ui';
+import { JobOfferSection } from '@common/components/JobOffer';
+import { Paths } from '@routes';
+import backend from '@services/backend';
 
 export default function PopularSection() {
   const sizeType = useScreenType();
@@ -9,7 +9,7 @@ export default function PopularSection() {
   return (
     <JobOfferSection
       hideArrow={sizeType === 'mobile'}
-      goTo={POPULAR_PATH}
+      goTo={Paths.Popular}
       queryKey="popular"
       title="인기 구인글"
       fetchFunction={backend.offers.popular}

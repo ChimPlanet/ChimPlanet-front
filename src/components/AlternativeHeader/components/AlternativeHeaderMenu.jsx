@@ -1,8 +1,3 @@
-import { Centering } from '@/common/components/Centering';
-import Tag from '@/components/Tag';
-import { SearchTagSequenceColor } from '@/constants/color';
-import { SEARCH_PATH } from '@/constants/route';
-import { getSearchMetadata } from '@/utils';
 import {
   styled,
   useLocation,
@@ -10,6 +5,11 @@ import {
   useScreenType,
 } from '@chimplanet/ui';
 import { X } from '@chimplanet/ui/icons';
+import { Centering } from '@common/components/Centering';
+import Tag from '@components/Tag';
+import { SearchTagSequenceColor } from '@constants/color';
+import { Paths } from '@routes';
+import { getSearchMetadata } from '@utils';
 import { useMemo, useState } from 'react';
 
 export const AlternativeHeaderMenu = () => {
@@ -55,7 +55,7 @@ const NormalQuery = ({ text }) => {
       return;
     }
     if (query.length >= 2) {
-      navigate(`${SEARCH_PATH}?type=normal&q=${encodeURIComponent(query)}`);
+      navigate(`${Paths.Search}?type=normal&q=${encodeURIComponent(query)}`);
     } else {
       alert('두 글자 이상을 입력해주세요.');
     }

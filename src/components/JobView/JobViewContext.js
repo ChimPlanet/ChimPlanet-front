@@ -1,6 +1,6 @@
-import { usePreloadContext } from '@/context/preloadContext';
-import backend from '@/service/backend';
-import { Tag } from '@/service/tag';
+import { usePreloadContext } from '@context/preloadContext';
+import backend from '@services/backend';
+import { Tag } from '@services/tag';
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
 /**
@@ -8,8 +8,8 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
  * @property {import('../Search/SearchResult').SearchMetadata} searchMetadata
  * @property {"all"|"end"|"ongoing"} condition
  * @property {"popular" | "recent" | "recommend"} orderBy
- * @property {import('@/utils/job').JobOfferVO[]} originalData
- * @property {import('@/utils/job').JobOfferVO[]} displayedData
+ * @property {import('@utils/job').JobOfferVO[]} originalData
+ * @property {import('@utils/job').JobOfferVO[]} displayedData
  * @property {"loading" | "done"} pending
  *
  * @typedef {[context: JobViewContextValue, dispatch:(newValue: Partial<JobViewContextValue>)=>void]} JobViewContextState
@@ -83,7 +83,7 @@ function __preprocess(state) {
 /**
  * 정렬
  * @param {JobViewContextValue['orderBy']} type
- * @param {import('@/utils/job').JobOfferVO[]} offers
+ * @param {import('@utils/job').JobOfferVO[]} offers
  */
 function sortOffers(type, offers) {
   switch (type) {
@@ -103,7 +103,7 @@ function sortOffers(type, offers) {
 /**
  * 필터링
  * @param {JobViewContextValue['condition']} type
- * @param {import('@/utils/job').JobOfferVO[]} offers
+ * @param {import('@utils/job').JobOfferVO[]} offers
  */
 function filterOffers(type, offers) {
   //"all"|"end"|"ongoing"

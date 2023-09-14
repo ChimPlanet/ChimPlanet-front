@@ -1,7 +1,7 @@
-import FixMemberSection from '@/components/Home/Sections/FixMemberSection';
-import SubBanner from '@/components/Home/SubBanner';
 import { styled } from '@chimplanet/ui';
-//import IsegyeSection from '@/components/Home/Sections/IsegyeSection';
+import FixMemberSection from '@components/Home/Sections/FixMemberSection';
+import SubBanner from '@components/Home/SubBanner';
+//import IsegyeSection from '@components/Home/Sections/IsegyeSection';
 
 export const Official = () => {
   return (

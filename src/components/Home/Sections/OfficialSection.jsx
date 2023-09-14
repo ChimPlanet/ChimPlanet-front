@@ -1,7 +1,7 @@
-import { JobOfferSection } from '@/common/components/JobOffer';
-import { OFFICIAL_PATH } from '@/constants/route';
-import backend from '@/service/backend';
 import { useScreenType } from '@chimplanet/ui';
+import { JobOfferSection } from '@common/components/JobOffer';
+import { Paths } from '@routes';
+import backend from '@services/backend';
 
 export default function OfficialSection() {
   const sizeType = useScreenType();
@@ -13,7 +13,7 @@ export default function OfficialSection() {
       fetchFunction={backend.official.list}
       hideArrow={sizeType === 'mobile'}
       maxLength={sizeType === 'mobile' && 4}
-      goTo={OFFICIAL_PATH}
+      goTo={Paths.Official}
     />
   );
 }

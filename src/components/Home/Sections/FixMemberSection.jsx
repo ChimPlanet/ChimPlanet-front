@@ -1,6 +1,6 @@
-import { JobOfferSection } from '@/common/components/JobOffer';
-import backend from '@/service/backend';
 import { useScreenType } from '@chimplanet/ui';
+import { JobOfferSection } from '@common/components/JobOffer';
+import backend from '@services/backend';
 
 export default function FixMemberSection() {
   const sizeType = useScreenType();

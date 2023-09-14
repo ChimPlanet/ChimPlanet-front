@@ -1,12 +1,12 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
-import backend from '@/service/backend';
-import TagTrie from '@/utils/tagTrie';
-import { ERROR_PATH, NOTFOUND_PATH } from '@/constants/route';
+import { Paths } from '@routes';
+import backend from '@services/backend';
+import TagTrie from '@utils/tagTrie';
 
 const preloadContext = createContext();
 
-const IGNORE_PATHS = [ERROR_PATH, NOTFOUND_PATH];
+const IGNORE_PATHS = [Paths.Error, Paths.NotFound];
 
 export function PreloadProvider({ children }) {
   const [preloads, setPreload] = useState({});
@@ -28,7 +28,7 @@ export function PreloadProvider({ children }) {
         setPreload(_preload);
       })
       .catch(() => {
-        window.location.href = ERROR_PATH;
+        window.location.href = Paths.Error;
       });
   }, []);
 

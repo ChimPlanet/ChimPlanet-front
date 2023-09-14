@@ -1,6 +1,6 @@
-import EventSection from '@/components/Home/Sections/EventSection';
-import SubBanner from '@/components/Home/SubBanner';
 import { styled } from '@chimplanet/ui';
+import EventSection from '@components/Home/Sections/EventSection';
+import SubBanner from '@components/Home/SubBanner';
 
 export const Event = () => {
   return (

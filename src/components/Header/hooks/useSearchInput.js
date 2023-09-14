@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-import { isHangulChar } from '@/utils/str';
+import { isHangulChar } from '@utils/str';
 import { useSearchContext } from '../context/searchContext';
 
 export default function useSearchInput() {

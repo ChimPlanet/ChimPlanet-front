@@ -1,10 +1,10 @@
 import { styled } from '@chimplanet/ui';
 
-import { RecruitSection } from '@/common/components/Recruit/RecruitSection';
-import OfficialSection from '@/components/Home/Sections/OfficialSection';
-import PopularSection from '@/components/Home/Sections/PopularSection';
-import RecentSection from '@/components/Home/Sections/RecentSection';
-import SubBanner from '@/components/Home/SubBanner';
+import { RecruitSection } from '@common/components/Recruit/RecruitSection';
+import OfficialSection from '@components/Home/Sections/OfficialSection';
+import PopularSection from '@components/Home/Sections/PopularSection';
+import RecentSection from '@components/Home/Sections/RecentSection';
+import SubBanner from '@components/Home/SubBanner';
 
 export const Home = () => {
   return (

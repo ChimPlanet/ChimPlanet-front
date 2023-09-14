@@ -1,6 +1,6 @@
 import { PropTypes, styled } from '@chimplanet/ui';
 
-import { XIcon } from '@/common/icons';
+import { XIcon } from '@common/icons';
 
 /**
  * @param {{history: string[], removeHistory(index: number):void, addTag(tag): void}} props

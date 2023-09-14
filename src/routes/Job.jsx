@@ -1,9 +1,9 @@
-import JobInfiniteScroll from '@/components/JobInfiniteScroll';
-import JobNavBar from '@/components/JobNavBar';
-import { useArticleContext } from '@/context/articleContext';
-import { useJobOfferBasic, useJobOfferDetail } from '@/query/offer';
-import { Offer } from '@/service/offer';
 import { styled } from '@chimplanet/ui';
+import { useArticle } from '@components/ArticleRenderer/hook';
+import JobInfiniteScroll from '@components/JobInfiniteScroll';
+import JobNavBar from '@components/JobNavBar';
+import { useJobOfferBasic, useJobOfferDetail } from '@query/offer';
+import { Offer } from '@services/offer';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export const Job = ({ parId }) => {
@@ -26,7 +26,7 @@ export const Job = ({ parId }) => {
   const [select, setSelect] = useState(false);
   //디테일 모달
   const [offerData, setOfferData] = useState(null);
-  const [, { open }] = useArticleContext();
+  const [, { open }] = useArticle();
   // 가져오는 게시글 수
   const size = 12;
 

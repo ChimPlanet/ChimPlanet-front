@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import '../styles/layout.scss';
+import '@styles/layout.scss';
 
 import {
   Banner,
@@ -10,17 +10,14 @@ import {
   useScreenType,
 } from '@chimplanet/ui';
 
-import { usePreloadContext } from '@/context/preloadContext';
+import { usePreloadContext } from '@context/preloadContext';
 import {
   filterMainBanner,
   getBannerByType,
-} from '@/service/banner/banner-utils';
+} from '@services/banner/banner-utils';
 
-import { Centering } from '@/common/components/Centering';
-import { Footer } from '@/components/Footer';
-import { Header } from '@/components/Header';
-import JobDetailSubscriber from '@/components/JobDetailSubscriber';
-import DesktopThemeChangeButton from '@/components/ThemeChangeButton';
+import { Centering } from '@common/components/Centering';
+import { DesktopThemeChangeButton, Footer, Header } from '@components';
 import { Paths } from './path';
 
 const BannerWhileList = [Paths.Home, Paths.Event, Paths.Official];
@@ -57,7 +54,6 @@ export default function Layout() {
       >
         <Outlet />
       </Centering>
-      <JobDetailSubscriber />
       <Footer />
       <DesktopThemeChangeButton />
     </Container>

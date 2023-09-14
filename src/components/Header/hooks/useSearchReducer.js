@@ -1,9 +1,9 @@
-import { useReducer, useMemo } from 'react';
+import { useMemo, useReducer } from 'react';
 
-import { ignorePrefix } from '@/utils/str';
-import TagTrie from '@/utils/tagTrie';
+import { HistoryContext } from '@utils/Context/historyContext';
+import { ignorePrefix } from '@utils/str';
+import TagTrie from '@utils/tagTrie';
 import useSearchNavigate from './useSearchNavigate';
-import { HistoryContext } from '@/utils/Context/historyContext';
 
 /**
  * @typedef {object} SearchState

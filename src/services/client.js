@@ -1,4 +1,4 @@
-import { getApiBase } from '@/constants';
+import { getApiBase } from '@constants';
 import axios from 'axios';
 
 const client = axios.create({

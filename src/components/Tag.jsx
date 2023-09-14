@@ -1,6 +1,6 @@
 import { PropTypes, styled } from '@chimplanet/ui';
 
-import CloseIcon from '@/common/icons/CloseIcon';
+import CloseIcon from '@common/icons/CloseIcon';
 
 Tag.propTypes = {
   name: PropTypes.string.isRequired,

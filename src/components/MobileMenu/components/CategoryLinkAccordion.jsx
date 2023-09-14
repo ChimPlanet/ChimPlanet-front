@@ -1,7 +1,7 @@
 import { Link, styled, useCurrentTheme } from '@chimplanet/ui';
 
-import { usePreloadContext } from '@/context/preloadContext';
-import { getFamilyTree } from '@/utils';
+import { usePreloadContext } from '@context/preloadContext';
+import { getFamilyTree } from '@utils';
 import { useMemo, useState } from 'react';
 
 import { ChevronDown } from '@chimplanet/ui/icons';

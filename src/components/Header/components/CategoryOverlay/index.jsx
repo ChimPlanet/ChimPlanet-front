@@ -1,9 +1,9 @@
 import { styled } from '@chimplanet/ui';
 import { useMemo, useState } from 'react';
 
-import { getFamilyTree } from '@/utils';
+import { getFamilyTree } from '@utils';
 
-import { usePreloadContext } from '@/context/preloadContext';
+import { usePreloadContext } from '@context/preloadContext';
 import ChildCategoryColumn from './childCategoryColumn';
 import ParentCategoryColumn from './parentCategoryColumn';
 

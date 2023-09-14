@@ -1,5 +1,5 @@
-import { baseTheme } from '@/theme';
 import { CPThemeProvider, PropTypes, ScreenTypeProvider } from '@chimplanet/ui';
+import { baseTheme } from 'theme';
 import { ArticleProvider } from './articleContext';
 
 /**

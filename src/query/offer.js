@@ -1,8 +1,8 @@
 import { useQuery } from 'react-query';
 
-import { Offer, OfferContent } from '@/service/offer';
-import { JobOfferQueryKey } from '@/constants/query';
-import backend from '@/service/backend';
+import { JobOfferQueryKey } from '@constants/query';
+import backend from '@services/backend';
+import { Offer, OfferContent } from '@services/offer';
 
 /**
  * @returns {import('react-query').UseQueryResult<Offer[]>}

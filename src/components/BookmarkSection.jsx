@@ -4,14 +4,14 @@ import {
   useScreenType,
 } from '@chimplanet/ui';
 
-import { useArticleContext } from '@/context/articleContext';
-import useBookmark from '@/hooks/useBookmark';
-import { Offer } from '@/service/offer';
+import { useArticle } from '@components/ArticleRenderer/hook';
+import useBookmark from '@hooks/useBookmark';
+import { Offer } from '@services/offer';
 import { useMemo } from 'react';
 
 export default function BookmarkSection() {
   const screenType = useScreenType();
-  const [, { open }] = useArticleContext();
+  const [, { open }] = useArticle();
   const { toggle, is, bookmarks } = useBookmark();
 
   const layoutConfig = useMemo(

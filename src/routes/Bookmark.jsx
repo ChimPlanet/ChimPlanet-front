@@ -1,6 +1,6 @@
 import { styled } from '@chimplanet/ui';
 
-import BookmarkSection from '@/components/BookmarkSection';
+import BookmarkSection from '@components/BookmarkSection';
 
 export const Bookmark = () => {
   return (

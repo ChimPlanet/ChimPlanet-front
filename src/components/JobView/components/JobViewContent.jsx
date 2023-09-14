@@ -6,13 +6,13 @@ import {
 } from '@chimplanet/ui';
 import { useMemo } from 'react';
 
-import { useArticleContext } from '@/context/articleContext';
-import useBookmark from '@/hooks/useBookmark';
+import { useArticle } from '@components/ArticleRenderer/hook';
+import useBookmark from '@hooks/useBookmark';
 import { useJobViewContext } from '../JobViewContext';
 import JobViewContentNotFound from './JobViewContentNotFound';
 
 export default function JobViewContent() {
-  const [, { open }] = useArticleContext();
+  const [, { open }] = useArticle();
   const { toggle, is } = useBookmark();
   const [context] = useJobViewContext();
   const screenType = useScreenType();

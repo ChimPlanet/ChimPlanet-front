@@ -1,11 +1,11 @@
 import { styled, useScreenType } from '@chimplanet/ui';
 import { useEffect, useMemo, useState } from 'react';
 
-import { useJobOfferDetail } from '@/query/offer';
-import { Offer } from '@/service/offer';
+import { useJobOfferDetail } from '@query/offer';
+import { Offer } from '@services/offer';
 import JobDetailHeader from './jobDetailHeader';
 
-import PurifyHtml from '@/common/components/PurifyHtml';
+import PurifyHtml from '@common/components/PurifyHtml';
 import JobImageModal from './JobImageModal';
 import {
   adaptImageClickListener,

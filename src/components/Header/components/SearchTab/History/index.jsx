@@ -1,6 +1,6 @@
 import { styled } from '@chimplanet/ui';
 
-import useHistory from '@/hooks/useHistory';
+import useHistory from '@hooks/useHistory';
 import { useSearchContext } from '../../../context/searchContext';
 import HistoryList from './historyList';
 

@@ -1,5 +1,5 @@
-import { SectionLeftIcon, SectionRightIcon } from '@/common/icons';
 import { Recruit } from '@chimplanet/ui';
+import { SectionLeftIcon, SectionRightIcon } from '@common/icons';
 import { Suspense } from 'react';
 import { RecruitData } from './RecruitData';
 
@@ -15,7 +15,7 @@ export const RecruitSection = () => {
           {(items) => (
             <Recruit.Items
               items={items}
-              renderItem={(item) => <>{console.log(item)}</>}
+              renderItem={(item) => <>{item.boardTitle}</>}
             />
           )}
         </RecruitData>

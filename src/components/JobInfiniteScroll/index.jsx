@@ -6,8 +6,8 @@ import {
 } from '@chimplanet/ui';
 import { useEffect, useMemo, useRef } from 'react';
 
-import { useArticleContext } from '@/context/articleContext';
-import useBookmark from '@/hooks/useBookmark';
+import { useArticle } from '@components/ArticleRenderer/hook';
+import useBookmark from '@hooks/useBookmark';
 
 export default function JobInfiniteScroll({ List, getMoreItem, last }) {
   const target = useRef();
@@ -15,7 +15,7 @@ export default function JobInfiniteScroll({ List, getMoreItem, last }) {
   const screenType = useScreenType();
 
   const { toggle, is } = useBookmark();
-  const [, { open }] = useArticleContext();
+  const [, { open }] = useArticle();
 
   const onIntersect = async ([entry], observer) => {
     if (entry.isIntersecting) {

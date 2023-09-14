@@ -6,9 +6,9 @@ import {
 } from '@chimplanet/ui';
 import { useMemo } from 'react';
 
-import Tag from '@/components/Tag';
-import { ignorePrefix } from '@/utils/str';
-import TagTrie from '@/utils/tagTrie';
+import Tag from '@components/Tag';
+import { ignorePrefix } from '@utils/str';
+import TagTrie from '@utils/tagTrie';
 import { selectRandomItemsInCollection } from '../../utils';
 
 export default function RecommendTagSection({ word, addTag }) {

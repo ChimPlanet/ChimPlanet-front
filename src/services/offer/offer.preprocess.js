@@ -1,4 +1,4 @@
-import { convertStringsToRegExp } from '@/service/domain.utils';
+import { convertStringsToRegExp } from '@services/domain.utils';
 
 export function number(value) {
   return parseInt(value);

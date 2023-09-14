@@ -1,4 +1,4 @@
-import { Tag } from '@/service/tag';
+import { Tag } from '@services/tag';
 
 export function groupBy(collection, attributeName) {
   if (!Array.isArray(collection)) {

@@ -6,11 +6,11 @@ import {
 } from '@chimplanet/ui';
 import { useEffect, useLayoutEffect, useMemo } from 'react';
 
-import { useJobOfferFromDynamic } from '@/query/offer';
-import { prefetchImages } from '@/utils';
+import { useJobOfferFromDynamic } from '@query/offer';
+import { prefetchImages } from '@utils';
 
-import { useArticleContext } from '@/context/articleContext';
-import useBookmark from '@/hooks/useBookmark';
+import { useArticle } from '@components/ArticleRenderer/hook';
+import useBookmark from '@hooks/useBookmark';
 import { FallbackFetching } from '../../FallbackFetching';
 
 /**
@@ -32,7 +32,7 @@ export default function JobOfferSectionContent({
   fetchFunction,
   maxLength,
 }) {
-  const [, { open }] = useArticleContext();
+  const [, { open }] = useArticle();
   const { toggle, is } = useBookmark();
   const { data: offers } = useJobOfferFromDynamic(
     queryKey,

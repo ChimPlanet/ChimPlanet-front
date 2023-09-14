@@ -1,6 +1,6 @@
 import { PropTypes, styled, useNavigate } from '@chimplanet/ui';
 
-import { JOB_PATH } from '@/constants/route';
+import { Paths } from '@routes';
 import useSearch from '../../hooks/useSearchNavigate';
 
 export default function ParentCategoryColumn({
@@ -18,7 +18,7 @@ export default function ParentCategoryColumn({
         <Item
           onMouseEnter={() => setCurrent(null)}
           onClick={() => {
-            navigate(JOB_PATH);
+            navigate(Paths.Job);
             afterChoose();
           }}
         >

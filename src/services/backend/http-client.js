@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { getApiBase } from '@/constants';
+import { getApiBase } from '@constants';
 
 const client = axios.create({
   timeout: 3000,

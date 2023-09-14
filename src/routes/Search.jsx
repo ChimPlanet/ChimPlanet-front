@@ -1,9 +1,9 @@
 import { styled, useLocation } from '@chimplanet/ui';
 import { useMemo } from 'react';
 
-import InvalidSearch from '@/components/Search/InvalidSearch';
-import SearchResult from '@/components/Search/SearchResult';
-import { getSearchMetadata } from '@/utils';
+import InvalidSearch from '@components/Search/InvalidSearch';
+import SearchResult from '@components/Search/SearchResult';
+import { getSearchMetadata } from '@utils';
 
 export const Search = () => {
   const location = useLocation();

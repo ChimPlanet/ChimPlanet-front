@@ -2,7 +2,6 @@ import { Loading, styled, useScreenType, useTheme } from '@chimplanet/ui';
 import { ChevronLeft, MoreHorizontal } from '@chimplanet/ui/icons';
 import { Suspense, useEffect, useState } from 'react';
 
-import { useArticleContext } from '@/context/articleContext';
 import { Modal } from '@mui/material';
 import JobDetailContent from './jobDetailContent';
 import JobDetailMenuBar from './jobDetailMenuBar';
@@ -10,14 +9,16 @@ import JobDetailMobileMenuBar from './jobDetailMobileMenuBar';
 
 import { styled as muiStyled } from '@mui/material/styles';
 
-import useBookmark from '@/hooks/useBookmark';
-import { BookmarkContext } from '@/utils/Context/bookmarkContext';
+import useBookmark from '@hooks/useBookmark';
+import { BookmarkContext } from '@utils/Context/bookmarkContext';
 
-import useModalGoBack from '@/hooks/useModalGoBack';
-import '@/styles/naver-se.css';
+import useModalGoBack from '@hooks/useModalGoBack';
+import 'styles/naver-se.css';
+
+import { useArticle } from '@components/ArticleRenderer/hook';
 
 export default function JobDetailSubscriber() {
-  const [article, { close }] = useArticleContext();
+  const [article, { close }] = useArticle();
   const [isOpen, toggleActive] = useModalGoBack('#article-view');
   const [modal, setModal] = useState(false);
   const [userProfile, setUserProfile] = useState();
