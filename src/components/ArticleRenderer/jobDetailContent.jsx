@@ -5,7 +5,6 @@ import JobDetailHeader from './jobDetailHeader';
 
 import PurifyHtml from '@common/components/PurifyHtml';
 import { useArticleContext } from './context';
-import { useArticle } from './hook';
 import {
   adaptImageClickListener,
   adaptImagesNoRefererPolicy,
@@ -15,10 +14,7 @@ import {
 } from './util';
 
 export default function JobDetailContent({ setFocusedImageSrc, id }) {
-  const [, { close }] = useArticle();
-  const { data, isError } = useArticleContext();
-
-  if (isError && errorHandler(id, close)) return <></>;
+  const data = useArticleContext();
 
   const sizeType = useScreenType();
   const { title, isClosed, viewCount } = data;
@@ -65,16 +61,6 @@ export default function JobDetailContent({ setFocusedImageSrc, id }) {
     </Wrapper>
   );
 }
-
-const errorHandler = (id, close) => {
-  if (
-    confirm('삭제되었거나 권한이 필요한 게시글입니다. 원문으로 보시겠습니까?')
-  ) {
-    window.open(`https://cafe.naver.com/steamindiegame/${id}`);
-    close();
-  }
-  return true;
-};
 
 const Wrapper = styled.div`
   margin-top: ${({ sizeType }) => (sizeType === 'desktop' ? '' : '43px')};

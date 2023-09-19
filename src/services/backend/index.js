@@ -1,13 +1,13 @@
-import OfferClient from './offer-client';
-import BannerClient from './banner-client';
-import TagClient from './tag-client';
-import OfficialClient from './official-client';
+import banners from './banners';
+import offers from './offers';
+import official from './official';
+import tags from './tags';
 
 const backend = Object.freeze({
-  offers: new OfferClient(),
-  banners: new BannerClient(),
-  tags: new TagClient(),
-  official: new OfficialClient(),
+  offers,
+  banners,
+  tags,
+  official,
 });
 
 export default backend;

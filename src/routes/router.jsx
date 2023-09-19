@@ -19,6 +19,7 @@ const router = createBrowserRouter([
   {
     path: Paths.Home,
     element: <Layout />,
+    errorElement: <Error />,
     children: [
       {
         path: Paths.Home,

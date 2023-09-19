@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider as Provider } from 'react-query';
+import { QueryClientProvider as Provider, QueryClient } from 'react-query';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -7,6 +7,7 @@ const queryClient = new QueryClient({
       staleTime: 180000, // Stale time, 3 minutes
       suspense: true,
       keepPreviousData: true,
+      refetchOnWindowFocus: false,
     },
   },
 });

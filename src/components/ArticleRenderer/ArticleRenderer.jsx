@@ -1,4 +1,4 @@
-import { Loading, styled, useScreenType } from '@chimplanet/ui';
+import { ErrorBoundary, Loading, styled, useScreenType } from '@chimplanet/ui';
 
 import { Modal } from '@mui/material';
 
@@ -20,10 +20,11 @@ const ArticleRenderer = () => {
   return (
     <ScrollModal open={id !== null} onClose={close} full={sizeType}>
       <>
-        <Suspense fallback={<Loading />}>
-          <ArticleProvider id={id}>
-            <ContentWrapper full={sizeType}>
-              {/* <MobileContainer full={sizeType}>
+        <ErrorBoundary>
+          <Suspense fallback={<Loading />}>
+            <ArticleProvider id={id}>
+              <ContentWrapper full={sizeType}>
+                {/* <MobileContainer full={sizeType}>
             <div onClick={close}>
               <ChevronLeft color={theme.textColors.primary} />
             </div>
@@ -31,14 +32,14 @@ const ArticleRenderer = () => {
               <MoreHorizontal color={theme.textColors.primary} />
             </div>
           </MobileContainer> */}
-              <JobDetailContent
-                setFocusedImageSrc={setImageURI}
-                full={sizeType}
-              />
-              <JobImageModal close={() => setImageURI(null)} src={imageURI} />
-            </ContentWrapper>
-            <Menubar id={id} />
-            {/* <JobDetailMobileMenuBar
+                <JobDetailContent
+                  setFocusedImageSrc={setImageURI}
+                  full={sizeType}
+                />
+                <JobImageModal close={() => setImageURI(null)} src={imageURI} />
+              </ContentWrapper>
+              <Menubar id={id} />
+              {/* <JobDetailMobileMenuBar
           modal={modal}
           handleModal={handleModal}
           id={article?.id}
@@ -47,8 +48,9 @@ const ArticleRenderer = () => {
           isBookmarked={bookmarkSet.has(article?.id)}
           onBookmarkClick={() => toggle(article?.data)}
         /> */}
-          </ArticleProvider>
-        </Suspense>
+            </ArticleProvider>
+          </Suspense>
+        </ErrorBoundary>
       </>
     </ScrollModal>
   );

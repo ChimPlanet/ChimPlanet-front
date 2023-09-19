@@ -1,7 +1,7 @@
 import { useQuery } from 'react-query';
 
-import { BannerQueryKey } from '@constants/query';
 import backend from '@services/backend';
+import { QueryKeys } from './keys';
 
 function preloadImages(data) {
   if (Array.isArray(data)) {
@@ -16,7 +16,7 @@ function preloadImages(data) {
 
 /** @returns {import('react-query').UseQueryResult<Banner[]>} */
 export const useBanner = () => {
-  return useQuery(BannerQueryKey, backend.banners.banners, {
+  return useQuery(QueryKeys.banner, backend.banners, {
     select: preloadImages,
   });
 };

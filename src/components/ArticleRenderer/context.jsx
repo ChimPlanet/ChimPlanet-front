@@ -6,11 +6,10 @@ import { createContext, useContext, useMemo } from 'react';
 const ArticleContext = createContext();
 
 export const ArticleProvider = ({ children, id }) => {
-  const { data, isError } = useJobOfferDetail(id);
+  const { data } = useJobOfferDetail(id);
+
   return (
-    <ArticleContext.Provider
-      value={useMemo(() => ({ data, isError }), [data, isError])}
-    >
+    <ArticleContext.Provider value={useMemo(() => data, [data])}>
       {children}
     </ArticleContext.Provider>
   );

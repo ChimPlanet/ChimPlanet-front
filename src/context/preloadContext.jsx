@@ -42,7 +42,7 @@ export function usePreloadContext() {
 const NeedPreloadRequests = [
   {
     key: 'banners',
-    value: backend.banners.banners,
+    value: backend.banners,
     preprocess: (collection) => {
       if (Array.isArray(collection)) {
         collection.forEach((item) => {
@@ -54,7 +54,7 @@ const NeedPreloadRequests = [
   },
   {
     key: 'tags',
-    value: backend.tags.tagList,
+    value: backend.tags,
     preprocess: (collection) => {
       TagTrie.getInstance(collection.map((e) => e.tagName));
       return collection;

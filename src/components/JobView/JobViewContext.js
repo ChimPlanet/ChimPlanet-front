@@ -47,12 +47,12 @@ export const useJobViewReducer = (metadata) => {
         return acc;
       }, []);
       backend.offers
-        .searchTags(items.map((e) => e.tagId))
+        .searchByTag(items.map((e) => e.tagId))
         .then((offers) => state[1]({ originalData: offers }))
         .finally(() => state[1]({ pending: 'done' }));
     } else if (metadata.type === 'normal') {
       backend.offers
-        .searchTitle(metadata.words[0])
+        .searchByTitle(metadata.words[0])
         .then((offers) => state[1]({ originalData: offers }))
         .finally(() => state[1]({ pending: 'done' }));
     }

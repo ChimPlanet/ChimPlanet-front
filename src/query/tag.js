@@ -1,12 +1,11 @@
-//import fetchTagList from '@services/tag/fetchTagList';
 import backend from '@services/backend';
 import { useQuery } from 'react-query';
-import { TagQueryKey } from '../constants/query';
+import { QueryKeys } from './keys';
 
 export const useTagList = () => {
-  return useQuery([TagQueryKey], backend.tags.tagList);
+  return useQuery([QueryKeys.tag], backend.tags);
 };
 
 export const useTag = () => {
-  return useQuery([TagQueryKey], backend.tags.tag);
+  return useQuery([QueryKeys.tag], backend.tags.get);
 };
