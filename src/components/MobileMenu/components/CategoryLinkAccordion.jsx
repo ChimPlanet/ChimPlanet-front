@@ -1,6 +1,5 @@
 import { Link, styled, useCurrentTheme } from '@chimplanet/ui';
 
-import { usePreloadContext } from '@context/preloadContext';
 import { getFamilyTree } from '@utils';
 import { useMemo, useState } from 'react';
 
@@ -9,11 +8,12 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import { styled as mStyled } from '@mui/material/styles';
+import { getLocalStorageValue } from '@utils/localStorage';
 
 export default function CategoryLinkAccordion({ close }) {
   const [expandedId, setExpandedId] = useState(null);
 
-  const { tags } = usePreloadContext();
+  const { tags } = getLocalStorageValue('tags');
 
   const theme = useCurrentTheme();
 

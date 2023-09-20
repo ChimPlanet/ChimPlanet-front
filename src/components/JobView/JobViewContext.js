@@ -1,6 +1,6 @@
-import { usePreloadContext } from '@context/preloadContext';
 import backend from '@services/backend';
 import { Tag } from '@services/tag';
+import { getLocalStorageValue } from '@utils/localStorage';
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
 /**
@@ -33,7 +33,7 @@ export const useJobViewReducer = (metadata) => {
   });
 
   /** @type {{tags: Tag[]}} */
-  const { tags } = usePreloadContext();
+  const { tags } = getLocalStorageValue('tags');
 
   useEffect(() => {
     state[1]({ searchMetadata: metadata });

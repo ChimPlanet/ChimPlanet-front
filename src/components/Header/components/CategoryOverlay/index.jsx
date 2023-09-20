@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 
 import { getFamilyTree } from '@utils';
 
-import { usePreloadContext } from '@context/preloadContext';
+import { getLocalStorageValue } from '@utils/localStorage';
 import ChildCategoryColumn from './childCategoryColumn';
 import ParentCategoryColumn from './parentCategoryColumn';
 
@@ -14,7 +14,9 @@ import ParentCategoryColumn from './parentCategoryColumn';
 export default function CategoryOverlay({ close }) {
   const [parent, setParent] = useState(null);
 
-  const { tags } = usePreloadContext();
+  const tags = getLocalStorageValue('tags');
+
+  console.log(tags);
 
   const [ancestors, itemMap] = useMemo(() => {
     const familyTree = getFamilyTree(tags);

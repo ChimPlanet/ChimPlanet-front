@@ -1,39 +1,24 @@
 import { styled, useScreenType } from '@chimplanet/ui';
 import { useMemo } from 'react';
 
-import { usePreloadContext } from '@context/preloadContext';
-import { Banner } from '@services/banner';
-import {
-  filterSubBanner,
-  getBannerByType,
-} from '@services/banner/banner-utils';
+import useBanner from '@hooks/useBanner';
 
 export default function SubBanner() {
   const screenType = useScreenType();
-  const { banners } = usePreloadContext();
+  const { mid } = useBanner();
 
-  /** @type {Banner} */
-  const bannerItem = useMemo(
-    () =>
-      banners
-        ? getBannerByType(
-            filterSubBanner,
-            banners,
-            screenType === 'desktop' ? 'PC' : 'MOBILE',
-          )[0]
-        : undefined,
-    [banners, screenType],
+  /** @type {import('@services/entity').Banner} */
+  const { to, redirectType, imageUrl, fileName } = useMemo(
+    () => mid[screenType === 'desktop' ? 'pc' : 'mobile'],
+    [mid, screenType],
   );
 
   return (
     <Container
-      href={bannerItem?.redirectUrl || '#'}
-      target={bannerItem?.redirectType === 'NewTab' ? '_blank' : '_self'}
+      href={to}
+      target={redirectType === 'NewTab' ? '_blank' : '_self'}
     >
-      <SubBannerImage
-        src={bannerItem?.sourceUrl || ''}
-        alt={bannerItem?.sourceUrl || ''}
-      />
+      <SubBannerImage src={imageUrl} alt={fileName} />
     </Container>
   );
 }

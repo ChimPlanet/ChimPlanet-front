@@ -1,4 +1,4 @@
-import { Tag } from '../tag';
+import { parseTagFromResponse } from '@services/entity';
 import { createRequester } from './base';
 
 const list = createRequester(
@@ -7,7 +7,8 @@ const list = createRequester(
     uri: '/tag/tagList',
   },
   {
-    parse: typeTagArray,
+    /** @returns {import('@services/entity').Tag[]} */
+    parse: (p) => p.map(parseTagFromResponse),
   },
 );
 
@@ -20,9 +21,5 @@ const get = createRequester((param) => ({
 const tags = Object.assign(list, {
   get,
 });
-
-function typeTagArray(values) {
-  return values.map(Tag);
-}
 
 export default tags;

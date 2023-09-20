@@ -10,12 +10,6 @@ import {
   useScreenType,
 } from '@chimplanet/ui';
 
-import { usePreloadContext } from '@context/preloadContext';
-import {
-  filterMainBanner,
-  getBannerByType,
-} from '@services/banner/banner-utils';
-
 import { Centering } from '@common/components/Centering';
 import {
   ArticleRenderer,
@@ -23,6 +17,7 @@ import {
   Footer,
   Header,
 } from '@components';
+import useBanner from '@hooks/useBanner';
 import { Paths } from './path';
 
 const BannerWhileList = [Paths.Home, Paths.Event, Paths.Official];
@@ -30,18 +25,12 @@ const BannerWhileList = [Paths.Home, Paths.Event, Paths.Official];
 export default function Layout() {
   const sizeType = useScreenType();
   const { pathname } = useLocation();
-  const { banners } = usePreloadContext();
+  const { main } = useBanner();
 
-  const mainBanners = useMemo(
-    () =>
-      banners
-        ? getBannerByType(
-            filterMainBanner,
-            banners,
-            sizeType === 'desktop' ? 'PC' : 'MOBILE',
-          )
-        : [],
-    [banners, sizeType],
+  /** @type {import('@services/entity').Banner[]} */
+  const banners = useMemo(
+    () => main.map((v) => v[sizeType === 'desktop' ? 'pc' : 'mobile']),
+    [main, sizeType],
   );
 
   return (
@@ -49,7 +38,7 @@ export default function Layout() {
       <Container>
         <Header />
         {BannerWhileList.includes(pathname) && banners ? (
-          <BannerWrapper children={<Banner banners={mainBanners} />} />
+          <BannerWrapper children={<Banner banners={banners} />} />
         ) : null}
 
         <Centering
