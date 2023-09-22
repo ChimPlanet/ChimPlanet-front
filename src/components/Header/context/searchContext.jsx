@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import useSearchReducer from '../hooks/useSearchReducer';
+import useSearch from '../hooks/useSearchReducer';
 
 /** @type {React.Context<import('../hooks/useSearchReducer').SearchReducerResult>} */
 const searchContext = createContext();
@@ -7,7 +7,7 @@ const searchContext = createContext();
 export const useSearchContext = () => useContext(searchContext);
 
 export const SearchContextProvider = ({ children, onAfterSearch }) => {
-  const stateAndDispatcher = useSearchReducer(onAfterSearch);
+  const stateAndDispatcher = useSearch(onAfterSearch);
 
   return (
     <searchContext.Provider value={stateAndDispatcher}>

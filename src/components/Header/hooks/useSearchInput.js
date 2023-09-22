@@ -5,7 +5,7 @@ import { useSearchContext } from '../context/searchContext';
 
 export default function useSearchInput() {
   // 마지막 입력이 한글 입력인지 확인(input 한글 버그 해소용)
-  const [{ input, tags, searchType }, { search, removeTag, addTag }] =
+  const [{ input, current: tags, searchType }, { search, removeTag, addTag }] =
     useSearchContext();
   const lastHangulRef = useRef(false);
 

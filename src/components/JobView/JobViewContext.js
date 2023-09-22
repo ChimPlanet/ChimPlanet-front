@@ -1,6 +1,6 @@
+import useTag from '@hooks/useTag';
 import backend from '@services/backend';
 import { Tag } from '@services/tag';
-import { getLocalStorageValue } from '@utils/localStorage';
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
 /**
@@ -33,14 +33,14 @@ export const useJobViewReducer = (metadata) => {
   });
 
   /** @type {{tags: Tag[]}} */
-  const { tags } = getLocalStorageValue('tags');
+  const { items } = useTag();
 
   useEffect(() => {
     state[1]({ searchMetadata: metadata });
-    if (metadata.type === 'tag' && tags) {
+    if (metadata.type === 'tag' && items) {
       const querySet = new Set(metadata.words);
       /** @type {Tag[]} */
-      const items = tags.reduce((acc, it) => {
+      const items = items.reduce((acc, it) => {
         if (querySet.has(it.tagName)) {
           acc.push(it);
         }
@@ -56,7 +56,7 @@ export const useJobViewReducer = (metadata) => {
         .then((offers) => state[1]({ originalData: offers }))
         .finally(() => state[1]({ pending: 'done' }));
     }
-  }, [metadata, tags]);
+  }, [metadata, items]);
 
   return state;
 };

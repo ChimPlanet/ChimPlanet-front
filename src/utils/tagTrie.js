@@ -3,17 +3,9 @@ import trie from 'trie-prefix-tree';
 
 /**
  * Tag Trie Class For Search & Recommendations
- * ! Singleton
  * @author byungjin.dev
  */
 class TagTrie {
-  //#region Fields
-  /**
-   * ! Singleton Instance
-   * @type {TagTrie}
-   */
-  static #instance;
-  //#endregion
   /**
    * @param {string[]} tags
    */
@@ -40,8 +32,16 @@ class TagTrie {
    * @param {string} word
    * @returns {boolean}
    */
-  hasTag(word) {
+  has(word) {
     return this.tagMap.has(TagTrie.disassembleWord(word));
+  }
+
+  /**
+   * @param {string} word
+   * @returns
+   */
+  get(word) {
+    return this.tagMap.get(TagTrie.disassembleWord(word));
   }
 
   //#endregion
@@ -67,22 +67,6 @@ class TagTrie {
       disassembled.map((disassembledWord, i) => [disassembledWord, tags[i]]),
     );
   }
-
-  /**
-   * Factory Method for Singleton Instance
-   * @param {string[] | undefined} tags
-   */
-  static getInstance(tags) {
-    if (TagTrie.#instance === undefined) {
-      TagTrie.#instance = new TagTrie(tags);
-    }
-    return TagTrie.#instance;
-  }
-
-  static ready() {
-    return TagTrie.#instance !== undefined;
-  }
-
   //#endregion
 }
 

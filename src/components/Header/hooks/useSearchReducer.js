@@ -1,15 +1,15 @@
 import { useMemo, useReducer } from 'react';
 
+import useTag from '@hooks/useTag';
 import { HistoryContext } from '@utils/Context/historyContext';
-import { ignorePrefix } from '@utils/str';
-import TagTrie from '@utils/tagTrie';
+import { removePrefix } from '@utils/str';
 import useSearchNavigate from './useSearchNavigate';
 
 /**
  * @typedef {object} SearchState
  * @property {"tag" | "normal"} searchType
  * @property {string} input
- * @property {string[]} tags
+ * @property {string[]} current
  *
  *
  * @typedef {object} SearchHandle
@@ -23,41 +23,51 @@ import useSearchNavigate from './useSearchNavigate';
  * @param {()=>void} onAfterSearch
  * @returns {SearchReducerResult}
  */
-export default function useSearchReducer(onAfterSearch) {
+export default function useSearch(onAfterSearch) {
   const navigate = useSearchNavigate();
+
+  const { trie } = useTag();
+
   /** @type {[SearchState, (newState: Partial<SearchState>)=>void]} */
   const [state, dispatch] = useReducer(reducer, {
     searchType: 'normal',
     input: '',
-    tags: [],
+    current: [],
   });
 
   /** @type {SearchHandle} */
   const handle = useMemo(
     () => ({
-      removeTag: (id) => dispatch({ tags: state.tags.filter((t) => t !== id) }),
-      addTag: (tag, clear = false) => {
-        if (!validateTag(state, tag)) return;
-        dispatch({ tags: [...state.tags, getOriginalTag(tag)] });
+      removeTag: (id) =>
+        dispatch({ current: state.current.filter((t) => t !== id) }),
+      addTag: (word, clear = false) => {
+        if (state.searchType !== 'tag') return;
+
+        const lowered = removePrefix(word).toLowerCase();
+
+        if (!validate(state.current, lowered) || !trie.has(lowered)) return;
+        dispatch({
+          current: [...state.current, trie.get(removePrefix(word))],
+        });
         // 만약 입력한 태그가 input과 같다면 input을 초기화
-        if (tag === state.input || clear) dispatch({ input: '' });
+        if (word === state.input || clear) dispatch({ input: '' });
       },
       setInput: (newValue) => dispatch({ input: newValue }),
       search: () => {
         HistoryContext.getInstance().addFront(
           state.searchType === 'normal'
             ? [state.input]
-            : state.tags.map((t) => `#${t}`),
+            : state.current.map((t) => `#${t}`),
         );
 
         navigate(
-          state.searchType === 'normal' ? state.input : state.tags,
+          state.searchType === 'normal' ? state.input : state.current,
           state.searchType,
         );
         onAfterSearch();
       },
     }),
-    [state, dispatch, onAfterSearch, navigate],
+    [state, dispatch, onAfterSearch, navigate, trie],
   );
 
   return [state, handle];
@@ -72,7 +82,7 @@ const reducer = (state, newState) => preprocess({ ...state, ...newState });
 const preprocess = (state) => {
   // ! 검색 종류 조건
   state.searchType =
-    state.tags.length === 0 && // 선 입력된 태그가 없고
+    state.current.length === 0 && // 선 입력된 태그가 없고
     (state.input.length === 0 || state.input.at(0) !== '#') // 첫 문자가 태그 prefix가 아닌 경우
       ? 'normal'
       : 'tag';
@@ -81,24 +91,9 @@ const preprocess = (state) => {
 };
 
 /**
- * @param {SearchState} state
+ * @param {string[]} current
  * @param {string} target
  */
-const validateTag = (state, target) => {
-  if (typeof target !== 'string' || target.at(0) !== '#') return false;
-
-  const lowered = ignorePrefix(target).toLowerCase();
-
-  return (
-    // 이미 동일한 태그가 없는 경우
-    state.tags.findIndex((t) => t.toLocaleLowerCase() === lowered) === -1 &&
-    TagTrie.ready() &&
-    TagTrie.getInstance().hasTag(lowered)
-  );
-};
-
-const getOriginalTag = (rawTag) => {
-  return TagTrie.getInstance().tagMap.get(
-    TagTrie.disassembleWord(ignorePrefix(rawTag)),
-  );
-};
+const validate = (current, lowered) =>
+  // 이미 동일한 태그가 없는 경우
+  current.findIndex((t) => t.toLocaleLowerCase() === lowered) === -1;

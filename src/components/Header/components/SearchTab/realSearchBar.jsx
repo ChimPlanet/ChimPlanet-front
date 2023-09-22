@@ -23,7 +23,8 @@ import RealSearchTagList from './realSearchTagList';
  * @returns
  */
 export default function RealSearchBar({ desktop }) {
-  const [{ input, tags }, { setInput, removeTag }] = useSearchContext();
+  const [{ input, current: tags }, { setInput, removeTag }] =
+    useSearchContext();
 
   const inputRef = useRef(null);
   const handleEnter = useSearchInput();

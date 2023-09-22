@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 
 import { getFamilyTree } from '@utils';
 
-import { getLocalStorageValue } from '@utils/localStorage';
+import useTag from '@hooks/useTag';
 import ChildCategoryColumn from './childCategoryColumn';
 import ParentCategoryColumn from './parentCategoryColumn';
 
@@ -14,12 +14,10 @@ import ParentCategoryColumn from './parentCategoryColumn';
 export default function CategoryOverlay({ close }) {
   const [parent, setParent] = useState(null);
 
-  const tags = getLocalStorageValue('tags');
-
-  console.log(tags);
+  const { items } = useTag();
 
   const [ancestors, itemMap] = useMemo(() => {
-    const familyTree = getFamilyTree(tags);
+    const familyTree = getFamilyTree(items);
 
     const parents = Array.from(familyTree.keys());
 
@@ -30,7 +28,7 @@ export default function CategoryOverlay({ close }) {
     }, {});
 
     return [parents.map((e) => e.tagName), tree];
-  }, [tags]);
+  }, [items]);
 
   return (
     <Container>

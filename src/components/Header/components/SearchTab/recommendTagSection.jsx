@@ -7,19 +7,20 @@ import {
 import { useMemo } from 'react';
 
 import Tag from '@components/Tag';
-import { ignorePrefix } from '@utils/str';
-import TagTrie from '@utils/tagTrie';
+import useTag from '@hooks/useTag';
+import { removePrefix } from '@utils/str';
 import { selectRandomItemsInCollection } from '../../utils';
 
 export default function RecommendTagSection({ word, addTag }) {
+  const { trie } = useTag();
   const screenType = useScreenType();
 
   const recommends = useMemo(() => {
     return selectRandomItemsInCollection(
-      TagTrie.getInstance().getSimilarTags(ignorePrefix(word)),
+      trie.getSimilarTags(removePrefix(word)),
       screenType !== 'mobile' ? 30 : 10,
     );
-  }, [word, screenType]);
+  }, [word, screenType, trie]);
 
   const theme = useCurrentTheme();
 

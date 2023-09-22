@@ -8,7 +8,7 @@ export function isHangulChar(ch) {
  * @param {string} prefix
  * @returns {string}
  */
-export function ignorePrefix(str, prefix = '#') {
+export function removePrefix(str, prefix = '#') {
   return str.startsWith(prefix) ? str.slice(prefix.length) : str;
 }
 
