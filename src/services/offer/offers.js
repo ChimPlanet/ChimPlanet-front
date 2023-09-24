@@ -1,5 +1,5 @@
 import { data, field } from 'useful-decorator';
-import * as pp from './offer.preprocess';
+import * as pp from '../entity/preprocess';
 
 @data
 class Offer {
