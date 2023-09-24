@@ -1,12 +1,8 @@
 import { useQuery } from 'react-query';
 
 import backend from '@services/backend';
-import { Offer, OfferContent } from '@services/offer';
 import { QueryKeys } from './keys';
 
-/**
- * @returns {import('react-query').UseQueryResult<Offer[]>}
- */
 export const usePopularJobOffer = () => {
   return useQuery([QueryKeys.jobOffer, 'popular'], backend.offers.popular);
 };
@@ -23,14 +19,7 @@ export function useJobOfferFromDynamic(key, fetchFunction, maxLength) {
   });
 }
 
-export function useJobOfferBasic(
-  lastArticleId,
-  size,
-  page,
-  sort,
-  isEnd,
-  value,
-) {
+export function useJobOfferBasic(lastArticleId, size, page, sort, isEnd, value) {
   return useQuery([QueryKeys.jobOffer, 'basic', page, sort, isEnd], () =>
     backend.offers(lastArticleId, size, page, sort, isEnd, value),
   );

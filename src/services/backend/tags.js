@@ -1,7 +1,7 @@
 import { parseTagFromResponse } from '@services/entity';
-import { createRequester } from './base';
+import { createAPI } from './base';
 
-const list = createRequester(
+const list = createAPI(
   {
     method: 'GET',
     uri: '/tag/tagList',
@@ -12,7 +12,7 @@ const list = createRequester(
   },
 );
 
-const get = createRequester((param) => ({
+const get = createAPI((param) => ({
   method: 'POST',
   uri: '/tag',
   data: param,

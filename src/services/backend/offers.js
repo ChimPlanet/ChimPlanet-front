@@ -1,7 +1,7 @@
 import { Offer, OfferContent } from '@services/offer';
-import { createRequester } from './base';
+import { createAPI } from './base';
 
-const list = createRequester(
+const list = createAPI(
   (id, size, page, sort, isEnd, value) => {
     let query = '';
 
@@ -24,25 +24,25 @@ const list = createRequester(
   },
 );
 
-const recent = createRequester(
+const recent = createAPI(
   { method: 'GET', uri: '/boards/new' },
   {
     parse: typeOfferArray,
   },
 );
 
-const popular = createRequester(
+const popular = createAPI(
   { method: 'GET', uri: '/boards/popular' },
   {
     parse: typeOfferArray,
   },
 );
 
-const get = createRequester((id) => ({ method: 'GET', uri: '/boards/' + id }), {
+const get = createAPI((id) => ({ method: 'GET', uri: '/boards/' + id }), {
   parse: OfferContent,
 });
 
-const searchByTag = createRequester(
+const searchByTag = createAPI(
   (ids) => ({
     method: 'GET',
     uri: `/boards/search?searchTagId=${encodeURIComponent(ids.join(','))}`,
@@ -52,7 +52,7 @@ const searchByTag = createRequester(
   },
 );
 
-const searchByTitle = createRequester(
+const searchByTitle = createAPI(
   (title) => ({
     method: 'GET',
     uri: `/boards/search?title=${encodeURIComponent(title)}`,

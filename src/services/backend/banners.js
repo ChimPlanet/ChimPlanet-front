@@ -1,7 +1,7 @@
 import { parseBannerFromResponse } from '@services/entity/banner';
-import { createRequester } from './base';
+import { createAPI } from './base';
 
-const list = createRequester(
+const list = createAPI(
   { method: 'GET', uri: '/file/banner' },
   {
     parse: (d) => d.map(parseBannerFromResponse),
