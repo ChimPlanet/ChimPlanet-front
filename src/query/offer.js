@@ -21,7 +21,7 @@ export function useJobOfferFromDynamic(key, fetchFunction, maxLength) {
 
 export function useJobOfferBasic(lastArticleId, size, page, sort, isEnd, value) {
   return useQuery([QueryKeys.jobOffer, 'basic', page, sort, isEnd], () =>
-    backend.offers(lastArticleId, size, page, sort, isEnd, value),
+    backend.offers.list({ lastArticleId, size, page, sort, isEnd, value }),
   );
 }
 

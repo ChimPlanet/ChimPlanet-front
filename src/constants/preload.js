@@ -4,7 +4,7 @@ import backend from '@services/backend';
 export const preloadTasks = [
   {
     key: 'banners',
-    fetch: backend.banners,
+    fetch: backend.banners.list,
     preprocess: (d) => {
       if (!Array.isArray(d)) return;
 
@@ -14,7 +14,7 @@ export const preloadTasks = [
   },
   {
     key: 'tags',
-    fetch: backend.tags,
+    fetch: backend.tags.list,
     preprocess: (d) => {
       if (!Array.isArray(d)) return;
       return d;

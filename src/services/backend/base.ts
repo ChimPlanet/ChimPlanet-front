@@ -34,7 +34,7 @@ export const client = async <T>(request: Request): Promise<T> => {
 export const createAPI =
   <Payload = void, From = unknown, To = unknown>(
     config: RequesterConfig<Payload>,
-    option: Option<From, To>,
+    option?: Option<From, To>,
   ) =>
   async (payload: Payload): Promise<To extends unknown ? From : To> => {
     const request = typeof config === 'function' ? config(payload) : config;

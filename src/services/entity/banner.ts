@@ -4,7 +4,7 @@ type BannerDeviceType = 'MOBILE' | 'PC';
 type BannerImageType = 'MAIN' | 'MID';
 type BannerRedirectType = 'CurrentTab' | 'NewTab';
 
-interface BannerDAO {
+export interface BannerDAO {
   createdDate: string;
   fileId: string;
   fileName: string;

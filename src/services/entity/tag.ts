@@ -1,13 +1,13 @@
 import { createEntityFactory } from './base';
 
-interface TagDAO {
+export interface TagDAO {
   tagId: string;
   tagName: string;
   parentTagId: string;
   childTagId: string;
 }
 
-interface Tag {
+export interface Tag {
   id: string;
   name: string;
   parent: string;

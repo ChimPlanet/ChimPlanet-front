@@ -1,5 +1,3 @@
-import { Tag } from '@services/tag';
-
 /**
  * @template T
  * @param {Array<T>} array
@@ -20,14 +18,13 @@ export function getFamilyTree(tags) {
   const sourceTree = tags.reduce((acc, tag) => {
     if (tag.childTagId === tag.parentTagId) {
       acc[tag.parentTagId] = tag;
-      familyTree.set(tag, new Array());
+      familyTree.set(tag, []);
     }
     return acc;
   }, {});
 
   tags.forEach((tag) => {
-    if (tag.childTagId === tag.parentTagId || !(tag.parentTagId in sourceTree))
-      return;
+    if (tag.childTagId === tag.parentTagId || !(tag.parentTagId in sourceTree)) return;
 
     familyTree.get(sourceTree[tag.parentTagId]).push(tag);
   });

@@ -1,9 +1,4 @@
-import {
-  PropTypes,
-  styled,
-  useCurrentTheme,
-  useScreenType,
-} from '@chimplanet/ui';
+import { PropTypes, styled, useCurrentTheme, useScreenType } from '@chimplanet/ui';
 import { useMemo } from 'react';
 
 import Tag from '@components/Tag';
@@ -17,7 +12,7 @@ export default function RecommendTagSection({ word, addTag }) {
 
   const recommends = useMemo(() => {
     return selectRandomItemsInCollection(
-      trie.getSimilarTags(removePrefix(word)),
+      trie.similar(removePrefix(word)),
       screenType !== 'mobile' ? 30 : 10,
     );
   }, [word, screenType, trie]);

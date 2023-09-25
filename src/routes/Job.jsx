@@ -3,7 +3,6 @@ import { useArticle } from '@components/ArticleRenderer/hook';
 import JobInfiniteScroll from '@components/JobInfiniteScroll';
 import JobNavBar from '@components/JobNavBar';
 import { useJobOfferBasic, useJobOfferDetail } from '@query/offer';
-import { Offer } from '@services/offer';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export const Job = ({ parId }) => {

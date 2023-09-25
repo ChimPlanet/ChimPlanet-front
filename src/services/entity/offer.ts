@@ -1,7 +1,7 @@
 import { createEntityFactory } from './base';
 import * as pp from './preprocess';
 
-interface OfferDAO {
+export interface OfferDAO {
   articleId: string;
   boardTitle: string;
   writer: string;
@@ -15,7 +15,7 @@ interface OfferDAO {
   unauthorized: boolean;
 }
 
-interface Offer {
+export interface Offer {
   id: number;
   title: string;
   writer: string;

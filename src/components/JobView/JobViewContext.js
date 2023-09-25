@@ -1,6 +1,5 @@
 import useTag from '@hooks/useTag';
 import backend from '@services/backend';
-import { Tag } from '@services/tag';
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
 /**
@@ -90,9 +89,7 @@ function sortOffers(type, offers) {
     case 'popular':
       return offers.sort((lhs, rhs) => rhs.viewCount - lhs.viewCount);
     case 'recent':
-      return offers.sort(
-        (lhs, rhs) => rhs.regDateTime.valueOf() - lhs.regDateTime.valueOf(),
-      );
+      return offers.sort((lhs, rhs) => rhs.regDateTime.valueOf() - lhs.regDateTime.valueOf());
     case 'recommend':
       return offers.sort((lhs, rhs) => rhs.likeCount - lhs.likeCount);
     default:

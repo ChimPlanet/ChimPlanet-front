@@ -1,5 +1,4 @@
 import { useJobOfferDetail } from '@query/offer';
-import { OfferContent } from '@services/offer';
 import { createContext, useContext, useMemo } from 'react';
 
 /** @type {React.Context<{data: OfferContent, isError: boolean}>} */

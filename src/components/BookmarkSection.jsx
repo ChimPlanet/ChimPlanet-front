@@ -1,12 +1,7 @@
-import {
-  JobOfferMapContent,
-  ResizableGrid,
-  useScreenType,
-} from '@chimplanet/ui';
+import { JobOfferMapContent, ResizableGrid, useScreenType } from '@chimplanet/ui';
 
 import { useArticle } from '@components/ArticleRenderer/hook';
 import useBookmark from '@hooks/useBookmark';
-import { Offer } from '@services/offer';
 import { useMemo } from 'react';
 
 export default function BookmarkSection() {
@@ -14,10 +9,9 @@ export default function BookmarkSection() {
   const [, { open }] = useArticle();
   const { toggle, is, bookmarks } = useBookmark();
 
-  const layoutConfig = useMemo(
-    () => OfferLayoutConfig[screenType],
-    [screenType],
-  );
+  console.log(bookmarks);
+
+  const layoutConfig = useMemo(() => OfferLayoutConfig[screenType], [screenType]);
 
   return (
     <ResizableGrid
