@@ -5,7 +5,7 @@
  * @property {(d: any)=>any} preprocess
  */
 
-import { setLocalStorageValue } from './localStorage';
+import { setLocalStorageValue } from './storage';
 
 /**
  * @param {Task[]} tasks

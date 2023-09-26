@@ -2,7 +2,7 @@ import {
   getLocalStorageValue,
   isKeyOnLocalStorage,
   setLocalStorageValue,
-} from '../localStorage';
+} from '../storage';
 
 /**
  * @class

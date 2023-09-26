@@ -3,11 +3,7 @@
     "baseUrl": "src",
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
@@ -23,68 +19,29 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@components": [
-        "./components/index"
-      ],
-      "@components/*": [
-        "./components/*"
-      ],
-      "@hooks": [
-        "./hooks/index"
-      ],
-      "@hooks/*": [
-        "./hooks/*"
-      ],
-      "@services": [
-        "./services/index"
-      ],
-      "@services/*": [
-        "./services/*"
-      ],
-      "@utils": [
-        "./utils/index"
-      ],
-      "@utils/*": [
-        "./utils/*"
-      ],
-      "@styles": [
-        "./styles/index"
-      ],
-      "@theme": [
-        "./theme/index"
-      ],
-      "@query": [
-        "./query/index"
-      ],
-      "@query/*": [
-        "./query/*"
-      ],
-      "@routes": [
-        "./routes/index"
-      ],
-      "@constants": [
-        "./constants/index"
-      ],
-      "@constants/*": [
-        "./constants/*"
-      ],
-      "@context": [
-        "./context/index"
-      ],
-      "@context/*": [
-        "./context/*"
-      ],
-      "@common": [
-        "./common/index"
-      ],
-      "@common/*": [
-        "./common/*"
-      ]
+      "@components": ["./components/index"],
+      "@components/*": ["./components/*"],
+      "@hooks": ["./hooks/index"],
+      "@hooks/*": ["./hooks/*"],
+      "@services": ["./services/index"],
+      "@services/*": ["./services/*"],
+      "@utils": ["./utils/index"],
+      "@utils/*": ["./utils/*"],
+      "@styles": ["./styles/index"],
+      "@theme": ["./theme/index"],
+      "@query": ["./query/index"],
+      "@query/*": ["./query/*"],
+      "@routes": ["./routes/index"],
+      "@constants": ["./constants/index"],
+      "@constants/*": ["./constants/*"],
+      "@context": ["./context/index"],
+      "@context/*": ["./context/*"],
+      "@common": ["./common/index"],
+      "@common/*": ["./common/*"],
+      "@chimplanet/ui": ["../../chimplanet-ui/src/index"]
     }
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "references": [
     {
       "path": "./tsconfig.node.json"

@@ -1,7 +1,4 @@
-import {
-  createBrowserRouter,
-  RouterProvider as Provider,
-} from '@chimplanet/ui';
+import { createBrowserRouter, RouterProvider as Provider } from '@chimplanet/ui';
 
 import { Bookmark } from './Bookmark';
 import { Error } from './Error';
@@ -61,6 +58,4 @@ const router = createBrowserRouter([
   },
 ]);
 
-export const RouterProvider = ({ children }) => (
-  <Provider router={router} children={children} />
-);
+export const RouterProvider = () => <Provider router={router} />;

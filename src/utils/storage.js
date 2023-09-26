@@ -13,14 +13,15 @@ function validate(type, value) {
   switch (true) {
     case value === null || value === undefined:
       throw new LocalStorageInvalidError(type, value, 'null/undefined');
-    case type === 'key' &&
-      (typeof value !== 'string' || value.length < MIN_KEY_LENGTH):
+    case type === 'key' && (typeof value !== 'string' || value.length < MIN_KEY_LENGTH):
       throw new LocalStorageInvalidError(type, value, 'check key condition');
   }
 }
 /**
  * LocalStorage 에서 값을 가져옵니다.
+ * @template T
  * @param {string} key
+ * @returns {T}
  */
 export function getLocalStorageValue(key) {
   validate('key', key);

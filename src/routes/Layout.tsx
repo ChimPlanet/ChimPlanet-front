@@ -3,43 +3,37 @@ import { useMemo } from 'react';
 import '@styles/layout.scss';
 
 import {
-  Banner,
   Outlet,
+  Banner as SwippleBanner,
   styled,
   useLocation,
   useScreenType,
 } from '@chimplanet/ui';
 
 import { Centering } from '@common/components/Centering';
-import {
-  ArticleRenderer,
-  DesktopThemeChangeButton,
-  Footer,
-  Header,
-} from '@components';
+import { ArticleRenderer, DesktopThemeChangeButton, Footer, Header } from '@components';
 import useBanner from '@hooks/useBanner';
+import { Banner } from '@services/entity';
 import { Paths } from './path';
 
-const BannerWhileList = [Paths.Home, Paths.Event, Paths.Official];
+const BannerWhiteList: string[] = [Paths.Home, Paths.Event, Paths.Official];
 
 export default function Layout() {
   const sizeType = useScreenType();
   const { pathname } = useLocation();
   const { main } = useBanner();
 
-  /** @type {import('@services/entity').Banner[]} */
-  const banners = useMemo(
-    () => main.map((v) => v[sizeType === 'desktop' ? 'pc' : 'mobile']),
-    [main, sizeType],
-  );
+  const computedBanner = useMemo(() => {
+    const items = main.map((v) => v[sizeType === 'desktop' ? 'pc' : 'mobile']);
+
+    return <SwippleBanner elements={items.map(implementBannerEl)} />;
+  }, [main, sizeType]);
 
   return (
     <>
       <Container>
         <Header />
-        {BannerWhileList.includes(pathname) && banners ? (
-          <BannerWrapper children={<Banner banners={banners} />} />
-        ) : null}
+        {BannerWhiteList.includes(pathname) && <BannerWrapper children={computedBanner} />}
 
         <Centering
           styles={{
@@ -56,6 +50,12 @@ export default function Layout() {
     </>
   );
 }
+
+const implementBannerEl = ({ to, redirectType, imageUrl }: Banner) => (
+  <a href={to} target={redirectType === 'NewTab' ? '_blank' : '_self'}>
+    <img referrerPolicy="no-referrer" src={imageUrl} alt={to} />
+  </a>
+);
 
 const Container = styled.main`
   position: relative;

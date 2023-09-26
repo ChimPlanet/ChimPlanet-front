@@ -2,22 +2,26 @@ import { styled, useScreenType } from '@chimplanet/ui';
 import { useMemo } from 'react';
 
 import useBanner from '@hooks/useBanner';
+import { Banner } from '@services/entity';
+
+const DEFAULT_MID_BANNER: Pick<Banner, 'to' | 'redirectType' | 'imageUrl' | 'fileName'> = {
+  to: '',
+  redirectType: 'NewTab',
+  imageUrl: '',
+  fileName: '',
+};
 
 export default function SubBanner() {
   const screenType = useScreenType();
   const { mid } = useBanner();
 
-  /** @type {import('@services/entity').Banner} */
   const { to, redirectType, imageUrl, fileName } = useMemo(
-    () => mid[screenType === 'desktop' ? 'pc' : 'mobile'],
+    () => (mid ? mid[screenType === 'desktop' ? 'pc' : 'mobile'] : DEFAULT_MID_BANNER),
     [mid, screenType],
   );
 
   return (
-    <Container
-      href={to}
-      target={redirectType === 'NewTab' ? '_blank' : '_self'}
-    >
+    <Container href={to} target={redirectType === 'NewTab' ? '_blank' : '_self'}>
       <SubBannerImage src={imageUrl} alt={fileName} />
     </Container>
   );

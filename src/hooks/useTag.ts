@@ -1,15 +1,10 @@
-import { getLocalStorageValue } from '@utils/localStorage';
+import { Tag } from '@services/entity';
+import { getLocalStorageValue } from '@utils/storage';
 import TagTrie from '@utils/tagTrie';
 import { useMemo } from 'react';
 
-/**
- * @typedef {import('@services/entity').Tag} Tag
- *
- * @function
- */
 const useTag = () => {
-  /** @type {Tag[]} */
-  const tags = getLocalStorageValue('tags') ?? [];
+  const tags = getLocalStorageValue<Tag[]>('tags') ?? [];
 
   return useMemo(
     () => ({
