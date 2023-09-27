@@ -1,17 +1,11 @@
-import {
-  ErrorBoundary,
-  JobOfferMapContent,
-  Loading,
-  styled,
-  useScreenType,
-} from '@chimplanet/ui';
+import { ErrorBoundary, JobOfferMapContent, Loading, styled, useScreenType } from '@chimplanet/ui';
 import { Suspense, useMemo } from 'react';
 
 import { FallbackFetching } from '@common/components/FallbackFetching';
 import { LinkFooter } from '@common/components/LinkFooter';
 import { useArticle } from '@components/ArticleRenderer/hook';
 import useBookmark from '@hooks/useBookmark';
-import { useRecentOffers } from '@query/offer';
+import { useQuery } from '@hooks/useQuery';
 import { Paths } from '@routes';
 import MoreOfferButton from '../MoreOfferButton';
 
@@ -29,7 +23,7 @@ export default function RecentSection() {
 }
 
 function RecentSectionContent() {
-  const { data: offers } = useRecentOffers();
+  const { data: offers } = useQuery('offer', { type: 'recent' });
   const [, { open }] = useArticle();
 
   const screenType = useScreenType();

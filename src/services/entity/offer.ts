@@ -60,7 +60,7 @@ interface OfferContentDAO {
   readCount: string;
 }
 
-interface OfferContent {
+export interface OfferContent {
   id: number;
   title: string;
   writer: string;

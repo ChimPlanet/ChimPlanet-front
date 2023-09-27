@@ -6,8 +6,8 @@ import {
 } from '@services/entity';
 import { createAPI } from './base';
 
-interface ListPayload {
-  lastArticleId: number;
+export interface OfferListRequestPayload {
+  lastArticleId: number | null;
   size: number;
   page: number;
   sort: string;
@@ -30,7 +30,7 @@ const parseArrayFromResponseNoDup = (d: OfferDAO[]) => {
 
 const offers = Object.freeze({
   list: createAPI(
-    ({ lastArticleId, size, page, sort, isEnd, value }: ListPayload) => {
+    ({ lastArticleId, size, page, sort, isEnd, value }: OfferListRequestPayload) => {
       let query = `?lastArticleId=${lastArticleId}&size=${size}&page=${page}&sort=${sort}`;
       if (value) query += `&lastInputValue=${value}`;
       if (isEnd !== 'ALL') query += `&isEnd=${isEnd}`;
@@ -52,7 +52,7 @@ const offers = Object.freeze({
       parse: parseArrayFromResponse,
     },
   ),
-  get: createAPI((id) => ({ method: 'GET', uri: '/boards/' + id }), {
+  get: createAPI((id: string) => ({ method: 'GET', uri: '/boards/' + id }), {
     parse: parseOfferContentFromResponse,
   }),
   searchByTag: createAPI(

@@ -10,12 +10,12 @@ interface Request {
 
 type RequesterConfig<Payload> = Request | ((o: Payload) => Request);
 
-const useOption = <From, To = unknown>(data: From, option?: Option<From, To>) => {
+const useOption = <From, To = void>(data: From, option?: Option<From, To>) => {
   let res: any = data;
   if (option && option.parse) {
     res = option.parse(res);
   }
-  return res as To extends unknown ? From : To;
+  return res as To extends void ? From : To;
 };
 
 const parseAPIResponse = async (response: Response) => {
@@ -32,11 +32,11 @@ export const client = async <T>(request: Request): Promise<T> => {
 };
 
 export const createAPI =
-  <Payload = void, From = unknown, To = unknown>(
+  <Payload = void, From = unknown, To = void>(
     config: RequesterConfig<Payload>,
     option?: Option<From, To>,
   ) =>
-  async (payload: Payload): Promise<To extends unknown ? From : To> => {
+  async (payload: Payload): Promise<To extends void ? From : To> => {
     const request = typeof config === 'function' ? config(payload) : config;
     const data = await client<From>(request);
     return useOption(data, option);

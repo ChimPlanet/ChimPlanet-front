@@ -1,7 +1,7 @@
-import { usePopularJobOffer } from '@query/offer';
+import { useQuery } from '@hooks/useQuery';
 
 export const RecruitData = ({ children }) => {
-  const { data } = usePopularJobOffer();
+  const { data } = useQuery('offers', { type: 'popular' });
 
   return children(data);
 };
