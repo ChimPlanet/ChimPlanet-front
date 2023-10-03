@@ -2,7 +2,7 @@ import { styled } from '@chimplanet/ui';
 import { useLayoutEffect, useRef } from 'react';
 
 import { Search } from '@chimplanet/ui/icons';
-import { useSearchContext } from '../../context/searchContext';
+import { useSearch } from '../../context/searchContext';
 import useSearchInput from '../../hooks/useSearchInput';
 import RealSearchTagList from './realSearchTagList';
 
@@ -23,8 +23,7 @@ import RealSearchTagList from './realSearchTagList';
  * @returns
  */
 export default function RealSearchBar({ desktop }) {
-  const [{ input, current: tags }, { setInput, removeTag }] =
-    useSearchContext();
+  const { updateText, bundle } = useSearch();
 
   const inputRef = useRef(null);
   const handleEnter = useSearchInput();
@@ -36,17 +35,17 @@ export default function RealSearchBar({ desktop }) {
     }
   }, []);
   // Input Event
-  const handleInput = ({ target }) => setInput(target.value);
+  const handleInput = ({ target }) => updateText(target.value);
 
   return (
     <Container id="search-bar" data-desktop={desktop}>
       <Search width="18px" />
       <SearchContent>
-        <RealSearchTagList tags={tags} removeTag={removeTag} />
+        <RealSearchTagList />
         <SearchInput
           ref={inputRef}
-          value={input}
-          placeholder={tags.length > 0 ? '#태그 검색' : '#태그, 팀 검색'}
+          value={bundle.text}
+          placeholder={bundle.tags.length > 0 ? '#태그 검색' : '#태그, 팀 검색'}
           onChange={handleInput}
           onKeyDown={handleEnter}
         />

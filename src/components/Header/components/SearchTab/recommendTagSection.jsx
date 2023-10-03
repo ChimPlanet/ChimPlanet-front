@@ -1,21 +1,23 @@
 import { PropTypes, styled, useCurrentTheme, useScreenType } from '@chimplanet/ui';
 import { useMemo } from 'react';
 
+import { useSearch } from '@components/Header/context/searchContext';
 import Tag from '@components/Tag';
 import useTag from '@hooks/useTag';
 import { removePrefix } from '@utils/str';
 import { selectRandomItemsInCollection } from '../../utils';
 
-export default function RecommendTagSection({ word, addTag }) {
+export default function RecommendTagSection() {
   const { trie } = useTag();
+  const { bundle, tags } = useSearch();
   const screenType = useScreenType();
 
   const recommends = useMemo(() => {
     return selectRandomItemsInCollection(
-      trie.similar(removePrefix(word)),
+      trie.similar(removePrefix(bundle.text)),
       screenType !== 'mobile' ? 30 : 10,
     );
-  }, [word, screenType, trie]);
+  }, [bundle.text, screenType, trie]);
 
   const theme = useCurrentTheme();
 
@@ -27,7 +29,7 @@ export default function RecommendTagSection({ word, addTag }) {
           color={theme.textColors.septenary}
           borderColor={theme.borderColors.quinary}
           name={' ' + tag}
-          onClick={addTag.bind(null, '#' + tag, true)}
+          onClick={() => tags.add(tag, true)}
           padding="7px 18px 9px 16px"
         />
       ))}

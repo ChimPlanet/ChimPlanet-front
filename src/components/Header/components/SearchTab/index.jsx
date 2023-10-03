@@ -1,10 +1,9 @@
 import { styled } from '@chimplanet/ui';
 
 import { LeftChevronIcon } from '@common/icons';
-import {
-  SearchContextProvider,
-  useSearchContext,
-} from '../../context/searchContext';
+import { getCurrentStrategy } from '@components/Header/hooks/useSearchBundle';
+import { TextSearchStrategy } from '@components/Header/types/strategy';
+import { SearchContextProvider, useSearch } from '../../context/searchContext';
 import History from './History';
 import RealSearchBar from './realSearchBar';
 import Recommend from './recommend';
@@ -19,12 +18,7 @@ export default function SearchTab({ afterSearch, activeHeaderTab, desktop }) {
       <Content data-desktop={desktop}>
         <SearchContextProvider onAfterSearch={afterSearch}>
           <SearchBarWrapper>
-            {!desktop && (
-              <ExitButton
-                onClick={activeHeaderTab}
-                children={<LeftChevronIcon />}
-              />
-            )}
+            {!desktop && <ExitButton onClick={activeHeaderTab} children={<LeftChevronIcon />} />}
             <RealSearchBar desktop={desktop} />
           </SearchBarWrapper>
           <SearchOptionalSection />
@@ -35,8 +29,8 @@ export default function SearchTab({ afterSearch, activeHeaderTab, desktop }) {
 }
 
 export function SearchOptionalSection() {
-  const [{ searchType }] = useSearchContext();
-  return searchType === 'normal' ? <History /> : <Recommend />;
+  const { bundle } = useSearch();
+  return getCurrentStrategy(bundle) === TextSearchStrategy ? <History /> : <Recommend />;
 }
 
 const Container = styled.div`

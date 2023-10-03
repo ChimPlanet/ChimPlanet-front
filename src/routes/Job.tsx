@@ -2,7 +2,8 @@ import { styled } from '@chimplanet/ui';
 import { useArticle } from '@components/ArticleRenderer/hook';
 import JobInfiniteScroll from '@components/JobInfiniteScroll';
 import JobNavBar from '@components/JobNavBar';
-import { useJobOfferBasic, useJobOfferDetail } from '@query/offer';
+import { useQuery } from '@hooks/useQuery';
+import { useJobOfferBasic } from '@query/offer';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
 export const Job = ({ parId }) => {
@@ -65,7 +66,7 @@ export const Job = ({ parId }) => {
   );
 
   if (parId !== null && parId !== 0) {
-    const { data: offer } = useJobOfferDetail(parId);
+    const { data: offer } = useQuery('offer', parId);
     useMemo(() => {
       setOfferData(offer);
     }, [offer]);

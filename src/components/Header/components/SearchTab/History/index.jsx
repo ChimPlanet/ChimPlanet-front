@@ -1,16 +1,16 @@
 import { styled } from '@chimplanet/ui';
 
 import useHistory from '@hooks/useHistory';
-import { useSearchContext } from '../../../context/searchContext';
+import { useSearch } from '../../../context/searchContext';
 import HistoryList from './historyList';
 
 export default function History() {
-  const [, { addTag, setInput }] = useSearchContext();
+  const { tags, updateText } = useSearch();
   const { history, removeAll, removeHistory } = useHistory();
 
   const handleClick = (historyItem) => {
-    if (historyItem.at(0) === '#') addTag(historyItem);
-    else setInput(historyItem);
+    if (historyItem.at(0) === '#') tags.add(historyItem);
+    else updateText(historyItem);
   };
 
   return (
@@ -19,11 +19,7 @@ export default function History() {
         <Title>최근 검색 기록</Title>
         <RemoveButton onClick={removeAll}>전체삭제</RemoveButton>
       </Header>
-      <HistoryList
-        onClick={handleClick}
-        history={history}
-        removeHistory={removeHistory}
-      />
+      <HistoryList onClick={handleClick} history={history} removeHistory={removeHistory} />
     </Container>
   );
 }

@@ -1,17 +1,12 @@
 import { styled } from '@chimplanet/ui';
-import { useSearchContext } from '../../context/searchContext';
 
 import RecommendTagSection from './recommendTagSection';
 
 export default function Recommend() {
-  const [{ searchType, input }, { addTag }] = useSearchContext();
-
   return (
     <>
       <Title>추천 태그</Title>
-      {searchType === 'tag' && (
-        <RecommendTagSection word={input} addTag={addTag} />
-      )}
+      <RecommendTagSection />
     </>
   );
 }

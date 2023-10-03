@@ -1,11 +1,13 @@
 import { styled } from '@chimplanet/ui';
+import { useSearch } from '@components/Header/context/searchContext';
 import Tag from '@components/Tag';
 import { SearchTagSequenceColor } from '@constants/color';
 
-export default function RealSearchTagList({ tags, removeTag }) {
+export default function RealSearchTagList() {
+  const { tags, bundle } = useSearch();
   return (
     <Container>
-      {tags.map((tag, i) => (
+      {bundle.tags.map((tag, i) => (
         <Tag
           key={tag}
           name={tag}
@@ -15,7 +17,7 @@ export default function RealSearchTagList({ tags, removeTag }) {
           padding="7px 10px"
           weight={400}
           backgroundColor={SearchTagSequenceColor[i]}
-          removeSelf={removeTag.bind(null, tag)}
+          removeSelf={() => tags.remove(tag)}
         />
       ))}
     </Container>
