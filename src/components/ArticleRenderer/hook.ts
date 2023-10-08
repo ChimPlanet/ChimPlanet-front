@@ -10,11 +10,11 @@ export const useArticle = () => {
 
   const handle = useMemo(
     () => ({
-      open: (o) => navigate(`?${ARTICLE_QUERY_KEY}=${o.id}`, { replace: false }),
+      open: (id: number) => navigate(`?${ARTICLE_QUERY_KEY}=${id}`, { replace: false }),
       close: () => navigate('', { replace: true }),
     }),
     [navigate],
   );
 
-  return [id, handle];
+  return [id, handle] as [string | null, { open(id: number): void; close(): void }];
 };

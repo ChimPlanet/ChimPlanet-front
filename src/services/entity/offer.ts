@@ -1,3 +1,4 @@
+import { UIOfferVO } from '../../../../chimplanet-ui/src/components/JobOffer/JobOffer';
 import { createEntityFactory } from './base';
 import * as pp from './preprocess';
 
@@ -45,6 +46,20 @@ export const parseOfferFromResponse = createEntityFactory<OfferDAO, Offer>({
   isRegular: ({ boardtags }) => pp.isRegular(boardtags),
   isThumbnail: ({ thumbnailURL }) => pp.isThumbnail(thumbnailURL),
   needAuth: ({ unauthorized }) => unauthorized,
+});
+
+export const parseUIOffer = (offer: Offer, isBookmarked: (_: number) => boolean): UIOfferVO => ({
+  id: offer.id,
+  title: offer.title,
+  writer: offer.writer,
+  like: offer.like,
+  view: offer.view,
+  writeAt: offer.date,
+  redirectURL: offer.redirectURL,
+  thumbnailURL: offer.thumbnailURL,
+  closed: offer.isClosed,
+  regular: offer.isRegular,
+  bookmarked: isBookmarked(offer.id),
 });
 
 interface OfferContentDAO {
