@@ -14,7 +14,7 @@ import { Centering } from '@common/components/Centering';
 import { ArticleRenderer, DesktopThemeChangeButton, Footer, Header } from '@components';
 import useBanner from '@hooks/useBanner';
 import { Banner } from '@services/entity';
-import { Paths } from './path';
+import Paths from './path';
 
 const BannerWhiteList: string[] = [Paths.Home, Paths.Event, Paths.Official];
 

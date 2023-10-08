@@ -1,7 +1,7 @@
 import { Link, styled, useNavigate } from '@chimplanet/ui';
 
 import { Chimplanet404 } from '@common/icons';
-import { Paths } from './path';
+import Paths from './path';
 
 export const NotFound = () => {
   const navigate = useNavigate();

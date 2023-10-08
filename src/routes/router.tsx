@@ -8,7 +8,7 @@ import { Job } from './Job';
 import Layout from './Layout';
 import { NotFound } from './NotFound';
 import { Official } from './Official';
-import { Paths } from './path';
+import Paths from './path';
 import Popular from './Popular';
 import { Search } from './Search';
 

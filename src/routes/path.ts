@@ -12,3 +12,5 @@ export const Paths = Object.freeze({
   NotFound: '/404',
   Popular: '/popular',
 });
+
+export default Paths;

@@ -1,5 +1,5 @@
 import { ErrorBoundary, JobOfferMapContent, Loading, styled, useScreenType } from '@chimplanet/ui';
-import { Suspense, useMemo } from 'react';
+import { Suspense } from 'react';
 
 import { FallbackFetching } from '@common/components/FallbackFetching';
 import { LinkFooter } from '@common/components/LinkFooter';
@@ -7,6 +7,7 @@ import { useArticle } from '@components/ArticleRenderer/hook';
 import useBookmark from '@hooks/useBookmark';
 import { useQuery } from '@hooks/useQuery';
 import { Paths } from '@routes';
+import { parseUIOffer } from '@services/entity';
 import MoreOfferButton from '../MoreOfferButton';
 
 export default function RecentSection() {
@@ -23,25 +24,24 @@ export default function RecentSection() {
 }
 
 function RecentSectionContent() {
-  const { data: offers } = useQuery('offer', { type: 'recent' });
+  const { data } = useQuery('offers', { type: 'recent' });
   const [, { open }] = useArticle();
 
   const screenType = useScreenType();
   const { toggle, is } = useBookmark();
 
-  const config = useMemo(() => OfferConfig[screenType], [screenType]);
+  const { column, width, threshold, direction, rowConfig } = OfferConfig[screenType];
 
   return (
     <>
-      <JobContent column={config.numOfColumn}>
+      <JobContent column={column}>
         <JobOfferMapContent
-          jobs={offers.slice(0, config.itemEnd)}
-          offerWidth={config.width}
-          direction={config.direction}
-          rowLayoutConfig={config.rowConfig}
+          offers={data.slice(0, threshold).map((it) => parseUIOffer(it, is))}
+          offerWidth={width}
+          direction={direction}
+          rowLayoutConfig={rowConfig}
           onBookmarkClick={toggle}
           onClick={open}
-          isBookmarked={is}
         />
       </JobContent>
       {screenType === 'mobile' ? (
@@ -55,23 +55,22 @@ function RecentSectionContent() {
 
 const OfferConfig = {
   desktop: {
-    numOfColumn: 4,
+    column: 4,
     width: 250,
-    itemEnd: 8,
+    threshold: 8,
     direction: 'column',
   },
   tablet: {
-    numOfColumn: 3,
+    column: 3,
     width: 220,
-    itemEnd: 6,
+    threshold: 6,
     direction: 'column',
   },
   mobile: {
-    numOfColumn: 1,
+    column: 1,
     width: '100%',
-    itemEnd: 6,
+    threshold: 6,
     direction: 'row',
-    /** @type {import('@chimplanet/ui/build/components/JobOffer/JobOffer').JobOfferProps['rowLayoutConfig']} */
     rowConfig: {
       height: 120,
       gap: 20,

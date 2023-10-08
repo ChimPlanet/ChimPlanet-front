@@ -1,16 +1,19 @@
 import { OfferListRequestPayload } from '@services/backend/offers';
 import { Banner, Offer, OfferContent } from '@services/entity';
 
-export type ActionPayloadObj<T, P = void> = P extends void ? { type: T } : { type: T; data: P };
+export type ActionPayloadArgument<Type, Data = void> = Data extends void
+  ? { type: Type }
+  : { type: Type; data: Data };
 
 export interface Actions {
-  //key: [payload, return type]
+  //namespace: [payload,  Return type]
   banners: [void, Banner[]];
   offers: [
     (
-      | ActionPayloadObj<'list', OfferListRequestPayload>
-      | ActionPayloadObj<'popular'>
-      | ActionPayloadObj<'recent'>
+      | ActionPayloadArgument<'list', OfferListRequestPayload>
+      | ActionPayloadArgument<'popular'>
+      | ActionPayloadArgument<'recent'>
+      | ActionPayloadArgument<'official'>
     ),
     Offer[],
   ];

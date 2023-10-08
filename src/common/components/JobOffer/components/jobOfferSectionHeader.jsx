@@ -81,7 +81,6 @@ const Arrow = styled.span`
   cursor: pointer;
 
   & svg {
-    fill: ${({ enable, theme }) =>
-      enable ? theme.textColors.primary : theme.textColors.senary};
+    fill: ${({ enable, theme }) => (enable ? theme.textColors.primary : theme.textColors.senary)};
   }
 `;
