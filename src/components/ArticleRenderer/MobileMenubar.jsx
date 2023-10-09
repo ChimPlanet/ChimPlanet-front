@@ -1,31 +1,19 @@
 import { styled } from '@chimplanet/ui';
-import {
-  LineIcon,
-  MobileBookMarkIcon,
-  MobileCafeIcon,
-  MobileShareIcon,
-} from '@common/icons';
+import { LineIcon, MobileBookMarkIcon, MobileCafeIcon, MobileShareIcon } from '@common/icons';
 import { Modal } from '@mui/material';
-import { styled as muiStyled } from '@mui/material/styles';
 import { useState } from 'react';
+import { useArticleContext } from './context';
 
 const defaultImage =
   'https://images-ext-2.discordapp.net/external/NubY254DitZhl4T3xlPsSwQrnlIvVacwb87LmSn0xq0/%3Ftype%3Df100_100/https/ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?width=154&height=154';
 
-export default function JobDetailMobileMenuBar({
-  modal,
-  handleModal,
-  userProfile,
-  writer,
-  id,
-  isBookmarked,
-  onBookmarkClick,
-}) {
+export default function MobileMenubar({ close, id }) {
+  const { profileImageURL, writer } = useArticleContext();
   const [imageError, setImageError] = useState(false);
 
   const handleClick = (e) => {
     e.stopPropagation();
-    onBookmarkClick();
+    // onBookmarkClick();
   };
 
   const handleCopyClipBoard = async (text) => {
@@ -43,10 +31,10 @@ export default function JobDetailMobileMenuBar({
   };
 
   return (
-    <Modal open={modal} onClose={handleModal}>
+    <Modal open onClose={close}>
       <>
         <Container>
-          <ContainerTab onClick={handleModal}>
+          <ContainerTab onClick={close}>
             <LineIcon />
           </ContainerTab>
           <NavBar>
@@ -54,22 +42,15 @@ export default function JobDetailMobileMenuBar({
               <Item className="profile">
                 <Profile>
                   <img
-                    referrerpolicy="no-referrer"
-                    src={
-                      !imageError
-                        ? userProfile + '?type=f100_100'
-                        : defaultImage
-                    }
-                    alt={userProfile}
+                    referrerPolicy="no-referrer"
+                    src={!imageError ? profileImageURL + '?type=f100_100' : defaultImage}
+                    alt={profileImageURL}
                     onError={handleImageError}
                   />
                 </Profile>
                 <p className="text">{writer}</p>
               </Item>
-              <a
-                href={`https://m.cafe.naver.com/steamindiegame/${id}`}
-                target="_blank"
-              >
+              <a href={`https://m.cafe.naver.com/steamindiegame/${id}`} target="_blank">
                 <Item>
                   <IconContainer>
                     <MobileCafeIcon />
@@ -79,15 +60,13 @@ export default function JobDetailMobileMenuBar({
               </a>
               <Item onClick={handleClick}>
                 <IconContainer>
-                  <MobileBookMarkIcon filled={isBookmarked} />
+                  <MobileBookMarkIcon filled={true} />
                 </IconContainer>
                 <p className="text">북마크</p>
               </Item>
               <Item
                 onClick={() => {
-                  handleCopyClipBoard(
-                    window.location.origin + `/job/?id=${id}`,
-                  );
+                  handleCopyClipBoard(window.location.origin + `/job/?id=${id}`);
                 }}
               >
                 <IconContainer>
@@ -103,10 +82,10 @@ export default function JobDetailMobileMenuBar({
   );
 }
 
-const MenuModal = muiStyled(Modal)({
-  position: 'absolute',
-  bottom: '0',
-});
+// const MenuModal = muiStyled(Modal)({
+//   position: 'absolute',
+//   bottom: '0',
+// });
 
 const Container = styled.div`
   display: flex;

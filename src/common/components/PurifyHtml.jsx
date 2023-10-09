@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 /**
  *
- * @param {{html: string, onLoad(element: HTMLDivElement) => void, onUnload(element: HTMLDivElement)=>void}}
+ * @param {{html: string, onLoad(element: HTMLDivElement) => void, onUnload?(element: HTMLDivElement)=>void}}
  * @returns
  */
 export default function PurifyHtml({ html, onLoad, onUnload, ...props }) {
@@ -18,7 +18,5 @@ export default function PurifyHtml({ html, onLoad, onUnload, ...props }) {
     };
   }, [ref.current, onLoad, onUnload]);
 
-  return (
-    <div ref={ref} dangerouslySetInnerHTML={{ __html: html }} {...props} />
-  );
+  return <div ref={ref} dangerouslySetInnerHTML={{ __html: html }} {...props} />;
 }

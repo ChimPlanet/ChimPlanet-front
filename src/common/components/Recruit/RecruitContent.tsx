@@ -13,23 +13,24 @@ export const RecruitContent = ({ items }: Props) => {
   const screenType = useScreenType();
   const { cursor } = useRecruitContextState();
 
-  const layoutConfig = useMemo(
+  const { width, gap } = useMemo(
     () => LayoutSettingMap[screenType as keyof typeof LayoutSettingMap],
     [screenType],
   );
 
+  const { offers, vertical } = useMemo(
+    () => getConfigUsingScreenType(screenType, items, is),
+    [items, screenType, is],
+  );
+
   return (
     <Container>
-      <Movement
-        moveX={-cursor * ((layoutConfig.width as number) + layoutConfig.columnGap)}
-        gap={layoutConfig.columnGap}
-        vertical={screenType === 'mobile'}
-      >
+      <Movement moveX={calculateMoveX(cursor, width as number, gap)} gap={gap} vertical={vertical}>
         <JobOfferMapContent
-          offerWidth={layoutConfig.width}
-          offers={items.map((e) => parseUIOffer(e, is))}
-          onClick={(offer) => open(offer.id)}
-          onBookmarkClick={(offer) => toggle(offer.id)}
+          offerWidth={width}
+          offers={offers}
+          onClick={(o) => open(o.id)}
+          onBookmarkClick={(o) => toggle(o.id)}
           rowLayoutConfig={DefaultRowLayoutSetting}
         />
       </Movement>
@@ -38,6 +39,23 @@ export const RecruitContent = ({ items }: Props) => {
 };
 
 export default RecruitContent;
+
+const getConfigUsingScreenType = (
+  screenType: string,
+  items: Offer[],
+  isBookmark: (_: number) => boolean,
+) =>
+  screenType === 'mobile'
+    ? {
+        offers: items.slice(0, 4).map((e) => parseUIOffer(e, isBookmark)),
+        vertical: true,
+      }
+    : {
+        offers: items.map((e) => parseUIOffer(e, isBookmark)),
+        vertical: false,
+      };
+
+const calculateMoveX = (cursor: number, width: number, gap: number) => -cursor * (width + gap);
 
 const Container = styled.div`
   overflow-x: hidden;
@@ -55,15 +73,15 @@ const Movement = styled.div<{ vertical: boolean; gap: number; moveX: number }>`
 
 const LayoutSettingMap = {
   desktop: {
-    columnGap: 20,
+    gap: 20,
     width: 250,
   },
   tablet: {
-    columnGap: 25,
+    gap: 25,
     width: 220,
   },
   mobile: {
-    columnGap: 20,
+    gap: 20,
     width: '100%',
   },
 };

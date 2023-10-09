@@ -1,6 +1,8 @@
-import { Link, Recruit, styled } from '@chimplanet/ui';
+import { Link, Recruit, styled, useRecruitContextUpdater, useScreenType } from '@chimplanet/ui';
+import { ChevronRight } from '@chimplanet/ui/icons';
 import { SectionLeftIcon, SectionRightIcon } from '@common/icons';
-import { ComponentProps, Suspense, useMemo } from 'react';
+import JobSelectionSkeleton from '@components/Skeletons/JobSectionSkeleton';
+import { ComponentProps, Fragment, Suspense, useLayoutEffect, useMemo } from 'react';
 import RecruitContent from './RecruitContent';
 import RecruitData from './RecruitData';
 
@@ -12,17 +14,47 @@ interface Props {
 
 export const RecruitSection = ({ goto, title, payload }: Props) => {
   const renderControl = useMemo(() => createControlRenderer(goto), [goto]);
+  const screenType = useScreenType();
 
   return (
     <Recruit>
       <Recruit.Header as="h2" renderControl={renderControl}>
         {title}
       </Recruit.Header>
-      <Suspense>
-        <RecruitData payload={payload}>{(items) => <RecruitContent items={items} />}</RecruitData>
+      <Suspense fallback={<JobSelectionSkeleton />}>
+        <RecruitData payload={payload}>
+          {(items) => (
+            <Fragment>
+              <RecruitContextUpdater screenType={screenType} itemLength={items.length} />
+              <RecruitContent items={items} />
+            </Fragment>
+          )}
+        </RecruitData>
       </Suspense>
+      {screenType === 'mobile' && (
+        <Footer to={goto ?? ''}>
+          자세히보기
+          <ChevronRight />
+        </Footer>
+      )}
     </Recruit>
   );
+};
+
+interface RecruitContextUpdaterProps {
+  itemLength: number;
+  screenType: string;
+}
+
+export const RecruitContextUpdater = ({ itemLength = 4 }: RecruitContextUpdaterProps) => {
+  const update = useRecruitContextUpdater();
+  const screenType = useScreenType();
+
+  useLayoutEffect(() => {
+    update({ length: itemLength, cursor: 0, perPage: screenType === 'desktop' ? 4 : 3 });
+  }, [itemLength, screenType, update]);
+
+  return <Fragment />;
 };
 
 export default RecruitSection;
@@ -68,5 +100,21 @@ const Navigation = styled.div`
 
   button[disabled] svg {
     fill: ${({ theme }) => theme.textColors.senary};
+  }
+`;
+
+const Footer = styled(Link)`
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  color: ${({ theme }) => theme.specialColors.positive};
+
+  font-size: 16px;
+  font-weight: 500;
+
+  & svg {
+    margin-top: -2.5px;
   }
 `;

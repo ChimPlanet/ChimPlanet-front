@@ -6,7 +6,7 @@ export default function JobDetailHeader({ title, status, date, views }) {
       <PostTitle>{title}</PostTitle>
       <PostInfo>
         <PostStatus $end={status}>{status ? '마감' : '구인 중'}</PostStatus>
-        <PostDate>{date}</PostDate>
+        <PostDate>{`${date}`}</PostDate>
         <PostViews>조회 {views}</PostViews>
       </PostInfo>
     </HeaderContainer>

@@ -1,75 +1,58 @@
 import { styled, useScreenType } from '@chimplanet/ui';
 import { CafeIcon, DetailBookMark, ShareIcon } from '@common/icons';
 import { useState } from 'react';
+import { useArticle } from '.';
 import { useArticleContext } from './context';
 
 const defaultImage =
   'https://images-ext-2.discordapp.net/external/NubY254DitZhl4T3xlPsSwQrnlIvVacwb87LmSn0xq0/%3Ftype%3Df100_100/https/ssl.pstatic.net/static/cafe/cafe_pc/default/cafe_profile_77.png?width=154&height=154';
 
 export const Menubar = ({ id }) => {
-  const { data } = useArticleContext();
-  const sizeType = useScreenType();
-  const [imageError, setImageError] = useState(false);
+  const [, { close }] = useArticle();
+  const { profileImageURL, writer } = useArticleContext();
+  const screenType = useScreenType();
+  const [imageLoadedError, setImageLoadedError] = useState(false);
 
-  const { profileImageUrl, writer } = data;
-
-  const handleCopyClipBoard = async (text) => {
-    const input = document.createElement('input');
-    input.value = text;
-    document.body.appendChild(input);
-    input.select();
-    document.execCommand('copy');
-    document.body.removeChild(input);
-    alert('링크가 복사되었습니다.');
+  const handleCopyClipBoard = () => {
+    navigator.clipboard
+      .writeText(window.location.origin + `/?a=${id}`)
+      .then(() => alert('링크가 복사되었습니다.'));
   };
 
   const handleClick = (e) => {
     e.stopPropagation();
-    onBookmarkClick();
+    // onBookmarkClick();
   };
 
-  const handleImageError = () => {
-    setImageError(true);
-  };
-
+  const handleImageLoadedError = () => setImageLoadedError(true);
   // TODO: 북마크 기능
   return (
-    <Container display={sizeType}>
-      <MenuContainer>
-        <IconContainer>
-          <Profile>
-            <img
-              referrerPolicy="no-referrer"
-              src={
-                !imageError ? profileImageUrl + '?type=f100_100' : defaultImage
-              }
-              alt={profileImageUrl}
-              onError={handleImageError}
-            />
-          </Profile>
-        </IconContainer>
-        <IconText>{writer}</IconText>
-      </MenuContainer>
+    <Container display={screenType}>
+      <Item>
+        <Profile
+          referrerPolicy="no-referrer"
+          src={!imageLoadedError ? profileImageURL + '?type=f100_100' : defaultImage}
+          alt={profileImageURL}
+          onError={handleImageLoadedError}
+        />
+      </Item>
+      <IconText>{writer}</IconText>
       <a href={`https://cafe.naver.com/steamindiegame/${id}`} target="_blank">
-        <IconContainer>
+        <Item>
           <CafeIcon />
-        </IconContainer>
+        </Item>
         <IconText>원문</IconText>
       </a>
       <div onClick={handleClick}>
-        <IconContainer>
+        <Item>
           <DetailBookMark filled={true} />
-        </IconContainer>
+        </Item>
         <IconText>북마크</IconText>
       </div>
-      <div
-        onClick={() => {
-          handleCopyClipBoard(window.location.origin + `/?a=${id}`);
-        }}
-      >
-        <IconContainer>
+      <div onClick={handleCopyClipBoard}>
+        <Item>
           <ShareIcon />
-        </IconContainer>
+        </Item>
         <IconText>공유하기</IconText>
       </div>
       <Rest onClick={close}></Rest>
@@ -88,23 +71,14 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const MenuContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Profile = styled.div`
-  display: flex;
+const Profile = styled.img`
   height: 46px;
   width: 46px;
   border-radius: 50%;
   overflow: hidden;
-  justify-content: center;
-  align-items: stretch;
 `;
 
-const IconContainer = styled.div`
+const Item = styled.div`
   display: flex;
   width: 46px;
   height: 46px;

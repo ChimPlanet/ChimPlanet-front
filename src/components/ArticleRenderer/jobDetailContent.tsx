@@ -13,35 +13,33 @@ import {
   stringToDom,
 } from './util';
 
-export default function JobDetailContent({ setFocusedImageSrc, id }) {
+interface Props {
+  setFocusedImageSrc: (src: string) => void;
+}
+
+export default function JobDetailContent({ setFocusedImageSrc }: Props) {
   const data = useArticleContext();
+  const screenType = useScreenType();
 
-  const sizeType = useScreenType();
-  const { title, isClosed, viewCount } = data;
+  const { title, isClosed, view, date } = data;
 
-  /** @param {HTMLImageElement} e */
-  const handleImageClick = (e) => setFocusedImageSrc(e.src);
+  const handleImageClick = (e: HTMLImageElement) => setFocusedImageSrc(e.src);
 
   const content = useMemo(() => {
     if (!data.content) return '';
 
     const dom = stringToDom(data.content);
-    const images = getAllImgElementsFromDom(dom);
+    const images = getAllImgElementsFromDom(dom.body);
     //removeHeader(dom);
-    adaptJavascriptData(dom);
+    adaptJavascriptData(dom.body);
     adaptImagesNoRefererPolicy(images);
     return dom.documentElement.outerHTML;
   }, [data]);
 
   return (
-    <Wrapper sizeType={sizeType}>
-      <JobDetailHeader
-        title={title}
-        status={isClosed}
-        date={data.data.regDate}
-        views={viewCount}
-      />
-      <Content data-desktop={sizeType === 'desktop'}>
+    <Wrapper screenType={screenType}>
+      <JobDetailHeader title={title} status={isClosed} date={date} views={view} />
+      <Content data-desktop={screenType === 'desktop'}>
         <PurifyHtml
           html={content}
           onLoad={(e) => {
@@ -51,21 +49,14 @@ export default function JobDetailContent({ setFocusedImageSrc, id }) {
         />
       </Content>
       <SubTitle>태그</SubTitle>
-      <PostTags>
-        {data.tags?.map((items) => (
-          <Tag key={items.tagObjResponseDto.tagName}>
-            {'# ' + items.tagObjResponseDto.tagName}
-          </Tag>
-        ))}
-      </PostTags>
+      <PostTags>{data.tags?.map((t) => <Tag key={t}>{'# ' + t}</Tag>)}</PostTags>
     </Wrapper>
   );
 }
 
-const Wrapper = styled.div`
-  margin-top: ${({ sizeType }) => (sizeType === 'desktop' ? '' : '43px')};
-  padding: ${({ sizeType }) =>
-    sizeType === 'mobile' ? '20px 10px 70px 20px' : '30px 2px 30px 45px'};
+const Wrapper = styled.div<{ screenType: string }>`
+  margin-top: ${(p) => (p.screenType === 'desktop' ? '' : '43px')};
+  padding: ${(p) => (p.screenType === 'mobile' ? '20px 10px 70px 20px' : '30px 2px 30px 45px')};
   color: ${({ theme }) => theme.textColors.primary};
 `;
 
@@ -83,12 +74,6 @@ const Content = styled.div`
   &[data-desktop='true'] {
     padding-right: 40px;
   }
-`;
-
-const PostText = styled.div`
-  padding-right: 45px;
-  font-weight: 500;
-  font-size: 16px;
 `;
 
 const SubTitle = styled.div`

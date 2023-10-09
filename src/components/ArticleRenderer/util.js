@@ -6,9 +6,7 @@ export const stringToDom = (str) => {
  * @param {HTMLElement} doc
  */
 export const removeHeader = (doc) => {
-  const headerEl = doc.querySelector(
-    '#SE-fe209951-d6e7-11ea-9687-e7fd650c59ac',
-  );
+  const headerEl = doc.querySelector('#SE-fe209951-d6e7-11ea-9687-e7fd650c59ac');
 
   if (headerEl) {
     headerEl.remove();
@@ -58,7 +56,7 @@ export const adaptImagesNoRefererPolicy = (nodeList) => {
 
 /**
  * @param {NodeList} nodeList
- * @param {(imageElement: Element) => void} listener
+ * @param {(imageElement: HTMLImageElement) => void} listener
  */
 export const adaptImageClickListener = (nodeList, listener) => {
   nodeList.forEach((el) => {
