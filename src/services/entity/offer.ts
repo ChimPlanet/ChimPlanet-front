@@ -66,7 +66,7 @@ interface OfferContentDAO {
   articleId: string;
   content: string;
   redirectURL: string;
-  tags: {
+  tags?: {
     boardTagId: number;
     tagObjResponseDto: { tagId: number; tagName: string; parentTagId: number; childTagId: number };
   }[];
@@ -99,7 +99,7 @@ export const parseOfferContentFromResponse = createEntityFactory<OfferContentDAO
   date: ({ regDate }) => new Date(regDate),
   view: ({ readCount }) => parseInt(readCount),
   redirectURL: 'redirectURL',
-  tags: ({ tags }) => tags.map((t) => t.tagObjResponseDto.tagName),
+  tags: ({ tags }) => (tags ? tags.map((t) => t.tagObjResponseDto.tagName) : []),
   profileImageURL: ({ profileImageUrl }) => pp.profileImageUrl(profileImageUrl) || '',
   isClosed: ({ isEnd }) => pp.isClosed(isEnd),
 });

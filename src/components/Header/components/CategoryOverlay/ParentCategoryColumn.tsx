@@ -1,14 +1,17 @@
 import { PropTypes, styled, useNavigate } from '@chimplanet/ui';
 
 import { Paths } from '@routes';
+import { Tag } from '@services/entity';
 import useSearch from '../../hooks/useSearchNavigate';
 
-export default function ParentCategoryColumn({
-  current,
-  setCurrent,
-  afterChoose,
-  items,
-}) {
+interface Props {
+  current: Tag | null;
+  setCurrent: (tag: Tag | null) => void;
+  afterChoose(): void;
+  items: Tag[];
+}
+
+const ParentCategoryColumn = ({ current, setCurrent, afterChoose, items }: Props) => {
   const search = useSearch();
   const navigate = useNavigate();
 
@@ -26,22 +29,24 @@ export default function ParentCategoryColumn({
         </Item>
         {items.map((parent) => (
           <Item
-            key={parent}
+            key={parent.id}
             data-selected={parent === current}
             onMouseEnter={() => setCurrent(parent)}
             onClick={() => {
-              search(parent, 'tag');
+              search(parent.name, 'tag');
               afterChoose();
             }}
           >
-            {parent.replace('전체', '').trim()}
+            {parent.name.replace('전체', '').trim()}
           </Item>
         ))}
       </Content>
       <Background />
     </Container>
   );
-}
+};
+
+export default ParentCategoryColumn;
 
 ParentCategoryColumn.propTypes = {
   current: PropTypes.string,
@@ -70,13 +75,3 @@ const Item = styled.div`
     color: ${({ theme }) => theme.specialColors.positive};
   }
 `;
-
-const PARENTS = [
-  '전체',
-  'IT · 게임',
-  '디자인 · 2D',
-  '3D · 건축 · 인테리어',
-  '미디어 · 연예 · 창작',
-  '일러스트',
-  '기타',
-];

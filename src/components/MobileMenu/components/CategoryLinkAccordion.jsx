@@ -1,10 +1,9 @@
 import { Link, styled, useCurrentTheme } from '@chimplanet/ui';
 
-import { getFamilyTree } from '@utils';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { ChevronDown } from '@chimplanet/ui/icons';
-import useTag from '@hooks/useTag';
+import useTagCategory from '@components/Header/components/CategoryOverlay/useTagCategory';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionDetails from '@mui/material/AccordionDetails';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
@@ -13,49 +12,39 @@ import { styled as mStyled } from '@mui/material/styles';
 export default function CategoryLinkAccordion({ close }) {
   const [expandedId, setExpandedId] = useState(null);
 
-  const { items } = useTag();
+  const { topLevels, category } = useTagCategory();
 
   const theme = useCurrentTheme();
-
-  const [ancestors, familyTree] = useMemo(() => {
-    const familyTree = getFamilyTree(items);
-
-    return [Array.from(familyTree.keys()), familyTree];
-  }, [items]);
 
   const handleChange = (id) => (event, isExpanded) => {
     setExpandedId(isExpanded ? id : false);
   };
 
-  const makeSearchQuery = (word) =>
-    `/search?type=tag&q=${encodeURIComponent(word)}`;
+  const makeSearchQuery = (word) => `/search?type=tag&q=${encodeURIComponent(word)}`;
 
   return (
     <Container>
-      {ancestors.map((parent) => (
+      {topLevels.map((parent) => (
         <Accordion
-          key={parent.tagId}
-          expanded={expandedId === parent.tagId}
-          onChange={handleChange(parent.tagId)}
+          key={parent.id}
+          expanded={expandedId === parent.id}
+          onChange={handleChange(parent.id)}
         >
           <AccordionSummary
             background={theme.bgColors.quaternary}
             activebackground={theme.bgColors.septenary}
-            data-selected={expandedId === parent.tagId}
+            data-selected={expandedId === parent.id}
           >
-            <Parent data-selected={expandedId === parent.tagId}>
-              {parent.tagName}
+            <Parent data-selected={expandedId === parent.id}>
+              {parent.name}
               <Icon children={<ChevronDown />} />
             </Parent>
           </AccordionSummary>
-          <AccordionDetails
-            background={theme.bgColors.septenary}
-            onClick={close}
-          >
-            <Child to={makeSearchQuery(parent.tagName)}>{parent.tagName}</Child>
-            {familyTree.get(parent).map((child) => (
-              <Child key={child.tagId} to={makeSearchQuery(child.tagName)}>
-                {child.tagName}
+          <AccordionDetails background={theme.bgColors.septenary} onClick={close}>
+            <Child to={makeSearchQuery(parent.name)}>{parent.name}</Child>
+            {category.get(parent).map((child) => (
+              <Child key={child.id} to={makeSearchQuery(child.name)}>
+                {child.name}
               </Child>
             ))}
           </AccordionDetails>
@@ -117,11 +106,8 @@ const Accordion = mStyled((props) => (
 });
 
 const AccordionSummary = mStyled((props) => <MuiAccordionSummary {...props} />)(
-  ({ theme, background, activebackground }) => ({
+  ({ background, activebackground }) => ({
     backgroundColor: background,
-    // theme.palette.mode === 'dark'
-    //   ? 'rgba(255, 255, 255, .05)'
-    //   : 'rgba(0, 0, 0, .03)',
     paddingLeft: '30px',
     paddingRight: '26px',
     flexDirection: 'row-reverse',

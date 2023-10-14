@@ -1,46 +1,52 @@
 import { PropTypes, styled } from '@chimplanet/ui';
 
+import { Tag } from '@services/entity';
 import useSearch from '../../hooks/useSearchNavigate';
 
-/**
- * @param {{parent: string, afterChoose():void}}
- * @returns
- */
-export default function ChildCategoryColumn({ parent, afterChoose, itemMap }) {
+interface Props {
+  parent: Tag | null;
+  afterChoose(): void;
+  category: Map<Tag, Tag[]>;
+}
+
+const ChildCategoryColumn = ({ parent, afterChoose, category }: Props) => {
   const search = useSearch();
+
+  const items = parent && category.get(parent);
 
   return (
     <Container>
       <Content>
         {parent && (
           <Item
-            key={parent}
+            key={parent.id}
             onClick={() => {
               search(parent, 'tag');
               afterChoose();
             }}
           >
-            {parent}
+            {parent.name}
           </Item>
         )}
-        {parent &&
-          Array.isArray(itemMap[parent]) &&
-          itemMap[parent].map((el) => (
+        {items &&
+          items.map((t) => (
             <Item
-              key={el}
+              key={t.id}
               onClick={() => {
-                search(el, 'tag');
+                search(t.name, 'tag');
                 afterChoose();
               }}
             >
-              {el}
+              {t.name}
             </Item>
           ))}
       </Content>
       <Background />
     </Container>
   );
-}
+};
+
+export default ChildCategoryColumn;
 
 ChildCategoryColumn.propTypes = {
   parent: PropTypes.string,
